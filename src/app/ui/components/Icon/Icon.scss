@@ -1,0 +1,14 @@
+@import "~app/assets/scss/bundle.scss";
+
+.icon {
+	$size: var(--icon-size, 1em);
+
+	display: inline;
+	vertical-align: middle;
+	width: $size;
+	height: $size;
+
+	use {
+		pointer-events: none;
+	}
+}

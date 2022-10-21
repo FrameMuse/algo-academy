@@ -1,0 +1,36 @@
+@import "~app/assets/scss/bundle.scss";
+
+.cookies-notice {
+	position: fixed;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	padding: 1em 2em;
+	background: $color-white;
+	transition: 350ms ease transform;
+	z-index: 2;
+
+	&--accept {
+		transform: translateY(100%);
+	}
+
+	@include Mobile {
+		display: grid;
+		gap: 1em;
+
+		padding: 1em;
+	}
+}
+
+.cookies-notice__container {
+	display: flex;
+	align-items: center;
+	gap: 3.5em;
+	@include WidthLimit;
+}
+
+.cookies-notice__text {
+	line-height: 1.25;
+}

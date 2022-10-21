@@ -1,0 +1,68 @@
+@import "~app/assets/scss/bundle.scss";
+
+.details {}
+
+.details__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.details__left {
+	display: grid;
+	gap: 0.5em;
+}
+
+.details__date {
+	color: $color-gray;
+}
+
+.details__summary {
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.details__right {
+	display: grid;
+	gap: 0.5em;
+
+	cursor: pointer;
+
+	display: none;
+}
+
+.details__chevron {
+	transition: 250ms ease transform;
+
+	&--up {
+		transform: rotateX(180deg);
+	}
+}
+
+.details__body {
+	transition: 350ms ease height;
+	height: 0px;
+
+	&--expanded {
+		height: calc(var(--details-height) * 1px);
+	}
+
+	p {
+		font-weight: 500;
+		line-height: 1.35;
+	}
+}
+
+.details__inner {
+	display: grid;
+	justify-items: left;
+	gap: 0.5em;
+	padding: 1.25em 0;
+	transition: 250ms ease opacity, 250ms ease transform;
+
+	:not(.details__body--expanded)>& {
+		opacity: 0;
+		transform: translateY(-5%);
+		pointer-events: none;
+	}
+}

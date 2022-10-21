@@ -1,0 +1,29 @@
+@import "~app/assets/scss/bundle.scss";
+
+.textarea {
+	display: grid;
+	gap: 0.5em;
+}
+
+.textarea__appearance {
+	flex: 1;
+	max-width: 100%;
+	max-height: 50vh;
+	transition: 200ms ease color;
+
+	@include InputAppearance;
+
+	line-height: 1.25;
+	overflow-wrap: break-word;
+	cursor: text;
+
+	&:invalid {
+		color: red;
+	}
+
+	&::placeholder {
+		color: gray;
+	}
+}
+
+.textarea__label {}

@@ -1,0 +1,104 @@
+@import "~app/assets/scss/bundle.scss";
+
+@function getHoverColor($color) {
+	@return rgba($color, 0.75);
+}
+
+.button {
+	--button-color: #{$color-white};
+	--button-color-hover: #{$color-white};
+
+	--button-background: red;
+	--button-background-hover: #{getHoverColor(red)};
+
+	--button-border-color: transparent;
+	--button-border-color-hover: transparent;
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 0.5em;
+
+	padding: 0.75em 1em;
+	background: var(--button-background);
+	border: 1px solid var(--button-border-color);
+	border-radius: 0.25em;
+	transition: 250ms ease background-color, 250ms ease border-color, 250ms ease color;
+
+	color: var(--button-color-hover);
+
+	&:disabled:not(&--pending) {
+		opacity: 0.2;
+	}
+
+	&:active:not(:disabled) {
+		opacity: 0.7;
+	}
+
+	&:hover:not(:disabled) {
+		background: var(--button-background-hover);
+		border-color: var(--button-border-color-hover);
+		color: var(--button-color-hover);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+
+	&--small {
+		padding: 0.625em 0.75em;
+	}
+
+	&--outline {
+		--button-color: red;
+		--button-color-hover: #{getHoverColor(red)};
+
+		--button-background: transparent;
+		--button-background-hover: transparent;
+
+		--button-border-color: var(--button-color);
+		--button-border-color-hover: var(--button-color-hover);
+	}
+
+	&--dark {
+		--button-color: #{$color-white};
+		--button-color-hover: #{getHoverColor($color-white)};
+	}
+
+	&--gray {
+		--button-color: #{$color-gray};
+		--button-color-hover: #{getHoverColor($color-gray)};
+	}
+
+	&--white {
+		--button-color: red;
+		--button-color-hover: #{getHoverColor(red)};
+
+		--button-background: #{$color-white};
+		--button-background-hover: #{getHoverColor($color-white)};
+	}
+
+	&--pending {
+		.button__text {
+			color: transparent;
+		}
+
+		.button__loader {
+			visibility: visible;
+		}
+	}
+}
+
+a.button {
+	text-decoration: none;
+}
+
+.button__text {
+	font-weight: 500;
+}
+
+.button__loader {
+	visibility: hidden;
+}

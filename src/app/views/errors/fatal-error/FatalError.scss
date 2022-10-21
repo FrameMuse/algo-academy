@@ -1,0 +1,23 @@
+@import "~app/assets/scss/bundle.scss";
+
+.error-view {
+	display: flex;
+
+	min-height: 100vh;
+	padding: 2em 0;
+	background: #dadada;
+	overflow: hidden;
+}
+
+.error-view__container {
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	gap: 2.5em;
+	flex: 1;
+}
+
+.error-view__desc {
+	display: grid;
+	gap: 0.75em;
+}

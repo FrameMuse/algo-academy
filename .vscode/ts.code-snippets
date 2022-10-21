@@ -1,0 +1,65 @@
+{
+  "Create api action": {
+    "prefix": "APIAction",
+    "body": [
+      "export const ${1:get}${2/(.*)/${1:/capitalize}/}: Action<${3}> = {",
+      "  method: \"${1/(.*)/${1:/upcase}/}\",",
+      "  endpoint: \"/${2}\"",
+      "}"
+    ],
+    "description": "Create react-fethcing-query api action"
+  },
+  "Create api action factory": {
+    "prefix": "APIActionFactory",
+    "body": [
+      "export const ${1:get}${2/(.*)/${1:/capitalize}/} = (): Action<${3}> => ({",
+      "  method: \"${1/(.*)/${1:/upcase}/}\",",
+      "  endpoint: \"/${2}\"",
+      "})"
+    ],
+    "description": "Create react-fethcing-query api action"
+  },
+  "Create api action pagination factory": {
+    "prefix": "APIActionPaginationFactory",
+    "body": [
+      "export const get${2/(.*)/${1:/capitalize}/} = (page: number, page_size: number): Action<PaginationType<${3}>> => ({",
+      "  method: \"GET\",",
+      "  endpoint: \"/${2}\",",
+      "  params: { page, page_size }",
+      "})"
+    ],
+    "description": "Create react-fethcing-query api action"
+  },
+  "Create reducer": {
+    "prefix": "reducer",
+    "body": [
+      "const initialState: User = {",
+      "  auth: false",
+      "}",
+      "",
+      "interface Actions {",
+      "  USER_UPDATE: typeof initialState",
+      "}",
+      "",
+      "type Action = ValuesOf<MapActions<Actions>>",
+      "",
+      "export default (state = initialState, action: Action): typeof initialState => {",
+      "  switch (action.type) {",
+      "",
+      "    case \"USER_UPDATE\":",
+      "      return { ...state, ...action.payload }",
+      "",
+      "    default:",
+      "      return state",
+      "  }",
+      "}",
+      "",
+      "",
+      "export const updateUser = (payload: Partial<typeof initialState>) => ({",
+      "  type: \"USER_UPDATE\",",
+      "  payload",
+      "})"
+    ],
+    "description": ""
+  }
+}

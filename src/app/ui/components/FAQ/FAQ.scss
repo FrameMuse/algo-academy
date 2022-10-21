@@ -1,0 +1,49 @@
+@import "~app/assets/scss/bundle.scss";
+
+.faq {
+	display: grid;
+	row-gap: 0.5em;
+}
+
+.faq__clause {
+	display: grid;
+}
+
+.faq__summary {
+	display: flex;
+	align-items: center;
+	padding: 1.5em;
+	background: $color-white;
+
+	cursor: pointer;
+}
+
+.faq__title {
+	font-weight: 600;
+}
+
+.faq__content {
+	height: 0;
+	overflow: hidden;
+	transition: 350ms height;
+
+	&--expanded {
+		height: calc(var(--height) * 1px);
+	}
+}
+
+.faq__inner {
+	padding: 1.5em;
+	background: $color-white;
+	transition: 250ms ease opacity, 250ms ease transform;
+
+	color: $color-dark;
+	line-height: 1.25;
+	white-space: pre-wrap;
+
+	:not(.faq__content--expanded)>& {
+		opacity: 0;
+		transform: translateY(-5%);
+		pointer-events: none;
+	}
+}

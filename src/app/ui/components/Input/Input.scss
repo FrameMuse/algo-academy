@@ -1,0 +1,31 @@
+@import "~app/assets/scss/bundle.scss";
+
+.input {
+	display: flex;
+	gap: 0.5em;
+
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid rgba(gray, 0.2);
+
+	@include Mobile {
+		display: grid;
+	}
+}
+
+.input__input {
+	width: 100%;
+
+	color: $color-black-main;
+	font-size: 1.5rem;
+
+	&::placeholder {
+		color: $color-gray-80;
+		transition: 200ms ease color;
+	}
+
+	&:focus::placeholder {
+		color: rgba(gray, 0.2);
+	}
+
+	resize: vertical;
+}
