@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Шаблон</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+</head>
+<body>
+
+<section class="mobMenuSection">
+	<ul class="mobMenu">
+		<li class="mobMenuItem">
+			<a href="index.html" class="mobMenuLink">What is Algo Academy?</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="about.html" class="mobMenuLink">About us</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="course.html" class="mobMenuLink">Full course</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="purchase.html" class="mobMenuLink">Purchase</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="account1.html" class="mobMenuLink">My Account</a>
+		</li>
+	</ul>
+</section>
+
+<header>
+	<div class="wrapper">
+		<div class="headerWrap">
+			<div class="burger">
+				<div class="line"></div>
+				<div class="line"></div>
+				<div class="line"></div>
+			</div>
+			
+			<a href="/" class="logo">&lt;Algo Academy/&gt;</a>
+
+			<div class="headerRight">
+				<ul class="menu">
+					<li class="menuItem">
+						<a href="index.html" class="menuItemLink">What is Algo Academy?</a>
+					</li>
+					<li class="menuItem">
+						<a href="about.html" class="menuItemLink">About us</a>
+					</li>
+					<li class="menuItem">
+						<a href="course.html" class="menuItemLink">Full course</a>
+					</li>
+					<li class="menuItem">
+						<a href="purchase.html" class="menuItemLink">Purchase</a>
+					</li>
+				</ul>
+				<div class="headerLk">
+					<div class="headerLkImg">
+						<img src="img/user.jpg" alt="">
+					</div>
+					<div class="headerLkText">
+						Welcome
+						<div class="headerLkName">Matt</div>
+					</div>
+					<div class="headerLkArrow">
+						<img src="img/header-lk-arrow.svg" alt="">
+					</div>
+					<ul class="headerLkPopup">
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">My Account</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">My Purchase</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">Account Data</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">Log out</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<section class="pageSection accountSection">
+	<div class="wrapper">
+		<div class="titleBlock">
+			<h1>Account Information</h1>
+		</div>		
+
+		<div class="notice">
+			<div class="noticeText">
+				<div class="h5">You haven’t purchased a plan yet!</div>
+				<p>You only have access to the free content, if you’d like to fully unlock all content that Algo Academy has to offer then you’ll need to purchase our full course.</p>
+			</div>
+			<div class="noticeButton">
+				<a href="#" class="button bigButton">
+					<span>Buy Now</span>
+					<svg width="24" height="24">
+						<use xlink:href="sprites.svg#buttonArrow"></use>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="accountBigBlock">
+			<div class="accountLeft">
+				<ul class="accountMenu">
+					<li class="accountMenuItem">
+						<a href="account1.html" class="accountMenuLink accountMenuActive">My Account</a>
+					</li>
+					<li class="accountMenuItem">
+						<a href="account2.html" class="accountMenuLink">My Purchase</a>
+					</li>
+					<li class="accountMenuItem">
+						<a href="account3.html" class="accountMenuLink">Account Data</a>
+					</li>
+				</ul>
+			</div>
+			<div class="accountRight">
+				<div class="accountInfo">
+					<form action="#" class="generalInfo">
+						<div class="generalInfoTitle h5">General Information</div>						
+						<div class="generalInfoImg">
+							<input type="file" name="account-img" id="account-img">
+							<label for="account-img" class="accountImg">								
+								<span class="accountImgInner">
+									<img src="img/user.jpg" alt="">
+								</span>
+								<span class="accountImgOverlay">
+									<img src="img/load-acc-img.svg" alt="">
+								</span>
+							</label>							
+						</div>
+						<div class="generalInfoPlan">Plan - Job Seeker</div>
+						<div class="generalInfoRank">
+							<img src="img/crown.svg" alt="">
+							<p>Algo Master</p>
+						</div>
+						
+						<div class="inputWrap">
+							<div class="inputItem half">
+								<div class="label">First Name</div>
+								<input type="text" name="first-name" placeholder="Your First Name" autocomplete="off" required class="input colored">
+							</div>
+							<div class="inputItem half">
+								<div class="label">Last Name</div>
+								<input type="text" name="last-name" placeholder="Your Last Name" autocomplete="off" required class="input colored">
+							</div>
+							<div class="inputItem">
+								<div class="label">Current Email</div>
+								<input type="email" name="mail" placeholder="Your E-mail Address" autocomplete="off" required class="input colored">
+							</div>
+							<div class="inputItem">
+								<div class="label">User Name</div>
+								<input type="text" name="user-name" placeholder="Your User Name" autocomplete="off" required class="input colored">
+							</div>
+						</div>						
+					</form>
+
+					<div class="solvedProblems">
+						<div class="solvedProblemsTitle">
+							<div class="h5">Solved Problems</div>
+							<div class="solvedAmount">50 Solved</div>
+						</div>
+
+						<div class="solvedProblemsProgress">
+							<div class="progressLine" style="width: 15%;"></div>
+						</div>
+
+						<div class="solvedItem">
+							<div class="solvedItemName">Getting Started</div>
+							<div class="solvedItemAmount">1/4</div>
+						</div>
+						<div class="solvedItem">
+							<div class="solvedItemName">Big O Notation</div>
+							<div class="solvedItemAmount">3/6</div>
+						</div>
+						<div class="solvedItem">
+							<div class="solvedItemName">Data Structures</div>
+							<div class="solvedItemAmount">6/10</div>
+						</div>
+						<div class="solvedItem">
+							<div class="solvedItemName">Coding Patterns</div>
+							<div class="solvedItemAmount">18/35</div>
+						</div>
+						<div class="solvedItem">
+							<div class="solvedItemName">System Design</div>
+							<div class="solvedItemAmount">4/12</div>
+						</div>
+						<div class="solvedItem">
+							<div class="solvedItemName">Behavioral Interviews</div>
+							<div class="solvedItemAmount">2/6</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<div class="wrapper">
+		<div class="logo">&lt;Algo Academy/&gt;</div>
+
+		<ul class="footerMenu">
+			<li class="footerMenuItem">
+				<a href="contact.html" class="footerMenuLink">Contact Us</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="purchase.html#faq" class="footerMenuLink">FAQ</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="index.html#reviews" class="footerMenuLink">Reviews</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="#" class="footerMenuLink">Privacy Policy</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="#" class="footerMenuLink">Terms & Conditions</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="about.html" class="footerMenuLink">About Us</a>
+			</li>
+		</ul>
+
+		<div class="copyright">Copyright &copy; 2022 Algo Academy, LLC. All Rights Reserved.</div>
+	</div>
+</footer>
+
+
+
+
+
+
+
+<!-- JavaScript section -->
+
+<script src="js/js-libs.min.js"></script>
+<script src="js/custom.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Шаблон</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+</head>
+<body>
+
+<section class="mobMenuSection">
+	<ul class="mobMenu">
+		<li class="mobMenuItem">
+			<a href="index.html" class="mobMenuLink">What is Algo Academy?</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="about.html" class="mobMenuLink">About us</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="course.html" class="mobMenuLink">Full course</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="purchase.html" class="mobMenuLink">Purchase</a>
+		</li>
+		<li class="mobMenuItem">
+			<a href="account1.html" class="mobMenuLink">Log In</a>
+		</li>
+	</ul>
+</section>
+
+<header>
+	<div class="wrapper">
+		<div class="headerWrap">
+			<div class="burger">
+				<div class="line"></div>
+				<div class="line"></div>
+				<div class="line"></div>
+			</div>
+			
+			<a href="/" class="logo">&lt;Algo Academy/&gt;</a>
+
+			<div class="headerRight">
+				<ul class="menu">
+					<li class="menuItem">
+						<a href="index.html" class="menuItemLink">What is Algo Academy?</a>
+					</li>
+					<li class="menuItem">
+						<a href="about.html" class="menuItemLink">About us</a>
+					</li>
+					<li class="menuItem">
+						<a href="course.html" class="menuItemLink menuItemActive">Full course</a>
+					</li>
+					<li class="menuItem">
+						<a href="purchase.html" class="menuItemLink">Purchase</a>
+					</li>
+				</ul>
+				<div class="headerLk">
+					<div class="headerLkImg">
+						<img src="img/user.jpg" alt="">
+					</div>
+					<div class="headerLkText">
+						Welcome
+						<div class="headerLkName">Matt</div>
+					</div>
+					<div class="headerLkArrow">
+						<img src="img/header-lk-arrow.svg" alt="">
+					</div>
+					<ul class="headerLkPopup">
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">My Account</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">My Purchase</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">Account Data</a>
+						</li>
+						<li class="headerLkPopupItem">
+							<a href="#" class="headerLkPopupLink">Log out</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<section class="pageSection courseSection">
+	<div class="wrapper">
+		<div class="titleBlock">
+			<h1>Algo Academy Course</h1>
+			<p>Our curriculum spans topics such as, algorithms, system design, coding patterns, space time complexity, behavioral interviews and much more. Start practicing today and learn everything you need to ace your next coding interview.</p>
+		</div>
+
+		<div class="notice">
+			<div class="noticeText">
+				<div class="h5">This is the free preview of our course</div>
+				<p>You only have access to the free content, if you’d like to fully unlock all content that Algo Academy has to offer then you’ll need to purchase our full course.</p>
+			</div>
+			<div class="noticeButton">
+				<a href="#" class="button bigButton">
+					<span>Upgrade Now</span>
+					<svg width="24" height="24">
+						<use xlink:href="sprites.svg#buttonArrow"></use>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="courseProgress">
+			<div class="courseProgressLevel">Level: <strong>Junior Engineer</strong></div>
+			<div class="courseProgressCompleted"><strong>6/134</strong> Lessons Completed</div>
+			<div class="courseProgressBar" data-percents="40">
+				<div class="progressLine" style="width: 15%;"></div>
+			</div>
+		</div>
+
+		<div class="courseContents">
+			<div class="courseContentsTitle">
+				<div class="h4">Course Contents</div>
+				<a href="#" class="showAllLessons active">
+					<span>Show all lesssons</span>
+					<svg width="24" height="24">
+						<use xlink:href="sprites.svg#courseShowArrow"></use>
+					</svg>
+				</a>
+			</div>			
+
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">1. Getting Started</div>
+					<div class="courseItemCompleted">2/3 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow active">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent active">
+					<div class="h6">Learning</div>
+					<div class="courseElems">
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">Welcome</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">How to use this Course</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">What are Coding Patterns?</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">2. Big O Notation</div>
+					<div class="courseItemCompleted">0/5 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">3. Data Structures</div>
+					<div class="courseItemCompleted">0/2 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">4. Linked List</div>
+					<div class="courseItemCompleted">0/7 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">5. Binary Search</div>
+					<div class="courseItemCompleted">0/6 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">6. Two Pointers</div>
+					<div class="courseItemCompleted">0/8 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">7. Priority Queue</div>
+					<div class="courseItemCompleted">0/4 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">8. Monotonic Stack</div>
+					<div class="courseItemCompleted">0/7 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">9. Trees</div>
+					<div class="courseItemCompleted">4/12 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow active">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent active">
+					<div class="h6">Learning</div>
+					<div class="courseElems">
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">Intro To Trees</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">Tree Traversal</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article1.html" class="courseElem">
+							<span class="courseElemText">Common Patterns</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+					</div>
+
+					<div class="h6">Practice</div>
+
+					<div class="courseElems">
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Level Order Traversal</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Same Tree</span>
+							<span class="courseElemButton greenBg">Completed</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Find Eventual Safe States</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Lowest Common Ancestor</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Balanced Binary Tree</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Max Depth Of A Tree</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Valid Binary Trees</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Implement A Prefix Trie</span>
+							<span class="courseElemButton redBg">Needs Review</span>
+						</a>
+						<a href="article2.html" class="courseElem">
+							<span class="courseElemText">Word Ladder</span>
+							<span class="courseElemButton">
+								<span>Start Now</span>
+								<svg width="24" height="24">
+									<use xlink:href="sprites.svg#buttonArrow"></use>
+								</svg>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">10. Graphs</div>
+					<div class="courseItemCompleted">0/5 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">11. Dynamic Programming</div>
+					<div class="courseItemCompleted">0/3 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">13. Merge Intervals</div>
+					<div class="courseItemCompleted">0/4 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">14. Behavioral Interviews</div>
+					<div class="courseItemCompleted">0/9 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">15. Coding Interviews</div>
+					<div class="courseItemCompleted">0/6 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">16. System Design</div>
+					<div class="courseItemCompleted">0/4 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>			
+			<div class="courseItem">
+				<div class="courseItemInfo">
+					<div class="courseItemName">17. Bonus</div>
+					<div class="courseItemCompleted">0/9 <strong>Lessons completed</strong></div>
+					<div class="courseItemArrow">
+						<svg width="24" height="24">
+							<use xlink:href="sprites.svg#courseShowArrow"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="courseItemContent"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<div class="wrapper">
+		<div class="logo">&lt;Algo Academy/&gt;</div>
+
+		<ul class="footerMenu">
+			<li class="footerMenuItem">
+				<a href="contact.html" class="footerMenuLink">Contact Us</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="purchase.html#faq" class="footerMenuLink">FAQ</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="index.html#reviews" class="footerMenuLink">Reviews</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="#" class="footerMenuLink">Privacy Policy</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="#" class="footerMenuLink">Terms & Conditions</a>
+			</li>
+			<li class="footerMenuItem">
+				<a href="about.html" class="footerMenuLink">About Us</a>
+			</li>
+		</ul>
+
+		<div class="copyright">Copyright &copy; 2022 Algo Academy, LLC. All Rights Reserved.</div>
+	</div>
+</footer>
+
+
+
+
+
+
+
+<!-- JavaScript section -->
+
+<script src="js/js-libs.min.js"></script>
+<script src="js/custom.js"></script>
+
+</body>
+</html>
