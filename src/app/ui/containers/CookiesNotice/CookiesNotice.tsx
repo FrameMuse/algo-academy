@@ -1,7 +1,7 @@
 import "./CookiesNotice.scss"
 
+import Button from "app/ui/components/Button/Button"
 import { useRef, useState } from "react"
-import Button from "ui/Button/Button"
 import { classWithModifiers } from "utils/common"
 
 function CookiesNotice() {
@@ -20,9 +20,9 @@ function CookiesNotice() {
     <div className={classWithModifiers("cookies-notice", cookies === "accept" && "accept")}>
       <div className="cookies-notice__container">
         <p className="cookies-notice__text">
-          Этот сайт использует файлы cookies. Продолжая использовать наш сайт, вы соглашаетесь с использованием данных технологий.
+          By using our website, you agree to the use of cookies.
         </p>
-        <Button onClick={onClick}>Ок</Button>
+        <Button onClick={onClick}>Well, Ok</Button>
       </div>
     </div>
   )

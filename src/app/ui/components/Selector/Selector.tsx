@@ -1,8 +1,8 @@
 import "./Selector.scss"
 
 import { Children, ComponentProps, Dispatch, ReactElement, ReactNode, useRef, useState } from "react"
+import { useClickAway } from "react-use"
 import { classWithModifiers } from "utils/common"
-import useClickAway from "utils/hooks/useClickAway"
 
 import DropDown from "../DropDown/DropDown"
 import Icon from "../Icon/Icon"

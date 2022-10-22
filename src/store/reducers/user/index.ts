@@ -1,12 +1,17 @@
-import { ValuesOf } from "utils/types"
+import { ValuesOf } from "types"
 
 import { MapActions } from "../../store.types"
-import { User } from "./types"
+import { User, UserType } from "./types"
 
-
-const initialState: User = {
-  auth: false
+export const USER_GUEST: User = {
+  signed: false,
+  type: UserType.default,
+  avatar: "/static/images/guest-avatar.jpg",
+  firstName: "Mr.",
+  lastName: "Guest"
 }
+
+const initialState: User = { ...USER_GUEST }
 
 interface Actions {
   USER_UPDATE: User

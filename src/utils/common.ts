@@ -1,10 +1,6 @@
-import "./extensions"
-
-import { Buffer } from "buffer"
+// import { Buffer } from "buffer"
 import { SyntheticEvent } from "react"
 import { URLDataBase64 } from "types"
-
-import { ExtractInterpolations } from "./types-utils"
 
 /**
  *
@@ -55,10 +51,10 @@ export function createQuery(queryObject?: Record<string | number, unknown> | nul
   return queryArray.filter(Boolean).join("&")
 }
 
-export function toBase64<T = unknown>(value: T | null | undefined) {
-  if (value == null) return String(value)
-  return Buffer.from(JSON.stringify(value)).toString("base64")
-}
+// export function toBase64<T = unknown>(value: T | null | undefined) {
+//   if (value == null) return String(value)
+//   return Buffer.from(JSON.stringify(value)).toString("base64")
+// }
 
 export function FileToURLDataBase64(file: File): Promise<URLDataBase64> {
   return new Promise((resolve, reject) => {
@@ -84,8 +80,8 @@ export async function getFileFromURL(url: string) {
 /**
  * Interpolates {variable} in string
  */
-export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
-  const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+export function interpolate<T extends string>(value: T, vars: Record<string, string | number>): string {
+  const varKeys = Object.keys(vars)
   return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
 }
 

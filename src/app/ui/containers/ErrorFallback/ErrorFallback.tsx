@@ -1,9 +1,7 @@
-import "./ErrorFallback.scss"
-
-import { ErrorBoundaryError, ErrorBoundaryReset } from "app/containers/ErrorBoundary/ErrorBoundary.types"
+import FatalError from "app/views/errors/fatal-error/FatalError"
 import { ErrorInfo } from "react"
 
-import FatalError from "../../../views/errors/fatal-error/FatalError"
+import { ErrorBoundaryError, ErrorBoundaryReset } from "../ErrorBoundary/ErrorBoundary.types"
 
 function ErrorFallback(reset: ErrorBoundaryReset, error?: ErrorBoundaryError, errorInfo?: ErrorInfo) {
   return (

@@ -1,13 +1,16 @@
-export type User = UserDefault & Partial<UserSigned>
+export type User = UserDefault & UserSigned
 
 export interface UserSigned {
-  auth: boolean
+  signed: boolean
   type: UserType
+
   avatar: string
+  firstName: string
+  lastName: string
 }
 
 export interface UserDefault {
-  auth: boolean
+  signed: boolean
 }
 
 export enum UserType {

@@ -2,7 +2,7 @@ import "./Details.scss"
 
 import { ReactNode, useEffect, useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
-import { humanizeDate } from "utils/date"
+import { humanizeDate } from "utils/transform/date"
 
 import Icon from "../Icon/Icon"
 

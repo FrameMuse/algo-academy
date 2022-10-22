@@ -4,7 +4,7 @@ import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
-import Loader from "../Loader/Loader"
+import LoaderCover from "../Loader/LoaderCover"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonProps extends ButtonBaseProps {
@@ -12,6 +12,7 @@ interface ButtonProps extends ButtonBaseProps {
   eventLabel?: string
   disabled?: boolean
   await?: boolean
+  pending?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -36,13 +37,13 @@ function Button(props: ButtonProps) {
   }
 
   const modifiers: string[] = []
-  if (props.size) modifiers.push(props.size)
   if (props.color) modifiers.push(props.color)
+  if (props.size) modifiers.push(props.size)
   if (props.outline) modifiers.push("outline")
-  if (pending) modifiers.push("pending")
+  if (pending || props.pending) modifiers.push("pending")
 
   return (
-    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} aria-busy={pending} onClick={onClick}>
+    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} onClick={onClick}>
       {props.iconLeft && (
         <div className="button__icon">{props.iconLeft}</div>
       )}
@@ -50,7 +51,9 @@ function Button(props: ButtonProps) {
       {props.iconRight && (
         <div className="button__icon">{props.iconRight}</div>
       )}
-      <Loader className="button__loader" />
+      <div className="button__loader">
+        <LoaderCover white />
+      </div>
     </button>
   )
 }

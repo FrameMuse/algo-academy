@@ -1,0 +1,106 @@
+$mul: 'Mulish', sans-serif;
+
+$base: #0D0E14;
+
+$red: #EA4040;
+$green: #07B123;
+$blue: #004B7F;
+
+$grey: #4B5567;
+$grey1: rgba(13, 14, 20, .75);
+
+$red1: rgba(234, 64, 64, 0.1);
+$blue1: #EDF2F7;
+
+section {
+  padding: 175px 0;
+}
+
+h1,
+.h1 {
+  font: 800 64px/1.1 $mul;
+  color: $base;
+  margin-bottom: 75px;
+}
+
+h2,
+.h2 {
+  font: 800 64px/1.25 $mul;
+  color: $base;
+  margin-bottom: 16px;
+}
+
+h3,
+.h3 {
+  font: 800 48px/1.25 $mul;
+  color: $base;
+  margin-bottom: 16px;
+}
+
+h4,
+.h4 {
+  font: 800 36px/1.1 $mul;
+  color: $base;
+  margin-bottom: 16px;
+}
+
+h5,
+.h5 {
+  font: 800 24px/1.1 $mul;
+  color: $base;
+  margin-bottom: 16px;
+}
+
+h6,
+.h6 {
+  font: 700 20px/1.1 $mul;
+  color: $base;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 24px;
+  opacity: 0.68;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.fontSize1 {
+  font-size: 16px;
+}
+
+.fontSize2 {
+  font-size: 18px;
+}
+
+.fontSize3 {
+  font-size: 24px;
+}
+
+/* Colors */
+
+.redBg {
+  background: $red;
+}
+
+.greenBg {
+  background: $green;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1650px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

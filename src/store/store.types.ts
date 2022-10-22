@@ -1,10 +1,16 @@
-import { reducers } from "./combinedReducers"
-type RS = typeof reducers
+import store from "./store"
 
 export interface StoreAction<T, P> {
   type: T
   payload: P
 }
 
-// export type ReducersType = { [key in keyof RS]: ReturnType<RS[key]> }
 export type MapActions<Actions> = { [K in keyof Actions]: StoreAction<K, Actions[K]> }
+
+
+// https://react-redux.js.org/using-react-redux/usage-with-typescript#define-root-state-and-dispatch-types
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

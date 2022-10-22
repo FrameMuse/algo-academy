@@ -1,9 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 
-import combinedReducers from "./combinedReducers"
+import user from "./reducers/user"
+
+export const reducers = {
+  user,
+}
 
 const store = configureStore({
-  reducer: combinedReducers,
+  reducer: combineReducers(reducers),
   preloadedState: {}
 })
 

@@ -31,7 +31,9 @@
   "rules": {
     "default-case": "error",
     "no-multi-spaces": "error",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": "warn",
+    // "simple-import-sort/exports": "error",
+    "unused-imports/no-unused-imports": "warn",
     "semi": [
       "error",
       "never"
@@ -52,6 +54,8 @@
     ],
     // OFF
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-empty-interface": "off"
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "ban-types": "off"
   }
 }

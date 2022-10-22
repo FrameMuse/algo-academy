@@ -1,4 +1,4 @@
-@import "~app/assets/scss/bundle.scss";
+@import "~assets/scss/bundle.scss";
 
 .loader {
 	position: absolute;
@@ -7,11 +7,13 @@
 	align-items: center;
 	justify-content: center;
 
+	margin: auto;
+
 	&::before {
 		content: "";
 		padding: 0.5em;
-		border: 3px solid var(--loader-color, rgba($color-white, 0.5));
-		border-right-color: var(--loader-part-color, rgba($color-white, 1));
+		border: 3px solid var(--loader-color, rgba(black, 0.5));
+		border-right-color: var(--loader-part-color, rgba(black, 1));
 		border-radius: 50%;
 
 		animation: 1s linear infinite spin;
@@ -37,10 +39,25 @@
 
 	flex: 1;
 	padding: 10em 5em;
-	background: $color-white;
+
+	&--absolute {
+		position: absolute;
+		inset: 0;
+	}
+
+	&--white {
+		--loader-color: #{rgba(white, 0.5)};
+		--loader-part-color: #{rgba(white, 1)};
+	}
+
+	&--dimmed {
+		background: rgba(black, 0.75);
+	}
+
+	padding: 1em;
+	margin: auto;
+
+	@include Mobile {}
 }
 
-.loader-cover__loader {
-	--loader-color: #{rgba($color-dark, 0.25)};
-	--loader-part-color: #{rgba($color-dark, 0.5)};
-}
+.loader-cover__loader {}

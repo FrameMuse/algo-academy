@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from "react"
 import { Enum } from "types"
+import { ValuesOf } from "types"
 import { FileToURLDataBase64 } from "utils/common"
-import { ValuesOf } from "utils/types-utils"
 
 type FormValue = string | string[] | number | number[] | boolean | null | undefined
 type FormValues = Record<string, FormValue>
