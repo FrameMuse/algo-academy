@@ -83,5 +83,15 @@ kbd {
 	white-space: nowrap;
 }
 
+.icon {
+	$size: var(--icon-size, 1em);
+
+	display: inline-block;
+	width: $size;
+	height: $size;
+	vertical-align: middle;
+	object-fit: contain;
+}
+
 @import "~assets/scss/reset.scss";
 @import "~assets/scss/common.scss";

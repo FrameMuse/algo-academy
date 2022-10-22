@@ -4,6 +4,8 @@ import { MouseEventHandler } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { classMerge, classWithModifiers } from "utils/common"
 
+import Icon from "../Icon/Icon"
+import { ButtonIconize } from "./Button"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonLinkProps extends ButtonBaseProps {
@@ -13,6 +15,20 @@ interface ButtonLinkProps extends ButtonBaseProps {
   disabled?: boolean
   replace?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
+}
+
+function Iconize(icon: ButtonLinkProps["iconLeft"]) {
+  if (typeof icon === "string") {
+    return (
+      <div className="button__icon">
+        <Icon name={icon} />
+      </div>
+    )
+  }
+
+  return (
+    <div className="button__icon">{icon}</div>
+  )
 }
 
 function ButtonLink(props: ButtonLinkProps) {
@@ -27,13 +43,9 @@ function ButtonLink(props: ButtonLinkProps) {
     <NavLink className={
       link => classMerge(classWithModifiers("button", ...modifiers, props.nav && link.isActive && "white"), props.className)
     } replace={props.replace} to={props.disabled ? location : props.to} onClick={props.onClick} end={props.end}>
-      {props.iconLeft && (
-        <div className="button__icon">{props.iconLeft}</div>
-      )}
+      <ButtonIconize icon={props.iconLeft} />
       <div className="button__text">{props.children}</div>
-      {props.iconRight && (
-        <div className="button__icon">{props.iconRight}</div>
-      )}
+      <ButtonIconize icon={props.iconRight} />
     </NavLink>
   )
 }

@@ -4,6 +4,7 @@ import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
+import Icon from "../Icon/Icon"
 import LoaderCover from "../Loader/LoaderCover"
 import { ButtonBaseProps } from "./Button.types"
 
@@ -44,17 +45,27 @@ function Button(props: ButtonProps) {
 
   return (
     <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} onClick={onClick}>
-      {props.iconLeft && (
-        <div className="button__icon">{props.iconLeft}</div>
-      )}
+      <ButtonIconize icon={props.iconLeft} />
       <div className="button__text">{props.children}</div>
-      {props.iconRight && (
-        <div className="button__icon">{props.iconRight}</div>
-      )}
+      <ButtonIconize icon={props.iconRight} />
       <div className="button__loader">
         <LoaderCover white />
       </div>
     </button>
+  )
+}
+
+export function ButtonIconize(props: { icon: ButtonProps["iconLeft"] }) {
+  if (typeof props.icon === "string") {
+    return (
+      <div className="button__icon">
+        <Icon name={props.icon} />
+      </div>
+    )
+  }
+
+  return (
+    <div className="button__icon">{props.icon}</div>
   )
 }
 

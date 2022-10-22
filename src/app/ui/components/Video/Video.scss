@@ -1,16 +1,53 @@
 @import "~assets/scss/bundle.scss";
 
-.video-block {
+.video {
   position: relative;
   border-radius: 50px;
   overflow: hidden;
 }
 
-.video-block-padding {
+video.video__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  cursor: pointer;
+}
+
+button.video-play {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(#1c39bb, 0.4);
+
+  transition: 400ms ease background-color;
+
+  cursor: pointer;
+
+  &:hover:not([hidden]) {
+    background: rgba(#1c39bb, 0.5);
+  }
+
+  &[hidden] {
+    opacity: 0;
+  }
+}
+
+.video-play__icon {
+  --icon-size: 5em;
+
+  color: white;
+}
+
+.video-padding {
   padding-top: 62.2%;
 }
 
-.video-block-frame {
+.video-frame {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -32,7 +69,7 @@
   }
 }
 
-.video-block-preview {
+.video-preview {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -74,13 +111,13 @@
       background: rgba(28, 57, 187, 0.2);
     }
 
-    .video-block-button svg {
+    .video-button svg {
       fill: $blue;
     }
   }
 }
 
-.video-block-button {
+.video-button {
   position: absolute;
   z-index: 4;
   top: 50%;
@@ -90,6 +127,8 @@
   align-items: center;
   width: 80px;
   height: 80px;
+
+  color: white;
 
   svg {
     fill: #fff;

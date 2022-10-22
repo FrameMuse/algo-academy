@@ -63,10 +63,11 @@
   width: 63%;
   padding-left: 150px;
   font-size: 18px;
-  color: $color-gray;
+  color: $color-dark-75;
 
   p {
     margin-bottom: 24px;
+    line-height: 150%;
 
     &:last-child {
       margin-bottom: 0;
@@ -125,7 +126,7 @@
 }
 
 .features-item-text {
-  color: $color-gray;
+  color: $color-dark-75;
 }
 
 
@@ -172,6 +173,10 @@
   line-height: 1.25;
   opacity: 0.68;
   transition: .5s;
+
+  text-decoration: none;
+
+  color: $color-black-main;
 
   &::after {
     content: '';
@@ -425,4 +430,110 @@
 .read-more {
   font-weight: 500;
   color: $blue;
+}
+
+/* Support languages */
+
+.lang-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.lang-title {
+  width: 37%;
+  padding-right: 30px;
+}
+
+.lang-items {
+  width: 53%;
+  max-width: 63%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.lang-item {
+  width: calc(33.33% - 30px);
+  min-height: 195px;
+  margin: 0 15px;
+  margin-bottom: 30px;
+  padding: 35px 24px;
+  background: $blue1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.lang-item-icon {
+  width: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.lang-item-name {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+
+/* Ace your next coding interview */
+
+.ace-section {
+  background: $blue;
+  padding: 75px 0;
+}
+
+.ace-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ace-img {
+  width: 535px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.ace-text {
+  width: 700px;
+  max-width: calc(100% - 535px);
+  padding-right: 30px;
+  color: #fff;
+
+  h2 {
+    color: #fff;
+  }
+}
+
+.ace-buttons {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+
+  .button {
+    margin-right: 16px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
