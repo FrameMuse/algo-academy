@@ -2,10 +2,10 @@ import "./s.scss"
 
 import { EAppRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/components/Button/ButtonLink"
+import TabLink from "app/ui/components/TabRouter/TabLink"
+import TabRoute from "app/ui/components/TabRouter/TabRoute"
+import TabRouter from "app/ui/components/TabRouter/TabRouter"
 import Video from "app/ui/components/Video/Video"
-import TabLink from "app/ui/containers/TabRouter/TabLink"
-import TabRoute from "app/ui/containers/TabRouter/TabRoute"
-import TabRouter from "app/ui/containers/TabRouter/TabRouter"
 
 import __TESTVIDEO__ from "./video.mp4"
 
