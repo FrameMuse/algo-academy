@@ -3,6 +3,9 @@ import "./s.scss"
 import { EAppRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/components/Button/ButtonLink"
 import Video from "app/ui/components/Video/Video"
+import TabLink from "app/ui/containers/TabRouter/TabLink"
+import TabRoute from "app/ui/containers/TabRouter/TabRoute"
+import TabRouter from "app/ui/containers/TabRouter/TabRouter"
 
 import __TESTVIDEO__ from "./video.mp4"
 
@@ -111,48 +114,51 @@ function HomeView() {
               </div>
             </div>
 
-            <div className="curriculum-content">
-              <div className="curriculum-tabs">
-                <a href="#" className="curriculum-tabs-item active">Data structures</a>
-                <a href="#" className="curriculum-tabs-item">Coding patterns</a>
-                <a href="#" className="curriculum-tabs-item">Bonus content</a>
+            <TabRouter defaultPath="data-structures">
+              <div className="curriculum-content">
+                <div className="curriculum-tabs">
+                  <TabLink className="curriculum-tabs-item" to="data-structures">Data structures</TabLink>
+                  <TabLink className="curriculum-tabs-item" to="coding-patterns">Coding patterns</TabLink>
+                  <TabLink className="curriculum-tabs-item" to="bonus-content">Bonus content</TabLink>
+                </div>
+                <TabRoute path="data-structures">
+                  <div className="curriculum-wrap">
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">01.</div>
+                      <div className="curriculum-item-name">Arrays</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">02.</div>
+                      <div className="curriculum-item-name">Hash maps</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">03.</div>
+                      <div className="curriculum-item-name">Linked lists</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">04.</div>
+                      <div className="curriculum-item-name">Trees</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">05.</div>
+                      <div className="curriculum-item-name">Graphs</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">06.</div>
+                      <div className="curriculum-item-name">Heaps</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">07.</div>
+                      <div className="curriculum-item-name">Tries</div>
+                    </div>
+                    <div className="curriculum-item">
+                      <div className="curriculum-item-digit">08.</div>
+                      <div className="curriculum-item-name">Stack</div>
+                    </div>
+                  </div>
+                </TabRoute>
               </div>
-
-              <div className="curriculum-wrap">
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">01.</div>
-                  <div className="curriculum-item-name">Arrays</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">02.</div>
-                  <div className="curriculum-item-name">Hash maps</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">03.</div>
-                  <div className="curriculum-item-name">Linked lists</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">04.</div>
-                  <div className="curriculum-item-name">Trees</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">05.</div>
-                  <div className="curriculum-item-name">Graphs</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">06.</div>
-                  <div className="curriculum-item-name">Heaps</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">07.</div>
-                  <div className="curriculum-item-name">Tries</div>
-                </div>
-                <div className="curriculum-item">
-                  <div className="curriculum-item-digit">08.</div>
-                  <div className="curriculum-item-name">Stack</div>
-                </div>
-              </div>
-            </div>
+            </TabRouter>
           </div>
         </div>
       </section>

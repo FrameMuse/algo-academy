@@ -175,7 +175,6 @@
   font-weight: 700;
   line-height: 1.25;
   opacity: 0.68;
-  transition: .5s;
 
   text-decoration: none;
 
@@ -187,10 +186,12 @@
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 0;
+    width: 0%;
     height: 2px;
     background: $color-black-main;
     opacity: 0;
+
+    transition: 200ms ease opacity, 200ms ease width;
   }
 
   &:last-child {
@@ -202,7 +203,7 @@
     opacity: 1;
   }
 
-  &.active {
+  &--active {
     opacity: 1;
 
     &::after {
