@@ -64,7 +64,7 @@ function HomeView() {
                   <img src="/static/images/features2.png" alt="" />
                 </div>
                 <div className="features-item-title">In-depth videos</div>
-                <div className="features-item-text">struggling to understand a concept? each of our questions contains an in-depth two-part video walkthrough to help solidify your understanding. never feel lost again.</div>
+                <div className="features-item-text">Struggling to understand a concept? each of our questions contains an in-depth two-part video walkthrough to help solidify your understanding. never feel lost again.</div>
               </div>
               <div className="features-item">
                 <div className="features-item-icon">
@@ -84,8 +84,8 @@ function HomeView() {
                 <div className="features-item-icon">
                   <img src="/static/images/features5.png" alt="" />
                 </div>
-                <div className="features-item-title">soft skills</div>
-                <div className="features-item-text">the best way to become a well-rounded candidate is to balance your technical knowledge with strong soft skills. learn how to excel in behavioral interviews and even negotiate a higher salary!</div>
+                <div className="features-item-title">Soft skills</div>
+                <div className="features-item-text">The best way to become a well-rounded candidate is to balance your technical knowledge with strong soft skills. learn how to excel in behavioral interviews and even negotiate a higher salary!</div>
               </div>
               <div className="features-item">
                 <div className="features-item-icon">
@@ -184,7 +184,7 @@ function HomeView() {
         <div className="wrapper">
           <div className="main-six-wrap">
             <div className="main-six-left">
-              <div className="main-six-item active">
+              <div className="main-six-item">
                 <div className="main-six-item-title">In-depth video explanations</div>
                 <div className="main-six-item-text grey-color">
                   <p>Studying for coding interviews is difficult enough. at algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
@@ -193,7 +193,7 @@ function HomeView() {
                   </div>
                 </div>
               </div>
-              <div className="main-six-item">
+              <div className="main-six-item active">
                 <div className="main-six-item-title">Hands-on coding environment</div>
                 <div className="main-six-item-text grey-color">
                   <p>Put your skills to the test. practice and learn interactively with our built-in coding workspace. pick a language. run your solution against our test cases. and if you get stuck, we got you covered with our in-depth solution videos. we have it all.</p>
@@ -221,7 +221,7 @@ function HomeView() {
           <div className="lang-wrap">
             <div className="lang-title">
               <h2>We support these programming languages</h2>
-              <p className="subtitle">It can be frustrating to find an interview prep resource with solutions written in programming languages you’re unfamiliar with. that’s why we offer support in 4 popular languages, with more on the way!</p>
+              <p className="subtitle">It can be frustrating to find an interview prep resource with solutions written in programming languages you’re unfamiliar with. that’s why we offer support in 5 popular languages, with more on the way!</p>
             </div>
             <div className="lang-items">
               <div className="lang-item">

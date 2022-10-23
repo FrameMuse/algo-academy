@@ -82,6 +82,7 @@
 
 .features-section {
   padding-bottom: 125px;
+  background: $color-blue-10;
 }
 
 .features-wrap {
@@ -127,6 +128,8 @@
 
 .features-item-text {
   color: $color-dark-75;
+
+  line-height: 1.25;
 }
 
 
@@ -221,7 +224,7 @@
   margin-bottom: 30px;
   padding: 25px 32px;
   padding-bottom: 23px;
-  background: $color-blue;
+  background: $color-blue-10;
   border-radius: 20px;
   line-height: 1.25;
 }
@@ -388,7 +391,9 @@
 }
 
 
-
+.main-six-section {
+  background: $color-blue-10;
+}
 
 .main-six-wrap {
   display: flex;
