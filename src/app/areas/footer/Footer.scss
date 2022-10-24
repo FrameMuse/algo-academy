@@ -1,0 +1,51 @@
+@import "~assets/scss/bundle.scss";
+
+footer {
+  background: $color-dark;
+  padding: 80px 0;
+  text-align: center;
+  color: #fff;
+
+  .logo {
+    margin-bottom: 32px;
+  }
+}
+
+.copyright {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: 0.68;
+}
+
+.footer-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-weight: 600;
+
+  margin-bottom: 15px;
+}
+
+a.footer-menu-link {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+
+  text-decoration: none;
+  transition: 200ms ease opacity;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &--active {
+    // font-weight: 800;
+    text-decoration: underline;
+  }
+
+  &:not(:first-child) {
+    margin-left: 30px;
+  }
+}

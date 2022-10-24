@@ -1,0 +1,60 @@
+{
+  "in use of classWithModifiers": {
+    "prefix": "modifiers",
+    "body": [
+      "const modifiers: string[] = []"
+    ],
+    "description": "in use of classWithModifiers"
+  },
+  "useLocalization": {
+    "prefix": "usell",
+    "body": [
+      "const ll = useLocalization$1(ll => ll.$key)"
+    ],
+    "description": "useLocalization"
+  },
+  "ts react function component": {
+    "prefix": "tsrfc",
+    "body": [
+      "import \"./${1:${TM_FILENAME_BASE}}.scss\"",
+      "",
+      "import { ReactNode } from \"react\"",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
+      "  children: ReactNode",
+      "}",
+      "",
+      "function ${1:${TM_FILENAME_BASE}}(props: ${1:${TM_FILENAME_BASE}}Props) {",
+      "  return (",
+      "    .${2:${TM_FILENAME_BASE/(?<!^)(?=[A-Z])/-/g}}",
+      "  )",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      ""
+    ],
+    "description": "ts react function component"
+  },
+  "query": {
+    "prefix": "useQuery",
+    "body": [
+      "const { error, loading, payload } = useQuery()",
+      "if (error) throw new Error(\"useQuery error\")",
+      "if (loading) return <>loading...</>",
+      "if (!payload) return <>no content</>"
+    ],
+    "description": "query"
+  },
+  "pagination query": {
+    "prefix": "usePaginationQuery",
+    "body": [
+      "const [page, setPage] = useState(1)",
+      "const [pageSize] = useState(15)",
+      "const { error, loading, payload } = useQuery(${0:get}(page, pageSize))",
+      "if (error) throw new Error(\"useQuery error\")",
+      "if (loading) return <>loading...</>",
+      "if (!payload) return <>no content</>"
+    ],
+    "description": "pagination query"
+  }
+}
