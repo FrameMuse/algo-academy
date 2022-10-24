@@ -1,13 +1,15 @@
-import Footer from "app/areas/footer/Footer"
-import Header from "app/areas/header/Header"
 import { ReactNode } from "react"
 import { Outlet } from "react-router-dom"
 
-interface ViewLayoutProps {
+import Footer from "../Footer/Footer"
+import Header from "../Header/Header"
+
+
+interface BaseLayout {
   children?: ReactNode
 }
 
-function ViewLayout(props: ViewLayoutProps) {
+function BaseLayout(props: BaseLayout) {
   return (
     <>
       <Header />
@@ -17,4 +19,4 @@ function ViewLayout(props: ViewLayoutProps) {
   )
 }
 
-export default ViewLayout
+export default BaseLayout

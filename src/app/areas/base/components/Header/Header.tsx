@@ -1,10 +1,9 @@
 import "./Header.scss"
 
 import { EAppRoutes } from "app/AppRoutes"
-import AppNavLink from "app/ui/components/Link/AppNavLink"
-import Logo from "app/ui/components/Logo/Logo"
-
-import { ProfileWidget } from "../profile"
+import AppNavLink from "app/ui/kit/Link/AppNavLink"
+import Logo from "app/ui/synthetic/Logo/Logo"
+import ProfileWidget from "app/ui/synthetic/ProfileWidget/ProfileWidget"
 
 function Header() {
   return (

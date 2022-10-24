@@ -1,5 +1,5 @@
-import Button from "app/ui/components/Button/Button"
-import { ErrorBoundaryError, ErrorBoundaryReset } from "app/ui/containers/ErrorBoundary/ErrorBoundary.types"
+import { ErrorBoundaryError, ErrorBoundaryReset } from "app/containers/ErrorBoundary/ErrorBoundary.types"
+import Button from "app/ui/kit/Button/Button"
 import { ErrorInfo } from "react"
 
 interface FatalErrorProps {

@@ -1,6 +1,6 @@
 import "./CookiesNotice.scss"
 
-import Button from "app/ui/components/Button/Button"
+import Button from "app/ui/kit/Button/Button"
 import { useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
 

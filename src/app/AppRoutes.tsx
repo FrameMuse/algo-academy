@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom"
 
-import ViewLayout from "./layouts/ViewLayout/ViewLayout"
+import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
 import HomeView from "./views/home"
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<ViewLayout />}>
+      <Route element={<BaseLayout />}>
         <Route path="*" element={<HomeView />} />
       </Route>
     </Routes>
