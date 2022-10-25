@@ -1,6 +1,7 @@
 import "./FAQ.scss"
 
-import { ReactNode, useEffect, useRef, useState } from "react"
+import Icon from "app/ui/kit/Icon/Icon"
+import { ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
 interface FAQClauseProps {
@@ -12,13 +13,17 @@ function FAQClause(props: FAQClauseProps) {
   const innerRef = useRef<HTMLDivElement>(null)
   const [expanded, setExpanded] = useState<boolean>(false)
   const [height, setHeight] = useState<number | undefined>()
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     if (!innerRef.current) return
+
     setHeight(innerRef.current.scrollHeight)
-  }, [])
+  }, [expanded])
+
   return (
     <div className="faq__clause" aria-expanded={expanded}>
-      <div className="faq__summary" aria-details="show more" onClick={() => setExpanded(!expanded)}>
+      <div className={classWithModifiers("faq__summary", expanded && "expanded")} aria-details="show more" onClick={() => setExpanded(!expanded)}>
+        <Icon name={expanded ? "minus" : "plus"} className="faq__icon" />
         <div className="faq__title">{props.summary}</div>
       </div>
       <div className={classWithModifiers("faq__content", expanded && "expanded")} aria-hidden={!expanded} style={{ "--height": height }}>
