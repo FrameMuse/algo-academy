@@ -40,7 +40,10 @@ function Button(props: ButtonProps) {
   const modifiers: string[] = []
   if (props.color) modifiers.push(props.color)
   if (props.size) modifiers.push(props.size)
+
   if (props.outline) modifiers.push("outline")
+  if (props.squared) modifiers.push("squared")
+
   if (pending || props.pending) modifiers.push("pending")
 
   return (

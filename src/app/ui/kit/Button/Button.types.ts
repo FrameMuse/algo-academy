@@ -3,12 +3,14 @@ import { ReactElement, ReactNode } from "react"
 import { IconName } from "../Icon/Icon"
 
 type ButtonSize = "little" | "small" | "big"
-type ButtonColor = "dark" | "white" | "green" | "violet"
+type ButtonColor = "dark" | "white" | "green" | "violet" | "gray"
 
 export interface ButtonBaseProps {
   size?: ButtonSize
   color?: ButtonColor
+
   outline?: boolean
+  squared?: boolean
 
   className?: string
 

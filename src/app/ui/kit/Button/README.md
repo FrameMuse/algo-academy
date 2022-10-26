@@ -1,28 +1,37 @@
 # Button
 
-- This should be a customizable button
-- Should have transition on events, colors and outline type changed
+- This is a customizable button
+- Has transition on events, colors and outline type changed
 
-## Colors
+## Customize
+
+To customize button, text, icon properties, pass them to classes
+- `.button`
+- `.button__text`
+- `.button__icon`
+
+## Features
+
+### Colors
 
 - Dark (default)
 - White
 - Green
 - Violet
 
-## Sizes
+### Sizes
 
 - Little (for `ButtonIcon`)
 - Small
 - Normal (default)
 - Big
 
-## Outline type
+### Outline type
 
 - Only border (with outline)
 - Only background (without outline) (default)
 
-## Events
+### Events
 
 - Hover
 - Active

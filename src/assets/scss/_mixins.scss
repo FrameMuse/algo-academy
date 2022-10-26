@@ -91,3 +91,15 @@
 		padding-right: 4vw;
 	}
 }
+
+@mixin row-gap($gap) {
+	&>*:not(:first-child) {
+		margin-left: $gap;
+	}
+}
+
+@mixin column-gap($gap) {
+	&>*:not(:first-child) {
+		margin-top: $gap;
+	}
+}

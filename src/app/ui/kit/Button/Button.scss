@@ -49,6 +49,8 @@
 		}
 	}
 
+	/* Colors */
+
 	&--green {
 		--button-color: #{$color-green};
 
@@ -60,25 +62,21 @@
 		}
 
 		.button__text {
-			color: $color-black-main;
+			--button-text-color: #{$color-black-main};
 			font-weight: 600;
 		}
 	}
 
 	&--white:not(&--outline) {
-		--button-color: #{$color-gray};
+		--button-color: #{$color-white};
+		--button-text-color: #{$color-black-main};
 
 		.button__text {
-			color: #{$color-black-main};
 			font-weight: 600;
 		}
 
-		.button__icon {
-			color: #{$color-gray};
-		}
-
 		&:hover {
-			--button-color: #{rgba(white, 0.85)};
+			--button-color: #{rgba($color-dark, 0.1)};
 		}
 	}
 
@@ -97,6 +95,7 @@
 
 	&--dark {
 		--button-color: #{$color-black-main};
+		--button-text-color: #{$color-black-main};
 	}
 
 	&--dark:not(&--outline) {
@@ -105,6 +104,17 @@
 		}
 	}
 
+	&--gray:not(&--outline) {
+		--button-color: #{$color-blue-10};
+		--button-text-color: #{$color-black-main};
+
+		&:hover {
+			--button-color: #{$color-gray};
+			--button-text-color: #{$color-black-main};
+		}
+	}
+
+	/* Features */
 
 	&--little {
 		border-radius: 1em;
@@ -136,11 +146,9 @@
 	}
 
 	&--icon-only {
-		padding: unset;
-	}
+		--icon-size: 1.5rem;
 
-	&--icon-only:not(&--little) {
-		border-radius: 1.5em;
+		padding: unset;
 	}
 
 	&:not(&--icon-only) {
@@ -160,7 +168,7 @@ a.button {
 }
 
 .button__text {
-	color: white;
+	color: var(--button-text-color, white);
 	font-size: 1.125rem;
 }
 
@@ -170,7 +178,7 @@ a.button {
 
 	display: grid;
 	padding: 1.5em;
-	color: white;
+	color: var(--button-icon-color, var(--button-text-color, white));
 
 	.icon {
 		transition: 200ms ease transform;
@@ -183,10 +191,12 @@ a.button {
 	}
 
 	&--small {
-		padding: 1.25em;
+		--icon-size: 1.25rem;
+		padding: 1em;
 	}
 
 	&--big {
+		--icon-size: 1.75rem;
 		padding: 2em;
 	}
 }

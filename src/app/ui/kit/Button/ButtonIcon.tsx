@@ -43,13 +43,16 @@ function ButtonIcon(props: ButtonIconProps) {
   modifiers.push("icon-only")
   if (props.color) modifiers.push(props.color)
   if (props.size) modifiers.push(props.size)
+
   if (props.outline) modifiers.push("outline")
+  if (props.squared) modifiers.push("squared")
+
   if (pending || props.pending) modifiers.push("pending")
 
   return (
     <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} onClick={onClick}>
       {/* Pass size to `button__icon` so now it controls the padding by itself */}
-      <div className={classWithModifiers("button__icon", props.size)}>
+      <div className={classMerge(classWithModifiers("button__icon", props.size), props.className)}>
         <Icon name={props.name} />
       </div>
       <div className="button__loader">

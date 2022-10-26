@@ -3,7 +3,6 @@
 header {
   background: $color-blue;
   position: relative;
-  z-index: 91;
 }
 
 .header-wrap {
@@ -197,32 +196,6 @@ header {
   color: #fff;
 }
 
-.header-feedback {
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #fff;
-
-  &:hover {
-    color: $red;
-    ;
-
-    svg {
-      fill: $red;
-    }
-  }
-
-  svg {
-    fill: #fff;
-  }
-}
-
-.header-feedback-text {
-  margin-left: 6px;
-}
-
 /* mobile menu */
 
 .mob-menu-section {
@@ -257,30 +230,6 @@ header {
   text-align: center;
   padding: 40px 15px;
   color: #fff;
-}
-
-.mob-menu-feedback {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 30px;
-  color: #fff;
-  margin-top: 30px;
-
-  &:hover {
-    color: $red;
-    ;
-
-    svg {
-      fill: $red;
-    }
-  }
-
-  svg {
-    fill: #fff;
-  }
 }
 
 .mob-menu-feedback-text {

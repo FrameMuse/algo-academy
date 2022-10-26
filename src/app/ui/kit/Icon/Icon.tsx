@@ -3,11 +3,17 @@ import { classMerge, classWithModifiers } from "utils/common"
 
 
 export type IconName =
+  | "chevron-left"
+  | "chevron-right"
   | "chevron-down"
   | "gear"
   | "arrow-right"
   | "exclamation-mark"
   | "play-circle"
+  | "quote"
+  | "plus"
+  | "minus"
+  | "cross"
   // | "asd"
   // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})

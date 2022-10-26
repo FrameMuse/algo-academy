@@ -1,7 +1,7 @@
 import "./Footer.scss"
 
 import { EAppRoutes } from "app/AppRoutes"
-import AppNavLink from "app/ui/components/Link/AppNavLink"
+import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 
 function Footer() {
