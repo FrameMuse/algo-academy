@@ -6,10 +6,10 @@ import { Headings } from "app/areas/base"
 import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Selector from "app/ui/kit/Selector/Selector"
-import TabLink from "app/ui/kit/TabRouter/TabLink"
-import TabRoute from "app/ui/kit/TabRouter/TabRoute"
-import TabRouter from "app/ui/kit/TabRouter/TabRouter"
 import Video from "app/ui/kit/Video/Video"
+import TabLink from "app/ui/synthetic/TabRouter/TabLink"
+import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
+import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 
 import __TESTVIDEO__ from "./video.mp4"
 

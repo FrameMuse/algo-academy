@@ -4,8 +4,8 @@ import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
+import LoaderCover from "../../synthetic/Loader/LoaderCover"
 import Icon, { IconName } from "../Icon/Icon"
-import LoaderCover from "../Loader/LoaderCover"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight" | "children"> {

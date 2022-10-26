@@ -1,9 +1,8 @@
 import "./Slider.scss"
 
+import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import { Children, ReactNode, useEffect, useRef } from "react"
 import ElementUtils from "utils/element"
-
-import ButtonIcon from "../Button/ButtonIcon"
 
 interface SliderProps {
   emptyFallback?: ReactNode
