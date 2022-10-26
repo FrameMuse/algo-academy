@@ -157,7 +157,7 @@
 		}
 	}
 
-	&>*:not(:first-child) {
+	&>*:not(:first-child, .button__loader) {
 		margin-left: 0.75em;
 	}
 }

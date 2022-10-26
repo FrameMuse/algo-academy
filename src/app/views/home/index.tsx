@@ -1,11 +1,9 @@
 import "./s.scss"
-import "react-modal-global/styles/modal.scss"
 
 import { EAppRoutes } from "app/AppRoutes"
 import { Headings } from "app/areas/base"
 import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
-import Selector from "app/ui/kit/Selector/Selector"
 import Video from "app/ui/kit/Video/Video"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
@@ -24,10 +22,6 @@ function HomeView() {
                 <h1>Coding interviews made easy</h1>
                 <p>Learn the techniques to breakdown and solve any coding problem. algo academy is the ultimate resource for aceing the coding interview.</p>
               </Headings>
-              <Selector defaultValue="Incomplete">
-                <option value="Incomplete">Not completed</option>
-                <option value="2">2</option>
-              </Selector>
               <div className="button-wrap">
                 <ButtonLink to={EAppRoutes.FullCourse}>Try a Question</ButtonLink>
               </div>

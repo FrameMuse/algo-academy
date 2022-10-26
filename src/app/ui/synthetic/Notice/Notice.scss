@@ -9,6 +9,11 @@
   align-items: center;
 }
 
+.notice__info {
+  display: grid;
+  gap: 1em;
+}
+
 .notice__title {
   font-size: $font-size-h5;
   font-weight: 800;
@@ -24,5 +29,6 @@
 }
 
 .notice__element {
+  flex-shrink: 0;
   margin-left: auto;
 }

@@ -1,9 +1,8 @@
 import "./ReviewsSection.scss"
 
-import Slider from "app/ui/kit/Slider/Slider"
+import Slider from "app/ui/synthetic/Slider/Slider"
 
-import { Headings } from "../.."
-import Review from "../../components/Review/Review"
+import { Headings, Review } from "../.."
 
 function ReviewsSection() {
   return (

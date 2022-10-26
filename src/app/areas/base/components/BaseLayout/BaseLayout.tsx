@@ -13,7 +13,9 @@ function BaseLayout(props: BaseLayout) {
   return (
     <>
       <Header />
-      {props.children || <Outlet />}
+      <main>
+        {props.children || <Outlet />}
+      </main>
       <Footer />
     </>
   )

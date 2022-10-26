@@ -1,23 +1,19 @@
 import "./CookiesNotice.scss"
 
 import Button from "app/ui/kit/Button/Button"
-import { useRef, useState } from "react"
+import { useLocalStorage } from "react-use"
 import { classWithModifiers } from "utils/common"
 
 function CookiesNotice() {
-  const cookiesRef = useRef(localStorage.getItem("cookies"))
-  const [cookies, setCookies] = useState("")
+  const [cookiesAllow, setCookiesAllow] = useLocalStorage("cookies-allow", false)
   function onClick() {
-    setCookies("accept")
-    localStorage.setItem("cookies", "accept")
+    setCookiesAllow(true)
   }
   if (process.env.NODE_ENV === "production") {
-    if (cookiesRef.current === "accept") {
-      return null
-    }
+    if (cookiesAllow) return null
   }
   return (
-    <div className={classWithModifiers("cookies-notice", cookies === "accept" && "accept")}>
+    <div className={classWithModifiers("cookies-notice", cookiesAllow && "allow")}>
       <div className="cookies-notice__container">
         <p className="cookies-notice__text">
           By using our website, you agree to the use of cookies.

@@ -1,4 +1,6 @@
 import "assets/scss/base.scss"
+import "react-modal-global/styles/modal.scss"
+import "react-toastify/scss/main.scss"
 
 import { ReactNode, Suspense } from "react"
 import { ModalContainer } from "react-modal-global"

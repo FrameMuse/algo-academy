@@ -3,7 +3,7 @@
 .popup-layout {
   position: relative;
 
-  padding: 40px;
+  padding: 2.25em;
   background: white;
   border-radius: 20px;
 
@@ -27,8 +27,8 @@
   margin-left: auto;
 
   position: absolute;
-  top: 1.75em;
-  right: 1.75em;
+  top: 1.25em;
+  right: 1.25em;
 
   &:not(&--static) {}
 }

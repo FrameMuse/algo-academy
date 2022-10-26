@@ -1,14 +1,12 @@
 import "./Box.scss"
 
-import { ReactNode } from "react"
+import { HTMLAttributes } from "react"
 
-interface BoxProps {
-  children: ReactNode
-}
+interface BoxProps extends HTMLAttributes<HTMLElement> { }
 
 function Box(props: BoxProps) {
   return (
-    <div className="box">{props.children}</div>
+    <div {...props} className="box" />
   )
 }
 
