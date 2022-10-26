@@ -1,0 +1,39 @@
+@import "~assets/scss/bundle.scss";
+
+.popup-layout {
+  position: relative;
+
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+
+  min-width: 20em;
+  max-width: 75vw;
+
+  max-height: 90vh;
+
+  margin: auto;
+  overflow: auto;
+
+  box-shadow: 0px 0px 20px 10px rgba(black, 0.1);
+  cursor: initial;
+
+  @include Mobile {
+    max-width: 90vw;
+  }
+}
+
+.popup-layout__close {
+  margin-left: auto;
+
+  position: absolute;
+  top: 1.75em;
+  right: 1.75em;
+
+  &:not(&--static) {}
+}
+
+.popup-layout__container {
+  display: grid;
+  gap: 1.5em;
+}
