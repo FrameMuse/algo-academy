@@ -1,0 +1,10 @@
+@import "~assets/scss/bundle.scss";
+
+.box {
+  display: grid;
+  gap: 2em;
+
+  padding: 2.5em;
+  border: 1px solid $color-blue-10;
+  border-radius: 0.5em;
+}
