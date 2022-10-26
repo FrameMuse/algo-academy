@@ -1,4 +1,4 @@
-import { classWithModifiers, createQuery, minFill } from "./common"
+import { classMerge, classWithModifiers, createQuery, minFill } from "./common"
 
 describe("Common utils", () => {
   test("minFill", () => {
@@ -10,6 +10,13 @@ describe("Common utils", () => {
     expect(minFill([1, 2], 5)).toStrictEqual([1, 2, 1, 2, 1])
 
     expect(minFill([[1, 2], [3, 4]], 5)).toStrictEqual([[1, 2], [3, 4], [1, 2], [3, 4], [1, 2]])
+  })
+
+  test("classMerge", () => {
+    expect(classMerge("origin-class")).toBe("origin-class")
+    expect(classMerge("origin-class", "another-class")).toBe("origin-class another-class")
+    expect(classMerge("origin-class", "another-class", "another-class")).toBe("origin-class another-class another-class")
+    expect(classMerge("origin-class", "another-class", "another-class2")).toBe("origin-class another-class another-class2")
   })
 
   test("classWithModifiers", () => {

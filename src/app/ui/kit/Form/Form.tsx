@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from "react"
 import { Enum } from "types"
 import { ValuesOf } from "types"
-import { FileToURLDataBase64 } from "utils/common"
+import FileTransform from "utils/transform/file"
 
 type FormValue = string | string[] | number | number[] | boolean | null | undefined
 type FormValues = Record<string, FormValue>
@@ -56,7 +56,7 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
 
       const file = next.files?.[0]
       if (file instanceof File) {
-        values[next.name] = await FileToURLDataBase64(file)
+        values[next.name] = await FileTransform.toURLData(file)
       }
     }
 

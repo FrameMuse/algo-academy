@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
+    "jest": "^27.5.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -48,6 +49,7 @@
     "vscode": ">=1.22.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.2.0",
     "@types/lodash": "^4.14.186",
     "@types/node": "^18.11.3",
     "@types/react-dom": "^18.0.6",
