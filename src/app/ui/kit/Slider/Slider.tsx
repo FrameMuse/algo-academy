@@ -1,7 +1,7 @@
 import "./Slider.scss"
 
 import { Children, ReactNode, useEffect, useRef } from "react"
-import { getCenterOfElement } from "utils/common"
+import ElementUtils from "utils/element"
 
 import ButtonIcon from "../Button/ButtonIcon"
 
@@ -39,7 +39,7 @@ function Slider(props: SliderProps) {
   useEffect(() => {
     if (!innerRef.current) return
 
-    innerRef.current.scrollTo(getCenterOfElement(innerRef.current), 0)
+    innerRef.current.scrollTo(ElementUtils.getCenter(innerRef.current), 0)
   }, [])
 
   const children = Children.toArray(props.children)

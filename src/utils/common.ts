@@ -100,7 +100,3 @@ export function minFill<T>(array: T[], minLevel?: number): T[] {
 export function isDictionary(object: unknown): object is Record<keyof never, unknown> {
   return object instanceof Object && object.constructor === Object
 }
-
-export function getCenterOfElement(element: HTMLElement) {
-  return (element.scrollWidth / 2) - (element.offsetWidth / 2)
-}
