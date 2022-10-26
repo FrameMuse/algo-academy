@@ -1,0 +1,31 @@
+@import "~assets/scss/bundle.scss";
+
+.headings {
+  display: grid;
+  gap: 1em;
+  color: $color-black-main;
+
+  h2 {
+    font-size: $font-size-h1;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.25;
+
+    opacity: 0.75;
+  }
+
+  h1+p,
+  h2+p {
+    font-size: $font-size-h5;
+  }
+
+  &--white {
+    color: white;
+
+    p {
+      font-weight: 300;
+    }
+  }
+}
