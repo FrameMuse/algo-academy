@@ -22,14 +22,14 @@ button.video-play {
   align-items: center;
   justify-content: center;
 
-  background: rgba(#1c39bb, 0.4);
+  background: rgba($color-blue, 0.4);
 
   transition: 400ms ease background-color;
 
   cursor: pointer;
 
   &:hover:not([hidden]) {
-    background: rgba(#1c39bb, 0.5);
+    background: rgba($color-blue, 0.5);
   }
 
   &[hidden] {
