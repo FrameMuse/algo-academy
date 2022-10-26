@@ -1,6 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .selector {
+	position: relative;
+
 	display: grid;
 	gap: 0.5em;
 
@@ -30,6 +32,12 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 
+	font-size: $font-size-h6;
+	font-weight: 600;
+
+	color: $color-black-main;
+	opacity: 0.75;
+
 	&--empty {
 		color: gray;
 	}
@@ -38,7 +46,7 @@
 .selector__icon {
 	--icon-size: 0.75em;
 
-	color: black;
+	color: $color-black-main;
 	transition: 200ms ease transform;
 
 	&--up {
