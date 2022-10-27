@@ -9,6 +9,7 @@ import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Details from "app/ui/kit/Details/Details"
 import Icon from "app/ui/kit/Icon/Icon"
+import Input from "app/ui/kit/Input/Input"
 import Selector from "app/ui/kit/Selector/Selector"
 import Table from "app/ui/kit/Table/Table"
 import Video from "app/ui/kit/Video/Video"
@@ -37,7 +38,7 @@ function BoxDark(props: { children: ReactNode, style?: CSSProperties }) {
   )
 }
 
-function ShowCaseView() {
+function UIShowcaseView() {
   // Disallow cookies to see the notice
   const [, setCookiesAllow] = useLocalStorage("cookies-allow")
   useEffect(() => { setCookiesAllow(false) }, [])
@@ -52,16 +53,18 @@ function ShowCaseView() {
       <br />
       <br />
       <Headings>
-        <h1>UI Show Case</h1>
+        <h1>UI Showcase</h1>
         <p>
           You can click, hover, focus and look ^-^
           <br />
           Note that though examples may used on the website, they are just examples and can be modified.
-          <br />
-          <br />
-          {"Don't be shy to request any changes in style or behavior."}
         </p>
+        <Callout>
+          {"Don't be shy to request any changes in style or behavior."}
+        </Callout>
       </Headings>
+      <br />
+      <br />
       <Box>
 
         <h2>Headings</h2>
@@ -101,7 +104,7 @@ function ShowCaseView() {
         <h3>Pending</h3>
         <Button color="dark" pending>Dark</Button>
         <h2>Button Link</h2>
-        <ButtonLink to={EAppRoutes.ShowCase}>Default</ButtonLink>
+        <ButtonLink to={EAppRoutes.UIShowcase}>Default</ButtonLink>
         <h2>Button Icon</h2>
         <Row alignItems="center">
           <ButtonIcon name="gear" size="big" ariaLabel={""} />
@@ -135,30 +138,34 @@ function ShowCaseView() {
         </Slider>
         <h2>Table</h2>
         <Table>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Price</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>FrameMuse</td>
-            <td>Developer</td>
-            <td>{Price.format(1000, "USD", "US")}</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>FrameMuse</td>
-            <td>Developer</td>
-            <td>{Price.format(1000, "USD", "US")}</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>FrameMuse</td>
-            <td>Developer</td>
-            <td>{Price.format(1000, "USD", "US")}</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>FrameMuse</td>
+              <td>Developer</td>
+              <td>{Price.format(1000, "USD", "US")}</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>FrameMuse</td>
+              <td>Developer</td>
+              <td>{Price.format(1000, "USD", "US")}</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>FrameMuse</td>
+              <td>Developer</td>
+              <td>{Price.format(1000, "USD", "US")}</td>
+            </tr>
+          </tbody>
         </Table>
         <h2>ProgressBar</h2>
         <div style={{ width: "25em" }}><ProgressBar value={35} /></div>
@@ -217,10 +224,13 @@ function ShowCaseView() {
             </p>
           </Details>
         </Box>
+
+        <h2>Modal</h2>
+        <Input placeholder="Your First Name" />
         {/* <h2>Modal</h2> */}
       </Box>
     </div>
   )
 }
 
-export default ShowCaseView
+export default UIShowcaseView

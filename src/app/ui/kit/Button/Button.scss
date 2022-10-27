@@ -95,7 +95,7 @@
 
 	&--dark {
 		--button-color: #{$color-black-main};
-		--button-text-color: #{$color-black-main};
+		--button-text-color: white;
 	}
 
 	&--dark:not(&--outline) {

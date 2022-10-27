@@ -3,6 +3,9 @@
 .headings {
   display: grid;
   gap: 1em;
+
+  justify-items: baseline;
+
   color: $color-black-main;
 
   h2 {

@@ -4,8 +4,10 @@
 	display: flex;
 	gap: 0.5em;
 
-	padding-bottom: 0.5em;
-	border-bottom: 1px solid rgba(gray, 0.2);
+	padding: 1.25em 1.5em;
+
+	border: 1px solid $color-gray;
+	border-radius: 0.75em;
 
 	@include Mobile {
 		display: grid;
@@ -16,15 +18,16 @@
 	width: 100%;
 
 	color: $color-black-main;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 
 	&::placeholder {
-		color: $color-gray;
+		color: rgba($color-dark, 0.5);
 		transition: 200ms ease color;
 	}
 
 	&:focus::placeholder {
-		color: rgba(gray, 0.2);
+		font-weight: 500;
+		color: rgba($color-dark, 0.5);
 	}
 
 	resize: vertical;

@@ -91,6 +91,10 @@ kbd {
 	height: $size;
 	vertical-align: middle;
 	object-fit: contain;
+
+	use {
+		pointer-events: none;
+	}
 }
 
 @import "~assets/scss/reset.scss";

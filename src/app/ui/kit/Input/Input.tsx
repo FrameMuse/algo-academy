@@ -1,20 +1,15 @@
 import "./Input.scss"
 
-import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from "react"
+import { DetailedHTMLProps, InputHTMLAttributes } from "react"
 
-export interface InputStrainType<V> {
-  title: string
-  value: V
+interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  label?: string
 }
 
-interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  strains?: InputStrainType<V>[]
-  onChange?: (event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<V>) => void
-}
-
-function Input<V>(props: InputProps<V>) {
+function Input(props: InputProps) {
   return (
     <label className="input">
+      <div className="input__label">{props.label}</div>
       <input className="input__input" {...props} placeholder={props.placeholder + (props.required ? "*" : "")} />
     </label>
   )
