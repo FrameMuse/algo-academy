@@ -1,4 +1,6 @@
 import "assets/scss/base.scss"
+import "react-modal-global/styles/modal.scss"
+import "react-toastify/scss/main.scss"
 
 import { ReactNode, Suspense } from "react"
 import { ModalContainer } from "react-modal-global"
@@ -8,9 +10,9 @@ import { ToastContainer } from "react-toastify"
 import store from "store/store"
 
 import AppRoutes from "./AppRoutes"
-import CookiesNotice from "./ui/containers/CookiesNotice/CookiesNotice"
-import ErrorBoundary from "./ui/containers/ErrorBoundary/ErrorBoundary"
-import ErrorFallback from "./ui/containers/ErrorFallback/ErrorFallback"
+import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
+import ErrorBoundary from "./containers/ErrorBoundary/ErrorBoundary"
+import ErrorFallback from "./containers/ErrorFallback/ErrorFallback"
 
 function App() {
   return (

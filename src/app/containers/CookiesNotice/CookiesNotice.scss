@@ -1,0 +1,42 @@
+@import "~assets/scss/bundle.scss";
+
+.cookies-notice {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+
+	margin: 0 auto;
+
+	padding: 1.5em;
+	max-width: 23em;
+
+	transition: 350ms ease transform;
+	z-index: 2;
+
+	&--allow {
+		transform: translateY(100%);
+	}
+
+	@include Mobile {
+		display: grid;
+		gap: 1em;
+
+		padding: 1em;
+	}
+}
+
+.cookies-notice__container {
+	display: grid;
+	justify-items: start;
+
+	gap: 1.5em;
+
+	padding: 2em;
+	background: $color-white;
+	box-shadow: 0 0 10px -6px black;
+	border-radius: 0.5em;
+}
+
+.cookies-notice__text {
+	line-height: 1.25;
+}

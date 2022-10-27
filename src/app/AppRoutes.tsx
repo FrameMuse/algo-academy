@@ -1,13 +1,15 @@
 import { Route, Routes } from "react-router-dom"
 
-import ViewLayout from "./layouts/ViewLayout/ViewLayout"
+import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
 import HomeView from "./views/home"
+import UIShowcaseView from "./views/showcase"
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<ViewLayout />}>
-        <Route path="*" element={<HomeView />} />
+      <Route element={<BaseLayout />}>
+        <Route path={EAppRoutes.Home} element={<HomeView />} />
+        <Route path={EAppRoutes.UIShowcase} element={<UIShowcaseView />} />
       </Route>
     </Routes>
   )
@@ -24,6 +26,8 @@ export enum EAppRoutes {
   AboutUs = "/about-us",
   FullCourse = "/full-course",
   Purchase = "/purchase",
+
+  UIShowcase = "/ui-showcase",
 }
 
 export default AppRoutes

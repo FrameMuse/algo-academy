@@ -1,0 +1,36 @@
+@import "~assets/scss/bundle.scss";
+
+.progress-bar {
+  flex: 1;
+
+  display: grid;
+  gap: 0.5em;
+}
+
+.progress-bar__line {
+  --progress: 35;
+
+  position: relative;
+  flex: 1;
+
+  display: flex;
+  height: 0.75em;
+
+  background: $color-blue-10;
+  border-radius: 10em;
+
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    width: calc(var(--progress) * 1%);
+    height: inherit;
+
+    background: $color-green;
+    border-radius: inherit;
+
+    transition: width 200ms;
+  }
+}

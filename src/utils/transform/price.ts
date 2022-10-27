@@ -1,5 +1,5 @@
 class Price {
-  static format(value: number, locale = "RU", currency: Intl.NumberFormatOptions["currency"] = "RUB"): string {
+  static format(value: number, currency: Intl.NumberFormatOptions["currency"] = "RUB", locale = "RU"): string {
     try {
       return value.toLocaleString(locale, { style: "currency", currency, minimumFractionDigits: 0 })
     } catch (error) {

@@ -1,0 +1,50 @@
+@import "~assets/scss/bundle.scss";
+
+.details {
+	background: rgba(white, 0.15);
+	border: 1px solid rgba(white, 0.25);
+	border-radius: 0.5em;
+	overflow: hidden;
+}
+
+.details__summary {
+	padding: 0.75em 1.25em;
+	background: rgba(white, 0.1);
+
+	cursor: pointer;
+}
+
+.details__text {
+	font-weight: 700;
+	color: white;
+	cursor: pointer;
+}
+
+.details__body {
+	height: 0px;
+	transition: 350ms ease height;
+
+	&--expanded {
+		height: calc(var(--details-height) * 1px);
+	}
+
+	p {
+		line-height: 1.35;
+		color: white;
+		opacity: 0.75;
+	}
+}
+
+.details__inner {
+	display: grid;
+	justify-items: left;
+	gap: 0.5em;
+	padding: 1em 1.25em;
+	transition: 250ms ease opacity, 250ms ease transform;
+
+	:not(.details__body--expanded)>& {
+		opacity: 0;
+		transform: translateY(-5%);
+		pointer-events: none;
+	}
+}

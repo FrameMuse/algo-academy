@@ -1,0 +1,15 @@
+@import "~assets/scss/bundle.scss";
+
+.row {
+  --row-indent: 1em;
+
+  display: flex;
+  justify-content: flex-end;
+
+  @include row-gap(var(--row-indent));
+
+  @include Mobile {
+    display: grid;
+    gap: var(--row-indent);
+  }
+}

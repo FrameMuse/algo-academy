@@ -1,0 +1,31 @@
+@import "~assets/scss/bundle.scss";
+
+.person {
+  display: flex;
+  align-items: center;
+}
+
+.person__avatar {
+  width: 2.5em;
+  height: 2.5em;
+
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.person__info {
+  display: grid;
+  gap: 0.25em;
+
+  margin-left: 0.5em;
+}
+
+.person__name {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.person__bio {
+  font-size: 0.825rem;
+  color: $color-blue-40;
+}

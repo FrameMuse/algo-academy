@@ -1,0 +1,11 @@
+@import "~assets/scss/bundle.scss";
+
+.callout {
+  padding: 0.5em 1.5em;
+
+  background: rgba($color-blue, 0.1);
+  border-radius: 10em;
+
+  font-weight: 700;
+  line-height: 1.25;
+}

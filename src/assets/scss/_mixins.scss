@@ -7,9 +7,9 @@
 }
 
 @mixin InputAppearance {
-	padding: 0.75em 1em;
-	border: 1px solid gray;
-	border-radius: 0.25em;
+	padding: 0.5em 1em;
+	background: $color-blue-10;
+	border-radius: 0.5em;
 }
 
 @mixin Badge($size: 1em, $float: true) {
@@ -89,5 +89,17 @@
 	@include Tablet {
 		padding-left: 4vw;
 		padding-right: 4vw;
+	}
+}
+
+@mixin row-gap($gap) {
+	&>*:not(:first-child) {
+		margin-left: $gap;
+	}
+}
+
+@mixin column-gap($gap) {
+	&>*:not(:first-child) {
+		margin-top: $gap;
 	}
 }

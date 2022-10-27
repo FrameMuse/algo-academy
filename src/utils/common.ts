@@ -1,6 +1,5 @@
 // import { Buffer } from "buffer"
 import { SyntheticEvent } from "react"
-import { URLDataBase64 } from "types"
 
 /**
  *
@@ -50,32 +49,6 @@ export function createQuery(queryObject?: Record<string | number, unknown> | nul
 
   return queryArray.filter(Boolean).join("&")
 }
-
-// export function toBase64<T = unknown>(value: T | null | undefined) {
-//   if (value == null) return String(value)
-//   return Buffer.from(JSON.stringify(value)).toString("base64")
-// }
-
-export function FileToURLDataBase64(file: File): Promise<URLDataBase64> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as URLDataBase64)
-    reader.onerror = reject
-  })
-}
-
-
-export async function getFileFromURL(url: string) {
-  const fileName = url.slice(url.lastIndexOf("/") + 1)
-
-  const response = await fetch(url)
-  const Uint8Array = (await response.body?.getReader()?.read())?.value
-
-  return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
-}
-
 
 /**
  * Interpolates {variable} in string
