@@ -29,7 +29,7 @@ function PopupLayout(props: PopupLayoutProps) {
   return (
     <div className="popup-layout" style={{ width: props.width }} ref={elementRef}>
       <div className="popup-layout__close">
-        <ButtonIcon name="cross" size="small" color="white" onClick={modal.close} aria-label="Close modal" />
+        <ButtonIcon name="cross" size="small" color="white" onClick={modal.close} ariaLabel="Close modal" />
       </div>
       <div className="popup-layout__container">{props.children}</div>
     </div>

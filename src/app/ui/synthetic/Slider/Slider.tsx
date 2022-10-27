@@ -46,8 +46,8 @@ function Slider(props: SliderProps) {
   return (
     <div className="slider">
       <div className="slider__buttons">
-        <ButtonIcon name="chevron-left" size="small" color="gray" squared onClick={prev} />
-        <ButtonIcon name="chevron-right" size="small" color="gray" squared onClick={next} />
+        <ButtonIcon name="chevron-left" size="small" color="gray" squared onClick={prev} ariaLabel="Scroll left" />
+        <ButtonIcon name="chevron-right" size="small" color="gray" squared onClick={next} ariaLabel="Scroll right" />
       </div>
       <div className="slider__container">
         <div className="slider__inner" ref={innerRef}>

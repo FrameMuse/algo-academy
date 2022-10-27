@@ -15,6 +15,12 @@ interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight"
   disabled?: boolean
   await?: boolean
   pending?: boolean
+  /**
+   * As such buttons have no text, you should always define a label.
+   * 
+   * This is to enforce you do this ^-^
+   */
+  ariaLabel: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -50,7 +56,7 @@ function ButtonIcon(props: ButtonIconProps) {
   if (pending || props.pending) modifiers.push("pending")
 
   return (
-    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} onClick={onClick}>
+    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} onClick={onClick} aria-label={props.ariaLabel}>
       {/* Pass size to `button__icon` so now it controls the padding by itself */}
       <div className={classMerge(classWithModifiers("button__icon", props.size), props.className)}>
         <Icon name={props.name} />

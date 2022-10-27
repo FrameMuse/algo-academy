@@ -104,10 +104,10 @@ function ShowCaseView() {
         <ButtonLink to={EAppRoutes.ShowCase}>Default</ButtonLink>
         <h2>Button Icon</h2>
         <Row alignItems="center">
-          <ButtonIcon name="gear" size="big" />
-          <ButtonIcon name="gear" color="gray" />
-          <ButtonIcon name="gear" size="small" color="green" />
-          <ButtonIcon name="gear" size="little" color="dark" />
+          <ButtonIcon name="gear" size="big" ariaLabel={""} />
+          <ButtonIcon name="gear" color="gray" ariaLabel={""} />
+          <ButtonIcon name="gear" size="small" color="green" ariaLabel={""} />
+          <ButtonIcon name="gear" size="little" color="dark" ariaLabel={""} />
         </Row>
         <h2>Toast</h2>
         <Button onClick={() => toast.success("Your Data Has Been Reset!", { position: "bottom-center" })}>Show Toast</Button>
