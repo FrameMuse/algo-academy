@@ -1,0 +1,21 @@
+{
+  "short_name": "Algo",
+  "name": "Algo Academy",
+  "start_url": "/",
+  "theme_color": "#004b7f",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/static/images/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
