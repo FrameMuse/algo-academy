@@ -260,7 +260,7 @@ function HomeView() {
               </div>
             </div>
             <div className="main-six-right">
-              <Video src={__TESTVIDEO__} poster="/static/images/video2.jpg" />
+              <Video src={"__TESTVIDEO__"} poster="/static/images/video2.jpg" />
             </div>
           </div>
         </div>
