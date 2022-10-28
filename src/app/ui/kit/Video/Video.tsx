@@ -37,7 +37,7 @@ function Video(props: VideoProps) {
         {/* <source src="movie.ogg" type="video/ogg" /> */}
         Your browser does not support the video tag.
       </video>
-      <button className="video-play" type="button" hidden={playing} onClick={() => setPlaying(!playing)}>
+      <button className="video-play" type="button" hidden={playing} onClick={() => setPlaying(!playing)} aria-label="play video">
         <Icon className="video-play__icon" name="play-circle" />
       </button>
     </div >
