@@ -32,5 +32,9 @@
     "src",
     "scripts",
     "@types"
+  ],
+  "exclude": [
+    "**/*.test.ts*",
+    "**/*.spec.ts*"
   ]
 }
