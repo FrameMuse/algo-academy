@@ -28,7 +28,6 @@ import { useLocalStorage } from "react-use"
 import Price from "utils/transform/price"
 
 import __MELIODAF__ from "./meliodaf+.jpg"
-import __TESTVIDEO__ from "./video.mp4"
 
 function BoxDark(props: { children: ReactNode, style?: CSSProperties }) {
   return (
@@ -172,9 +171,9 @@ function UIShowcaseView() {
         <h2>Callout</h2>
         <Callout>Plan - Job Seeker</Callout>
         <h2>Video</h2>
-        <Video src={__TESTVIDEO__} poster="/static/images/video1.jpg" />
+        <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" />
         <h3>1 / 1.25 Aspect ratio</h3>
-        <Video src={__TESTVIDEO__} poster="/static/images/video1.jpg" aspectRatio="1.25" />
+        <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" aspectRatio="1.25" />
         <h2>Selector</h2>
         <Selector>
           <option value="Incomplete">Not completed</option>

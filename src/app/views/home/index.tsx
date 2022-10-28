@@ -9,8 +9,6 @@ import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 
-import __TESTVIDEO__ from "./video.mp4"
-
 function HomeView() {
   return (
     <>
@@ -27,7 +25,7 @@ function HomeView() {
               </div>
             </div>
             <div className="main-title-right">
-              <Video src={__TESTVIDEO__} poster="/static/images/video1.jpg" aspectRatio="1.25" />
+              <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" aspectRatio="1.25" />
             </div>
           </div>
         </div>
