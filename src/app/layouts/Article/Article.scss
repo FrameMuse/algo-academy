@@ -1,0 +1,26 @@
+@import "~assets/scss/bundle.scss";
+
+article.article {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0.5em 0;
+  }
+
+  p {
+    margin: 1.5em 0;
+    font-size: 1.125rem;
+  }
+
+  img {
+    border-radius: 50px;
+    box-shadow: 0 0 12px -6px black;
+
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
