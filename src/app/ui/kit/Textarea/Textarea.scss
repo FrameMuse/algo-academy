@@ -2,7 +2,13 @@
 
 .textarea {
 	display: grid;
-	gap: 0.5em;
+	gap: 0.75em;
+
+	cursor: text;
+}
+
+.textarea__label {
+	font-weight: 500;
 }
 
 .textarea__appearance {
@@ -15,15 +21,14 @@
 
 	line-height: 1.25;
 	overflow-wrap: break-word;
-	cursor: text;
-
-	&:invalid {
-		color: red;
-	}
 
 	&::placeholder {
-		color: gray;
+		color: rgba($color-dark, 0.5);
+		transition: 200ms ease color;
+	}
+
+	&:focus::placeholder {
+		font-weight: 500;
+		color: rgba($color-dark, 0.5);
 	}
 }
-
-.textarea__label {}

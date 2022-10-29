@@ -1,20 +1,21 @@
 @import "~assets/scss/bundle.scss";
 
-.input {
-	display: flex;
-	gap: 0.5em;
+.field {
+	display: grid;
+	gap: 0.75em;
 
-	padding: 1.25em 1.5em;
-
-	border: 1px solid $color-gray;
-	border-radius: 0.75em;
-
-	@include Mobile {
-		display: grid;
-	}
+	cursor: text;
 }
 
-.input__input {
+.field__label {
+	font-weight: 500;
+}
+
+.field__appearance {
+	@include InputAppearance;
+}
+
+.field__input {
 	width: 100%;
 
 	color: $color-black-main;
@@ -28,6 +29,10 @@
 	&:focus::placeholder {
 		font-weight: 500;
 		color: rgba($color-dark, 0.5);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
 	}
 
 	resize: vertical;

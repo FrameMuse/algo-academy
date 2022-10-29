@@ -22,7 +22,8 @@
 	justify-content: space-between;
 	gap: 1em;
 
-	@include InputAppearance;
+	@include InputAppearance(0.5em 1em);
+	background: $color-blue-10;
 
 	cursor: pointer;
 }

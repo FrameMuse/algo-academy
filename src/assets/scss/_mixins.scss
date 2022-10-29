@@ -6,10 +6,27 @@
 	outline: 3px solid rgba(black, 0.25);
 }
 
-@mixin InputAppearance {
-	padding: 0.5em 1em;
+@mixin InputAppearance($padding: 1.25em 1.5em) {
+	padding: $padding;
+
 	background: $color-blue-10;
+	border: 1px solid $color-blue-10;
 	border-radius: 0.5em;
+
+	transition: 200ms ease background-color, 200ms ease border-color;
+
+	&:focus,
+	&--focused {
+		background: white;
+		border-color: $color-blue;
+		outline: 4px solid rgba($color-blue, 0.25);
+	}
+
+	&:disabled,
+	&--disabled {
+		background: $color-gray;
+		cursor: not-allowed;
+	}
 }
 
 @mixin Badge($size: 1em, $float: true) {

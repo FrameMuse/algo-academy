@@ -8,10 +8,11 @@ import Button from "app/ui/kit/Button/Button"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Details from "app/ui/kit/Details/Details"
+import Field from "app/ui/kit/Field/Field"
 import Icon from "app/ui/kit/Icon/Icon"
-import Input from "app/ui/kit/Input/Input"
 import Selector from "app/ui/kit/Selector/Selector"
 import Table from "app/ui/kit/Table/Table"
+import Textarea from "app/ui/kit/Textarea/Textarea"
 import Video from "app/ui/kit/Video/Video"
 import Callout from "app/ui/synthetic/Callout/Callout"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
@@ -224,8 +225,21 @@ function UIShowcaseView() {
           </Details>
         </Box>
 
-        <h2>Modal</h2>
-        <Input placeholder="Your First Name" />
+        <h2>Field</h2>
+        <h3>Text</h3>
+        <Field placeholder="Your First Name" />
+        <h3>Phone number</h3>
+        <Field type="tel" placeholder="+1 (555) 000-0000">Phone number</Field>
+        <h3>Disabled</h3>
+        <Field type="tel" placeholder="+1 (555) 000-0000" disabled>Phone number</Field>
+        <h2>Card number</h2>
+        <Field placeholder="Your First Name" />
+        <h2>Textarea</h2>
+        <Textarea>Message</Textarea>
+        {/* <h2>Modal</h2> */}
+        {/* <h2>Modal</h2> */}
+        {/* <h2>Modal</h2> */}
+        {/* <h2>Modal</h2> */}
         {/* <h2>Modal</h2> */}
       </Box>
     </div>
