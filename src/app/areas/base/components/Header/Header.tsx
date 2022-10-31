@@ -4,7 +4,6 @@ import { EAppRoutes } from "app/AppRoutes"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 import ProfileWidget from "app/ui/synthetic/ProfileWidget/ProfileWidget"
-import ENV from "utils/components/ENV"
 
 function Header() {
   return (
@@ -38,9 +37,9 @@ function Header() {
           <Logo />
           <div className="header-right">
             <nav className="menu">
-              <ENV type={["test", "development"]}>
-                <AppNavLink className="menu-item-link" to={EAppRoutes.UIShowcase}>UI Showcase</AppNavLink>
-              </ENV>
+              {/* <ENV type={["test", "development"]}> */}
+              <AppNavLink className="menu-item-link" to={EAppRoutes.UIShowcase}>UI Showcase</AppNavLink>
+              {/* </ENV> */}
 
               <AppNavLink className="menu-item-link" to={EAppRoutes.Home} end>What is Algo Academy?</AppNavLink>
               <AppNavLink className="menu-item-link" to={EAppRoutes.AboutUs}>About us</AppNavLink>
