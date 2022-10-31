@@ -6,7 +6,7 @@
 	outline: 3px solid rgba(black, 0.25);
 }
 
-@mixin InputAppearance($padding: 1.25em 1.5em) {
+@mixin InputAppearance($padding: 1em 1.25em) {
 	padding: $padding;
 
 	background: $color-blue-10;

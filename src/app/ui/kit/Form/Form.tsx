@@ -16,14 +16,14 @@ export interface FormStateEnum<E extends Enum<E>, V extends Record<ValuesOf<E>, 
 }
 
 interface FormProps<V> extends Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, "onSubmit"> {
-  onSubmit?: (state: FormState<V>, event: FormEvent<HTMLFormElement>) => void
+  onSubmit?: (state: Promise<FormState<V>>, event: FormEvent<HTMLFormElement>) => void
 }
 
 function Form<V>(props: FormProps<V>) {
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const formState = await getFormState(event.currentTarget.elements) as unknown as FormState<V>
+    const formState = getFormState(event.currentTarget.elements) as unknown as Promise<FormState<V>>
 
     props.onSubmit?.(formState, event)
   }

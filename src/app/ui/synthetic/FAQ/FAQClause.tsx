@@ -22,11 +22,11 @@ function FAQClause(props: FAQClauseProps) {
 
   return (
     <div className="faq__clause" aria-expanded={expanded}>
-      <div className={classWithModifiers("faq__summary", expanded && "expanded")} aria-details="show more" onClick={() => setExpanded(!expanded)}>
+      <div className={classWithModifiers("faq__summary", expanded && "expanded")} onClick={() => setExpanded(!expanded)} aria-details="Toggle content display">
         <Icon name={expanded ? "minus" : "plus"} className="faq__icon" />
         <div className="faq__title">{props.summary}</div>
       </div>
-      <div className={classWithModifiers("faq__content", expanded && "expanded")} aria-hidden={!expanded} style={{ "--height": height }}>
+      <div className={classWithModifiers("faq__content", expanded && "expanded")} style={{ "--height": height }} aria-hidden={!expanded}>
         <div className="faq__inner" ref={innerRef}>{props.children}</div>
       </div>
     </div>

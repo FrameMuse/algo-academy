@@ -85,12 +85,15 @@ kbd {
 
 .icon {
 	$size: var(--icon-size, 1em);
+	$color: var(--icon-color, currentColor);
 
 	display: inline-block;
 	width: $size;
 	height: $size;
 	vertical-align: middle;
 	object-fit: contain;
+
+	color: $color;
 
 	use {
 		pointer-events: none;

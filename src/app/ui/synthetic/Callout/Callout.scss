@@ -8,4 +8,8 @@
 
   font-weight: 700;
   line-height: 1.25;
+
+  &--red {
+    background: rgba($color-red, 0.1);
+  }
 }

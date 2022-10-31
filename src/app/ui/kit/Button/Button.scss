@@ -59,21 +59,13 @@
 	&--green:not(&--outline) {
 		&:hover {
 			--button-color: #{rgba($color-green, 0.85)};
-		}
-
-		.button__text {
-			--button-text-color: #{$color-black-main};
-			font-weight: 600;
+			--button-text-color: white;
 		}
 	}
 
 	&--white:not(&--outline) {
 		--button-color: #{$color-white};
 		--button-text-color: #{$color-black-main};
-
-		.button__text {
-			font-weight: 600;
-		}
 
 		&:hover {
 			--button-color: #{rgba($color-dark, 0.1)};
@@ -110,7 +102,6 @@
 
 		&:hover {
 			--button-color: #{$color-gray};
-			--button-text-color: #{$color-black-main};
 		}
 	}
 
@@ -121,7 +112,7 @@
 	}
 
 	&--small {
-		padding: 1em 1.25em;
+		padding: 0.75em 1.25em;
 		border-radius: 1.25em;
 
 		.button__text {
@@ -157,6 +148,10 @@
 		}
 	}
 
+	&--squared {
+		border-radius: 0.5em;
+	}
+
 	&>*:not(:first-child, .button__loader) {
 		margin-left: 0.75em;
 	}
@@ -170,6 +165,7 @@ a.button {
 .button__text {
 	color: var(--button-text-color, white);
 	font-size: 1.125rem;
+	font-weight: 700;
 }
 
 

@@ -1,0 +1,22 @@
+@import "~assets/scss/bundle.scss";
+
+.lesson-previews {
+  display: grid;
+  gap: 1.5em;
+}
+
+.lesson-previews__title {
+  font-size: $font-size-h6;
+  font-weight: 700;
+}
+
+.lesson-previews__container {
+  $min-width: 17em;
+  $min-height: 9.25em;
+
+  display: grid;
+  grid-auto-rows: $min-height;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+
+  gap: 1.5em;
+}

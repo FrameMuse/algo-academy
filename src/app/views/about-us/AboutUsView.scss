@@ -1,0 +1,84 @@
+@import "~assets/scss/bundle.scss";
+
+/* About Page */
+
+.about-text {
+  max-width: 1356px;
+  margin: 0 auto;
+  font-size: 24px;
+  color: rgba(13, 14, 20, 0.75);
+
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.founder-block {
+  margin-top: 80px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  h2 {
+    margin-bottom: 40px;
+  }
+}
+
+.founder {
+  padding: 65px 40px;
+  display: flex;
+  align-items: flex-start;
+  background: $color-blue-10;
+  border-radius: 50px;
+}
+
+.founder-left {
+  width: calc(47% - 60px);
+  margin: 0 30px;
+}
+
+.founder-img {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  img {
+    max-width: 100%;
+    border-radius: 30px;
+  }
+}
+
+.founder-name {
+  margin-bottom: 8px;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.1;
+  color: $color-black-main;
+}
+
+.founder-position {
+  font-size: 16px;
+  line-height: 1.25;
+  color: $color-black-main;
+}
+
+.founder-right {
+  width: calc(53% - 60px);
+  margin: 0 30px;
+  font-size: 18px;
+  color: rgba(13, 14, 20, 0.75);
+
+  p {
+    margin-bottom: 20px;
+  }
+}

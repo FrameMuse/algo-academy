@@ -2,7 +2,7 @@ import "assets/scss/base.scss"
 import "react-modal-global/styles/modal.scss"
 import "react-toastify/scss/main.scss"
 
-import { ReactNode, Suspense } from "react"
+import { ReactNode, StrictMode, Suspense } from "react"
 import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
@@ -16,16 +16,18 @@ import ErrorFallback from "./containers/ErrorFallback/ErrorFallback"
 
 function App() {
   return (
-    <AppProviders>
-      <Suspense fallback="Loading...">
-        <ErrorBoundary fallback={ErrorFallback}>
-          <AppRoutes />
-          <CookiesNotice />
-          <ModalContainer />
-          <ToastContainer />
-        </ErrorBoundary>
-      </Suspense>
-    </AppProviders>
+    <StrictMode>
+      <AppProviders>
+        <Suspense fallback="Loading...">
+          <ErrorBoundary fallback={ErrorFallback}>
+            <AppRoutes />
+            <CookiesNotice />
+            <ModalContainer />
+            <ToastContainer />
+          </ErrorBoundary>
+        </Suspense>
+      </AppProviders>
+    </StrictMode>
   )
 }
 

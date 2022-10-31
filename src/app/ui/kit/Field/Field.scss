@@ -11,7 +11,16 @@
 	font-weight: 500;
 }
 
+.field__icon {
+	--icon-size: 1.25em;
+	--icon-color: #{rgba($color-dark, 0.5)};
+
+	margin-right: 1em;
+}
+
 .field__appearance {
+	display: flex;
+
 	@include InputAppearance;
 }
 
@@ -19,15 +28,9 @@
 	width: 100%;
 
 	color: $color-black-main;
-	font-size: 1.25rem;
+	font-weight: 500;
 
 	&::placeholder {
-		color: rgba($color-dark, 0.5);
-		transition: 200ms ease color;
-	}
-
-	&:focus::placeholder {
-		font-weight: 500;
 		color: rgba($color-dark, 0.5);
 	}
 

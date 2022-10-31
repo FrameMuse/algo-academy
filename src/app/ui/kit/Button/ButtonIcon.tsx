@@ -11,7 +11,7 @@ import { ButtonBaseProps } from "./Button.types"
 interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight" | "children"> {
   type?: "reset" | "submit"
   eventLabel?: string
-  name?: IconName
+  name: IconName
   disabled?: boolean
   await?: boolean
   pending?: boolean

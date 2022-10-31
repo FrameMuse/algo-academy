@@ -44,6 +44,13 @@ class PhoneNumber {
   static parse(value: string): number {
     return Number(value.replace(/[^\d]/g, ""))
   }
+
+  /**
+   * @returns length of a phone number.
+   */
+  static getLength(value: number): number {
+    return String(value).length
+  }
 }
 
 export default PhoneNumber

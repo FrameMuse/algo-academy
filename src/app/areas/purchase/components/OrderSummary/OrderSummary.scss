@@ -1,0 +1,48 @@
+@import "~assets/scss/bundle.scss";
+
+.order-summary {
+  display: grid;
+  gap: 1.5em;
+
+  padding: 2em;
+  background: $color-blue-10;
+  border-radius: 1.5em;
+}
+
+.order-summary__title {
+  font-size: $font-size-h5;
+  font-weight: 800;
+}
+
+.order-summary__summary {
+  font-size: $font-size-h2;
+  font-weight: 800;
+
+  .weak {
+    font-size: $font-size-h6;
+    font-weight: 500;
+
+    color: $color-dark-75;
+  }
+}
+
+.order-summary__description {
+  display: grid;
+  gap: 0.5em;
+
+  ul {
+    display: grid;
+
+    margin: unset;
+    padding-left: 1.5em;
+
+    li {
+      font-size: 1.125rem;
+
+      line-height: 1.35;
+
+      color: $color-black-main;
+      opacity: 0.75;
+    }
+  }
+}

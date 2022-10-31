@@ -1,0 +1,79 @@
+@import "~assets/scss/bundle.scss";
+
+.course-element {
+  display: grid;
+
+  background: $color-blue-10;
+  border-radius: 1em;
+
+  overflow: hidden;
+}
+
+.course-element__info {
+  display: flex;
+  align-items: center;
+
+  padding: 1.5em;
+}
+
+.course-element__title {
+  font-size: $font-size-h5;
+  font-weight: 700;
+}
+
+.course-element__right {
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
+}
+
+.course-element__progress {
+  font-size: $font-size-h5;
+  font-weight: 700;
+
+  .weak {
+    font-size: $font-size-h6;
+    font-weight: 500;
+
+    color: $color-dark-75;
+  }
+}
+
+.course-element__icon {
+  --icon-size: 0.75em;
+
+  color: $color-black-main;
+  margin-left: 1.25em;
+  transition: 200ms ease-out transform;
+
+  &--up {
+    transform: rotateX(180deg);
+  }
+}
+
+.course-element__content {
+  height: 0;
+  padding: 0 2.25em;
+  overflow: hidden;
+  transition: 350ms height;
+
+  &--expanded {
+    height: calc(var(--height, auto) * 1px);
+  }
+}
+
+.course-element__inner {
+  display: grid;
+  gap: 2.5em;
+
+  padding: 1em 0.5em;
+  padding-bottom: 1.5em;
+  transition: 250ms ease opacity, 250ms ease transform;
+
+  :not(.course-element__content--expanded)>& {
+    opacity: 0;
+    transform: translateY(-5%);
+    pointer-events: none;
+  }
+}

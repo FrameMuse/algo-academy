@@ -1,0 +1,20 @@
+@import "~assets/scss/bundle.scss";
+
+.list {
+  display: grid;
+  gap: 0.75em;
+}
+
+.list-item {
+  display: flex;
+
+  @include row-gap(0.5em);
+}
+
+.list-item__icon {
+  --icon-size: 1.125em;
+}
+
+.list-item__text {
+  line-height: 1.35;
+}

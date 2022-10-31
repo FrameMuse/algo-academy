@@ -8,12 +8,16 @@ export type IconName =
   | "chevron-down"
   | "gear"
   | "arrow-right"
+  | "arrow-left"
   | "exclamation-mark"
   | "play-circle"
   | "quote"
   | "plus"
   | "minus"
   | "cross"
+  | "crown"
+  | "check"
+  | "tag"
   // | "asd"
   // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})

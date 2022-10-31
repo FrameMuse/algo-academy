@@ -1,6 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .progress-bar {
+  --progress: 35;
+
   flex: 1;
 
   display: grid;
@@ -8,13 +10,11 @@
 }
 
 .progress-bar__line {
-  --progress: 35;
-
   position: relative;
   flex: 1;
 
   display: flex;
-  height: 0.75em;
+  height: 0.675em;
 
   background: $color-blue-10;
   border-radius: 10em;

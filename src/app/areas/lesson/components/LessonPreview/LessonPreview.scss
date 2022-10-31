@@ -1,0 +1,28 @@
+@import "~assets/scss/bundle.scss";
+
+.lesson-preview {
+  display: grid;
+  align-content: space-between;
+
+  background: white;
+  border-radius: 1.25em;
+
+  overflow: hidden;
+
+  .button {
+    border-radius: unset;
+  }
+
+  .button__text {
+    text-transform: uppercase;
+  }
+}
+
+.lesson-preview__info {
+  padding: 1.75em 1.5em;
+}
+
+.lesson-preview__text {
+  font-size: 1.125rem;
+  font-weight: 700;
+}

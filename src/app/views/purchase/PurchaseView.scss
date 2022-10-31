@@ -1,0 +1,101 @@
+@import "~assets/scss/bundle.scss";
+
+.pricing-section {
+  padding-bottom: 135px;
+
+  .title-block {
+    margin-bottom: 4em;
+  }
+}
+
+.pricing-subtitle {
+  justify-items: center;
+  margin-bottom: 80px;
+  text-align: center;
+
+  h2+p {
+    font-size: 1.125rem;
+  }
+}
+
+.pricing-wrap {
+  display: flex;
+  justify-content: center;
+
+  @include row-gap(2.5em);
+}
+
+.pricing-item {
+  --icon-color: #{$color-green-80};
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.25em;
+
+  max-width: 28em;
+  padding: 1.5em 2em;
+
+  border: 1px solid #d9e0e8;
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  &>:last-child {
+    margin-top: auto;
+  }
+}
+
+.pricing-item-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 200px;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: $color-blue-80;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  border-radius: 0 0 0 24px;
+}
+
+.pricing-item-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pricing-item-description {
+  color: rgba(13, 14, 20, 0.75);
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pricing-item-cost {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.1;
+  color: rgba(13, 14, 20, 0.68);
+
+  strong {
+    font-weight: 800;
+    font-size: 48px;
+    color: $color-black-main;
+  }
+}

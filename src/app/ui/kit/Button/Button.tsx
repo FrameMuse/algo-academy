@@ -59,7 +59,11 @@ function Button(props: ButtonProps) {
 }
 
 export function ButtonIconize(props: { icon: ButtonProps["iconLeft"] }) {
+  if (props.icon == null) return null
+
   if (typeof props.icon === "string") {
+    if (props.icon.length === 0) return null
+
     return (
       <div className="button__icon">
         <Icon name={props.icon} />

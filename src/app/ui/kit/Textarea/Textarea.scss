@@ -14,10 +14,13 @@
 .textarea__appearance {
 	flex: 1;
 	max-width: 100%;
+	min-height: 2em;
 	max-height: 50vh;
 	transition: 200ms ease color;
 
 	@include InputAppearance;
+
+	resize: vertical;
 
 	line-height: 1.25;
 	overflow-wrap: break-word;

@@ -8,7 +8,7 @@ import { classMerge, classWithModifiers } from "utils/common"
 import { ButtonIconize } from "./Button"
 import { ButtonBaseProps } from "./Button.types"
 
-interface ButtonLinkProps extends Omit<ButtonBaseProps, "iconRight"> {
+interface ButtonLinkProps extends ButtonBaseProps {
   to: string
   nav?: boolean
   end?: boolean
@@ -38,7 +38,7 @@ function ButtonLink(props: ButtonLinkProps) {
     >
       <ButtonIconize icon={props.iconLeft} />
       <div className="button__text">{props.children}</div>
-      <ButtonIconize icon="arrow-right" />
+      <ButtonIconize icon={props.iconRight ?? "arrow-right"} />
     </NavLink>
   )
 }

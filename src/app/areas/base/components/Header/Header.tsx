@@ -12,19 +12,19 @@ function Header() {
       <section className="mob-menu-section">
         <ul className="mob-menu">
           <li className="mob-menu-item">
-            <a href="index.html" className="mob-menu-link">what is algo academy?</a>
+            <a href="index.html" className="mob-menu-link">What is Algo Academy?</a>
           </li>
           <li className="mob-menu-item">
-            <a href="about.html" className="mob-menu-link">about us</a>
+            <a href="about.html" className="mob-menu-link">About us</a>
           </li>
           <li className="mob-menu-item">
-            <a href="course.html" className="mob-menu-link">full course</a>
+            <a href="course.html" className="mob-menu-link">Full Course</a>
           </li>
           <li className="mob-menu-item">
-            <a href="purchase.html" className="mob-menu-link">purchase</a>
+            <a href="purchase.html" className="mob-menu-link">Purchase</a>
           </li>
           <li className="mob-menu-item">
-            <a href="account1.html" className="mob-menu-link">log in</a>
+            <a href="account1.html" className="mob-menu-link">Log In</a>
           </li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ function Header() {
 
               <AppNavLink className="menu-item-link" to={EAppRoutes.Home} end>What is Algo Academy?</AppNavLink>
               <AppNavLink className="menu-item-link" to={EAppRoutes.AboutUs}>About us</AppNavLink>
-              <AppNavLink className="menu-item-link" to={EAppRoutes.FullCourse}>Full course</AppNavLink>
+              <AppNavLink className="menu-item-link" to={EAppRoutes.FullCourse}>Full Course</AppNavLink>
               <AppNavLink className="menu-item-link" to={EAppRoutes.Purchase}>Purchase</AppNavLink>
             </nav>
             <ProfileWidget />

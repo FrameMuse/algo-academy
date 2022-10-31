@@ -1,6 +1,7 @@
 {
   "typescript.preferences.autoImportFileExcludePatterns": [
     "areas/**/components",
+    "areas/**/containers",
     "areas/**/hooks",
     "components/**/components",
     "components/**/hooks"

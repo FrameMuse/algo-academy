@@ -88,14 +88,17 @@ function Field(props: FieldProps) {
   return (
     <label className="field" style={{ "--input-width": props.width }}>
       {props.children && (
-        <div className="field__label">{props.children}</div>
+        <div className="field__label">{props.children}{props.required && "*"}</div>
       )}
       <div className={classWithModifiers("field__appearance", invalid && "invalid", focused && "focused", props.disabled && "disabled")}>
+        {props.iconName && (
+          <Icon className={classWithModifiers("field__icon", !!props.onIconClick && "clickable")} name={props.iconName} onClick={props.onIconClick} />
+        )}
         <input
           {..._.omit(props, "iconName", "customValidity", "children", "onIconClick", "dataList")}
           className="field__input"
           maxLength={props.type === "tel" ? undefined : props.maxLength}
-          placeholder={props.placeholder && (props.placeholder + (props.required ? "*" : ""))}
+          placeholder={props.placeholder}
 
           list={dataListId}
           pattern={pattern}
@@ -104,9 +107,6 @@ function Field(props: FieldProps) {
           onBlur={() => setFocused(false)}
           onChange={onChange}
         />
-        {props.iconName && (
-          <Icon className={classWithModifiers("field__icon", !!props.onIconClick && "clickable")} name={props.iconName} onClick={props.onIconClick} />
-        )}
       </div>
       {props.validity && (
         <span className={classWithModifiers("field__validity", invalid && "active")} aria-hidden={!invalid}>{props.customValidity || "Данные введены неверно"}</span>
