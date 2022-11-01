@@ -1,6 +1,6 @@
 import "./s.scss"
 
-import { EAppRoutes } from "app/AppRoutes"
+import { BaseRoutes } from "app/AppRoutes"
 import { Headings } from "app/areas/base"
 import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
@@ -21,7 +21,7 @@ function HomeView() {
                 <p>Learn the techniques to breakdown and solve any coding problem. algo academy is the ultimate resource for aceing the coding interview.</p>
               </Headings>
               <div className="button-wrap">
-                <ButtonLink to={EAppRoutes.FullCourse}>Try a Question</ButtonLink>
+                <ButtonLink to={BaseRoutes.FullCourse}>Try a Question</ButtonLink>
               </div>
             </div>
             <div className="main-title-right">
@@ -111,7 +111,7 @@ function HomeView() {
               <p>30+ hours of practice questions, readings and in-depth solution breakdowns, covering:</p>
 
               <div className="button-wrap">
-                <ButtonLink to={EAppRoutes.FullCourse}>Explore curriculum</ButtonLink>
+                <ButtonLink to={BaseRoutes.FullCourse}>Explore curriculum</ButtonLink>
               </div>
             </Headings>
 
@@ -319,8 +319,8 @@ function HomeView() {
               </Headings>
 
               <div className="ace-buttons">
-                <ButtonLink to={EAppRoutes.Purchase}>Join now</ButtonLink>
-                <ButtonLink color="white" outline to={EAppRoutes.FullCourse}>Explore curriculum</ButtonLink>
+                <ButtonLink to={BaseRoutes.Purchase}>Join now</ButtonLink>
+                <ButtonLink color="white" outline to={BaseRoutes.FullCourse}>Explore curriculum</ButtonLink>
               </div>
             </div>
             <div className="ace-img">

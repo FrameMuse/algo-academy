@@ -1,6 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .box {
+  position: relative;
+
   display: grid;
   gap: 2em;
 

@@ -1,5 +1,7 @@
 import "./ProfileWidget.scss"
 
+import { BaseRoutes } from "app/AppRoutes"
+import { NavLink } from "react-router-dom"
 import { useAppSelector } from "store/hooks"
 
 function ProfileWidget() {
@@ -32,6 +34,9 @@ function ProfileWidget() {
             <a href="#" className="profile-widget-popup-link">log out</a>
           </li>
         </ul>
+      )}
+      {!user.signed && (
+        <NavLink className="ghost" to={BaseRoutes.Profile} />
       )}
     </div>
   )

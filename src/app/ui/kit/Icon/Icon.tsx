@@ -18,6 +18,7 @@ export type IconName =
   | "crown"
   | "check"
   | "tag"
+  | "touch"
   // | "asd"
   // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})

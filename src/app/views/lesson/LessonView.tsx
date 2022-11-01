@@ -9,7 +9,7 @@ import useParam from "utils/hooks/useParam"
 
 function LessonView() {
   const chapter = useParam("chapter", true)
-
+  window.scrollTo(0, 0)
   return (
     <div className="wrapper">
       <section className="article-section">

@@ -4,7 +4,8 @@
     "areas/**/containers",
     "areas/**/hooks",
     "components/**/components",
-    "components/**/hooks"
+    "components/**/hooks",
+    "views/**/views"
   ],
   "editor.codeActionsOnSave": {
     // "source.organizeImports": true,
