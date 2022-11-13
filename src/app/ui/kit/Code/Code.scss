@@ -1,0 +1,37 @@
+@import "~assets/scss/bundle.scss";
+
+.code {
+  position: relative;
+
+  code {
+    display: block;
+    padding: 1em;
+    background: inherit;
+
+    font-family: "JetBrains Mono", "Roboto Mono", "Source Code Pro", "Fira Code Retina", "Fira Code", monospace;
+    font-size: 1rem;
+
+    line-height: 1;
+  }
+
+  @include Scrollbar(0.5em, rgba(white, 0.35), transparent);
+
+  &:not(:hover) {
+    .code__toolbar {
+      opacity: 0;
+    }
+  }
+}
+
+.code__toolbar {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+
+  display: flex;
+  align-items: center;
+
+  @include column-gap(0.5em);
+
+  transition: 200ms ease opacity;
+}

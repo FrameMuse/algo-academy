@@ -1,10 +1,15 @@
 @import "~assets/scss/bundle.scss";
 
 .details {
-	background: rgba(white, 0.15);
-	border: 1px solid rgba(white, 0.25);
+	background: rgba(white, 0.1);
+	border: 1px solid rgba(white, 0.15);
 	border-radius: 0.5em;
 	overflow: hidden;
+
+	&--dark {
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+	}
 }
 
 .details__summary {

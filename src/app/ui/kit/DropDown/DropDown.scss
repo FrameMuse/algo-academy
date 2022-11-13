@@ -1,6 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .drop-down {
+	--translate: 0.25em;
+
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -16,14 +18,33 @@
 	border-radius: 0.5em;
 	box-shadow: 0px 0px 4px -5px rgba(39, 45, 58, 0.12);
 
-	transform: translateY(0.25em);
+	transform: translateY(var(--translate));
 	transition: 200ms ease opacity, 200ms ease transform;
 	z-index: 1;
 
 	&:not(&--expanded) {
+		--translate: 0em;
+
 		opacity: 0;
 		pointer-events: none;
-		transform: translateY(0em);
+	}
+
+	&--upwards {
+		--translate: calc(-100% - 0.25em);
+
+		top: 0%;
+	}
+
+	&--upwards:not(&--expanded) {
+		--translate: calc(-100% - 0em);
+	}
+
+	&--small {}
+
+	&--big {
+		.drop-down__option {
+			padding: 0.75rem 1.25rem;
+		}
 	}
 }
 

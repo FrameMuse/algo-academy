@@ -25,6 +25,33 @@
 	@include InputAppearance(0.5em 1em);
 	background: $color-blue-10;
 
+	&--small {}
+
+	&--big {
+		padding: 0.75em 1.25em;
+	}
+
+	&--transparent {
+
+		&,
+		&:focus,
+		&--focused {
+			border-color: transparent;
+			background: transparent;
+		}
+
+		&:focus,
+		&--focused {
+			box-shadow: 0 0 0 4px rgba(white, 0.25);
+		}
+
+		.selector__current,
+		.selector__icon {
+			opacity: 1;
+			color: white;
+		}
+	}
+
 	cursor: pointer;
 }
 

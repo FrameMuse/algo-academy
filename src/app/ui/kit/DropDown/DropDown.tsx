@@ -7,10 +7,15 @@ import { classWithModifiers } from "utils/common"
 interface DropDownProps<V> {
   name?: string
   default?: V
+  /**
+   * Open in up direction.
+   */
+  upwards?: boolean
+  size?: "small" | "big"
   expanded: boolean
   onSelect(option: { value: V, children: ReactNode }, index: number): void
 
-  children: ReactElement<ComponentProps<"option">>[]
+  children: ReactElement<ComponentProps<"option">> | ReactElement<ComponentProps<"option">>[]
 }
 
 function DropDown<V = string | undefined>(props: DropDownProps<V>) {
@@ -72,7 +77,7 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
     if (event.key === "ArrowDown") shiftChoicePointer(-1)
   })
   return (
-    <div className={classWithModifiers("drop-down", props.expanded && "expanded")} role="listbox" aria-expanded={props.expanded} ref={elementRef}>
+    <div className={classWithModifiers("drop-down", props.size, props.expanded && "expanded", props.upwards && "upwards")} role="listbox" aria-expanded={props.expanded} ref={elementRef}>
       {options.map((option, index) => (
         <button
           className={classWithModifiers("drop-down__option", choice === index && "selected")}

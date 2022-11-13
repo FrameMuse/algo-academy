@@ -1,6 +1,6 @@
+import { MapActions } from "store/store.types"
 import { ValuesOf } from "types"
 
-import { MapActions } from "../../store.types"
 import { User, UserType } from "./types"
 
 export const USER_GUEST: User = {

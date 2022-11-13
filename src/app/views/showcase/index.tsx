@@ -110,7 +110,7 @@ function UIShowcaseView() {
           <ButtonIcon name="gear" size="big" ariaLabel={""} />
           <ButtonIcon name="gear" color="gray" ariaLabel={""} />
           <ButtonIcon name="gear" size="small" color="green" ariaLabel={""} />
-          <ButtonIcon name="gear" size="little" color="dark" ariaLabel={""} />
+          <ButtonIcon name="gear" size="smaller" color="dark" ariaLabel={""} />
         </Row>
         <h2>Toast</h2>
         <Button onClick={() => toast.success("Your Data Has Been Reset!", { position: "bottom-center" })}>Show Toast</Button>
@@ -203,7 +203,7 @@ function UIShowcaseView() {
         <FAQSection />
         <h2>Details</h2>
         <BoxDark>
-          <Details summary="Example #1" defaultExapded>
+          <Details summary="Example #1" defaultExpanded>
             <p>
               Input: [2, 1, 5, 1, 3, 2], k=3
               <br />

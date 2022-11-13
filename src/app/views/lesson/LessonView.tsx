@@ -1,6 +1,6 @@
 import "./LessonView.scss"
 
-import Article from "app/layouts/Article/Article"
+import Article from "app/ui/kit/Article/Article"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Selector from "app/ui/kit/Selector/Selector"
@@ -18,9 +18,9 @@ function LessonView() {
             <ButtonLink color="white" size="small" squared iconLeft="arrow-left" iconRight="" to="..">Back to Course</ButtonLink>
           </div>
           <div className="article-nav">
-            <ButtonIcon name="chevron-left" color="gray" size="little" squared ariaLabel="Previous chapter" />
+            <ButtonIcon name="chevron-left" color="gray" size="smaller" squared ariaLabel="Previous chapter" />
             <div className="article-nav-chapter">Chapter {chapter}</div>
-            <ButtonIcon name="chevron-right" color="gray" size="little" squared ariaLabel="Next chapter" />
+            <ButtonIcon name="chevron-right" color="gray" size="smaller" squared ariaLabel="Next chapter" />
           </div>
           <div className="article-status">
             <Selector defaultValue="Incomplete">

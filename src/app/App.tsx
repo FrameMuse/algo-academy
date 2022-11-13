@@ -7,7 +7,8 @@ import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
-import store from "store/store"
+import { PersistGate } from "redux-persist/integration/react"
+import store, { persistor } from "store/store"
 
 import AppRoutes from "./AppRoutes"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
@@ -35,7 +36,9 @@ function AppProviders(props: { children: ReactNode }) {
   return (
     <BrowserRouter>
       <StoreProvider store={store}>
-        {props.children}
+        <PersistGate loading={null} persistor={persistor}>
+          {props.children}
+        </PersistGate>
       </StoreProvider>
     </BrowserRouter>
   )

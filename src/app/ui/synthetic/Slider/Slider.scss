@@ -7,7 +7,7 @@
 
 .slider__buttons {
 	display: flex;
-	@include row-gap(1em);
+	@include column-gap(1em);
 	margin-left: auto;
 
 	.button {
@@ -22,7 +22,7 @@
 	width: 100%;
 	overflow: hidden;
 
-	@include row-gap(3.5em);
+	@include column-gap(3.5em);
 
 	// @include Mobile {
 	// 	width: 100vw;

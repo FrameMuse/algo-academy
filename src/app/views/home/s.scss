@@ -160,61 +160,10 @@
 }
 
 .curriculum-content {
+  display: grid;
+  gap: 2.5em;
+
   width: calc(100% - 500px);
-}
-
-.curriculum-tabs {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.curriculum-tabs-item {
-  display: block;
-  position: relative;
-  margin-right: 40px;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  font-weight: 700;
-  line-height: 1.25;
-  opacity: 0.68;
-
-  text-decoration: none;
-
-  color: $color-black-main;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 0%;
-    height: 2px;
-    background: $color-black-main;
-    opacity: 0;
-
-    transition: 200ms ease opacity, 200ms ease width;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-
-  &:hover {
-    color: $color-black-main;
-    opacity: 1;
-  }
-
-  &--active {
-    opacity: 1;
-
-    &::after {
-      width: 100%;
-      opacity: 1;
-    }
-  }
 }
 
 .curriculum-wrap {

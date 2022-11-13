@@ -1,0 +1,60 @@
+@import "~assets/scss/bundle.scss";
+
+.tab-links {
+  --link-color: #{$color-black-main};
+
+  display: flex;
+  align-items: center;
+
+
+  @include column-gap(2.5em);
+
+  &>.button {
+    margin-left: auto;
+  }
+
+  &--dark {
+    --link-color: white;
+  }
+}
+
+.tab-links__link {
+  position: relative;
+
+  padding-bottom: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  opacity: 0.75;
+
+  color: var(--link-color);
+  text-decoration: none;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+
+    width: 0%;
+    height: 2px;
+    background: var(--link-color);
+
+    opacity: 0;
+    transform: translate(-50%, 0);
+    transition: 200ms ease opacity, 200ms ease width;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--active {
+    opacity: 1;
+
+    &::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+}

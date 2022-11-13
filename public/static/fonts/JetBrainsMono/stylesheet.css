@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: local("JetBrains Mono Variable Weight"), local("JetBrains-Mono-Variable-Weight"),
+    url("JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: local("JetBrains Mono Italic Variable Weight"), local("JetBrains-Mono-Italic-Variable-Weight"),
+    url("JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: italic;
+  font-display: swap;
+}

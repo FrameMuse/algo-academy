@@ -8,7 +8,7 @@
 .list-item {
   display: flex;
 
-  @include row-gap(0.5em);
+  @include column-gap(0.5em);
 }
 
 .list-item__icon {

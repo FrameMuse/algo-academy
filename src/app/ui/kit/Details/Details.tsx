@@ -1,25 +1,28 @@
 import "./Details.scss"
 
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { ReactNode, useEffect, useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
-
 interface DetailsProps {
-  defaultExapded?: boolean
+  defaultExpanded?: boolean
+
   summary: ReactNode
   children: ReactNode
 }
 
 function Details(props: DetailsProps) {
+  const theme = useTheme()
+
   const innerRef = useRef<HTMLDivElement>(null)
-  const [expanded, setExpanded] = useState<boolean>(props.defaultExapded ?? false)
+  const [expanded, setExpanded] = useState<boolean>(props.defaultExpanded ?? false)
   const [height, setHeight] = useState<number>()
   useEffect(() => {
     if (!innerRef.current) return
     setHeight(innerRef.current.scrollHeight)
   }, [expanded])
   return (
-    <div className="details" aria-expanded={expanded}>
+    <div className={classWithModifiers("details", theme)} aria-expanded={expanded}>
       <div className="details__summary" onClick={() => setExpanded(!expanded)}>
         <div className="details__text">{props.summary}</div>
       </div>

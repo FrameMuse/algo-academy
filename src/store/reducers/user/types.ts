@@ -1,3 +1,7 @@
+export interface Auth {
+
+}
+
 export type User = UserDefault & UserSigned
 
 export interface UserSigned {

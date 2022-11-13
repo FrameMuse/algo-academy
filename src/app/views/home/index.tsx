@@ -3,6 +3,7 @@ import "./s.scss"
 import { BaseRoutes } from "app/AppRoutes"
 import { Headings } from "app/areas/base"
 import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
+import TabLinks from "app/layouts/TabLinks/TabLinks"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Video from "app/ui/kit/Video/Video"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
@@ -117,11 +118,11 @@ function HomeView() {
 
             <TabRouter defaultPath="data-structures">
               <div className="curriculum-content">
-                <div className="curriculum-tabs">
-                  <TabLink className="curriculum-tabs-item" to="data-structures">Data structures</TabLink>
-                  <TabLink className="curriculum-tabs-item" to="coding-patterns">Coding patterns</TabLink>
-                  <TabLink className="curriculum-tabs-item" to="bonus-content">Bonus content</TabLink>
-                </div>
+                <TabLinks>
+                  <TabLink to="data-structures">Data structures</TabLink>
+                  <TabLink to="coding-patterns">Coding patterns</TabLink>
+                  <TabLink to="bonus-content">Bonus content</TabLink>
+                </TabLinks>
                 <TabRoute path="data-structures">
                   <div className="curriculum-wrap">
                     <div className="curriculum-item">

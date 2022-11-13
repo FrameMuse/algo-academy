@@ -9,7 +9,7 @@
     flex: 1;
   }
 
-  @include row-gap(var(--row-indent));
+  @include column-gap(var(--row-indent));
 
   @include Mobile {
     display: grid;

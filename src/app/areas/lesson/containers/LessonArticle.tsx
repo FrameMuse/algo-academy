@@ -1,4 +1,4 @@
-import Article from "app/layouts/Article/Article"
+import Article from "app/ui/kit/Article/Article"
 import Video from "app/ui/kit/Video/Video"
 import ReactMarkdown from "react-markdown"
 

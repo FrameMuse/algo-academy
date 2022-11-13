@@ -1,0 +1,20 @@
+@import "~assets/scss/bundle.scss";
+
+.buttons {
+	display: flex;
+	@include column-gap(1em);
+
+	&--space-between {
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	@include Mobile {
+		overflow: auto;
+		padding-bottom: 0.25em; // Scrollbar margin
+
+		&>* {
+			flex-shrink: 0;
+		}
+	}
+}

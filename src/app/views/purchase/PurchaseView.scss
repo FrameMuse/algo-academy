@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
 
-  @include row-gap(2.5em);
+  @include column-gap(2.5em);
 }
 
 .pricing-item {
