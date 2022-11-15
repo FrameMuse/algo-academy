@@ -9,6 +9,10 @@
   background: white;
   transition: 250ms ease background-color;
 
+  .article {
+    // max-width: 45em;
+  }
+
   &--dark {
     background: $color-dark;
   }
@@ -22,11 +26,16 @@
   padding: 1.25em 2.5em;
 
   // min-height: 5em;
+
+  &>* {
+    flex: 1;
+  }
 }
 
 .header-level {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   .button {
     --button-color: #{rgba(white, 0.2)};
@@ -38,12 +47,12 @@
 }
 
 .header-level-text {
-  min-width: calc(279 / 1920 * 100vw);
-  padding: 0 calc(15 / 1920 * 100vw);
+  padding: 0 3rem;
+
+  font-size: 1.125rem;
   font-weight: 700;
-  font-size: calc(18 / 1920 * 100vw);
-  line-height: 1.27;
-  color: #fff;
+
+  color: white;
   text-align: center;
 }
 
@@ -73,16 +82,8 @@
   align-items: center;
 
   .header-feedback {
+    font-size: 1.125rem;
     color: white;
-    text-decoration: none;
-
-    font-size: calc(18 / 1920 * 100vw);
-    line-height: 1.27;
-
-    svg {
-      width: calc(24 / 1920 * 100vw);
-      height: calc(24 / 1920 * 100vw);
-    }
   }
 }
 
@@ -140,14 +141,14 @@
     border-right: 1px solid $color-gray;
 
     .problem-layout--dark & {
-      border-color: $color-blue-40;
+      border-color: $color-dark-75;
     }
   }
 }
 
 .problem-layout__section {
   --scrollbar-thumb-color: #{rgba($color-blue-40, 0.25)};
-  --scrollbar-track-color: #{rgba($color-blue-40, 0.25)};
+  --scrollbar-track-color: white;
 
   position: relative;
 
@@ -157,7 +158,7 @@
 
   flex: 1;
 
-  padding: 1.5em 2.5em;
+  padding: 1.25vw 2vw;
 
   overflow: auto;
   overflow: overlay;
@@ -169,7 +170,7 @@
 
   .problem-layout--dark & {
     --scrollbar-thumb-color: #{rgba(white, 0.25)};
-    --scrollbar-track-color: #25262b;
+    --scrollbar-track-color: #{$color-dark};
   }
 }
 

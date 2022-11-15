@@ -6,7 +6,7 @@ import { ValuesOf } from "types"
 import { Workspace } from "./types"
 
 const initialState: Workspace = {
-  drafts: {},
+  instances: {},
   settings: {
     editorTheme: EditorTheme.Light,
     codeTheme: CodeTheme.nord,
@@ -16,7 +16,7 @@ const initialState: Workspace = {
 
 interface Actions {
   WORKSPACE_UPDATE: Workspace
-  WORKSPACE_DRAFTS_UPDATE: Workspace["drafts"]
+  WORKSPACE_INSTANCES_UPDATE: Workspace["instances"]
   WORKSPACE_SETTINGS_UPDATE: Workspace["settings"]
 }
 
@@ -28,11 +28,11 @@ export default (state = initialState, action: Action): Workspace => {
     case "WORKSPACE_UPDATE":
       return { ...state, ...action.payload }
 
-    case "WORKSPACE_DRAFTS_UPDATE":
+    case "WORKSPACE_INSTANCES_UPDATE":
       return {
         ...state,
-        drafts: {
-          ...state.drafts,
+        instances: {
+          ...state.instances,
           ...action.payload
         }
       }
@@ -57,8 +57,8 @@ export const updateWorkspace = (payload: Partial<Workspace>) => ({
   payload
 })
 
-export const updateWorkspaceDrafts = (payload: Partial<Workspace["drafts"]>) => ({
-  type: "WORKSPACE_DRAFTS_UPDATE",
+export const updateWorkspaceInstances = (payload: Partial<Workspace["instances"]>) => ({
+  type: "WORKSPACE_INSTANCES_UPDATE",
   payload
 })
 

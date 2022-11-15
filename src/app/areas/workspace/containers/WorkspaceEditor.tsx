@@ -1,7 +1,7 @@
 import { EditorProps } from "@monaco-editor/react"
 import Editor from "app/ui/synthetic/Editor/Editor"
 import { useAppDispatch, useAppSelector } from "store/hooks"
-import { updateWorkspaceDrafts } from "store/reducers/workspace"
+import { updateWorkspaceInstances } from "store/reducers/workspace"
 
 interface WorkspaceEditorProps extends EditorProps {
   /**
@@ -14,14 +14,14 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
   const workspace = useAppSelector(state => state.workspace)
   const dispatch = useAppDispatch()
 
-  const darft = workspace.drafts[props.id ?? ""]
+  const instance = workspace.instances[props.id ?? ""]
 
   function onChange(editorValue: string | undefined) {
     if (props.id == null) return
     if (editorValue == null) return
 
-    dispatch(updateWorkspaceDrafts({
-      [props.id]: { editorValue }
+    dispatch(updateWorkspaceInstances({
+      [props.id]: { ...instance, editorValue }
     }))
   }
 
@@ -30,8 +30,9 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
       <Editor
         theme={workspace.settings.editorTheme}
         options={workspace.settings.editorOptions}
-
-        value={darft?.editorValue}
+        value={instance?.editorValue}
+        language={instance?.editorLanguage}
+        defaultLanguage={instance?.editorLanguage}
         onChange={onChange}
         {...props}
       />

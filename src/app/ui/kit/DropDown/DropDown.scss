@@ -46,6 +46,13 @@
 			padding: 0.75rem 1.25rem;
 		}
 	}
+
+	&--dark {
+		background: $color-dark-75;
+		border-color: rgba(white, 0.25);
+
+		color: white;
+	}
 }
 
 .drop-down__option {
@@ -66,5 +73,11 @@
 
 	&--selected {
 		font-weight: 700;
+	}
+
+	.drop-down--dark & {
+		&:hover {
+			background: rgba($color-gray, 0.1);
+		}
 	}
 }

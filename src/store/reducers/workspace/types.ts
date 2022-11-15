@@ -2,18 +2,16 @@ import { EditorProps } from "@monaco-editor/react"
 import CodeTheme from "app/ui/kit/Code/CodeTheme"
 import { EditorTheme } from "app/ui/synthetic/Editor/Editor.types"
 
-interface WorkspaceDraft {
-  /**
-   * Editor value.
-   */
+export interface WorkspaceInstance {
   editorValue: string
+  editorLanguage: WorkspaceEditorLanguage
 }
 
 /**
  * User preferences. Only User can update them.
  */
 export interface Workspace {
-  drafts: Record<string | number, WorkspaceDraft | undefined>
+  instances: Record<string | number, Partial<WorkspaceInstance> | undefined>
   settings: WorkspaceSettings
 }
 
@@ -27,7 +25,7 @@ export interface WorkspaceSettings {
   darkThemeEnabled: boolean
 }
 
-export enum WorkspaceEditorLanguages {
+export enum WorkspaceEditorLanguage {
   TypeScript = "typescript",
   JavaScript = "javascript",
   "C++" = "C++",

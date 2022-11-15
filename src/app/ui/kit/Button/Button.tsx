@@ -1,11 +1,12 @@
 import "./Button.scss"
 
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
 import LoaderCover from "../../synthetic/Loader/LoaderCover"
-import Icon from "../Icon/Icon"
+import { buttonColorMap, ButtonIconize } from "./Button.helpers"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonProps extends ButtonBaseProps {
@@ -18,6 +19,8 @@ interface ButtonProps extends ButtonBaseProps {
 }
 
 function Button(props: ButtonProps) {
+  const theme = useTheme()
+
   const [pending, setPending] = useState(false)
   async function onClick(event: MouseEvent<HTMLButtonElement>) {
     if (props.await) {
@@ -38,7 +41,7 @@ function Button(props: ButtonProps) {
   }
 
   const modifiers: string[] = []
-  if (props.color) modifiers.push(props.color)
+  if (props.color) modifiers.push(buttonColorMap(props.color, theme))
   if (props.size) modifiers.push(props.size)
 
   if (props.outline) modifiers.push("outline")
@@ -55,24 +58,6 @@ function Button(props: ButtonProps) {
         <LoaderCover white />
       </div>
     </button>
-  )
-}
-
-export function ButtonIconize(props: { icon: ButtonProps["iconLeft"] }) {
-  if (props.icon == null) return null
-
-  if (typeof props.icon === "string") {
-    if (props.icon.length === 0) return null
-
-    return (
-      <div className="button__icon">
-        <Icon name={props.icon} />
-      </div>
-    )
-  }
-
-  return (
-    <div className="button__icon">{props.icon}</div>
   )
 }
 

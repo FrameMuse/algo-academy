@@ -1,6 +1,8 @@
 import "./ProblemView.scss"
 
-import { CodeExecution, WorkspaceCode, WorkspaceEditor } from "app/areas/workspace"
+import { Headings } from "app/areas/base"
+import { Templates, WorkspaceCode, WorkspaceEditor } from "app/areas/workspace"
+import { WorkspaceCodeExecution } from "app/areas/workspace/types"
 import Buttons from "app/layouts/Buttons/Buttons"
 import Column from "app/layouts/Column/Column"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
@@ -12,20 +14,21 @@ import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import CodeTheme from "app/ui/kit/Code/CodeTheme"
 import Details from "app/ui/kit/Details/Details"
 import Field from "app/ui/kit/Field/Field"
+import Form from "app/ui/kit/Form/Form"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEntries } from "app/ui/kit/Selector/Selector.helpers"
-import { EDITOR_DEFAULT_LANGUAGE } from "app/ui/synthetic/Editor/Editor"
+import Textarea from "app/ui/kit/Textarea/Textarea"
+import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
 import { EditorTheme } from "app/ui/synthetic/Editor/Editor.types"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 import Theme from "app/ui/synthetic/Theme/Theme"
 import Tumbler from "app/ui/synthetic/Tumbler/Tumbler"
-import { useState } from "react"
 import { Modal, useModalContext } from "react-modal-global"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceSettings } from "store/reducers/workspace"
-import { WorkspaceSettings } from "store/reducers/workspace/types"
+import { WorkspaceEditorLanguage, WorkspaceSettings } from "store/reducers/workspace/types"
 import { classWithModifiers, getEnumEntries } from "utils/common"
 
 function PopupWorkspaceSettings() {
@@ -41,7 +44,7 @@ function PopupWorkspaceSettings() {
       <h3>Workspace Settings</h3>
       <Column>
         <h5>Editor Theme</h5>
-        <WorkspaceEditor height="7.5em" />
+        <WorkspaceEditor height="7.5em" defaultLanguage={WorkspaceEditorLanguage.Python} />
         <Row justifyContent="space-between">
           <p>Theme</p>
           <Selector upwards defaultValue={settings.editorTheme} onChange={editorTheme => updateSettings({ editorTheme })}>
@@ -82,7 +85,7 @@ function PopupConfirm(props: { onSubmit?: () => void }) {
   }
   return (
     <PopupLayout>
-      <h5>The solution will be reveal</h5>
+      <h5>The solution will be <br /> revealed</h5>
 
       <Buttons>
         <Button color="gray" onClick={onSubmit}>Ok</Button>
@@ -92,9 +95,27 @@ function PopupConfirm(props: { onSubmit?: () => void }) {
   )
 }
 
+function PopupSubmitFeedback() {
+  return (
+    <PopupLayout width="40em">
+      <Headings>
+        <h3>Submit Feedback</h3>
+        <p>If you have any comments or questions, or think there is an issue with the question, feel free to let us know.</p>
+      </Headings>
+      <Form>
+        <Column>
+          {/* <Field placeholder="email@example.com">E-mail</Field> */}
+          <Field placeholder="e.g. Workspace issue">Subject</Field>
+          <Textarea rows={8} placeholder="e.g. The editor isn't working">Body</Textarea>
+          <Button type="submit">Submit</Button>
+        </Column>
+      </Form>
+    </PopupLayout>
+  )
+}
+
 function ProblemView() {
   const settings = useAppSelector(state => state.workspace.settings)
-  const [codeLanguage, setCodeLanguage] = useState(EDITOR_DEFAULT_LANGUAGE)
   return (
     <Theme theme={settings.darkThemeEnabled ? "dark" : "light"}>
       <div className={classWithModifiers("problem-layout", settings.darkThemeEnabled && "dark")}>
@@ -121,12 +142,10 @@ function ProblemView() {
                 <div className="header-time-inner">05:10</div>
               </div>
 
-              <a href="#" className="header-feedback show-feedback-modal">
-                <svg width="24" height="24">
-                  ?
-                </svg>
-                <span className="header-feedback-text">Submit Feedback</span>
-              </a>
+              <button className="header-feedback" type="button" onClick={() => Modal.open(PopupSubmitFeedback)}>
+                ?
+                <span>Submit Feedback</span>
+              </button>
             </div>
           </div>
         </header>
@@ -140,7 +159,7 @@ function ProblemView() {
               </TabLinks>
 
               <TabRoute path="problem">
-                <WorkspaceCode lang="json">{"{\"a\": 1}"}</WorkspaceCode>
+                {/* <WorkspaceCode lang="json">{"{\"a\": 1}"}</WorkspaceCode> */}
                 <Article fontSize="small">
                   <h2>Interview Question</h2>
                   <h3>Level Order Traversal</h3>
@@ -200,23 +219,31 @@ function ProblemView() {
                 <WorkspaceEditor
                   id="test"
                   height="100%"
-                  language={codeLanguage}
                 />
-                <CodeExecution />
-                {/* <div className="code-bottom">
-                  <div className="code-bottom-line">
-                    <Buttons>
-                      <Button size="small">Run Code</Button>
-                      <Button size="small" color="gray">Reset</Button>
+                <WorkspaceCodeExecution id="test" />
+              </TabRoute>
 
-                    </Buttons>
-                    <div className="code-bottom-lang">
-                      <Selector size="big" upwards defaultValue={codeLanguage} onChange={setCodeLanguage}>
-                        {optionsFromEntries(getEnumEntries(WorkspaceEditorLanguages))}
-                      </Selector>
-                    </div>
-                  </div>
-                </div> */}
+              <TabRoute path="hints">
+                <Article fontSize="small">
+                  <h3>Hint #1</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                  </p>
+
+                  <h3>Hint #2</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                  </p>
+
+                  <h3>Hint #3</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                  </p>
+                </Article>
+              </TabRoute>
+
+              <TabRoute path="templates">
+                <Templates templates={[{ name: "DFS", content: EDITOR_DEFAULT_VALUE, runTime: "O(n)", space: "O(n)" }]} />
               </TabRoute>
 
             </TabRouter>

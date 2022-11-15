@@ -1,5 +1,6 @@
 import "./DropDown.scss"
 
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { Children, ComponentProps, ReactElement, ReactNode, useEffect, useRef, useState } from "react"
 import { useKeyPressEvent } from "react-use"
 import { classWithModifiers } from "utils/common"
@@ -19,6 +20,8 @@ interface DropDownProps<V> {
 }
 
 function DropDown<V = string | undefined>(props: DropDownProps<V>) {
+  const theme = useTheme()
+
   const elementRef = useRef<HTMLDivElement>(null)
 
   const options = Children.map(props.children, child => child.props)
@@ -77,7 +80,7 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
     if (event.key === "ArrowDown") shiftChoicePointer(-1)
   })
   return (
-    <div className={classWithModifiers("drop-down", props.size, props.expanded && "expanded", props.upwards && "upwards")} role="listbox" aria-expanded={props.expanded} ref={elementRef}>
+    <div className={classWithModifiers("drop-down", props.size, props.expanded && "expanded", props.upwards && "upwards", theme)} role="listbox" aria-expanded={props.expanded} ref={elementRef}>
       {options.map((option, index) => (
         <button
           className={classWithModifiers("drop-down__option", choice === index && "selected")}

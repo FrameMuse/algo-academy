@@ -24,6 +24,7 @@
 
 	@include InputAppearance(0.5em 1em);
 	background: $color-blue-10;
+	color: $color-black-main;
 
 	&--small {}
 
@@ -52,6 +53,10 @@
 		}
 	}
 
+	&--dark {
+		color: white;
+	}
+
 	cursor: pointer;
 }
 
@@ -63,7 +68,6 @@
 	font-size: $font-size-h6;
 	font-weight: 600;
 
-	color: $color-black-main;
 	opacity: 0.75;
 
 	&--empty {
@@ -74,7 +78,6 @@
 .selector__icon {
 	--icon-size: 0.75em;
 
-	color: $color-black-main;
 	transition: 200ms ease transform;
 
 	&--up {

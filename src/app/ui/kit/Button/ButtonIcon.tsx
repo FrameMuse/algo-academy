@@ -1,11 +1,13 @@
 import "./Button.scss"
 
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
 import LoaderCover from "../../synthetic/Loader/LoaderCover"
 import Icon, { IconName } from "../Icon/Icon"
+import { buttonColorMap } from "./Button.helpers"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight" | "children"> {
@@ -25,6 +27,8 @@ interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight"
 }
 
 function ButtonIcon(props: ButtonIconProps) {
+  const theme = useTheme()
+
   const [pending, setPending] = useState(false)
   async function onClick(event: MouseEvent<HTMLButtonElement>) {
     if (props.await) {
@@ -47,7 +51,7 @@ function ButtonIcon(props: ButtonIconProps) {
   const modifiers: string[] = []
   // Defines that this is icon-only button (button with only icon as `children`)
   modifiers.push("icon-only")
-  if (props.color) modifiers.push(props.color)
+  if (props.color) modifiers.push(buttonColorMap(props.color, theme))
   if (props.size) modifiers.push(props.size)
 
   if (props.outline) modifiers.push("outline")

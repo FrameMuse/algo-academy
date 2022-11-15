@@ -7,6 +7,11 @@ type ButtonColor = "dark" | "white" | "green" | "gray"
 
 export interface ButtonBaseProps {
   size?: ButtonSize
+  /**
+   * Can vary according to current theme.
+   * 
+   * For example `"white"` may be mapped to `"dark"`.
+   */
   color?: ButtonColor
 
   outline?: boolean

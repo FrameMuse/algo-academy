@@ -1,11 +1,12 @@
 import "./Button.scss"
 
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEventHandler } from "react"
 import { useLocation } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 import { classMerge, classWithModifiers } from "utils/common"
 
-import { ButtonIconize } from "./Button"
+import { buttonColorMap, ButtonIconize } from "./Button.helpers"
 import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonLinkProps extends ButtonBaseProps {
@@ -18,10 +19,11 @@ interface ButtonLinkProps extends ButtonBaseProps {
 }
 
 function ButtonLink(props: ButtonLinkProps) {
+  const theme = useTheme()
   const location = useLocation()
 
   const modifiers: string[] = []
-  if (props.color) modifiers.push(props.color)
+  if (props.color) modifiers.push(buttonColorMap(props.color, theme))
   if (props.size) modifiers.push(props.size)
 
   if (props.outline) modifiers.push("outline")

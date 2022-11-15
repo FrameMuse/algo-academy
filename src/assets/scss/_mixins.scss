@@ -27,6 +27,22 @@
 		background: $color-gray;
 		cursor: not-allowed;
 	}
+
+
+	&--dark {
+		background: $color-dark-75;
+		border-color: rgba(white, 0.25);
+
+		&:focus,
+		&--focused {
+			background: rgba(white, 0.25);
+			border-color: rgba(white, 0.5);
+			box-shadow: unset;
+		}
+
+		&:disabled,
+		&--disabled {}
+	}
 }
 
 @mixin Badge($size: 1em, $float: true) {

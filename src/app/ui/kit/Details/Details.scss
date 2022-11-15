@@ -1,8 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .details {
-	background: rgba(white, 0.1);
-	border: 1px solid rgba(white, 0.15);
+	background: white;
+	border: 1px solid $color-gray;
 	border-radius: 0.5em;
 	overflow: hidden;
 
@@ -14,15 +14,22 @@
 
 .details__summary {
 	padding: 0.75em 1.25em;
-	background: rgba(white, 0.1);
+	background: $color-blue-10;
 
 	cursor: pointer;
+
+	.details--dark & {
+		background: rgba(white, 0.1);
+	}
 }
 
 .details__text {
 	font-weight: 700;
-	color: white;
 	cursor: pointer;
+
+	.details--dark & {
+		color: white;
+	}
 }
 
 .details__body {

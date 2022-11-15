@@ -1,0 +1,37 @@
+@import "~assets/scss/bundle.scss";
+
+.templates {
+  display: grid;
+  gap: 1.5em;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.templates__menu {
+  padding: 0.75em 2em 0.25em;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.templates__container {
+  padding: 0 2em;
+}
+
+.templates__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1em 2em;
+  background: rgba(#3A3B40, 0.5);
+}
+
+.templates__info {
+  display: flex;
+  @include column-gap(1rem);
+
+  font-size: 1.125rem;
+  color: white;
+}
