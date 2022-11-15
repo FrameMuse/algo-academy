@@ -83,7 +83,7 @@ function TestCase(props: TestCaseProps) {
           <div className="text-case-item">
             <div className="text-case-item-title">Inputs</div>
             <div className="text-case-item-code">
-              <WorkspaceCode>{"{\n X = 1\n }"}</WorkspaceCode>
+              <WorkspaceCode>{"{\n\tX = 1\n}"}</WorkspaceCode>
             </div>
           </div>
           <div className="text-case-item">
