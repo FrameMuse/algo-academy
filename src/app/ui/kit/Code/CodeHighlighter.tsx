@@ -23,7 +23,13 @@ function CodeHighlighter(props: CodeHighlighterProps) {
     return <LoaderCover />
   }
   if (themeStyle.error) {
-    return <ErrorCover>There was an error loading SyntaxHighlighter styles: <br /> {themeStyle.error.message}</ErrorCover>
+    return (
+      <>
+        <ErrorCover>There was an error loading SyntaxHighlighter styles: <br /> {themeStyle.error.message}</ErrorCover>
+        <br />
+
+      </>
+    )
   }
 
   return (

@@ -72,6 +72,10 @@ function PopupWorkspaceSettings() {
           <p>Dark Theme</p>
           <Tumbler defaultChecked={settings.darkThemeEnabled} onChange={darkThemeEnabled => updateSettings({ darkThemeEnabled })} />
         </Row>
+        <Row>
+          <p>Code Drafts (in browser only)</p>
+          <Tumbler defaultChecked={settings.useDrafts} onChange={useDrafts => updateSettings({ useDrafts })} />
+        </Row>
       </Column>
     </PopupLayout>
   )

@@ -23,6 +23,10 @@ export interface WorkspaceSettings {
    * Whether the dark theme of workspace is enabled.
    */
   darkThemeEnabled: boolean
+  /**
+   * Usage of workspace instances persistence (code drafts).
+   */
+  useDrafts: boolean
 }
 
 export enum WorkspaceEditorLanguage {

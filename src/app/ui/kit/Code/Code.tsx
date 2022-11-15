@@ -9,7 +9,7 @@ import { classMerge } from "utils/common"
 import { loadDocumentFormatter } from "utils/document-formatter"
 import useAppCopyToClipboard from "utils/hooks/useAppCopyToClipboard"
 
-import ButtonIcon from "../Button/ButtonIcon"
+import Button from "../Button/Button"
 import CodeHighlighter from "./CodeHighlighter"
 import CodeTheme from "./CodeTheme"
 
@@ -55,10 +55,10 @@ function Code(props: CodeProps) {
   return (
     <div {..._.omit(props, "lang", "theme")} className={classMerge("code", props.className)}>
       <div className="code__toolbar">
-        <ButtonIcon name="check" color="gray" size="smaller" squared onClick={() => copyToClipboard(content)} ariaLabel="Copy to clipboard" />
-        {!applyFormatting && (
+        <Button color="gray" size="smaller" squared onClick={() => copyToClipboard(content)}>Copy to clipboard</Button>
+        {/* {!applyFormatting && (
           <ButtonIcon name="exclamation-mark" color="gray" size="smaller" squared onClick={() => setApplyFormatting(true)} ariaLabel="Format (significant network usage)" />
-        )}
+        )} */}
       </div>
       <CodeHighlighter content={content} lang={props.lang} theme={props.theme} />
     </div>

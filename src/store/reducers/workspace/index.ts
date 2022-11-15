@@ -9,8 +9,9 @@ const initialState: Workspace = {
   instances: {},
   settings: {
     editorTheme: EditorTheme.Light,
-    codeTheme: CodeTheme.nord,
-    darkThemeEnabled: false
+    codeTheme: CodeTheme.dark,
+    darkThemeEnabled: false,
+    useDrafts: true
   }
 }
 

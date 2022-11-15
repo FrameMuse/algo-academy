@@ -5,12 +5,6 @@ article.article {
   line-height: 1.5;
 
   h1,
-  h2 {
-    border-bottom: 1px solid rgba($color-blue-40, 0.25);
-    padding-bottom: 0.5em;
-  }
-
-  h1,
   h2,
   h3,
   h4,
@@ -48,6 +42,12 @@ article.article {
 
   &--small {
     font-size: 1rem;
+
+    h1,
+    h2 {
+      border-bottom: 1px solid rgba($color-blue-40, 0.25);
+      padding-bottom: 0.5em;
+    }
 
     h2 {
       font-size: $font-size-h4;

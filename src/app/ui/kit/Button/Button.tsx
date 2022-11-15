@@ -3,6 +3,7 @@ import "./Button.scss"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
+import { GAEventAction, GAEventCategory, GAEventLabel } from "services/ga"
 import { classMerge, classWithModifiers } from "utils/common"
 
 import LoaderCover from "../../synthetic/Loader/LoaderCover"
@@ -11,7 +12,7 @@ import { ButtonBaseProps } from "./Button.types"
 
 interface ButtonProps extends ButtonBaseProps {
   type?: "reset" | "submit"
-  eventLabel?: string
+  eventLabel?: GAEventLabel
   disabled?: boolean
   await?: boolean
   pending?: boolean
@@ -33,9 +34,9 @@ function Button(props: ButtonProps) {
     /* --- Google Analytics --- */
     if (props.eventLabel) {
       ReactGA.event({
-        category: "User",
-        action: "Clicked Button",
-        label: props.eventLabel
+        category: GAEventCategory.User,
+        action: GAEventAction.ClickedButton,
+        label: String(props.eventLabel)
       })
     }
   }

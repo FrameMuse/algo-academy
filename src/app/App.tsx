@@ -6,7 +6,7 @@ import { ReactNode, StrictMode, Suspense } from "react"
 import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
+import { ToastContainer, ToastOptions } from "react-toastify"
 import { PersistGate } from "redux-persist/integration/react"
 import store, { persistor } from "store/store"
 
@@ -14,6 +14,14 @@ import AppRoutes from "./AppRoutes"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
 import ErrorBoundary from "./containers/ErrorBoundary/ErrorBoundary"
 import ErrorFallback from "./containers/ErrorFallback/ErrorFallback"
+
+/**
+ * TODO: Better move it from here
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+const DEFAULT_TOAST_CONFIG: ToastOptions<{}> = {
+  position: "bottom-center"
+}
 
 function App() {
   return (
@@ -24,7 +32,7 @@ function App() {
             <AppRoutes />
             <CookiesNotice />
             <ModalContainer />
-            <ToastContainer />
+            <ToastContainer {...DEFAULT_TOAST_CONFIG} />
           </ErrorBoundary>
         </Suspense>
       </AppProviders>

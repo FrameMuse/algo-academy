@@ -2,6 +2,7 @@ import "./Templates.scss"
 
 import TabLinks from "app/layouts/TabLinks/TabLinks"
 import Button from "app/ui/kit/Button/Button"
+import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { useState } from "react"
 import { classWithModifiers } from "utils/common"
 import useAppCopyToClipboard from "utils/hooks/useAppCopyToClipboard"
@@ -20,12 +21,14 @@ interface TemplatesProps {
 }
 
 function Templates(props: TemplatesProps) {
+  const theme = useTheme()
+
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const template = props.templates[activeIndex]
 
   const { copyToClipboard } = useAppCopyToClipboard()
   return (
-    <div className="templates">
+    <div className={classWithModifiers("templates", theme)}>
       <div className="templates__menu">
         <TabLinks>
           {props.templates.map((template, index) => (
