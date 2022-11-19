@@ -5,7 +5,7 @@ import { classWithModifiers } from "utils/common"
 import tabRouterContext from "./tabRouterContext"
 
 interface TabLinkProps extends HTMLAttributes<HTMLButtonElement> {
-  to: string
+  to: string | number
   verification?: () => (boolean | PromiseLike<boolean>)
 }
 

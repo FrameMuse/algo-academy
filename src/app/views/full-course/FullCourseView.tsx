@@ -1,5 +1,6 @@
 import "./FullCourseView.scss"
 
+import { APP_TITLE } from "app/App"
 import { CourseContentsContainer, CourseFreeNotice, CourseProgressContainer } from "app/areas/course"
 import { Helmet } from "react-helmet"
 
@@ -7,7 +8,7 @@ function FullCourseView() {
   return (
     <section className="wrapper course-section">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Algo Academy Course"}</title>
+        <title>{APP_TITLE + " | " + "Full Course"}</title>
       </Helmet>
       <div className="course-section__header">
         <h1>Algo Academy Course</h1>

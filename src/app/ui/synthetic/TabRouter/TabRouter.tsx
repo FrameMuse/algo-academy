@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react"
 import tabRouterContext from "./tabRouterContext"
 
 interface TabRouterProps {
-  defaultPath?: string
+  defaultPath?: string | number
   children: ReactNode
 }
 

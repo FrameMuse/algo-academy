@@ -9,6 +9,7 @@ export type IconName =
   | "gear"
   | "arrow-right"
   | "arrow-left"
+  | "question-mark"
   | "exclamation-mark"
   | "play-circle"
   | "quote"
@@ -20,6 +21,7 @@ export type IconName =
   | "tag"
   | "touch"
   | "home"
+  | "font-size"
   // | "asd"
   // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})

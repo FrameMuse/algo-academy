@@ -1,5 +1,15 @@
 # algo-academy_client
 
+## Structure
+
+...
+
+## Themes
+
+Some UI elements have theme implementation, some not. Ones that have can be wrapped with `Theme` component to change theme.
+
+Themes are curretly used only in `workspace`.
+
 ## Utils
 
 ### Transform

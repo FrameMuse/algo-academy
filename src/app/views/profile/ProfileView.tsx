@@ -1,5 +1,6 @@
 import "./ProfileView.scss"
 
+import { APP_TITLE } from "app/App"
 import { Headings } from "app/areas/base"
 import { FreeContentNotice } from "app/areas/user"
 import Box from "app/layouts/Box/Box"
@@ -25,7 +26,7 @@ function ProfileView() {
   return (
     <section className="page-section account-section">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Account Information"}</title>
+        <title>{APP_TITLE + " | " + "Account Information"}</title>
       </Helmet>
       <div className="wrapper">
         <div className="title-block">

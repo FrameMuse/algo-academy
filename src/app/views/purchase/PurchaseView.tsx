@@ -1,5 +1,6 @@
 import "./PurchaseView.scss"
 
+import { APP_TITLE } from "app/App"
 import { Headings } from "app/areas/base"
 import { PopupCheckout } from "app/areas/purchase"
 import Button from "app/ui/kit/Button/Button"
@@ -11,7 +12,7 @@ function PurchaseView() {
   return (
     <section className="page-section pricing-section">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Pricing Plans"}</title>
+        <title>{APP_TITLE + " | " + "Purchase"}</title>
       </Helmet>
       <div className="wrapper">
         <div className="title-block">

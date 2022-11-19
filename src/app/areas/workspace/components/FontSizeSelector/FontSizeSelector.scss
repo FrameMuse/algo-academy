@@ -1,0 +1,51 @@
+@import "~assets/scss/bundle.scss";
+
+.font-size-selector {}
+
+.font-size-selector__option {
+  &--small {
+    --button-text-size: 8px;
+    --icon-size: 8px;
+  }
+
+  &--default {
+    --button-text-size: 13px;
+    --icon-size: 13px;
+  }
+
+  &--big {
+    --button-text-size: 18px;
+    --icon-size: 18px;
+  }
+
+  &--bigger {
+    --button-text-size: 23px;
+    --icon-size: 23px;
+  }
+
+  &--active {
+    --button-color: white;
+  }
+
+  /* Override */
+
+  --button-color: transparent;
+  --button-text-color: #{$color-black-main};
+
+  &.button {
+    .button__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: unset;
+      min-height: 3em;
+      padding: unset;
+    }
+
+    &:hover {
+      --button-color: white;
+    }
+  }
+
+}

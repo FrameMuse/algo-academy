@@ -1,4 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react"
 
-const tabRouterContext = createContext<[string, Dispatch<SetStateAction<string>>]>(["", () => { throw new Error("Wrong use of tabRouterContext") }])
+type TabId = string | number
+const tabRouterContext = createContext<[TabId, Dispatch<SetStateAction<TabId>>]>(["", () => { throw new Error("No TabRouter context was found.") }])
 export default tabRouterContext

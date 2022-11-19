@@ -1,0 +1,29 @@
+@import "~assets/scss/bundle.scss";
+
+.button-group {
+  display: flex;
+
+  padding: 0.25em;
+  background: $color-blue-10;
+  border-radius: 0.5em;
+
+  @include column-gap(0.25em);
+
+  &>.button {
+    flex: 1;
+
+    // &:first-child {
+    //   border-top-right-radius: unset;
+    //   border-bottom-right-radius: unset;
+    // }
+
+    // &:last-child {
+    //   border-top-left-radius: unset;
+    //   border-bottom-left-radius: unset;
+    // }
+
+    // &:not(:first-child, :last-child) {
+    //   border-radius: unset;
+    // }
+  }
+}

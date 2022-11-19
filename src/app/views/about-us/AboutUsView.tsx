@@ -1,5 +1,6 @@
 import "./AboutUsView.scss"
 
+import { APP_TITLE } from "app/App"
 import { Headings } from "app/areas/base"
 import { Helmet } from "react-helmet"
 
@@ -7,7 +8,7 @@ function AboutUsView() {
   return (
     <section className="page-section">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Mission"}</title>
+        <title>{APP_TITLE + " | " + "Mission"}</title>
       </Helmet>
       <div className="wrapper">
         <h1>Algo academy’s mission</h1>

@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from "react"
 import { IconName } from "../Icon/Icon"
 
 type ButtonSize = "smaller" | "small" | "big"
-type ButtonColor = "dark" | "white" | "green" | "gray"
+type ButtonColor = "dark" | "white" | "green" | "gray" | "transparent"
 
 export interface ButtonBaseProps {
   size?: ButtonSize

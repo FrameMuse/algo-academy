@@ -1,5 +1,6 @@
 import "./s.scss"
 
+import { APP_TITLE } from "app/App"
 import { BaseRoutes } from "app/AppRoutes"
 import { Headings } from "app/areas/base"
 import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
@@ -15,7 +16,7 @@ function HomeView() {
   return (
     <>
       <Helmet>
-        <title>{process.env.TITLE}</title>
+        <title>{APP_TITLE}</title>
       </Helmet>
       <section className="main-title-section">
         <div className="wrapper">

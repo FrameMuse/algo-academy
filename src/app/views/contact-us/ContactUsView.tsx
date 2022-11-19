@@ -1,3 +1,4 @@
+import { APP_TITLE } from "app/App"
 import { Headings } from "app/areas/base"
 import Box from "app/layouts/Box/Box"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
@@ -23,7 +24,7 @@ function ContactUsView() {
   return (
     <section className="page-section">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Contact Us"}</title>
+        <title>{APP_TITLE + " | " + "Contact Us"}</title>
       </Helmet>
       <h1>Contact Us</h1>
       <Form onSubmit={onSubmit}>

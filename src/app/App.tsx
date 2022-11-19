@@ -24,6 +24,8 @@ const DEFAULT_TOAST_CONFIG: ToastOptions<{}> = {
   position: "bottom-center"
 }
 
+export const APP_TITLE = "Algo Academy"
+
 function App() {
   return (
     <StrictMode>

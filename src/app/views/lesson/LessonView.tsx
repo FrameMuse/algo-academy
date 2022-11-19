@@ -1,5 +1,6 @@
 import "./LessonView.scss"
 
+import { APP_TITLE } from "app/App"
 import Article from "app/ui/kit/Article/Article"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
@@ -14,7 +15,7 @@ function LessonView() {
   return (
     <div className="wrapper">
       <Helmet>
-        <title>{process.env.TITLE + " | " + "Lesson " + chapter}</title>
+        <title>{APP_TITLE + " | " + "Lesson " + chapter}</title>
       </Helmet>
       <section className="article-section">
         <div className="article-top">

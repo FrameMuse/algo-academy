@@ -82,6 +82,11 @@
   align-items: center;
 
   .header-feedback {
+    display: flex;
+    align-items: center;
+
+    @include column-gap(0.5em);
+
     font-size: 1.125rem;
     color: white;
   }
@@ -164,7 +169,7 @@
   overflow: overlay;
   @include Scrollbar(1em, var(--scrollbar-thumb-color), var(--scrollbar-track-color));
 
-  &--short {
+  &--shrink {
     max-width: 42%;
   }
 
