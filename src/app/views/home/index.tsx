@@ -9,10 +9,14 @@ import Video from "app/ui/kit/Video/Video"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
+import { Helmet } from "react-helmet"
 
 function HomeView() {
   return (
     <>
+      <Helmet>
+        <title>{process.env.TITLE}</title>
+      </Helmet>
       <section className="main-title-section">
         <div className="wrapper">
           <div className="main-title-wrap">

@@ -25,6 +25,7 @@ import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 import Theme from "app/ui/synthetic/Theme/Theme"
 import Tumbler from "app/ui/synthetic/Tumbler/Tumbler"
+import { Helmet } from "react-helmet"
 import { Modal, useModalContext } from "react-modal-global"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceSettings } from "store/reducers/workspace"
@@ -122,6 +123,9 @@ function ProblemView() {
   const settings = useAppSelector(state => state.workspace.settings)
   return (
     <Theme theme={settings.darkThemeEnabled ? "dark" : "light"}>
+      <Helmet>
+        <title>{process.env.TITLE + " | " + "Problem"}</title>
+      </Helmet>
       <div className={classWithModifiers("problem-layout", settings.darkThemeEnabled && "dark")}>
         <header>
           <div className="code-header-wrap">

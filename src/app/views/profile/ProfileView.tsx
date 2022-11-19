@@ -12,6 +12,7 @@ import Table from "app/ui/kit/Table/Table"
 import Callout from "app/ui/synthetic/Callout/Callout"
 import EditableAvatar from "app/ui/synthetic/EditableAvatar/EditableAvatar"
 import ProgressBar from "app/ui/synthetic/ProgressBar/ProgressBar"
+import { Helmet } from "react-helmet"
 import { Route, Routes } from "react-router-dom"
 
 enum ProfileViewRoutes {
@@ -23,6 +24,9 @@ enum ProfileViewRoutes {
 function ProfileView() {
   return (
     <section className="page-section account-section">
+      <Helmet>
+        <title>{process.env.TITLE + " | " + "Account Information"}</title>
+      </Helmet>
       <div className="wrapper">
         <div className="title-block">
           <h1>Account Information</h1>

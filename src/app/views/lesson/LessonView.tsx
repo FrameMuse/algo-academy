@@ -5,6 +5,7 @@ import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Selector from "app/ui/kit/Selector/Selector"
 import Video from "app/ui/kit/Video/Video"
+import { Helmet } from "react-helmet"
 import useParam from "utils/hooks/useParam"
 
 function LessonView() {
@@ -12,6 +13,9 @@ function LessonView() {
   window.scrollTo(0, 0)
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>{process.env.TITLE + " | " + "Lesson " + chapter}</title>
+      </Helmet>
       <section className="article-section">
         <div className="article-top">
           <div>

@@ -4,11 +4,15 @@ import { Headings } from "app/areas/base"
 import { PopupCheckout } from "app/areas/purchase"
 import Button from "app/ui/kit/Button/Button"
 import List from "app/ui/kit/List/List"
+import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 
 function PurchaseView() {
   return (
     <section className="page-section pricing-section">
+      <Helmet>
+        <title>{process.env.TITLE + " | " + "Pricing Plans"}</title>
+      </Helmet>
       <div className="wrapper">
         <div className="title-block">
           <h1>Pricing Plans</h1>

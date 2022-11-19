@@ -8,6 +8,7 @@ import Form from "app/ui/kit/Form/Form"
 import Textarea from "app/ui/kit/Textarea/Textarea"
 import Callout from "app/ui/synthetic/Callout/Callout"
 import { FormEvent } from "react"
+import { Helmet } from "react-helmet"
 import { Modal, useModalContext } from "react-modal-global"
 
 function ContactUsView() {
@@ -21,6 +22,9 @@ function ContactUsView() {
 
   return (
     <section className="page-section">
+      <Helmet>
+        <title>{process.env.TITLE + " | " + "Contact Us"}</title>
+      </Helmet>
       <h1>Contact Us</h1>
       <Form onSubmit={onSubmit}>
         <Box style={{ justifyItems: "stretch", width: "43em", margin: "auto" }}>
