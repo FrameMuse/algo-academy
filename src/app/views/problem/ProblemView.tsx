@@ -16,7 +16,7 @@ import Details from "app/ui/kit/Details/Details"
 import Field from "app/ui/kit/Field/Field"
 import Form from "app/ui/kit/Form/Form"
 import Selector from "app/ui/kit/Selector/Selector"
-import { optionsFromEntries } from "app/ui/kit/Selector/Selector.helpers"
+import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import Textarea from "app/ui/kit/Textarea/Textarea"
 import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
 import { EditorTheme } from "app/ui/synthetic/Editor/Editor.types"
@@ -29,7 +29,7 @@ import { Modal, useModalContext } from "react-modal-global"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceSettings } from "store/reducers/workspace"
 import { WorkspaceEditorLanguage, WorkspaceSettings } from "store/reducers/workspace/types"
-import { classWithModifiers, getEnumEntries } from "utils/common"
+import { classWithModifiers } from "utils/common"
 
 function PopupWorkspaceSettings() {
   const settings = useAppSelector(state => state.workspace.settings)
@@ -48,7 +48,7 @@ function PopupWorkspaceSettings() {
         <Row justifyContent="space-between">
           <p>Theme</p>
           <Selector upwards defaultValue={settings.editorTheme} onChange={editorTheme => updateSettings({ editorTheme })}>
-            {optionsFromEntries(getEnumEntries(EditorTheme), true)}
+            {optionsFromEnum(EditorTheme)}
           </Selector>
         </Row>
         <Row justifyContent="space-between">
@@ -62,7 +62,7 @@ function PopupWorkspaceSettings() {
         <Row justifyContent="space-between">
           <p>Theme</p>
           <Selector upwards defaultValue={settings.codeTheme} onChange={codeTheme => updateSettings({ codeTheme })}>
-            {optionsFromEntries(getEnumEntries(CodeTheme), true)}
+            {optionsFromEnum(CodeTheme)}
           </Selector>
         </Row>
       </Column>

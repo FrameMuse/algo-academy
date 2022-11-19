@@ -43,6 +43,9 @@
 }
 
 .founder-left {
+  display: flex;
+  flex-direction: column;
+
   width: calc(47% - 60px);
   margin: 0 30px;
 }
@@ -52,9 +55,14 @@
   align-items: center;
   margin-bottom: 24px;
 
+  aspect-ratio: 1.25;
+
   img {
-    max-width: 100%;
+    height: 100%;
+    width: 100%;
     border-radius: 30px;
+
+    object-fit: cover;
   }
 }
 

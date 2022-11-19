@@ -41,6 +41,9 @@ function AppRoutes() {
   )
 }
 
+/**
+ * Only base routes are declared globaly, local (deeper) ones better keep isolated (to not export).
+ */
 export enum BaseRoutes {
   Home = "/",
 
@@ -57,15 +60,5 @@ export enum BaseRoutes {
 
   UIShowcase = "/ui-showcase",
 }
-
-// function asd(element: ReactElement<{ children: never, path?: string }>) {
-//   if (element.type === Route) {
-//     console.log(element.props.path)
-//   }
-
-//   Children.forEach(element.props.children, asd)
-// }
-
-// asd(AppRoutes())
 
 export default AppRoutes

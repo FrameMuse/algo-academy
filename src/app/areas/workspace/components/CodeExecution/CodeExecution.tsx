@@ -4,11 +4,11 @@ import Buttons from "app/layouts/Buttons/Buttons"
 import Button from "app/ui/kit/Button/Button"
 import Icon from "app/ui/kit/Icon/Icon"
 import Selector from "app/ui/kit/Selector/Selector"
-import { optionsFromEntries } from "app/ui/kit/Selector/Selector.helpers"
+import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { Dispatch, useState } from "react"
 import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
-import { classWithModifiers, getEnumEntries } from "utils/common"
+import { classWithModifiers } from "utils/common"
 
 import { WorkspaceCode } from "../.."
 
@@ -33,7 +33,7 @@ function CodeExecution(props: CodeExecutionProps) {
         </Buttons>
         <div className="code-bottom-lang">
           <Selector size="big" upwards defaultValue={props.defaultLanguage ?? WorkspaceEditorLanguage.Python} onChange={props.onLanguageChange}>
-            {optionsFromEntries(getEnumEntries(WorkspaceEditorLanguage))}
+            {optionsFromEnum(WorkspaceEditorLanguage)}
           </Selector>
         </div>
       </div>

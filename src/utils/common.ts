@@ -100,19 +100,3 @@ export function minFill<T>(array: T[], minLevel?: number): T[] {
 export function isDictionary(object: unknown): object is Record<keyof never, unknown> {
   return object instanceof Object && object.constructor === Object
 }
-
-export function getEnumKeys(enumerator: Record<string | number, string | number>): string[] {
-  return Object.keys(enumerator).filter(key => !isNaN(Number(enumerator[key])))
-}
-
-export function getEnumEntries(enumerator: Record<string | number, string | number>): [string, number][] {
-  return Object
-    .keys(enumerator)
-    .reduce((result, nextKey) => {
-      if (!isNaN(Number(nextKey))) {
-        return result
-      }
-
-      return [...result, ([nextKey, enumerator[nextKey]] as [string, number])]
-    }, [] as [string, number][])
-}

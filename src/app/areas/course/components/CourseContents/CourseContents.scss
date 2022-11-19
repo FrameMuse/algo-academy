@@ -1,0 +1,19 @@
+@import "~assets/scss/bundle.scss";
+
+.course-contents {}
+
+.course-contents__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+
+  .h4 {
+    margin: 0;
+  }
+}
+
+.course-contents__list {
+  display: grid;
+  gap: 1em;
+}

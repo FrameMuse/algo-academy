@@ -9,6 +9,7 @@ import { BrowserRouter } from "react-router-dom"
 import { ToastContainer, ToastOptions } from "react-toastify"
 import { PersistGate } from "redux-persist/integration/react"
 import store, { persistor } from "store/store"
+import DevNavigation from "utils/components/DevNavigation/DevNavigation"
 
 import AppRoutes from "./AppRoutes"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
@@ -33,6 +34,8 @@ function App() {
             <CookiesNotice />
             <ModalContainer />
             <ToastContainer {...DEFAULT_TOAST_CONFIG} />
+
+            <DevNavigation />
           </ErrorBoundary>
         </Suspense>
       </AppProviders>
