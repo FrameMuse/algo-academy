@@ -1,45 +1,59 @@
 import "./ProblemsSolved.scss"
 
+import Callout from "app/ui/synthetic/Callout/Callout"
 import ProgressBar from "app/ui/synthetic/ProgressBar/ProgressBar"
-import { ReactNode } from "react"
+import Progress from "utils/transform/progress"
+
+interface LessonProblemProgress {
+  total: number
+  completed: number
+}
 
 interface ProblemsSolvedProps {
-  children: ReactNode
+  lessons: {
+    gettingStarted: LessonProblemProgress
+    bigONotation: LessonProblemProgress
+    dataStructures: LessonProblemProgress
+    codingPatterns: LessonProblemProgress
+    systemDesign: LessonProblemProgress
+    behavioralInterviews: LessonProblemProgress
+  }
 }
 
 function ProblemsSolved(props: ProblemsSolvedProps) {
+  const totalProgress = Progress.sum(...Object.values(props.lessons))
   return (
     <div className="solved-problems">
-      <div className="solved-problems-title">
-        <div className="h5">Solved Problems</div>
-        <div className="solved-amount">50 Solved</div>
+      <div className="solved-problems__title">
+        <h5>Solved Problems</h5>
+        <Callout>{totalProgress.total} Solved</Callout>
       </div>
 
-      <ProgressBar value={10} />
+      <ProgressBar value={Progress.percentile(totalProgress)} />
 
-      <div className="solved-item">
-        <div className="solved-item-name">Getting Started</div>
-        <div className="solved-item-amount">1/4</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">Getting Started</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.gettingStarted)}</div>
       </div>
-      <div className="solved-item">
-        <div className="solved-item-name">Big O Notation</div>
-        <div className="solved-item-amount">3/6</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">Big O Notation</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.bigONotation)}</div>
       </div>
-      <div className="solved-item">
-        <div className="solved-item-name">Data Structures</div>
-        <div className="solved-item-amount">6/10</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">Data Structures</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.dataStructures)}</div>
       </div>
-      <div className="solved-item">
-        <div className="solved-item-name">Coding Patterns</div>
-        <div className="solved-item-amount">18/35</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">Coding Patterns</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.codingPatterns)}</div>
       </div>
-      <div className="solved-item">
-        <div className="solved-item-name">System Design</div>
-        <div className="solved-item-amount">4/12</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">System Design</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.systemDesign)}</div>
       </div>
-      <div className="solved-item">
-        <div className="solved-item-name">Behavioral Interviews</div>
-        <div className="solved-item-amount">2/6</div>
+      <div className="solved-problem">
+        <div className="solved-problem__name">Behavioral Interviews</div>
+        <div className="solved-problem__amount">{Progress.humanize(props.lessons.behavioralInterviews)}</div>
       </div>
     </div>
   )

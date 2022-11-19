@@ -1,0 +1,53 @@
+@import "~assets/scss/bundle.scss";
+
+.general-info {
+  width: calc(56% - 2em);
+}
+
+.general-info__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
+}
+
+.general-info__inputs {
+  display: grid;
+  gap: 2em;
+
+  width: 100%;
+}
+
+.general-info__info {
+  justify-self: center;
+}
+
+.general-info__plan {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  padding: 7px 25px;
+  background: rgba(28, 57, 187, 0.1);
+  border-radius: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.general-info__rank {
+  --icon-size: 1.125rem;
+  --icon-color: #{$color-gold};
+
+  display: flex;
+  align-items: center;
+
+  @include column-gap(0.5em);
+
+  padding: 0.5em 2.25em;
+  background: rgba($color-gold, 0.1);
+  border-radius: 10em;
+
+  p {
+    font-weight: 600;
+  }
+}

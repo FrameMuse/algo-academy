@@ -1,1 +1,49 @@
 @import "~assets/scss/bundle.scss";
+
+.solved-problems {
+  display: grid;
+  align-content: baseline;
+  gap: 2em;
+
+  width: calc(44% - 2em);
+  border: 1px solid #d9e0e8;
+  border-radius: 0.5em;
+  padding: 2.5em;
+}
+
+.solved-problems__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+}
+
+
+.solved-problem {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  line-height: 1.25;
+  font-size: 20px;
+  color: rgba(13, 14, 20, 0.68);
+  word-break: break-word;
+}
+
+.solved-problem__name {
+  width: calc(100% - 144px);
+  padding-right: 15px;
+  font-size: 24px;
+}
+
+.solved-problem__amount {
+  width: 144px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  background: $color-blue-10;
+  border-radius: 10px;
+}

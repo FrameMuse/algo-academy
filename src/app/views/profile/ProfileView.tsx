@@ -2,22 +2,16 @@ import "./ProfileView.scss"
 
 import { APP_TITLE } from "app/App"
 import { Headings } from "app/areas/base"
-import { FreeContentNotice } from "app/areas/user"
+import { FreeContentNotice, UserGeneralInfo, UserProblemsSolved, useUserPurchaseHistory, useUserResetProgress } from "app/areas/user"
 import Box from "app/layouts/Box/Box"
-import Row from "app/layouts/Row/Row"
 import Button from "app/ui/kit/Button/Button"
-import Field from "app/ui/kit/Field/Field"
-import Icon from "app/ui/kit/Icon/Icon"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Table from "app/ui/kit/Table/Table"
-import Callout from "app/ui/synthetic/Callout/Callout"
-import EditableAvatar from "app/ui/synthetic/EditableAvatar/EditableAvatar"
-import ProgressBar from "app/ui/synthetic/ProgressBar/ProgressBar"
 import { Helmet } from "react-helmet"
 import { Route, Routes } from "react-router-dom"
 
 enum ProfileViewRoutes {
-  MyAccount = "", // local root
+  MyAccount = "", // relative root
   MyPurcase = "purchase",
   MyProgress = "progress"
 }
@@ -57,69 +51,14 @@ function ProfileView() {
 function AccountView() {
   return (
     <div className="account-info">
-      <Box className="general-info">
-        <h5>General Information</h5>
-        <div className="general-info-plan">Plan - Job Seeker</div>
-        <div className="general-info__info">
-          <div className="general-info-img">
-            <EditableAvatar image="/static/images/user.jpg" />
-          </div>
-          <div className="general-info-rank">
-            <Icon name="crown" />
-            <p>Algo Master</p>
-          </div>
-        </div>
-
-        <div className="general-info-inputs">
-          <Row>
-            <Field required defaultValue="John">First Name</Field>
-            <Field required defaultValue="Smith">Last Name</Field>
-          </Row>
-          <Field type="email" name="mail" required defaultValue="random_email123@gmail.com">Current Email</Field>
-          <Field required defaultValue="j.smith123">User Name</Field>
-        </div>
-      </Box>
-
-      <div className="solved-problems">
-        <div className="solved-problems-title">
-          <h5>Solved Problems</h5>
-          <Callout>50 Solved</Callout>
-        </div>
-
-        <ProgressBar value={10} />
-
-        <div className="solved-items">
-          <div className="solved-item">
-            <div className="solved-item-name">Getting Started</div>
-            <div className="solved-item-amount">1/4</div>
-          </div>
-          <div className="solved-item">
-            <div className="solved-item-name">Big O Notation</div>
-            <div className="solved-item-amount">3/6</div>
-          </div>
-          <div className="solved-item">
-            <div className="solved-item-name">Data Structures</div>
-            <div className="solved-item-amount">6/10</div>
-          </div>
-          <div className="solved-item">
-            <div className="solved-item-name">Coding Patterns</div>
-            <div className="solved-item-amount">18/35</div>
-          </div>
-          <div className="solved-item">
-            <div className="solved-item-name">System Design</div>
-            <div className="solved-item-amount">4/12</div>
-          </div>
-          <div className="solved-item">
-            <div className="solved-item-name">Behavioral Interviews</div>
-            <div className="solved-item-amount">2/6</div>
-          </div>
-        </div>
-      </div>
+      <UserGeneralInfo />
+      <UserProblemsSolved />
     </div>
   )
 }
 
 function PurchaseView() {
+  useUserPurchaseHistory()
   return (
     <Box className="purchase-history" style={{ justifyItems: "stretch" }}>
       <h5 className="purchase-history-title">Purchase History</h5>
@@ -178,6 +117,7 @@ function PurchaseView() {
 }
 
 function ResetProgressView() {
+  useUserResetProgress()
   return (
     <Box>
       <Headings>

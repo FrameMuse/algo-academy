@@ -13,6 +13,8 @@
 
 .list-item__icon {
   --icon-size: 1.125em;
+
+  flex-shrink: 0;
 }
 
 .list-item__text {
