@@ -32,7 +32,7 @@ function ProfileView() {
             <div className="account-menu">
               <AppNavLink to={ProfileViewRoutes.MyAccount} className="account-menu-link" end>My Account</AppNavLink>
               <AppNavLink to={ProfileViewRoutes.MyPurcase} className="account-menu-link">My Purchase</AppNavLink>
-              <AppNavLink to={ProfileViewRoutes.MyProgress} className="account-menu-link">My Progress</AppNavLink>
+              <AppNavLink to={ProfileViewRoutes.MyProgress} className="account-menu-link">Account Data</AppNavLink>
             </div>
           </div>
           <div className="account-right">

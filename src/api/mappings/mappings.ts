@@ -10,14 +10,14 @@ export function mapUser(schema: APISchemas.User): User {
     avatar: schema.avatar?.data ?? USER_GUEST["avatar"],
     firstName: schema.first_name,
     lastName: schema.last_name,
-    userName: schema.display_name,
+    userName: schema.display_name ?? "",
 
     email: schema.email,
     level: schema.rank,
 
     createdAt: new Date(schema.date_of_creation),
 
-    pricingPlan: schema.current_plan && mapPricingPlan(schema.current_plan),
+    pricingPlan: schema.current_plan ? mapPricingPlan(schema.current_plan) : undefined,
     type: mapUserType(schema.role),
     signed: true
   }

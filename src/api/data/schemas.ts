@@ -40,9 +40,9 @@ export interface User {
   id: string
   first_name: string
   last_name: string
-  display_name: string
+  display_name?: string | null
   rank: number
-  current_plan?: Plan
+  current_plan?: null | Plan
   progress: {
     curriculum_id: string
     curriculum_name: string
@@ -59,7 +59,7 @@ export interface User {
   avatar?: {
     data: string
     contentType: string
-  }
+  } | null
   date_of_creation: string
 }
 

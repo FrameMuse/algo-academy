@@ -89,7 +89,7 @@ export const getUsersMe = (): QueryAction<User> => ({
 /**
  * Update information about yourself. Only for authorized users.
  */
-export const patchUsersMe = (body: User): QueryAction<User> => ({
+export const patchUsersMe = (body: Partial<User>): QueryAction<User> => ({
   method: "PATCH",
   endpoint: `/users/me`,
   body

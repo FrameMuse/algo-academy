@@ -40,7 +40,7 @@ function bodyTransform(body: unknown, type: ("multipart/form-data" | "applicatio
 
 function mapFormData(value: unknown, key?: string | number): [string, Blob | string][] {
   const result: [string, Blob | string][] = []
-  console.log(value)
+
   if (typeof value === "string") {
     if (/^data:.*?;base64,.*$/gi.test(value)) {
       const file = FileTransform.dataURIToBlob(value)

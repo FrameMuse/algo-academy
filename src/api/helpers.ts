@@ -21,6 +21,16 @@ export function isResponseOk<T>(response: QueryResponse<T>, throwError = false):
     return false
   }
 
+  if (response.status == null) {
+    return false
+  }
+
+  if (![203, 204].includes(response.status)) {
+    if (response.payload == null) {
+      return false
+    }
+  }
+
   if (response.headers == null || !response.nativeResponse?.ok) {
     return false
   }

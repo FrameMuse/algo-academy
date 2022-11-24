@@ -5,7 +5,8 @@
   align-content: baseline;
   gap: 2em;
 
-  width: calc(44% - 2em);
+  flex: 1;
+
   border: 1px solid #d9e0e8;
   border-radius: 0.5em;
   padding: 2.5em;

@@ -16,7 +16,7 @@
 
 .account-left {
   width: 280px;
-  padding-right: 30px;
+  padding-right: 2em;
 }
 
 .account-menu {
@@ -51,5 +51,5 @@
 
 .account-info {
   display: flex;
-  @include column-gap(2.5em);
+  @include column-gap(2em);
 }
