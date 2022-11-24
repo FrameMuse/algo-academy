@@ -1,12 +1,12 @@
 import "./ProfileView.scss"
 
+import useUserResetData from "api/hooks/useUserResetData"
 import { APP_TITLE } from "app/App"
-import { Headings } from "app/areas/base"
-import { FreeContentNotice, UserGeneralInfo, UserProblemsSolved, useUserPurchaseHistory, useUserResetProgress } from "app/areas/user"
+import { FreeContentNotice, UserGeneralInfo, UserProblemsSolved, UserPurchaseHistory } from "app/areas/user"
 import Box from "app/layouts/Box/Box"
+import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
-import Table from "app/ui/kit/Table/Table"
 import { Helmet } from "react-helmet"
 import { Route, Routes } from "react-router-dom"
 
@@ -58,73 +58,20 @@ function AccountView() {
 }
 
 function PurchaseView() {
-  useUserPurchaseHistory()
   return (
-    <Box className="purchase-history" style={{ justifyItems: "stretch" }}>
-      <h5 className="purchase-history-title">Purchase History</h5>
-      <div className="table-wrap">
-        <Table>
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Purchase Date</th>
-              <th>Plan</th>
-              <th>Total Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#143567</td>
-              <td>May 21, 2022</td>
-              <td>Job Seeker</td>
-              <td>$149.00</td>
-            </tr>
-            <tr>
-              <td>#143566</td>
-              <td>May 29, 2022</td>
-              <td>Annual Pass</td>
-              <td>$249.00</td>
-            </tr>
-            <tr>
-              <td>#126786</td>
-              <td>Jun 05, 2022</td>
-              <td>Job Seeker</td>
-              <td>$149.00</td>
-            </tr>
-            <tr>
-              <td>#123326</td>
-              <td>Jun 19, 2022</td>
-              <td>Job Seeker</td>
-              <td>$149.00</td>
-            </tr>
-            <tr>
-              <td>#121123</td>
-              <td>Jul 11, 2022</td>
-              <td>Annual Pass</td>
-              <td>$249.00</td>
-            </tr>
-            <tr>
-              <td>#112321</td>
-              <td>Aug 15, 2022</td>
-              <td>Job Seeker</td>
-              <td>$149.00</td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-    </Box>
+    <UserPurchaseHistory />
   )
 }
 
 function ResetProgressView() {
-  useUserResetProgress()
+  const resetData = useUserResetData()
   return (
     <Box>
       <Headings>
         <h5>Reset Your Data</h5>
         <p>You may reset your account data here; this includes course progress, submissions, and rank. Note that resetting your data is irreversible.</p>
       </Headings>
-      <Button color="gray">Reset Data</Button>
+      <Button color="gray" await onClick={resetData}>Reset Data</Button>
     </Box>
   )
 }

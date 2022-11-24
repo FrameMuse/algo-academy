@@ -1,7 +1,7 @@
 import "./AboutUsView.scss"
 
 import { APP_TITLE } from "app/App"
-import { Headings } from "app/areas/base"
+import Headings from "app/layouts/Headings/Headings"
 import { Helmet } from "react-helmet"
 
 function AboutUsView() {

@@ -1,3 +1,3 @@
-export function humanizeDate(lang: string, date: Date) {
+export function humanizeDate(date: Date, lang = "en") {
   return date.toLocaleString(lang)
 }

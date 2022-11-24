@@ -5,33 +5,25 @@ import Row from "app/layouts/Row/Row"
 import Field from "app/ui/kit/Field/Field"
 import Icon from "app/ui/kit/Icon/Icon"
 import EditableAvatar from "app/ui/synthetic/EditableAvatar/EditableAvatar"
-import { ReactNode } from "react"
+import { User } from "store/reducers/user/types"
 
-interface GeneralInfoProps {
-  planTitle: ReactNode
-  rankTitle?: ReactNode
-
-  avatarImagePath: string
-
-  firstName: string
-  lastName: string
-  userName: string
-  email: string
-}
+interface GeneralInfoProps extends User { }
 
 function GeneralInfo(props: GeneralInfoProps) {
   return (
     <Box className="general-info">
       <h5>General Information</h5>
-      <div className="general-info__plan">Plan - {props.planTitle}</div>
+      {props.pricingPlan && (
+        <div className="general-info__plan">Plan - {props.pricingPlan.name}</div>
+      )}
       <div className="general-info__info">
         <div className="general-info__img">
-          <EditableAvatar image={props.avatarImagePath} />
+          <EditableAvatar image={props.avatar} />
         </div>
-        {props.rankTitle && (
+        {props.level && (
           <div className="general-info__rank">
             <Icon name="crown" />
-            <p>{props.rankTitle}</p>
+            <p>{props.level}</p>
           </div>
         )}
       </div>

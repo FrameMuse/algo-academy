@@ -1,0 +1,63 @@
+@import "~assets/scss/bundle.scss";
+
+.auth-prompt {
+  display: grid;
+  gap: 2em;
+}
+
+.auth-prompt-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5em 1.5em;
+  border-radius: 0.5em;
+
+  transition: 250ms ease opacity;
+  text-decoration: none;
+
+  &--red {
+    background: #D34332;
+    color: white;
+  }
+
+  &--gray {
+    background: #F2F2F2;
+    color: $color-black-main;
+  }
+
+  &--blue {
+    background: #2B4B90;
+    color: white;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.auth-prompt-link__icon {
+  --icon-size: 2.5em;
+
+  margin-right: auto;
+}
+
+.auth-prompt-link__text {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.125rem;
+  font-weight: 700;
+
+  text-align: center;
+}

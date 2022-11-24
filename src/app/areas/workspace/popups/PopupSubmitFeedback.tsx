@@ -1,5 +1,5 @@
-import { Headings } from "app/areas/base"
 import Column from "app/layouts/Column/Column"
+import Headings from "app/layouts/Headings/Headings"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"

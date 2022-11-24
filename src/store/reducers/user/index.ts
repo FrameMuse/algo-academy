@@ -5,10 +5,15 @@ import { User, UserType } from "./types"
 
 export const USER_GUEST: User = {
   signed: false,
-  type: UserType.default,
+  type: UserType.Default,
   avatar: "/static/images/guest-avatar.jpg",
   firstName: "Mr.",
-  lastName: "Guest"
+  lastName: "Guest",
+
+  createdAt: new Date(-1),
+  email: "mr.guest@example.com",
+  level: 0,
+  userName: "MrGuest"
 }
 
 const initialState: User = { ...USER_GUEST }

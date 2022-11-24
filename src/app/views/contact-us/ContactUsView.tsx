@@ -1,6 +1,6 @@
 import { APP_TITLE } from "app/App"
-import { Headings } from "app/areas/base"
 import Box from "app/layouts/Box/Box"
+import Headings from "app/layouts/Headings/Headings"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 import Row from "app/layouts/Row/Row"
 import Button from "app/ui/kit/Button/Button"

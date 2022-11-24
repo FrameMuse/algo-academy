@@ -59,6 +59,11 @@ button {
 	&:not(:disabled):active {
 		opacity: 0.75;
 	}
+
+	&.ghost {
+		position: absolute;
+		inset: 0;
+	}
 }
 
 pre {

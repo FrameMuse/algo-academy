@@ -11,12 +11,12 @@ interface OuterLinkProps extends Exclude<HTMLAttributes<HTMLAnchorElement>, "rel
 
 function OuterLink(props: OuterLinkProps) {
   const to = props.to ?? String(props.children)
-  const protocol = findProtocol(to)
+  const protocol = findLackingProtocol(to)
 
   const link = protocol + to
 
   return (
-    <a {..._.omit(props, "noTarget")} rel="noopener noreferrer" target={props.noTarget ? undefined : "_blank"} href={link} />
+    <a {..._.omit(props, "noTarget", "to")} rel="noopener noreferrer" target={props.noTarget ? undefined : "_blank"} href={link} />
   )
 }
 
@@ -24,12 +24,12 @@ function OuterLink(props: OuterLinkProps) {
 /**
  * @return null when already has proptocol
  */
-function findProtocol(uri: string): "mailto:" | "tel:" | "https://" | "" {
-  if (/1/i.test(uri)) {
-    return ""
-  }
+function findLackingProtocol(uri: string): "mailto:" | "tel:" | "https://" | "" {
+  if (uri.length === 0) return ""
+  if (uri.startsWith("http")) return ""
+  if (uri.startsWith("//")) return ""
 
-  if (uri.search("@")) {
+  if (uri.search("@") >= 0) {
     return "mailto:"
   }
 

@@ -1,6 +1,6 @@
-export interface Auth {
+import { PricingPlan } from "app/areas/purchase/types"
 
-}
+export interface Auth { }
 
 export type User = UserDefault & UserSigned
 
@@ -9,8 +9,15 @@ export interface UserSigned {
   type: UserType
 
   avatar: string
+  userName: string
   firstName: string
   lastName: string
+  email: string
+
+  level: number
+
+  createdAt: Date
+  pricingPlan?: PricingPlan
 }
 
 export interface UserDefault {
@@ -18,5 +25,5 @@ export interface UserDefault {
 }
 
 export enum UserType {
-  banned, default, admin
+  Default, Admin
 }

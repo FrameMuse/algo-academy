@@ -1,7 +1,7 @@
 import "./PurchaseView.scss"
 
 import { APP_TITLE } from "app/App"
-import { Headings } from "app/areas/base"
+import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import List from "app/ui/kit/List/List"
 import { Helmet } from "react-helmet"

@@ -22,6 +22,9 @@ export type IconName =
   | "touch"
   | "home"
   | "font-size"
+  | "github"
+  | "google"
+  | "facebook"
   // | "asd"
   // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})

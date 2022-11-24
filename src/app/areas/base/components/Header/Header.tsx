@@ -1,9 +1,9 @@
 import "./Header.scss"
 
 import { BaseRoutes } from "app/AppRoutes"
+import { ProfileWidget } from "app/areas/user"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
-import ProfileWidget from "app/ui/synthetic/ProfileWidget/ProfileWidget"
 
 function Header() {
   return (

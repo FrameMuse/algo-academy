@@ -1,0 +1,2100 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Algo Academy API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "algo-academy.online",
+      "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "OAuth",
+      "description": "Endpoints authorization"
+    },
+    {
+      "name": "Admin",
+      "description": "Endpoints for admin"
+    },
+    {
+      "name": "User",
+      "description": "Endpoints for users"
+    },
+    {
+      "name": "Lesson",
+      "description": "Endpoints for lesson"
+    },
+    {
+      "name": "Curriculum",
+      "description": "Endpoints for curriculum"
+    },
+    {
+      "name": "Promo",
+      "description": "Endpoints for promo code"
+    },
+    {
+      "name": "Judge0",
+      "description": "Endpoints for judge"
+    },
+    {
+      "name": "Stripe",
+      "description": "Endpoints for stripe"
+    }
+  ],
+  "paths": {
+    "/oauth2/google": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "google auth",
+        "description": "Authorization with google.",
+        "operationId": "googleAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/facebook": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "facebook auth",
+        "description": "Authorization with facebook.",
+        "operationId": "facebookAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/github": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "github auth",
+        "description": "Authorization with github.",
+        "operationId": "githubAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/logout": {
+      "post": {
+        "tags": [
+          "OAuth"
+        ],
+        "summary": "Logout from account",
+        "description": "Clear cookie info and redirect to '/'.",
+        "operationId": "logoutUser",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users",
+        "description": "Get information about all users. This can only be done by an administrator.",
+        "operationId": "allUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Delete user by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get yourself",
+        "description": "Get information about yourself. Only for authorized users.",
+        "operationId": "yourselfUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update yourself",
+        "description": "Update information about yourself. Only for authorized users.",
+        "operationId": "updateYourselfUser",
+        "requestBody": {
+          "description": "Update user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/me/avatar": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update avatar",
+        "description": "Update avatar. Only for authorized users.",
+        "operationId": "updateYourselfAvatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "format": "binary",
+                      "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+                    },
+                    "contentType": {
+                      "type": "string",
+                      "example": "image/jpeg"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/revoke-access/me": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Revoke access user",
+        "description": "Revoke access to your account. Only for authorized users.",
+        "operationId": "revokeUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get all lessons",
+        "description": "Get information about all lessons. Only for authorized users.",
+        "operationId": "allLessons",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lesson"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Create Lesson",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createLesson",
+        "requestBody": {
+          "description": "Created lesson object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/lessons/{id}": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get lesson by id",
+        "description": "Get information about lesson. Only for authorized users.",
+        "operationId": "lessonById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Update lesson by id",
+        "description": "Update information about lesson. This can only be done by an administrator.",
+        "operationId": "updateLesson",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update lesson object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Delete Lesson by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteLesson",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/curriculums": {
+      "get": {
+        "tags": [
+          "Curriculum"
+        ],
+        "summary": "Get all curriculums",
+        "description": "Get information about all curriculums. Only for authorized users.",
+        "operationId": "allCurriculums",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Curriculum"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Curriculum",
+          "Admin"
+        ],
+        "summary": "Create curriculum",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createCurriculum",
+        "requestBody": {
+          "description": "Created curriculum object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "order_number": {
+                    "type": "number",
+                    "example": 9
+                  },
+                  "user_topic": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "list": {
+                    "required": false,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "5fva36hd873d761bd1c7ae4f"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Curriculum"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/curriculums/{id}": {
+      "get": {
+        "tags": [
+          "Curriculum"
+        ],
+        "summary": "Get curriculum by id",
+        "description": "Get information about curriculum. Only for authorized users.",
+        "operationId": "curriculumById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of curriculum to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Curriculum"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Curriculum",
+          "Admin"
+        ],
+        "summary": "Update curriculum by id",
+        "description": "Update information about curriculum. This can only be done by an administrator.",
+        "operationId": "updateCurriculum",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of curriculum to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update curriculum object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "order_number": {
+                    "type": "number",
+                    "example": 9
+                  },
+                  "user_topic": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "list": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "5fva36hd873d761bd1c7ae4f"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Curriculum"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Curriculum",
+          "Admin"
+        ],
+        "summary": "Delete Curriculum by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteCurriculum",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of curriculum need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/promo": {
+      "get": {
+        "tags": [
+          "Promo"
+        ],
+        "summary": "Get all promo",
+        "description": "This can only be done by an administrator.",
+        "operationId": "allPromo",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Promo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Create promo",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createPromo",
+        "requestBody": {
+          "description": "Created promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Promo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/promo/check": {
+      "post": {
+        "tags": [
+          "Promo"
+        ],
+        "security": [],
+        "summary": "Check promo code",
+        "description": "",
+        "operationId": "checkPromo",
+        "requestBody": {
+          "description": "Check promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Promo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "promo success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/promo/{id}": {
+      "get": {
+        "tags": [
+          "Promo"
+        ],
+        "summary": "Get promo by id",
+        "description": "Only for authorized users.",
+        "operationId": "promoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Update promo by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updatePromo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Promo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Delete Promo by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deletePromo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/config_info": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge config",
+        "operationId": "judgeConfig",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeConfig"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/statuses": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge statuses",
+        "operationId": "judgeStatuses",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JudgeStatuses"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/languages": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge languages",
+        "operationId": "judgeLanguages",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JudgeLanguages"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/languages/{id}": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get languages by id",
+        "operationId": "languageJudgeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of language to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeLanguage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/compile": {
+      "post": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "compile code",
+        "operationId": "compileCodeJudge0",
+        "requestBody": {
+          "description": "Created promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "curriculum_id": {
+                    "type": "string",
+                    "example": "105061111241845470000"
+                  },
+                  "curriculum_name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "lesson_id": {
+                    "type": "string",
+                    "example": "937569451241848356894"
+                  },
+                  "language_id": {
+                    "type": "integer",
+                    "example": "52"
+                  },
+                  "source_code": {
+                    "type": "string",
+                    "format": "base64",
+                    "example": "I2luY2x1ZGUgPHN0ZGlvLmg+CgppbnQgbWFpbih2b2lkKSB7CiAgY2hhciBuYW1lWzEwXTsKICBzY2FuZigiJXMiLCBuYW1lKTsKICBwcmludGYoImhlbGxvLCAlc1xuIiwgbmFtZSk7CiAgcmV0dXJuIDA7Cn0="
+                  },
+                  "stdin": {
+                    "type": "string",
+                    "format": "base64",
+                    "example": "SnVkZ2Uw"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/stripe/create-charge": {
+      "post": {
+        "tags": [
+          "Stripe"
+        ],
+        "security": [],
+        "summary": "plan payment",
+        "description": "Tariff plan payment",
+        "operationId": "paymentStripe",
+        "requestBody": {
+          "description": "Payment data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stripe"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful payment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "receipt_url": {
+                      "type": "string",
+                      "example": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xSXgxelZGbnJqTjlsYkJJKI_Nr5sGMgYLYYeMoj06LBalR--cecBi0rdEBMo8rlTfkUSUr0iWym1aLKGw2vs79mmoOooS12v1VHyX"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Promo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "algo-free"
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "example": "5fva36hd873d761bd1c7ae4f"
+          },
+          "purchase_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plan_name": {
+            "type": "string",
+            "example": "Job Seeker"
+          },
+          "total_cost": {
+            "type": "string",
+            "example": "50"
+          }
+        }
+      },
+      "Stripe": {
+        "type": "object",
+        "properties": {
+          "plan_name": {
+            "type": "string",
+            "example": "Job Seeker"
+          },
+          "amount": {
+            "type": "number",
+            "example": 50
+          },
+          "email": {
+            "type": "string",
+            "example": "test@email.com"
+          },
+          "card_number": {
+            "type": "string",
+            "example": "4242424242424242"
+          },
+          "card_exp_month": {
+            "type": "string",
+            "example": "12"
+          },
+          "card_exp_year": {
+            "type": "string",
+            "example": "32"
+          },
+          "card_CVC": {
+            "type": "string",
+            "example": "567"
+          }
+        }
+      },
+      "CreateUser": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "635a518e488d761bd1c787f1"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "display_name": {
+            "type": "string",
+            "example": "John Snow"
+          },
+          "rank": {
+            "type": "number",
+            "example": 10
+          },
+          "current_plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "progress": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "curriculum_id": {
+                  "type": "string",
+                  "example": "105061111241845470000"
+                },
+                "curriculum_name": {
+                  "type": "string",
+                  "example": "Three"
+                },
+                "lessonsId_completed": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "105061111241845470000"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Not Completed",
+                        "enum": [
+                          "Not Completed",
+                          "Needs Review",
+                          "Completed"
+                        ]
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "105061111241845470000",
+                      "status": "Completed"
+                    },
+                    {
+                      "id": "928061177241845432123",
+                      "status": "Needs Review"
+                    }
+                  ]
+                },
+                "lessons_all": {
+                  "type": "number",
+                  "example": 5
+                }
+              }
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plan"
+            }
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "string",
+                "format": "binary",
+                "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+              },
+              "contentType": {
+                "type": "string",
+                "example": "image/jpeg"
+              }
+            }
+          },
+          "date_of_creation": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "5fva36hd873d761bd1c7ae4f"
+          },
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "release_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "content_type": {
+            "type": "string",
+            "example": "“Article” or “Coding Question”"
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "access_level": {
+            "type": "object",
+            "properties": {
+              "is_free": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "languages_supported": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "submission_statistics": {
+            "type": "object",
+            "properties": {
+              "successful_submission_count": {
+                "type": "number",
+                "example": 8
+              },
+              "failed_submission_count": {
+                "type": "number",
+                "example": 5
+              }
+            }
+          },
+          "video": {
+            "type": "object",
+            "properties": {
+              "vimeo_id": {
+                "type": "number"
+              },
+              "video_url": {
+                "type": "string",
+                "example": "https://video-url.com"
+              },
+              "duration": {
+                "type": "number",
+                "example": 10
+              },
+              "instructor": {
+                "type": "string",
+                "example": "Dan Abramov"
+              },
+              "conceptual_walkthrough_time": {
+                "type": "number",
+                "example": 30
+              },
+              "code_walkthrough_time": {
+                "type": "number",
+                "example": 20
+              }
+            }
+          },
+          "prompt": {
+            "type": "string",
+            "example": "<p>Write a function that returns an array of the sizes of all rivers represented in the input matrix. The sizes don't need to be in any particular order. </p><h3>Sample Input</h3> <pre> <span class=\"CodeEditor-promptParameter\">matrix</span> = [ [1, 0, 0, 1, 0], [1, 0, 1, 0, 0], [0, 0, 1, 0, 1], [1, 0, 1, 0, 1], [1, 0, 1, 1, 0], ]</pre>"
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "hints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "space_time_complexity": {
+            "type": "string",
+            "example": "O(wh) time | O(wh) space - where w and h are the width and height of the input matrix"
+          },
+          "status": {
+            "type": "string",
+            "example": "Not Completed",
+            "enum": [
+              "Not Completed",
+              "Needs Review",
+              "Completed"
+            ]
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            }
+          }
+        }
+      },
+      "Curriculum": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Trees"
+          },
+          "order_number": {
+            "type": "number",
+            "example": 9
+          },
+          "user_topic": {
+            "type": "boolean",
+            "example": true
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "5fva36hd873d761bd1c7ae4f"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Common Patterns"
+                },
+                "access_level": {
+                  "type": "object",
+                  "properties": {
+                    "is_free": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Not Completed",
+                  "enum": [
+                    "Not Completed",
+                    "Needs Review",
+                    "Completed"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "Resource": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "number",
+            "example": 40
+          },
+          "starting_code": {
+            "type": "string",
+            "example": "#include <vector>using namespace std; vector<int> riverSizes(vector<vector<int>> matrix) {// Write your code here.return {};}"
+          },
+          "solutions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "unit_tests": {
+            "type": "string",
+            "example": "import * as program from './program';import * as chai from 'chai'; it('Test Case #1', function () { const testInput = [ [1, 0, 0, 1, 0], [1, 0, 1, 0, 0], [0, 0, 1, 0, 1], [1, 0, 1, 0, 1], [1, 0, 1, 1, 0], ]; const expected = [1, 2, 2, 2, 5]; chai.expect(program.riverSizes(testInput).sort((a, b) => a - b)).to.deep.equal(expected); });"
+          }
+        }
+      },
+      "Provider": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "google"
+          },
+          "provider": {
+            "type": "string",
+            "example": "105061111241845470000"
+          }
+        }
+      },
+      "JudgeConfig": {
+        "type": "object",
+        "properties": {
+          "maintenance_mode": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_wait_result": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_compiler_options": {
+            "type": "boolean",
+            "example": true
+          },
+          "allowed_languages_for_compile_options": {
+            "type": "array",
+            "example": []
+          },
+          "enable_command_line_arguments": {
+            "type": "boolean",
+            "example": true
+          },
+          "enable_submission_delete": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_callbacks": {
+            "type": "boolean",
+            "example": true
+          },
+          "callbacks_max_tries": {
+            "type": "number",
+            "example": 3
+          },
+          "callbacks_timeout": {
+            "type": "number",
+            "example": 5
+          },
+          "enable_additional_files": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_queue_size": {
+            "type": "number",
+            "example": 10000
+          },
+          "cpu_time_limit": {
+            "type": "number",
+            "example": 5
+          },
+          "max_cpu_time_limit": {
+            "type": "number",
+            "example": 15
+          },
+          "cpu_extra_time": {
+            "type": "number",
+            "example": 1
+          },
+          "max_cpu_extra_time": {
+            "type": "number",
+            "example": 5
+          },
+          "wall_time_limit": {
+            "type": "number",
+            "example": 10
+          },
+          "max_wall_time_limit": {
+            "type": "number",
+            "example": 20
+          },
+          "memory_limit": {
+            "type": "number",
+            "example": 128000
+          },
+          "max_memory_limit": {
+            "type": "number",
+            "example": 512000
+          },
+          "stack_limit": {
+            "type": "number",
+            "example": 64000
+          },
+          "max_stack_limit": {
+            "type": "number",
+            "example": 128000
+          },
+          "max_processes_and_or_threads": {
+            "type": "number",
+            "example": 60
+          },
+          "max_max_processes_and_or_threads": {
+            "type": "number",
+            "example": 120
+          },
+          "enable_per_process_and_thread_time_limit": {
+            "type": "boolean",
+            "example": false
+          },
+          "allow_enable_per_process_and_thread_time_limit": {
+            "type": "boolean",
+            "example": true
+          },
+          "enable_per_process_and_thread_memory_limit": {
+            "type": "boolean",
+            "example": false
+          },
+          "allow_enable_per_process_and_thread_memory_limit": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_file_size": {
+            "type": "number",
+            "example": 1024
+          },
+          "max_max_file_size": {
+            "type": "number",
+            "example": 20480
+          },
+          "number_of_runs": {
+            "type": "number",
+            "example": 1
+          },
+          "max_number_of_runs": {
+            "type": "number",
+            "example": 20
+          },
+          "redirect_stderr_to_stdout": {
+            "type": "boolean",
+            "example": false
+          },
+          "max_extract_size": {
+            "type": "number",
+            "example": 10240
+          },
+          "enable_batched_submissions": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_submission_batch_size": {
+            "type": "number",
+            "example": 20
+          },
+          "submission_cache_duration": {
+            "type": "number",
+            "example": 1
+          },
+          "use_docs_as_homepage": {
+            "type": "boolean",
+            "example": true
+          },
+          "allow_enable_network": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_network": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "JudgeStatuses": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Accepted"
+          }
+        }
+      },
+      "JudgeLanguages": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 63
+          },
+          "name": {
+            "type": "string",
+            "example": "JavaScript (Node.js 12.14.0)"
+          }
+        }
+      },
+      "JudgeLanguage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 63
+          },
+          "name": {
+            "type": "string",
+            "example": "JavaScript (Node.js 12.14.0)"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "example": false
+          },
+          "source_file": {
+            "type": "string",
+            "example": "script.js"
+          },
+          "compile_cmd": {
+            "type": "string",
+            "example": null
+          },
+          "run_cmd": {
+            "type": "string",
+            "example": "/usr/local/node-12.14.0/bin/node script.js"
+          }
+        }
+      },
+      "JudgeResult": {
+        "type": "object",
+        "properties": {
+          "stdout": {
+            "type": "string",
+            "format": "base64",
+            "example": "aGVsbG8sIEp1ZGdlMAo"
+          },
+          "time": {
+            "type": "string",
+            "example": "0.007"
+          },
+          "memory": {
+            "type": "number",
+            "example": 1332
+          },
+          "stderr": {
+            "type": "string",
+            "example": null
+          },
+          "token": {
+            "type": "string",
+            "example": "13436421-bc5a-4640-ba2a-b8dc84de02f0"
+          },
+          "compile_output": {
+            "type": "string",
+            "example": null
+          },
+          "message": {
+            "type": "string",
+            "example": null
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 3
+              },
+              "description": {
+                "type": "string",
+                "example": "Accepted"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "app-sesson-id"
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
+}
