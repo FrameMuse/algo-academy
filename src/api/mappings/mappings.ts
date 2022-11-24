@@ -1,12 +1,13 @@
 import { APISchemas } from "api/data"
 import { LessonStatus } from "app/areas/lesson/types"
 import { PricingPlan } from "app/areas/purchase/types"
+import { USER_GUEST } from "store/reducers/user"
 import { User, UserType } from "store/reducers/user/types"
 import { ProgressEntry } from "utils/transform/progress"
 
 export function mapUser(schema: APISchemas.User): User {
   return {
-    avatar: schema.avatar.data,
+    avatar: schema.avatar?.data ?? USER_GUEST["avatar"],
     firstName: schema.first_name,
     lastName: schema.last_name,
     userName: schema.display_name,
@@ -16,7 +17,7 @@ export function mapUser(schema: APISchemas.User): User {
 
     createdAt: new Date(schema.date_of_creation),
 
-    pricingPlan: mapPricingPlan(schema.current_plan),
+    pricingPlan: schema.current_plan && mapPricingPlan(schema.current_plan),
     type: mapUserType(schema.role),
     signed: true
   }

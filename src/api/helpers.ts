@@ -28,7 +28,7 @@ export function isResponseOk<T>(response: QueryResponse<T>, throwError = false):
   return true
 }
 
-export function buildQueryActionURL<T>(action: QueryAction<T>): URL {
+export function buildActionURL<T>(action: QueryAction<T>): URL {
   const host = "https://algo-academy.online/"
   const url = new URL(action.endpoint, host)
 

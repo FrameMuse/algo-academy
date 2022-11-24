@@ -1,8 +1,14 @@
 import { BaseRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Notice from "app/ui/synthetic/Notice/Notice"
+import { useAppSelector } from "store/hooks"
 
-function FreeContentNotice() {
+function UserHasNoPlanNotice() {
+  const user = useAppSelector(state => state.user)
+  if (user.pricingPlan) {
+    return null
+  }
+
   return (
     <Notice
       title="You haven’t purchased a plan yet!"
@@ -12,4 +18,4 @@ function FreeContentNotice() {
   )
 }
 
-export default FreeContentNotice
+export default UserHasNoPlanNotice

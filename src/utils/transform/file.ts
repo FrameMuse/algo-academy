@@ -1,3 +1,4 @@
+import { Buffer } from "buffer"
 import { URLDataBase64 } from "types"
 
 class FileTransform {
@@ -19,6 +20,33 @@ class FileTransform {
       }
       reader.onerror = reject
     })
+  }
+
+  static toFormData(file: File, fieldName?: string): FormData {
+    const formData = new FormData
+    formData.append(fieldName ?? file.name, file)
+
+    return formData
+  }
+
+  // static asd(urlDataBase64: string) {
+
+  // }
+
+  /**
+   * https://stackoverflow.com/a/61321728/12468111
+   */
+  static dataURIToBlob(dataURI: string) {
+    const splitDataURI = dataURI.split(",")
+
+    const byteString = splitDataURI[0].indexOf("base64") >= 0 ? Buffer.from(splitDataURI[1], "base64").toString() : decodeURI(splitDataURI[1])
+    const mimeString = splitDataURI[0].split(":")[1].split(";")[0]
+
+    const ia = new Uint8Array(byteString.length)
+    for (let i = 0; i < byteString.length; i++)
+      ia[i] = byteString.charCodeAt(i)
+
+    return new Blob([ia], { type: mimeString })
   }
 
 

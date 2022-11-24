@@ -2,7 +2,7 @@ import "./ProfileView.scss"
 
 import useUserResetData from "api/hooks/useUserResetData"
 import { APP_TITLE } from "app/App"
-import { FreeContentNotice, UserGeneralInfo, UserProblemsSolved, UserPurchaseHistory } from "app/areas/user"
+import { UserGeneralInfo, UserHasNoPlanNotice, UserProblemsSolved, UserPurchaseHistory } from "app/areas/user"
 import Box from "app/layouts/Box/Box"
 import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
@@ -26,7 +26,7 @@ function ProfileView() {
         <div className="title-block">
           <h1>Account Information</h1>
         </div>
-        <FreeContentNotice />
+        <UserHasNoPlanNotice />
         <div className="account-big-block">
           <div className="account-left">
             <div className="account-menu">

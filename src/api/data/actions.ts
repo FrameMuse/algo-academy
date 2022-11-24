@@ -106,7 +106,8 @@ export const patchUsersMeAvatar = (body: {
 }> => ({
   method: "PATCH",
   endpoint: `/users/me/avatar`,
-  body
+  body,
+  contentType: "formData"
 })
 
 /**

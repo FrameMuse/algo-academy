@@ -6,6 +6,11 @@ export interface QueryAction<T = unknown> {
   body?: unknown
   params?: Record<string | number, unknown>
   headers?: Record<string, string>
+  /**
+   * @default
+   * "json"
+   */
+  contentType?: "formData" | "json"
 }
 
 export interface QueryResponse<T = unknown> {

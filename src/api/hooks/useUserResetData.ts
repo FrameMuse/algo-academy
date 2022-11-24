@@ -1,6 +1,6 @@
+import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
 import { isResponseOk } from "api/helpers"
-import { appQuery } from "api/useAppQuery"
 import { toast } from "react-toastify"
 
 const SUCCESSFUL_RESET_TEXT = ""

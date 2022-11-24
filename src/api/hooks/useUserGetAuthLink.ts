@@ -1,5 +1,5 @@
 import { APIActions } from "api/data"
-import { buildQueryActionURL } from "api/helpers"
+import { buildActionURL } from "api/helpers"
 
 type AuthType = "github" | "google" | "facebook"
 
@@ -13,7 +13,7 @@ function useUserGetAuthLink(): (type: AuthType) => string {
       action = APIActions.getOauth2Facebook()
     }
 
-    const url = buildQueryActionURL(action)
+    const url = buildActionURL(action)
     return url.toString()
   }
 
