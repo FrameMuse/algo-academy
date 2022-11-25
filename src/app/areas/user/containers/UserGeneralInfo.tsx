@@ -35,7 +35,8 @@ function UserGeneralInfo(props: UserGeneralInfoProps) {
     const response = await appQuery(APIActions.patchUsersMeAvatar({ avatar }))
   }
   return (
-    <GeneralInfo user={user} inputNames={FormInputs} onSubmit={onSubmit} onAvatarChange={onAvatarChange} />
+    // Define key to update the component default values when user changes.
+    <GeneralInfo user={user} inputNames={FormInputs} onSubmit={onSubmit} onAvatarChange={onAvatarChange} key={user.id} />
   )
 }
 

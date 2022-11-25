@@ -4,6 +4,8 @@ import { ValuesOf } from "types"
 import { User, UserType } from "./types"
 
 export const USER_GUEST: User = {
+  id: "",
+
   signed: false,
   type: UserType.Default,
   avatar: "/static/images/guest-avatar.jpg",

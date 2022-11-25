@@ -98,9 +98,9 @@ export const patchUsersMe = (body: Partial<User>): QueryAction<User> => ({
 /**
  * Update avatar. Only for authorized users.
  */
-export const patchUsersMeAvatar = (body: {
+export const patchUsersMeAvatar = (body: Partial<{
   avatar: string
-}): QueryAction<{
+}>): QueryAction<{
   data: string
   contentType: string
 }> => ({
@@ -146,7 +146,7 @@ export const getLessonsId = (id: string): QueryAction<Lesson> => ({
 /**
  * Update information about lesson. This can only be done by an administrator.
  */
-export const patchLessonsId = (id: string, body: Lesson): QueryAction<Lesson> => ({
+export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<Lesson> => ({
   method: "PATCH",
   endpoint: `/lessons/${id}`,
   body
@@ -193,12 +193,12 @@ export const getCurriculumsId = (id: string): QueryAction<Curriculum> => ({
 /**
  * Update information about curriculum. This can only be done by an administrator.
  */
-export const patchCurriculumsId = (id: string, body: {
+export const patchCurriculumsId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
   list: string[]
-}): QueryAction<Curriculum> => ({
+}>): QueryAction<Curriculum> => ({
   method: "PATCH",
   endpoint: `/curriculums/${id}`,
   body
@@ -249,7 +249,7 @@ export const getPromoId = (id: string): QueryAction<Promo> => ({
 /**
  * This can only be done by an administrator.
  */
-export const patchPromoId = (id: string, body: Promo): QueryAction<Promo> => ({
+export const patchPromoId = (id: string, body: Partial<Promo>): QueryAction<Promo> => ({
   method: "PATCH",
   endpoint: `/promo/${id}`,
   body

@@ -7,6 +7,8 @@ import { ProgressEntry } from "utils/transform/progress"
 
 export function mapUser(schema: APISchemas.User): User {
   return {
+    id: schema.id,
+
     avatar: schema.avatar?.data ?? USER_GUEST["avatar"],
     firstName: schema.first_name,
     lastName: schema.last_name,
@@ -45,6 +47,52 @@ export function mapLesson(schema: APISchemas.Lesson) {
 }
 
 
+
+export function mapCurriculum(schema: APISchemas.Curriculum) {
+  return {
+    title: schema.name,
+    lessons: schema.list.map(mapLessonPreview)
+  }
+}
+
+function mapLessonPreview(schema: APISchemas.Curriculum["list"][0]) {
+  return {
+    id: schema.id,
+    title: schema.name,
+    status: mapLessonPreviewStatus(schema.status)
+  }
+}
+
+function mapLessonPreviewStatus(schema: APISchemas.Curriculum["list"][0]["status"]): LessonStatus {
+
+
+  return LessonStatus.Unknown
+}
+
+export function unmapLessonPreviewStatus(value: LessonStatus): APISchemas.Curriculum["list"][0]["status"] {
+  return ""
+}
+
+
+// /**
+//  * https://www.google.com/search?q=bidirectional+map+js&oq=bidirectional+map+js&aqs=chrome..69i57.2532j0j7&sourceid=chrome&ie=UTF-8
+//  * https://www.google.com/search?q=bilateral+mapping+npm
+//  * https://startfunction.com/2020/11/26/bidirectional-map-javascript/#initialize
+//  * https://startfunction.com/bidirectional-map-javascript/
+//  * https://www.npmjs.com/package/bi-directional-map
+//  */
+// class BiMap {
+//   forwardMap = {}
+//   reversedMap = {}
+
+//   constructor(mapping: Record<string, string>) {
+//     this.forwardMap = { ...mapping }
+//     this.reversedMap = Object.keys(mapping).reduce((result, key) => ({
+//       ...result,
+//       [mapping[key]]: key
+//     }), {})
+//   }
+// }
 
 
 // interface ProgressEntry {

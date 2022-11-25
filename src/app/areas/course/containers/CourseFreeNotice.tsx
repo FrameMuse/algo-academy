@@ -1,8 +1,14 @@
 import { BaseRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Notice from "app/ui/synthetic/Notice/Notice"
+import { useAppSelector } from "store/hooks"
 
 function CourseFreeNotice() {
+  const user = useAppSelector(state => state.user)
+  if (user.pricingPlan) {
+    return null
+  }
+
   return (
     <Notice
       title="This is the free preview of our course"

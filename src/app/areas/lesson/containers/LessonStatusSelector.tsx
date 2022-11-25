@@ -1,3 +1,4 @@
+import useUpdateLessonStatus from "api/hooks/useUpdateLessonStatus"
 import Selector from "app/ui/kit/Selector/Selector"
 
 import { LessonStatus } from "../types"
@@ -6,12 +7,14 @@ interface LessonStatusSelectorProps {
   /**
    * Id of a course.
    */
-  id: number
+  id: string
 }
 
 function LessonStatusSelector(props: LessonStatusSelectorProps) {
-  function onChange(value: LessonStatus) {
+  const updateStatus = useUpdateLessonStatus()
 
+  function onChange(value: LessonStatus) {
+    updateStatus(props.id, value)
   }
 
   return (

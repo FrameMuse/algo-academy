@@ -1,3 +1,4 @@
+import useCurriculum from "api/hooks/useCurriculum"
 import { LessonPreview, LessonPreviews } from "app/areas/lesson"
 import { LessonStatus } from "app/areas/lesson/types"
 
@@ -8,12 +9,32 @@ interface CourseContentsContainerProps {
 }
 
 function CourseContentsContainer(props: CourseContentsContainerProps) {
-  function onFilterChange() {
+  const asd = useCurriculum()
 
-  }
+  function onFilterChange() { }
 
   return (
     <CourseContents onFilterChange={onFilterChange}>
+      {asd?.map((azd, index) => (
+        <CourseElement title={azd.name} progress={{ done: 2, total: 3 }} defaultExapanded key={index}>
+          <LessonPreviews title="Learning">
+            {azd.list.map((zxc, index) => (
+              <LessonPreview id={zxc.id} status={Number(zxc.status)} key={index}>{zxc.name}</LessonPreview>
+            ))}
+          </LessonPreviews>
+        </CourseElement>
+      ))}
+    </CourseContents>
+  )
+
+  return (
+    <CourseContentsContainerSample />
+  )
+}
+
+function CourseContentsContainerSample() {
+  return (
+    <CourseContents>
       <CourseElement title="1. Getting Started" progress={{ done: 2, total: 3 }} defaultExapanded>
         <LessonPreviews title="Learning">
           <LessonPreview id={1} status={LessonStatus.Complete}>Welcome</LessonPreview>

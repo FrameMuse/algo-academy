@@ -5,6 +5,8 @@ export interface Auth { }
 export type User = UserDefault & UserSigned
 
 export interface UserSigned {
+  id: string
+
   signed: boolean
   type: UserType
 
