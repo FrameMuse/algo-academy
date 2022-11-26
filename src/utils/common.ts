@@ -11,7 +11,7 @@ export function classMerge(...classNames: Array<string | null | undefined>): str
 }
 
 /**
- * Join modifiers with origin class
+ * Join modifiers with origin class.
  * @returns `"origin-class origin-class--modifier"`
  */
 export function classWithModifiers(originClass: string, ...modifiers: Array<string | number | false | null | undefined>): string {
@@ -26,7 +26,7 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
 }
 
 /**
- * Creates query from given object
+ * Creates query from given object.
  * - Stringify objects and arrays
  * - Supports deep nesting
  * @returns `state1=6&state2=horse` without `?`
@@ -51,7 +51,7 @@ export function createQuery(queryObject?: Record<string | number, unknown> | nul
 }
 
 /**
- * Interpolates {variable} in string
+ * Interpolates {variable} in string.
  */
 export function interpolate<T extends string>(value: T, vars: Record<string, string | number>): string {
   const varKeys = Object.keys(vars)
@@ -81,7 +81,9 @@ export function inputValue(callback: (value: string) => void) {
 }
 
 /**
- * Propagates the array, creating minimum fill level of the array by duplicating its items
+ * Continues the array, creating minimum fill level of the array by duplicating its items.
+ * 
+ * It **doesn't** mutate original `array`.
  * @returns new array
  */
 export function minFill<T>(array: T[], minLevel?: number): T[] {
