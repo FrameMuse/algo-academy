@@ -29,9 +29,9 @@ function Timer(props: TimerProps) {
       </button>
       <div className={classWithModifiers("timer-toolbar", expanded && "expanded")} ref={toolbarElementRef}>
         <ButtonGroup color="gray" size="smaller" squared>
-          <Button onClick={reset}>Reset</Button>
           <Button onClick={start}>Start</Button>
           <Button onClick={pause}>Pause</Button>
+          <Button onClick={reset}>Reset</Button>
         </ButtonGroup>
         <Selector defaultValue={minutesChoice} onChange={setMinutesChoice}>
           {minutesList.map(minute => (
