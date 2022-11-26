@@ -1,3 +1,8 @@
+const everySecondCallbacks = new Set<() => void>
+setInterval(() => {
+  for (const callback of everySecondCallbacks) callback()
+}, 1000)
+
 class Time {
   /**
    * Split time to its delimiters: seconds, minutes, hours and days.
@@ -31,6 +36,20 @@ class Time {
     }
 
     return numberString
+  }
+
+  /**
+   * Efficient way of executing code every second.
+   * It can handle infinite amount of callbacks since this method relies on only one `setInterval`.
+   * 
+   * @returns unsubscribe method.
+   */
+  static everySecond(callback: () => void): () => void {
+    everySecondCallbacks.add(callback)
+
+    return () => {
+      everySecondCallbacks.delete(callback)
+    }
   }
 }
 

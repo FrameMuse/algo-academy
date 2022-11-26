@@ -24,10 +24,7 @@ function useCountdown(startTime: number, options?: Partial<UseCountdownOptions>)
   useEffect(() => {
     if (!enabled) return
 
-    const interval = setInterval(() => setTime(time => time - 1000), 1000)
-    return () => {
-      clearInterval(interval)
-    }
+    return Time.everySecond(() => setTime(time => time - 1000))
   }, [startTime, enabled])
 
   useEffect(() => {
