@@ -6,21 +6,22 @@ import { QueryAction, QueryResponse } from "./types"
 
 function useAppQuery<T>(action: QueryAction<T>, options?: Omit<UseQueryOptions<QueryResponse<T>>, "queryFn" | "queryKey">) {
   return useQuery<QueryResponse<T>>([action.endpoint], {
-    ...options,
+    cacheTime: Number(process.env.REACT_APP_API_CACHE_TIME),
     refetchOnWindowFocus: () => false,
     retry(_failureCount, error) {
       return !(error instanceof QueryError)
     },
+    /**
+     * Try every 10, 20, 30, ... "seconds", depending on `failureCount`.
+     * 
+     * if `failureCount` more than 50, retry delay clumps to 5 "minutes".
+     */
     retryDelay(failureCount) {
-      if (failureCount > 3) {
-        return failureCount * 5 * 1000
-      }
-
       if (failureCount > 50) {
-        return 5 * 1000 * 60 // 5 minutes
+        return 10 * 1000 * 60 // 5 minutes
       }
 
-      return 3 * 1000
+      return failureCount * 5 * 1000
     },
     queryFn: async () => {
       const response = await appQuery(action)
@@ -30,15 +31,7 @@ function useAppQuery<T>(action: QueryAction<T>, options?: Omit<UseQueryOptions<Q
 
       return response
     },
-    onError(error) {
-      options?.onError?.(error)
-
-      // if (error instanceof Error) {
-      //   toast.error("Error while fetching request: " + error.message)
-      //   return
-      // }
-      // toast.error("Error while fetching request.")
-    },
+    ...options
   })
 }
 

@@ -13,10 +13,12 @@ import Details from "app/ui/kit/Details/Details"
 import Icon from "app/ui/kit/Icon/Icon"
 import Selector from "app/ui/kit/Selector/Selector"
 import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
+import Logo from "app/ui/synthetic/Logo/Logo"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 import Theme from "app/ui/synthetic/Theme/Theme"
+import Timer from "app/ui/synthetic/Timer/Timer"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { useAppSelector } from "store/hooks"
@@ -46,44 +48,39 @@ enum TabRoutes {
 function WorkspaceContainer() {
   const settings = useAppSelector(state => state.workspace.settings)
   return (
-    <Theme theme={settings.darkThemeEnabled ? "dark" : "light"}>
-      <div className={classWithModifiers("problem-layout", settings.darkThemeEnabled && "dark")}>
-        <header>
-          <div className="code-header-wrap">
-            <a href="/" className="logo">&lt;Algo Academy/&gt;</a>
+    <div className={classWithModifiers("problem-layout", settings.darkThemeEnabled && "dark")}>
+      <header>
+        <div className="workspace-header-wrap">
+          <Logo />
 
-            <div className="header-level">
-              <ButtonIcon name="chevron-left" size="smaller" squared ariaLabel="Previous" />
-              <div className="header-level-text">Level Order Traversal</div>
-              <ButtonIcon name="chevron-right" size="smaller" squared ariaLabel="Next" />
-            </div>
-
-            <div className="header-code-right">
-              <div className="header-status">
-                <Selector defaultValue="1" transparent>
-                  <option value="1">Not completed</option>
-                  <option value="2">Completed</option>
-                </Selector>
-              </div>
-
-              <div className="header-time">
-                <img src="/static/images/header-time.svg" alt="" className="header-time-img" />
-                <div className="header-time-inner">05:10</div>
-              </div>
-
-              <button className="header-feedback" type="button" onClick={() => Modal.open(PopupSubmitFeedback)}>
-                <Icon name="question-mark" />
-                <span>Submit Feedback</span>
-              </button>
-            </div>
+          <div className="workspace-header-level">
+            <ButtonIcon name="chevron-left" size="smaller" squared ariaLabel="Previous" />
+            <div className="workspace-header-level-text">Level Order Traversal</div>
+            <ButtonIcon name="chevron-right" size="smaller" squared ariaLabel="Next" />
           </div>
-        </header>
+
+          <div className="workspace-header__right">
+            <Selector defaultValue="1" transparent>
+              <option value="1">Not completed</option>
+              <option value="2">Completed</option>
+            </Selector>
+
+            <Timer />
+
+            <button className="workspace-header-feedback" type="button" onClick={() => Modal.open(PopupSubmitFeedback)}>
+              <Icon name="question-mark" />
+              <span>Submit Feedback</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <Theme theme={settings.darkThemeEnabled ? "dark" : "light"}>
         <div className="problem-layout__container">
           <WorkspaceLeftSection />
           <WorkspaceRightSection />
         </div>
-      </div>
-    </Theme>
+      </Theme>
+    </div>
   )
 }
 

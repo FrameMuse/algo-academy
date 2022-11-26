@@ -9,30 +9,24 @@
   background: white;
   transition: 250ms ease background-color;
 
-  .article {
-    // max-width: 45em;
-  }
-
   &--dark {
     background: $color-dark;
   }
 }
 
-.code-header-wrap {
+.workspace-header-wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   padding: 1.25em 2.5em;
 
-  // min-height: 5em;
-
   &>* {
     flex: 1;
   }
 }
 
-.header-level {
+.workspace-header-level {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +40,7 @@
   }
 }
 
-.header-level-text {
+.workspace-header-level-text {
   padding: 0 3rem;
 
   font-size: 1.125rem;
@@ -56,69 +50,26 @@
   text-align: center;
 }
 
-.header-level-arrow {
-  width: calc(40 / 1920 * 100vw);
-  height: calc(40 / 1920 * 100vw);
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: calc(10 / 1920 * 100vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: .5s;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-
-  img {
-    width: calc(30 / 1920 * 100vw);
-  }
-}
-
-.header-code-right {
+.workspace-header__right {
   display: flex;
   align-items: center;
 
-  .header-feedback {
-    display: flex;
-    align-items: center;
-
-    @include column-gap(0.5em);
-
-    font-size: 1.125rem;
-    color: white;
-  }
+  @include column-gap(2em);
 }
 
-.header-status {
-  margin-right: calc(32 / 1920 * 100vw);
+.workspace-header-feedback {
+  display: flex;
+  align-items: center;
 
-  .select-top {
-    min-height: auto;
-    background: transparent;
-    font-weight: 600;
-    color: #fff;
-    padding: 0;
-    padding-left: calc(16 / 1920 * 100vw);
-    padding-right: calc(30 / 1920 * 100vw);
-    border-radius: 0;
-  }
+  @include column-gap(0.5em);
 
-  .select-list {
-    top: calc(100% + 0.75vw);
-    font-size: calc(18 / 1920 * 100vw);
-    border-radius: calc(8 / 1920 * 100vw);
-    padding: calc(8 / 1920 * 100vw) 0;
-  }
-
-  .select-list-item {
-    padding: calc(8 / 1920 * 100vw) calc(16 / 1920 * 100vw);
-  }
+  font-size: 1.125rem;
+  color: white;
 }
 
-.header-time {
+.workspace-header-status {}
+
+.workspace-header-time {
   margin-right: calc(32 / 1920 * 100vw);
   border: 1px solid #f5f5f5;
   border-radius: calc(10 / 1920 * 100vw);
@@ -132,7 +83,7 @@
   color: #fff;
 }
 
-.header-time-img {
+.workspace-header-time-img {
   width: calc(24 / 1920 * 100vw);
   margin-right: calc(6 / 1920 * 100vw);
 }
@@ -176,88 +127,5 @@
   .problem-layout--dark & {
     --scrollbar-thumb-color: #{rgba(white, 0.25)};
     --scrollbar-track-color: #{$color-dark};
-  }
-}
-
-
-
-
-
-.templates-block {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  border-top: 1px solid #d9e0e8;
-  height: calc(100% - 5vw);
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.templates-left {
-  width: 20%;
-  height: calc(100% - 3.75vw);
-  background: #edf2f7;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-}
-
-.templates-left-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: calc(62 / 1920 * 100vw);
-  padding: calc(12 / 1920 * 100vw) calc(24 / 1920 * 100vw);
-  border-bottom: 1px solid rgba(13, 14, 20, 0.2);
-  font-weight: 700;
-  font-size: calc(18 / 1920 * 100vw);
-  line-height: 1.27;
-  color: rgba(13, 14, 20, 0.68);
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:hover,
-  &.templates-left-item-active {
-    color: $color-black-main;
-  }
-}
-
-.templates-right {
-  width: 80%;
-  height: calc(100% - 3.75vw);
-}
-
-.templates-bottom {
-  width: 100%;
-  min-height: 3.75vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: calc(8 / 1920 * 100vw) calc(40 / 1920 * 100vw);
-  background: #d9e0e8;
-}
-
-.templates-bottom-data {
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: calc(18 / 1920 * 100vw);
-  line-height: 1.27;
-
-  strong {
-    font-weight: 800;
-  }
-}
-
-.templates-bottom-data-item {
-  margin-right: calc(16 / 1920 * 100vw);
-
-  &:last-child {
-    margin-right: 0;
   }
 }

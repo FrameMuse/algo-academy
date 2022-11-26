@@ -13,19 +13,19 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
 
   function onFilterChange() { }
 
-  return (
-    <CourseContents onFilterChange={onFilterChange}>
-      {asd?.map((azd, index) => (
-        <CourseElement title={azd.name} progress={{ done: 2, total: 3 }} defaultExapanded key={index}>
-          <LessonPreviews title="Learning">
-            {azd.list.map((zxc, index) => (
-              <LessonPreview id={zxc.id} status={Number(zxc.status)} key={index}>{zxc.name}</LessonPreview>
-            ))}
-          </LessonPreviews>
-        </CourseElement>
-      ))}
-    </CourseContents>
-  )
+  // return (
+  //   <CourseContents onFilterChange={onFilterChange}>
+  //     {asd?.map((azd, index) => (
+  //       <CourseElement title={azd.name} progress={{ done: 2, total: 3 }} defaultExapanded key={index}>
+  //         <LessonPreviews title="Learning">
+  //           {azd.list.map((zxc, index) => (
+  //             <LessonPreview id={zxc.id} status={Number(zxc.status)} key={index}>{zxc.name}</LessonPreview>
+  //           ))}
+  //         </LessonPreviews>
+  //       </CourseElement>
+  //     ))}
+  //   </CourseContents>
+  // )
 
   return (
     <CourseContentsContainerSample />

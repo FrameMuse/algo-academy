@@ -118,19 +118,22 @@ async function handleResponse<T>(response: Response, action: QueryAction<T>): Pr
     throw new QueryError("Content Type is not of JSON types.", { cause: { response, action } })
   }
 
+  const queryResponse: QueryResponse<T> = {
+    nativeResponse: response,
+    status: response.status,
+    headers: response.headers
+  }
+
   try {
     const payload = await response.json()
     return {
-      nativeResponse: response,
-      status: response.status,
-      headers: response.headers,
+      ...queryResponse,
       payload
     }
   } catch (error) {
     if (error instanceof Error) {
       return {
-        nativeResponse: response,
-        status: response.status,
+        ...queryResponse,
         error
       }
     }
@@ -139,19 +142,29 @@ async function handleResponse<T>(response: Response, action: QueryAction<T>): Pr
   }
 }
 
-async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
+
+function getAuthorization() {
   try {
     // Parsing user's JWT token
     const userToken = localStorage.getItem("user-token")
-    const userTokenParsed = JSON.parse(userToken ?? "") as string
+    const userTokenParsed = JSON.parse(userToken ?? `""`) as string
 
     const userJWT = new JWT(userTokenParsed)
+    return userJWT.authorization
+  } catch (error) {
+    console.error(error)
 
+    return ""
+  }
+}
+
+async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
+  try {
     // Create new instance to make sure we're not changing original `action` object.
-    // Set it to the action headers.
+    // Set authorization to the action headers.
     action = { ...action }
     action.headers ||= {}
-    action.headers.Authorization ||= userJWT.authorization
+    action.headers.Authorization ||= getAuthorization()
 
 
     // Other doings...

@@ -63,7 +63,12 @@ class JWT<P = unknown> {
    * https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
    */
   public static parse<T>(token: string): JWTPayload & T {
-    return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString())
+    const tokenParts = token.split(".")
+    if (tokenParts.length < 3) {
+      throw new Error("ParsingError: Wrong JWT token format.", { cause: { token } })
+    }
+
+    return JSON.parse(Buffer.from(tokenParts[1], "base64").toString())
   }
 }
 
