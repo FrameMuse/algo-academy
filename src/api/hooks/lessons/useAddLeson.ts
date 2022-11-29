@@ -5,8 +5,8 @@ import { APIMappings } from "api/mappings"
 import { LessonType } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
 
-function useAddLeson() {
-  async function addLeson(lesson: {
+function useAddLesson() {
+  async function addLesson(lesson: {
     title: string
     type: LessonType
   }) {
@@ -21,7 +21,7 @@ function useAddLeson() {
 
     return APIMappings.mapLesson(response.payload)
   }
-  return addLeson
+  return addLesson
 }
 
-export default useAddLeson
+export default useAddLesson

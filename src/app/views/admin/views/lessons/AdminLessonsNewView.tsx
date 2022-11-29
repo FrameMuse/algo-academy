@@ -1,4 +1,4 @@
-import useAddLeson from "api/hooks/lessons/useAddLeson"
+import useAddLesson from "api/hooks/lessons/useAddLeson"
 import { LessonType } from "app/areas/lesson/types"
 import Box from "app/layouts/Box/Box"
 import Column from "app/layouts/Column/Column"
@@ -12,7 +12,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 function AdminLessonsNewView() {
-  const addLesson = useAddLeson()
+  const addLesson = useAddLesson()
   const navigate = useNavigate()
 
   const [pending, setPending] = useState(false)
