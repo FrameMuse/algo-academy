@@ -26,6 +26,9 @@ export interface UserDefault {
   signed: boolean
 }
 
+/**
+ * To help comparing user types, `Admin` is highest in rank for this enum.
+ */
 export enum UserType {
   Default, Admin
 }
