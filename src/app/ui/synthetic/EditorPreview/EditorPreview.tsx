@@ -1,16 +1,29 @@
 import "./EditorPreview.scss"
 
-import { WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { DiffEditor } from "@monaco-editor/react"
+import ButtonGroup from "app/layouts/ButtonGroup/ButtonGroup"
+import Headings from "app/layouts/Headings/Headings"
+import Row from "app/layouts/Row/Row"
+import PopupConfirm from "app/popups/PopupConfirm/PopupConfirm"
 import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
+import Button from "app/ui/kit/Button/Button"
+import Selector from "app/ui/kit/Selector/Selector"
+import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
+import { useEffect, useState } from "react"
+import { Modal } from "react-modal-global"
+import { classWithModifiers } from "utils/common"
 
-import { EditorLanguage } from "../Editor/Editor.types"
+import Editor from "../Editor/Editor"
+import { EditorLanguage, EditorTheme } from "../Editor/Editor.types"
+import Theme from "../Theme/Theme"
+import { AppTheme } from "../Theme/themeContext"
 
 
 interface EditorPreviewProps {
   language?: EditorLanguage
-
-  value: string
-  onChange(value: string): void
+  original?: string
+  onSave?(value: string): void | Promise<void>
+  onDirtyUpdate?(dirty: boolean): void
 }
 
 
@@ -18,37 +31,114 @@ interface EditorPreviewProps {
  * TODO: Currently uses outside class names and styles of `problem-layout`, but should be reworked to have its own.
  */
 function EditorPreview(props: EditorPreviewProps) {
-  // const [content, setContent] = useState<string | undefined>(props.value ?? "")
+  const [value, setValue] = useState<string>(props.original ?? "")
+  const [dirty, setDirty] = useState(false)
 
-  // useEffect(() => {
-  //   setContent(props.value ?? "")
-  // }, [props.value])
+  const [articleTheme, setArticleTheme] = useState<AppTheme>("light")
+  const [editorTheme, setEditorTheme] = useState<EditorTheme>(EditorTheme.Light)
+
+  const [diffMode, setDiffMode] = useState(false)
 
   function onChange(value: string | undefined) {
     if (value == null) return
 
-    // setContent(value)
-    props.onChange(value)
+    setValue(value)
+    setDirty(value !== props.original)
+
+    props.onDirtyUpdate?.(value !== props.original)
   }
 
-  return (
-    <WorkspaceTheme>
-      <div className="problem-layout" style={{ width: "100%" }}>
-        <div className="problem-layout__container">
-          <div className="problem-layout__section problem-layout__section--shrink">
-            <ArticleMarkdown content={props.value} />
-          </div>
-          <div className="problem-layout__section">
-            <WorkspaceEditor height="100%" defaultLanguage={props.language} language={props.language} value={props.value} onChange={onChange} />
-          </div>
-        </div>
-      </div>
-    </WorkspaceTheme>
+  async function onSave() {
+    const confirmed = await confirmAction()
+    if (!confirmed) return
+
+    await props.onSave?.(value)
+  }
+  async function onReset() {
+    const confirmed = await confirmAction()
+    if (!confirmed) return
+
+    if (props.original == null) return
+    setValue(props.original)
+  }
+
+  useEffect(() => {
+    if (props.original == null) return
+
+    const dirty = props.original !== value
+    if (dirty) return
+
+    setValue(props.original)
+    setDirty(false)
+  }, [props.original])
+
+  const plainEditor = (
+    <Editor
+      height="100%"
+      theme={editorTheme}
+
+      defaultLanguage={props.language}
+      language={props.language}
+
+      value={value}
+      defaultValue={value}
+
+
+
+      onChange={onChange}
+    />
   )
 
-  // return (
-  //   <div className="editor-preview"></div>
-  // )
+  const diffEditor = (
+    <DiffEditor
+      original={props.original}
+      modified={value}
+
+      options={{ readOnly: true }}
+    />
+  )
+
+  return (
+    <div className="editor-preview">
+      <Headings>
+        <h3>Editor Preview</h3>
+        <p>Data was not edited yet.</p>
+      </Headings>
+      <div className="editor-preview__tools">
+        <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
+          <Button await onClick={onSave}>Save</Button>
+          <Button onClick={onReset}>Reset</Button>
+          <Button color={diffMode ? "blue" : "gray"} onClick={() => setDiffMode(!diffMode)}>Diff</Button>
+        </ButtonGroup>
+        <Row>
+          <Selector label="Article Theme" defaultValue={articleTheme} onChange={setArticleTheme}>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </Selector>
+          <Selector label="Editor Theme" defaultValue={editorTheme} onChange={setEditorTheme}>{optionsFromEnum(EditorTheme)}</Selector>
+        </Row>
+      </div>
+      <div className="editor-preview__layout">
+        <div className={classWithModifiers("editor-preview__preview", articleTheme === "dark" && "dark")}>
+          <Theme theme={articleTheme}>
+            <ArticleMarkdown content={value} />
+          </Theme>
+        </div>
+        <div className="editor-preview__editor">
+          {diffMode && diffEditor}
+          {!diffMode && plainEditor}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+async function confirmAction() {
+  let confirmed = false
+  const onConfirm = () => confirmed = true
+  await Modal.open(PopupConfirm, { weak: true, onConfirm })
+
+  return confirmed
 }
 
 export default EditorPreview

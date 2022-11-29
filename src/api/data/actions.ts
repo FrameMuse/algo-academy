@@ -194,7 +194,7 @@ export const getLessonsId = (id: string): QueryAction<Lesson> => ({
 /**
  * Update information about lesson. This can only be done by an administrator.
  */
-export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<Lesson> => ({
+export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction => ({
   method: "PATCH",
   endpoint: `/lessons/${id}`,
   body,

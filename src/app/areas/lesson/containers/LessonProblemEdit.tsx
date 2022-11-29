@@ -159,7 +159,7 @@ function LessonProblemEditd(props: LessonProblemEditProps) {
           <Button color="dark" onClick={onCancel}>Cancel</Button>
         </Buttons>
       )}
-      <EditorPreview language={EditorLanguage.Markdown} value={content ?? ""} onChange={setContent} />
+      <EditorPreview language={EditorLanguage.Markdown} original={content ?? ""} />
     </>
   )
 }
