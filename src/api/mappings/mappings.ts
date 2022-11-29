@@ -4,6 +4,7 @@ import { PricingPlan } from "app/areas/purchase/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { USER_GUEST } from "store/reducers/user"
 import { User, UserType } from "store/reducers/user/types"
+import BiMap from "utils/transform/bimap"
 
 export function mapUser(schema: APISchemas.User): User {
   return {
@@ -20,7 +21,7 @@ export function mapUser(schema: APISchemas.User): User {
     createdAt: new Date(schema.date_of_creation),
 
     pricingPlan: schema.current_plan ? mapPricingPlan(schema.current_plan) : undefined,
-    type: mapUserType(schema.role),
+    type: userType.mapForward(schema.role),
     signed: true,
   }
 }
@@ -34,14 +35,6 @@ export function mapChapterProgress(schema: APISchemas.User["progress"][0]) {
       total: schema.lessons.all
     }
   }
-}
-
-export function mapUserType(schema: APISchemas.User["role"]): UserType {
-  if (schema === "admin") {
-    return UserType.Admin
-  }
-
-  return UserType.Default
 }
 
 export function mapPricingPlan(schema: APISchemas.Plan): PricingPlan {
@@ -58,9 +51,9 @@ export function mapLesson(schema: APISchemas.Lesson) {
   return {
     id: schema.id,
     title: schema.name,
-    type: mapLessonType(schema.type),
+    type: lessonType.mapForward(schema.type),
     chapterRelationId: schema.used_in[0] ?? "",
-    status: mapLessonStatus(schema.status),
+    status: lessonStatus.mapForward(schema.status),
 
     content: schema.content ?? "unknown",
 
@@ -73,22 +66,11 @@ export function mapLesson(schema: APISchemas.Lesson) {
 function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]) {
   return {
     solution: schema.solution,
-    language: mapLessonResourceLanguage(schema.language),
+    language: resourceLanguage.mapForward(schema.language),
     notes: schema.notes,
     tests: schema.tests,
     defaultCode: schema.default_code
   }
-}
-
-function mapLessonResourceLanguage(schema: NonNullable<APISchemas.Lesson["resources"]>[0]["language"]): EditorLanguage {
-  switch (schema) {
-    case 74:
-      return EditorLanguage.TypeScript
-
-    default:
-      return EditorLanguage.Python
-  }
-
 }
 
 
@@ -108,85 +90,40 @@ function mapLessonPreview(schema: APISchemas.Chapter["learning_list"][0]) {
   return {
     id: schema.id,
     title: schema.name,
-    status: mapLessonStatus(schema.status)
-  }
-}
-
-function mapLessonStatus(schema: APISchemas.Lesson["status"]): LessonStatus {
-  switch (schema) {
-    case "Completed":
-      return LessonStatus.Complete
-    case "Not Completed":
-      return LessonStatus.Incomplete
-    case "Needs Review":
-      return LessonStatus.NeedsReviews
-
-    default:
-      return LessonStatus.Complete
-  }
-}
-
-export function unmapLessonStatus(value: LessonStatus): APISchemas.Lesson["status"] {
-  switch (value) {
-    case LessonStatus.Complete:
-      return "Completed"
-    case LessonStatus.Incomplete:
-      return "Not Completed"
-    case LessonStatus.NeedsReviews:
-      return "Needs Review"
-
-    default:
-      return "Not Completed"
-  }
-}
-
-export function mapLessonType(schema: APISchemas.Lesson["type"]): LessonType {
-  switch (schema) {
-    case "learning":
-      return LessonType.Learning
-    case "practice":
-      return LessonType.Practice
-
-    default:
-      return LessonType.Learning
-  }
-}
-
-export function unmapLessonType(value: LessonType): APISchemas.Lesson["type"] {
-  switch (value) {
-    case LessonType.Learning:
-      return "learning"
-    case LessonType.Practice:
-      return "practice"
-
-    default:
-      return "learning"
+    status: lessonStatus.mapForward(schema.status)
   }
 }
 
 
-// /**
-//  * https://www.google.com/search?q=bidirectional+map+js&oq=bidirectional+map+js&aqs=chrome..69i57.2532j0j7&sourceid=chrome&ie=UTF-8
-//  * https://www.google.com/search?q=bilateral+mapping+npm
-//  * https://startfunction.com/2020/11/26/bidirectional-map-javascript/#initialize
-//  * https://startfunction.com/bidirectional-map-javascript/
-//  * https://www.npmjs.com/package/bi-directional-map
-//  */
-// class BiMap {
-//   forwardMap = {}
-//   reversedMap = {}
-
-//   constructor(mapping: Record<string, string>) {
-//     this.forwardMap = { ...mapping }
-//     this.reversedMap = Object.keys(mapping).reduce((result, key) => ({
-//       ...result,
-//       [mapping[key]]: key
-//     }), {})
-//   }
-// }
+export const userType = new BiMap<APISchemas.User["role"], UserType>({
+  "admin": UserType.Admin,
+  "user": UserType.Default
+})
 
 
-// interface ProgressEntry {
-//   completed: number
-//   total: number
-// }
+export const resourceLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
+  51: EditorLanguage["C#"],
+  62: EditorLanguage.Java,
+  63: EditorLanguage.JavaScript,
+  64: EditorLanguage.Lua,
+  68: EditorLanguage.PHP,
+  72: EditorLanguage.Ruby,
+  74: EditorLanguage.TypeScript,
+  75: EditorLanguage["C++"],
+  79: EditorLanguage["Objective-C"],
+  70: EditorLanguage.Python,
+  71: EditorLanguage.Python,
+  80: EditorLanguage.R,
+  87: EditorLanguage["F#"]
+})
+
+export const lessonStatus = new BiMap<APISchemas.Lesson["status"], LessonStatus>({
+  "Completed": LessonStatus.Complete,
+  "Not Completed": LessonStatus.Incomplete,
+  "Needs Review": LessonStatus.NeedsReviews
+})
+
+export const lessonType = new BiMap<APISchemas.Lesson["type"], LessonType>({
+  "learning": LessonType.Learning,
+  "practice": LessonType.Practice
+})
