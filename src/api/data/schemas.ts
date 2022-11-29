@@ -44,74 +44,54 @@ export interface User {
   rank: number
   current_plan?: null | Plan
   progress: {
-    curriculum_id: string
-    curriculum_name: string
-    lessonsId_completed: {
-      id: string
-      status: string
-    }[]
-    lessons_all: number
+    chapter_id: string
+    chapter_name: string
+    lessons: {
+      completed: number
+      all: number
+    }
   }[]
   history: Plan[]
   role: string
   email: string
   providers: Provider[]
-  avatar?: {
-    data: string
-    contentType: string
-  } | null
+  avatar?: string | null
   date_of_creation: string
 }
 
 export interface Lesson {
   id: string
   name: string
-  release_date: string
-  content_type: string
-  category: string[]
-  access_level: {
-    is_free: boolean
-  }
-  languages_supported: number[]
-  submission_statistics: {
-    successful_submission_count: number
-    failed_submission_count: number
-  }
-  video: {
-    vimeo_id: number
-    video_url: string
-    duration: number
-    instructor: string
-    conceptual_walkthrough_time: number
-    code_walkthrough_time: number
-  }
-  prompt: string
-  constraints: string[]
-  hints: string[]
-  space_time_complexity: string
+  type: string
+  statement: string | null
+  content: string | null
+  hints: string | null
   status: string
-  resources: Resource[]
+  resources: {
+    solution: string
+    language: number
+    notes: string
+    tests: string
+    default_code: string
+  }[] | null
+  used_in: string[]
 }
 
-export interface Curriculum {
+export interface Chapter {
+  id: string
   name: string
   order_number: number
   user_topic: boolean
-  list: {
+  learning_list: {
     id: string
     name: string
-    access_level: {
-      is_free: boolean
-    }
     status: string
   }[]
-}
-
-export interface Resource {
-  language: number
-  starting_code: string
-  solutions: string[]
-  unit_tests: string
+  practice_list: {
+    id: string
+    name: string
+    status: string
+  }[]
 }
 
 export interface Provider {

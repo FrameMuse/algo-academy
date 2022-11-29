@@ -1,0 +1,48 @@
+@import "~assets/scss/bundle.scss";
+
+.article-section {
+  max-width: 950px;
+  margin: 64px auto;
+}
+
+.article-top {
+  max-width: 950px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &>* {
+    flex: 1;
+
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.article-nav {
+  display: flex;
+  align-items: center;
+}
+
+.article-nav-chapter {
+  padding: 0 16px;
+  margin: 0 2em;
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.1;
+  color: rgba(13, 14, 20, 0.68);
+}
+
+.article-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}

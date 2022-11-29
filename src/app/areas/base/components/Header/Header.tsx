@@ -1,6 +1,6 @@
 import "./Header.scss"
 
-import { BaseRoutes } from "app/AppRoutes"
+import { StaticRoutes } from "app/AppRoutes"
 import { ProfileWidget } from "app/areas/user"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
@@ -38,13 +38,13 @@ function Header() {
           <div className="header-right">
             <nav className="menu">
               {/* <ENV type={["test", "development"]}> */}
-              <AppNavLink className="menu-item-link" to={BaseRoutes.UIShowcase}>UI Showcase</AppNavLink>
+              <AppNavLink className="menu-item-link" to={StaticRoutes.UIShowcase}>UI Showcase</AppNavLink>
               {/* </ENV> */}
 
-              <AppNavLink className="menu-item-link" to={BaseRoutes.Home} end>What is Algo Academy?</AppNavLink>
-              <AppNavLink className="menu-item-link" to={BaseRoutes.AboutUs}>About us</AppNavLink>
-              <AppNavLink className="menu-item-link" to={BaseRoutes.FullCourse}>Full Course</AppNavLink>
-              <AppNavLink className="menu-item-link" to={BaseRoutes.Purchase}>Purchase</AppNavLink>
+              <AppNavLink className="menu-item-link" to={StaticRoutes.Home} end>What is Algo Academy?</AppNavLink>
+              <AppNavLink className="menu-item-link" to={StaticRoutes.AboutUs}>About us</AppNavLink>
+              <AppNavLink className="menu-item-link" to={StaticRoutes.FullCourse}>Full Course</AppNavLink>
+              <AppNavLink className="menu-item-link" to={StaticRoutes.Purchase}>Purchase</AppNavLink>
             </nav>
             <ProfileWidget />
           </div>

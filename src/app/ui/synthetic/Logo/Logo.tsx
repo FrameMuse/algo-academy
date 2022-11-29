@@ -1,10 +1,18 @@
 import "./Logo.scss"
 
+import { StaticRoutes } from "app/AppRoutes"
 import { NavLink } from "react-router-dom"
 
-function Logo() {
+interface LogoProps {
+  title?: string
+  to?: string
+}
+
+function Logo(props: LogoProps) {
   return (
-    <NavLink className="logo" to="/">&lt;Algo Academy/&gt;</NavLink>
+    <NavLink className="logo" to={props.to || StaticRoutes.Home}>
+      {props.title || `<Algo Academy/>`}
+    </NavLink>
   )
 }
 

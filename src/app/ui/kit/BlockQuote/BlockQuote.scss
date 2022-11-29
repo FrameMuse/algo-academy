@@ -1,0 +1,8 @@
+@import "~assets/scss/bundle.scss";
+
+.block-quote {
+  padding-left: 1em;
+  padding-block: 0.5em;
+
+  border-left: 0.25em solid $color-gray;
+}

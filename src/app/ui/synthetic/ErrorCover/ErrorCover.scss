@@ -15,10 +15,13 @@
 }
 
 .error-cover__text {
-	color: $color-gray;
+	color: $color-dark;
 	text-align: center;
 
+	font-size: $font-size-h6;
+
 	em {
+		font-weight: 700;
 		color: $color-black-main;
 	}
 }

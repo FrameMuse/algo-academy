@@ -20,6 +20,16 @@ class Progress {
       }
     }, { completed: 0, total: 0 })
   }
+
+  static subtractTotal(entry: ProgressEntry, value: number): ProgressEntry {
+    const completed = entry.completed - value
+    const total = entry.total - value
+
+    return {
+      completed: completed < 0 ? 0 : completed,
+      total: total < 0 ? 0 : total
+    }
+  }
 }
 
 export default Progress

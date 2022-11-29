@@ -1,15 +1,19 @@
 import { useQuery, UseQueryOptions } from "@tanstack/react-query"
 
 import appQuery from "./appQuery"
-import { QueryError } from "./helpers"
+import { QueryClientError } from "./helpers"
 import { QueryAction, QueryResponse } from "./types"
 
 function useAppQuery<T>(action: QueryAction<T>, options?: Omit<UseQueryOptions<QueryResponse<T>>, "queryFn" | "queryKey">) {
-  return useQuery<QueryResponse<T>>([action.endpoint], {
+  return useQuery<QueryResponse<T>>([action.endpoint, action.operationId], {
     cacheTime: Number(process.env.REACT_APP_API_CACHE_TIME),
     refetchOnWindowFocus: () => false,
     retry(_failureCount, error) {
-      return !(error instanceof QueryError)
+      if (error instanceof QueryClientError) {
+        return false
+      }
+
+      return true
     },
     /**
      * Try every 10, 20, 30, ... "seconds", depending on `failureCount`.

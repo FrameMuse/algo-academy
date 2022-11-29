@@ -1,6 +1,6 @@
 import "./Footer.scss"
 
-import { BaseRoutes } from "app/AppRoutes"
+import { StaticRoutes } from "app/AppRoutes"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 
@@ -10,12 +10,12 @@ function Footer() {
       <div className="wrapper">
         <Logo />
         <nav className="footer-menu">
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.ContactUs}>Contact Us</AppNavLink>
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.FAQ}>FAQ</AppNavLink>
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.Reviews}>Reviews</AppNavLink>
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.PrivacyPolicy}>Privacy Policy</AppNavLink>
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.Terms}>Terms & Conditions</AppNavLink>
-          <AppNavLink className="footer-menu-link" to={BaseRoutes.AboutUs}>About Us</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.ContactUs}>Contact Us</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.FAQ}>FAQ</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.Reviews}>Reviews</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.PrivacyPolicy}>Privacy Policy</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.Terms}>Terms & Conditions</AppNavLink>
+          <AppNavLink className="footer-menu-link" to={StaticRoutes.AboutUs}>About Us</AppNavLink>
         </nav>
         <div className="copyright">Copyright &copy; {new Date().getFullYear()} Algo Academy, LLC. All Rights Reserved.</div>
       </div>

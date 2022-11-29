@@ -1,4 +1,4 @@
-export enum EditorLanguages {
+export enum EditorLanguage {
   TypeScript = "typescript",
   JavaScript = "javascript",
   CSS = "css",

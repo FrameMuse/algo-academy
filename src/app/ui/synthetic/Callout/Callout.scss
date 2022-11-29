@@ -1,6 +1,7 @@
 @import "~assets/scss/bundle.scss";
 
 .callout {
+  display: inline-block;
   padding: 0.35em 1.5em;
 
   background: rgba($color-blue, 0.1);

@@ -16,8 +16,8 @@ function FullCourseView() {
       </div>
       <div className="course-section__container">
         <CourseFreeNotice />
-        <CourseProgressContainer id="test" />
-        <CourseContentsContainer id="test" />
+        <CourseProgressContainer />
+        <CourseContentsContainer />
       </div>
     </section>
   )

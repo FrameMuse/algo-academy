@@ -2,14 +2,15 @@
 
 .code {
   position: relative;
+  // font-family: 'Mulish';
 
   code {
     display: block;
     padding: 1em;
     background: inherit;
 
-    font-family: "JetBrains Mono", "Roboto Mono", "Source Code Pro", "Fira Code Retina", "Fira Code", monospace;
     font-size: 1rem;
+    font-family: "JetBrains Mono", "Roboto Mono", "Source Code Pro", "Fira Code Retina", "Fira Code", monospace;
 
     line-height: 1.35;
     tab-size: 4;
@@ -35,4 +36,10 @@
   @include column-gap(0.5em);
 
   transition: 200ms ease opacity;
+}
+
+code.code-inline {
+  padding: 0.1em 0.25em;
+  background: $color-gray;
+  border-radius: 0.25em;
 }

@@ -1,3 +1,5 @@
+import useRunCode from "api/hooks/useRunCode"
+import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceInstances } from "store/reducers/workspace"
 import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
@@ -5,10 +7,13 @@ import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { CodeExecution } from ".."
 
 interface WorkspaceCodeExecutionProps {
-  id: string | number
+  id: string
 }
 
 function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
+  const runCode = useRunCode()
+  const [result, setResult] = useState<any>()
+
   const workspace = useAppSelector(state => state.workspace)
   const dispatch = useAppDispatch()
 
@@ -20,8 +25,24 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
     }))
   }
 
+  async function onRun() {
+    if (instance == null) return
+    if (instance.editorValue == null) return
+
+
+    const response = await runCode(props.id, {
+      languageId: 74,
+      lessonId: props.id,
+      sourceCode: instance.editorValue
+    })
+    // console.log(response)
+
+    setResult(response?.payload)
+  }
+  function onReset() { }
+
   return (
-    <CodeExecution defaultLanguage={instance?.editorLanguage} onLanguageChange={updateLanguage} />
+    <CodeExecution result={result} onRun={onRun} defaultLanguage={instance?.editorLanguage} onLanguageChange={updateLanguage} />
   )
 }
 

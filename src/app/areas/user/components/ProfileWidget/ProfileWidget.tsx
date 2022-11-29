@@ -1,6 +1,6 @@
 import "./ProfileWidget.scss"
 
-import { BaseRoutes } from "app/AppRoutes"
+import { StaticRoutes } from "app/AppRoutes"
 import { Modal } from "react-modal-global"
 import { NavLink } from "react-router-dom"
 import { useAppSelector } from "store/hooks"
@@ -22,7 +22,7 @@ function ProfileWidget() {
         <img src="img/profile-widget-arrow.svg" alt="" />
       </div> */}
       {user.signed && (
-        <NavLink className="ghost" to={BaseRoutes.Profile} />
+        <NavLink className="ghost" to={StaticRoutes.Profile} />
       )}
       {!user.signed && (
         <button className="ghost" type="button" onClick={() => Modal.open(PopupUserAuth)} />

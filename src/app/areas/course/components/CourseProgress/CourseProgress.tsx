@@ -22,7 +22,7 @@ function CourseProgress(props: CourseProgressProps) {
 
 function levelProgressMap(progress: number) {
   if (progress >= 25) {
-    return "any"
+    return "Middle Engineer"
   }
 
   return "Junior Engineer"

@@ -3,6 +3,8 @@ import { createQuery } from "utils/common"
 import { QueryAction, QueryResponse } from "./types"
 
 export class QueryError extends Error { }
+export class QueryClientError extends Error { }
+export class QueryServerError extends Error { }
 
 // export async function resolveBodyType(contentType?: string): Promise<void> {
 //   if (contentType?.startsWith("application/json")) {

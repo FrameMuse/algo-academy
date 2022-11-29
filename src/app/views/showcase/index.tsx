@@ -1,4 +1,4 @@
-import { BaseRoutes } from "app/AppRoutes"
+import { StaticRoutes } from "app/AppRoutes"
 import { Review } from "app/areas/base"
 import FAQSection from "app/areas/base/sections/FAQ/FAQSection"
 import { ProfileWidget } from "app/areas/user"
@@ -105,7 +105,7 @@ function UIShowcaseView() {
         <h3>Pending</h3>
         <Button color="dark" pending>Dark</Button>
         <h2>Button Link</h2>
-        <ButtonLink to={BaseRoutes.UIShowcase}>Default</ButtonLink>
+        <ButtonLink to={StaticRoutes.UIShowcase}>Default</ButtonLink>
         <h2>Button Icon</h2>
         <Row alignItems="center">
           <ButtonIcon name="gear" size="big" ariaLabel={""} />
@@ -198,7 +198,7 @@ function UIShowcaseView() {
         <Notice
           title="You haven’t purchased a plan yet!"
           desc="You only have access to the free content, if you’d like to fully unlock all content that Algo Academy has to offer then you’ll need to purchase our full course."
-          element={<ButtonLink to={BaseRoutes.Purchase}>Buy Now</ButtonLink>}
+          element={<ButtonLink to={StaticRoutes.Purchase}>Buy Now</ButtonLink>}
         />
         <h2>FAQ</h2>
         <FAQSection />

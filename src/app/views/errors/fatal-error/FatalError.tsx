@@ -30,7 +30,7 @@ function FatalError(props: FatalErrorProps) {
           <pre>{props.errorInfo?.componentStack}</pre>
         </div>
         <Button onClick={report}>Report</Button>
-        <Button onClick={props.reset}>Reset (may solve issue)</Button>
+        <Button onClick={props.reset}>Reset (might solve issue)</Button>
       </div>
     </div>
   )

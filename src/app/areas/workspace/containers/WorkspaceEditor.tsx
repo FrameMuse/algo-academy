@@ -1,5 +1,5 @@
 import { EditorProps } from "@monaco-editor/react"
-import Editor, { EDITOR_DEFAULT_LANGUAGE, EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
+import Editor, { EDITOR_DEFAULT_LANGUAGE } from "app/ui/synthetic/Editor/Editor"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceInstances } from "store/reducers/workspace"
 
@@ -30,7 +30,7 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
       <Editor
         theme={workspace.settings.editorTheme}
         options={workspace.settings.editorOptions}
-        value={instance?.editorValue ?? EDITOR_DEFAULT_VALUE}
+        value={instance?.editorValue ?? props.defaultValue}
         language={instance?.editorLanguage}
         defaultLanguage={instance?.editorLanguage ?? EDITOR_DEFAULT_LANGUAGE}
         onChange={onChange}

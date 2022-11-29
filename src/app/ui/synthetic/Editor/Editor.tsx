@@ -3,10 +3,10 @@ import "./Editor.scss"
 import MonacoEditor, { EditorProps } from "@monaco-editor/react"
 
 import LoaderCover from "../Loader/LoaderCover"
-import { EditorLanguages, EditorTheme } from "./Editor.types"
+import { EditorLanguage, EditorTheme } from "./Editor.types"
 
 export const EDITOR_DEFAULT_VALUE = "def solution(arg1, arg2):\n\t# Write your code here\n\tpass"
-export const EDITOR_DEFAULT_LANGUAGE = EditorLanguages.Python
+export const EDITOR_DEFAULT_LANGUAGE = EditorLanguage.Python
 export const EDITOR_DEFAULT_THEME = EditorTheme.Light
 export const EDITOR_DEFAULT_OPTIONS: EditorProps["options"] = {
   fontFamily: "JetBrains Mono, Roboto Mono, Source Code Pro, Fira Code Retina, Fira Code",

@@ -31,6 +31,13 @@ const DEFAULT_TOAST_CONFIG: ToastOptions<{}> = {
 }
 
 export const APP_TITLE = "Algo Academy"
+export function formatAppTitle(...titles: (string | null | undefined)[]): string {
+  if (titles.length > 0) {
+    return [...titles, APP_TITLE].filter(Boolean).join(" | ")
+  }
+
+  return APP_TITLE
+}
 
 function App() {
   return (

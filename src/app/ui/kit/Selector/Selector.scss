@@ -4,7 +4,7 @@
 	position: relative;
 
 	display: grid;
-	gap: 0.5em;
+	gap: 0.75em;
 
 	width: var(--selector-width, fit-content);
 	min-width: 15em;
@@ -14,7 +14,10 @@
 	}
 }
 
-.selector__label {}
+.selector__label {
+	font-size: 1.125rem;
+	font-weight: 700;
+}
 
 .selector__appearance {
 	display: flex;

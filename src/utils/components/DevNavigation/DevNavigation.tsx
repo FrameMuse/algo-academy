@@ -23,12 +23,14 @@ function DevNavigation() {
   )
 }
 
-function asd(element: ReactElement<{ children: never, path?: string }>): string[] {
+function asd(element: ReactElement<{ children: never, path?: string }> | null): string[] {
+  if (element == null) return []
+
   const children = Children.map(element.props.children, asd)?.flatMap(a => a) || []
 
   if (element.type === Route) {
     if (element.props.path) {
-      return [element.props.path, ...children.map(child => element.props.path + "/" + child.replace(/:.*(\/?)/g, "-1"))]
+      return [element.props.path, ...children.map(child => element.props.path + "/" + child.replace(/:\w*/g, "-1"))]
     }
   }
 

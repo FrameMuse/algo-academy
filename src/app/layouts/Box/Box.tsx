@@ -1,13 +1,15 @@
 import "./Box.scss"
 
 import { HTMLAttributes } from "react"
-import { classMerge } from "utils/common"
+import { classMerge, classWithModifiers } from "utils/common"
 
-interface BoxProps extends HTMLAttributes<HTMLElement> { }
+interface BoxProps extends HTMLAttributes<HTMLElement> {
+  color?: "gray"
+}
 
 function Box(props: BoxProps) {
   return (
-    <div {...props} className={classMerge("box", props.className)} />
+    <div {...props} className={classMerge(classWithModifiers("box", props.color), props.className)} />
   )
 }
 

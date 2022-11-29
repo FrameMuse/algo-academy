@@ -66,6 +66,18 @@
 		}
 	}
 
+	&--blue {
+		--button-color: #{$color-blue-80};
+
+	}
+
+	&--blue:not(&--outline) {
+		&:hover {
+			--button-color: #{rgba($color-blue-80, 0.85)};
+			--button-text-color: white;
+		}
+	}
+
 	&--white:not(&--outline) {
 		--button-color: #{$color-white};
 		--button-text-color: #{$color-black-main};

@@ -6,7 +6,7 @@ import { ReactNode } from "react"
 import { LessonStatus } from "../../types"
 
 interface LessonPreviewProps {
-  id: string | number
+  id: string
   status: LessonStatus
   children: ReactNode
 }
@@ -17,13 +17,13 @@ function LessonPreview(props: LessonPreviewProps) {
       <div className="lesson-preview__info">
         <p className="lesson-preview__text">{props.children}</p>
       </div>
-      <LessonPreviewButton id={props.id} status={props.status} />
+      <LessonPreviewButton {...props} />
     </div>
   )
 }
 
-function LessonPreviewButton(props: { id: string | number; status: LessonStatus }) {
-  const link = `lesson/${props.id}`
+function LessonPreviewButton(props: LessonPreviewProps) {
+  const link = `lessons/${props.id}`
 
   switch (props.status) {
     case LessonStatus.Complete:

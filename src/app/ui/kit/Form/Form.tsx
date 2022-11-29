@@ -54,6 +54,11 @@ async function getFormState(form: HTMLFormElement): Promise<{
     const next = form.elements.namedItem(key)
 
     if (next instanceof HTMLInputElement) {
+      if (next.value === "true" || next.value === "false") {
+        values[next.name] = Boolean(next.value)
+        continue
+      }
+
       if (next.checked) {
         values[next.name] = true
         continue

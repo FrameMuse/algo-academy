@@ -3,13 +3,11 @@ import "./CourseElement.scss"
 import Icon from "app/ui/kit/Icon/Icon"
 import { ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
+import Progress, { ProgressEntry } from "utils/transform/progress"
 
 interface CourseElementProps {
   title: string
-  progress: {
-    done: number
-    total: number
-  }
+  progress?: ProgressEntry
   defaultExapanded?: boolean
   children: ReactNode
 }
@@ -36,10 +34,12 @@ function CourseElement(props: CourseElementProps) {
     <div className="course-element">
       <button className="course-element__info" type="button" onClick={() => setExpanded(!expanded)} aria-details="Toggle content display">
         <div className="course-element__title">{props.title}</div>
-        <div className="course-element__right">
-          <div className="course-element__progress">{props.progress.done}/{props.progress.total} <span className="weak">Lessons completed</span></div>
-          <Icon className={classWithModifiers("course-element__icon", expanded && "up")} name="chevron-down" />
-        </div>
+        {props.progress && (
+          <div className="course-element__right">
+            <div className="course-element__progress">{Progress.humanize(props.progress)} <span className="weak">Lessons completed</span></div>
+            <Icon className={classWithModifiers("course-element__icon", expanded && "up")} name="chevron-down" />
+          </div>
+        )}
       </button>
       <div className={classWithModifiers("course-element__content", expanded && "expanded")} aria-hidden={!expanded} style={{ "--height": height }}>
         <div className="course-element__inner" ref={innerRef}>{props.children}</div>

@@ -1,5 +1,7 @@
 export enum LessonStatus {
-  Complete, Incomplete, NeedsReviews,
+  Complete, Incomplete, NeedsReviews
+}
 
-  Unknown
+export enum LessonType {
+  Learning, Practice
 }

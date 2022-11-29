@@ -5,3 +5,6 @@ export { default as CourseContents } from "./components/CourseContents/CourseCon
 export { default as CourseFreeNotice } from "./containers/CourseFreeNotice"
 export { default as CourseProgressContainer } from "./containers/CourseProgressContainer"
 export { default as CourseContentsContainer } from "./containers/CourseContentsContainer"
+
+export { default as ChapterInfoEdit } from "./containers/ChapterInfoEdit"
+export { default as ChapterLessonsEdit } from "./containers/ChapterLessonsEdit"

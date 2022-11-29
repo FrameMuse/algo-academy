@@ -39,17 +39,10 @@
 	&--expanded {
 		height: calc(var(--details-height) * 1px);
 	}
-
-	p {
-		line-height: 1.35;
-		color: white;
-		opacity: 0.75;
-	}
 }
 
 .details__inner {
 	display: grid;
-	justify-items: left;
 	gap: 0.5em;
 	padding: 1em 1.25em;
 	transition: 250ms ease opacity, 250ms ease transform;

@@ -1,0 +1,48 @@
+@import "~assets/scss/bundle.scss";
+
+.picker {
+  display: grid;
+  gap: 0.5em;
+
+  padding: 0.5em;
+  background: $color-blue-10;
+  border: 1px solid $color-gray;
+  border-radius: 0.5em;
+}
+
+.picker__items {
+  display: grid;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  // flex: 1;
+
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+
+  font-size: $font-size-h6;
+
+  transition: 100ms ease font-weight, 200ms ease background-color, 200ms ease color;
+
+  &:hover {
+    background: rgba($color-gray, 0.5);
+  }
+
+  &--picked {
+    background: rgba($color-gray, 0.75);
+  }
+}
+
+.picker-item__checkbox {
+  pointer-events: none;
+}
+
+.picker-item__text {
+  margin-left: 0.75em;
+
+  em {
+    font-weight: 800;
+  }
+}

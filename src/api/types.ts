@@ -11,6 +11,7 @@ export interface QueryAction<T = unknown> {
    * "json"
    */
   contentType?: "formData" | "json"
+  operationId: string
 }
 
 export interface QueryResponse<T = unknown> {
@@ -18,7 +19,11 @@ export interface QueryResponse<T = unknown> {
   error?: Error
   status?: number
   headers?: Headers
-  payload?: T
+  payload?: T & Partial<QueryClientError>
+}
+
+interface QueryClientError {
+  message: string
 }
 
 export type BodyType = "arrayBuffer" | "blob" | "formData" | "json" | "text"

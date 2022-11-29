@@ -9,8 +9,8 @@
 
 import { QueryAction } from "../types"
 import {
+  Chapter,
   CreateUser,
-  Curriculum,
   JudgeConfig,
   JudgeLanguage,
   JudgeLanguages,
@@ -26,7 +26,8 @@ import {
  */
 export const getOauth2Google = (): QueryAction => ({
   method: "GET",
-  endpoint: `/oauth2/google`
+  endpoint: `/oauth2/google`,
+  operationId: "googleAuth"
 })
 
 /**
@@ -34,7 +35,8 @@ export const getOauth2Google = (): QueryAction => ({
  */
 export const getOauth2Facebook = (): QueryAction => ({
   method: "GET",
-  endpoint: `/oauth2/facebook`
+  endpoint: `/oauth2/facebook`,
+  operationId: "facebookAuth"
 })
 
 /**
@@ -42,7 +44,8 @@ export const getOauth2Facebook = (): QueryAction => ({
  */
 export const getOauth2Github = (): QueryAction => ({
   method: "GET",
-  endpoint: `/oauth2/github`
+  endpoint: `/oauth2/github`,
+  operationId: "githubAuth"
 })
 
 /**
@@ -50,7 +53,8 @@ export const getOauth2Github = (): QueryAction => ({
  */
 export const postOauth2Logout = (): QueryAction => ({
   method: "POST",
-  endpoint: `/oauth2/logout`
+  endpoint: `/oauth2/logout`,
+  operationId: "logoutUser"
 })
 
 /**
@@ -58,7 +62,8 @@ export const postOauth2Logout = (): QueryAction => ({
  */
 export const getUsers = (): QueryAction<User[]> => ({
   method: "GET",
-  endpoint: `/users`
+  endpoint: `/users`,
+  operationId: "allUser"
 })
 
 /**
@@ -67,7 +72,18 @@ export const getUsers = (): QueryAction<User[]> => ({
 export const postUsers = (body: CreateUser): QueryAction<User> => ({
   method: "POST",
   endpoint: `/users`,
-  body
+  body,
+  operationId: "createUser"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const patchUsersId = (id: string, body: Partial<User>): QueryAction<User> => ({
+  method: "PATCH",
+  endpoint: `/users/${id}`,
+  body,
+  operationId: "updateuserByIdUser"
 })
 
 /**
@@ -75,7 +91,8 @@ export const postUsers = (body: CreateUser): QueryAction<User> => ({
  */
 export const deleteUsersId = (id: string): QueryAction => ({
   method: "DELETE",
-  endpoint: `/users/${id}`
+  endpoint: `/users/${id}`,
+  operationId: "deleteUser"
 })
 
 /**
@@ -83,7 +100,8 @@ export const deleteUsersId = (id: string): QueryAction => ({
  */
 export const getUsersMe = (): QueryAction<User> => ({
   method: "GET",
-  endpoint: `/users/me`
+  endpoint: `/users/me`,
+  operationId: "yourselfUser"
 })
 
 /**
@@ -92,7 +110,8 @@ export const getUsersMe = (): QueryAction<User> => ({
 export const patchUsersMe = (body: Partial<User>): QueryAction<User> => ({
   method: "PATCH",
   endpoint: `/users/me`,
-  body
+  body,
+  operationId: "updateYourselfUser"
 })
 
 /**
@@ -107,7 +126,23 @@ export const patchUsersMeAvatar = (body: Partial<{
   method: "PATCH",
   endpoint: `/users/me/avatar`,
   body,
-  contentType: "formData"
+  contentType: "formData",
+  operationId: "updateYourselfAvatar"
+})
+
+/**
+ * Update avatar. Only for authorized users.
+ */
+export const patchUsersMeProgress = (body: {
+  chapter_id: string
+  chapter_name: string
+  lesson_id: string
+  status: string
+}): QueryAction => ({
+  method: "PATCH",
+  endpoint: `/users/me/progress`,
+  body,
+  operationId: "updateYourselfProgress"
 })
 
 /**
@@ -115,7 +150,8 @@ export const patchUsersMeAvatar = (body: Partial<{
  */
 export const postUsersRevokeAccessMe = (): QueryAction<User> => ({
   method: "POST",
-  endpoint: `/users/revoke-access/me`
+  endpoint: `/users/revoke-access/me`,
+  operationId: "revokeUser"
 })
 
 /**
@@ -123,16 +159,27 @@ export const postUsersRevokeAccessMe = (): QueryAction<User> => ({
  */
 export const getLessons = (): QueryAction<Lesson[]> => ({
   method: "GET",
-  endpoint: `/lessons`
+  endpoint: `/lessons`,
+  operationId: "allLessons"
 })
 
 /**
  * This can only be done by an administrator.
  */
-export const postLessons = (body: Lesson): QueryAction<Lesson> => ({
+export const postLessons = (body: Partial<Lesson>): QueryAction<Lesson> => ({
   method: "POST",
   endpoint: `/lessons`,
-  body
+  body,
+  operationId: "createLesson"
+})
+
+/**
+ * Learning lessons unused in chapter. This can only be done by an administrator.
+ */
+export const getLessonsUnused = (): QueryAction<Lesson[]> => ({
+  method: "GET",
+  endpoint: `/lessons/unused`,
+  operationId: "ununsedLessons"
 })
 
 /**
@@ -140,7 +187,8 @@ export const postLessons = (body: Lesson): QueryAction<Lesson> => ({
  */
 export const getLessonsId = (id: string): QueryAction<Lesson> => ({
   method: "GET",
-  endpoint: `/lessons/${id}`
+  endpoint: `/lessons/${id}`,
+  operationId: "lessonById"
 })
 
 /**
@@ -149,7 +197,8 @@ export const getLessonsId = (id: string): QueryAction<Lesson> => ({
 export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<Lesson> => ({
   method: "PATCH",
   endpoint: `/lessons/${id}`,
-  body
+  body,
+  operationId: "updateLesson"
 })
 
 /**
@@ -157,59 +206,66 @@ export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<L
  */
 export const deleteLessonsId = (id: string): QueryAction => ({
   method: "DELETE",
-  endpoint: `/lessons/${id}`
+  endpoint: `/lessons/${id}`,
+  operationId: "deleteLesson"
 })
 
 /**
- * Get information about all curriculums. Only for authorized users.
+ * Get information about all chapters. Only for authorized users.
  */
-export const getCurriculums = (): QueryAction<Curriculum[]> => ({
+export const getChapters = (): QueryAction<Chapter[]> => ({
   method: "GET",
-  endpoint: `/curriculums`
+  endpoint: `/chapters`,
+  operationId: "allChapters"
 })
 
 /**
  * This can only be done by an administrator.
  */
-export const postCurriculums = (body: {
+export const postChapters = (body: {
   name: string
   order_number: number
   user_topic: boolean
-  list: string[]
-}): QueryAction<Curriculum> => ({
+  learning_list?: string[] | null
+  practice_list?: string[] | null
+}): QueryAction<Chapter> => ({
   method: "POST",
-  endpoint: `/curriculums`,
-  body
+  endpoint: `/chapters`,
+  body,
+  operationId: "createChapter"
 })
 
 /**
- * Get information about curriculum. Only for authorized users.
+ * Get information about chapter. Only for authorized users.
  */
-export const getCurriculumsId = (id: string): QueryAction<Curriculum> => ({
+export const getChaptersId = (id: string): QueryAction<Chapter> => ({
   method: "GET",
-  endpoint: `/curriculums/${id}`
+  endpoint: `/chapters/${id}`,
+  operationId: "chapterById"
 })
 
 /**
- * Update information about curriculum. This can only be done by an administrator.
+ * Update information about chapter. This can only be done by an administrator.
  */
-export const patchCurriculumsId = (id: string, body: Partial<{
+export const patchChaptersId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
   list: string[]
-}>): QueryAction<Curriculum> => ({
+}>): QueryAction<Chapter> => ({
   method: "PATCH",
-  endpoint: `/curriculums/${id}`,
-  body
+  endpoint: `/chapters/${id}`,
+  body,
+  operationId: "updateChapter"
 })
 
 /**
  * This can only be done by an administrator.
  */
-export const deleteCurriculumsId = (id: string): QueryAction => ({
+export const deleteChaptersId = (id: string): QueryAction => ({
   method: "DELETE",
-  endpoint: `/curriculums/${id}`
+  endpoint: `/chapters/${id}`,
+  operationId: "deleteChapter"
 })
 
 /**
@@ -217,7 +273,8 @@ export const deleteCurriculumsId = (id: string): QueryAction => ({
  */
 export const getPromo = (): QueryAction<Promo[]> => ({
   method: "GET",
-  endpoint: `/promo`
+  endpoint: `/promo`,
+  operationId: "allPromo"
 })
 
 /**
@@ -226,7 +283,8 @@ export const getPromo = (): QueryAction<Promo[]> => ({
 export const postPromo = (body: Promo): QueryAction<Promo> => ({
   method: "POST",
   endpoint: `/promo`,
-  body
+  body,
+  operationId: "createPromo"
 })
 
 /**
@@ -235,7 +293,8 @@ export const postPromo = (body: Promo): QueryAction<Promo> => ({
 export const postPromoCheck = (body: Promo): QueryAction => ({
   method: "POST",
   endpoint: `/promo/check`,
-  body
+  body,
+  operationId: "checkPromo"
 })
 
 /**
@@ -243,7 +302,8 @@ export const postPromoCheck = (body: Promo): QueryAction => ({
  */
 export const getPromoId = (id: string): QueryAction<Promo> => ({
   method: "GET",
-  endpoint: `/promo/${id}`
+  endpoint: `/promo/${id}`,
+  operationId: "promoById"
 })
 
 /**
@@ -252,7 +312,8 @@ export const getPromoId = (id: string): QueryAction<Promo> => ({
 export const patchPromoId = (id: string, body: Partial<Promo>): QueryAction<Promo> => ({
   method: "PATCH",
   endpoint: `/promo/${id}`,
-  body
+  body,
+  operationId: "updatePromo"
 })
 
 /**
@@ -260,40 +321,45 @@ export const patchPromoId = (id: string, body: Partial<Promo>): QueryAction<Prom
  */
 export const deletePromoId = (id: string): QueryAction => ({
   method: "DELETE",
-  endpoint: `/promo/${id}`
+  endpoint: `/promo/${id}`,
+  operationId: "deletePromo"
 })
 
 export const getJudge0ConfigInfo = (): QueryAction<JudgeConfig> => ({
   method: "GET",
-  endpoint: `/judge0/config_info`
+  endpoint: `/judge0/config_info`,
+  operationId: "judgeConfig"
 })
 
 export const getJudge0Statuses = (): QueryAction<JudgeStatuses[]> => ({
   method: "GET",
-  endpoint: `/judge0/statuses`
+  endpoint: `/judge0/statuses`,
+  operationId: "judgeStatuses"
 })
 
 export const getJudge0Languages = (): QueryAction<JudgeLanguages[]> => ({
   method: "GET",
-  endpoint: `/judge0/languages`
+  endpoint: `/judge0/languages`,
+  operationId: "judgeLanguages"
 })
 
 export const getJudge0LanguagesId = (id: string): QueryAction<JudgeLanguage> => ({
   method: "GET",
-  endpoint: `/judge0/languages/${id}`
+  endpoint: `/judge0/languages/${id}`,
+  operationId: "languageJudgeById"
 })
 
 export const postJudge0Compile = (body: {
-  curriculum_id: string
-  curriculum_name: string
+  chapter_id: string
+  chapter_name: string
   lesson_id: string
   language_id: number
   source_code: string
-  stdin: string
 }): QueryAction<JudgeResult> => ({
   method: "POST",
   endpoint: `/judge0/compile`,
-  body
+  body,
+  operationId: "compileCodeJudge0"
 })
 
 /**
@@ -304,5 +370,6 @@ export const postStripeCreateCharge = (body: Stripe): QueryAction<{
 }> => ({
   method: "POST",
   endpoint: `/stripe/create-charge`,
-  body
+  body,
+  operationId: "paymentStripe"
 })

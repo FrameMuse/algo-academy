@@ -14,7 +14,7 @@
   }
 }
 
-.workspace-header-wrap {
+.problem-header-wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +26,7 @@
   }
 }
 
-.workspace-header-level {
+.problem-header-level {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@
   }
 }
 
-.workspace-header-level-text {
+.problem-header-level-text {
   padding: 0 3rem;
 
   font-size: 1.125rem;
@@ -50,14 +50,14 @@
   text-align: center;
 }
 
-.workspace-header__right {
+.problem-header__right {
   display: flex;
   align-items: center;
 
   @include column-gap(2em);
 }
 
-.workspace-header-feedback {
+.problem-header-feedback {
   display: flex;
   align-items: center;
 
@@ -67,9 +67,9 @@
   color: white;
 }
 
-.workspace-header-status {}
+.problem-header-status {}
 
-.workspace-header-time {
+.problem-header-time {
   margin-right: calc(32 / 1920 * 100vw);
   border: 1px solid #f5f5f5;
   border-radius: calc(10 / 1920 * 100vw);
@@ -83,7 +83,7 @@
   color: #fff;
 }
 
-.workspace-header-time-img {
+.problem-header-time-img {
   width: calc(24 / 1920 * 100vw);
   margin-right: calc(6 / 1920 * 100vw);
 }

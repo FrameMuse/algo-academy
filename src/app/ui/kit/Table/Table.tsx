@@ -1,16 +1,14 @@
 import "./Table.scss"
 
-import { ReactNode } from "react"
+import { HTMLAttributes, ReactNode } from "react"
 
-interface TableProps {
+interface TableProps extends HTMLAttributes<HTMLTableElement> {
   children: ReactNode
 }
 
 function Table(props: TableProps) {
   return (
-    <table className="table">
-      {props.children}
-    </table>
+    <table {...props} className="table" />
   )
 }
 

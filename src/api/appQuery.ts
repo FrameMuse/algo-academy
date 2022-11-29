@@ -1,9 +1,10 @@
+import _ from "lodash"
 import { toast } from "react-toastify"
 import { isDictionary } from "utils/common"
 import FileTransform from "utils/transform/file"
 import JWT from "utils/transform/jwt"
 
-import { buildActionURL, isResponseOk, QueryError } from "./helpers"
+import { buildActionURL, isResponseOk, QueryClientError, QueryError } from "./helpers"
 import { QueryAction, QueryResponse } from "./types"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -43,7 +44,7 @@ function mapFormData(value: unknown, key?: string | number): [string, Blob | str
 
   if (typeof value === "string") {
     if (/^data:.*?;base64,.*$/gi.test(value)) {
-      const file = FileTransform.dataURIToBlob(value)
+      const file = FileTransform.parseURI(value)
 
       if (key) {
         result.push([String(key), file])
@@ -99,9 +100,14 @@ async function fetchAction(action: QueryAction): Promise<Response> {
   action.headers ||= {}
   action.headers["Content-Type"] ||= resolveActionContentType(action.contentType)
 
-
   const url = buildActionURL(action)
   const body = resolveActionBody(action)
+
+  if (body instanceof FormData) {
+    // Remove `Content-Type` when `body` is `FormData` to make browser put `boundary` by itself.
+    // https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post
+    delete action.headers["Content-Type"]
+  }
 
   return fetch(url, {
     method: action.method,
@@ -111,17 +117,23 @@ async function fetchAction(action: QueryAction): Promise<Response> {
 }
 
 /**
- * Currenly supports only `JSON` content type.
+ * Currenly supports only `JSON` content type for response.
  */
 async function handleResponse<T>(response: Response, action: QueryAction<T>): Promise<QueryResponse<T>> {
-  if (!response.headers.get("content-type")?.startsWith("application/json")) {
-    throw new QueryError("Content Type is not of JSON types.", { cause: { response, action } })
-  }
-
   const queryResponse: QueryResponse<T> = {
     nativeResponse: response,
     status: response.status,
     headers: response.headers
+  }
+
+  // Skip empty responses.
+  if ([203, 204].includes(response.status)) {
+    return queryResponse
+  }
+
+  // Check if contentful responses have correct content type.
+  if (!response.headers.get("content-type")?.startsWith("application/json")) {
+    throw new QueryError("Content Type is not of JSON types.", { cause: { response, action } })
   }
 
   try {
@@ -142,10 +154,11 @@ async function handleResponse<T>(response: Response, action: QueryAction<T>): Pr
   }
 }
 
-
+/**
+ * Parsing user's JWT token.
+ */
 function getAuthorization() {
   try {
-    // Parsing user's JWT token
     const userToken = localStorage.getItem("user-token")
     const userTokenParsed = JSON.parse(userToken ?? `""`) as string
 
@@ -171,7 +184,12 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     const response = await fetchAction(action)
     const queryResponse = await handleResponse(response, action)
 
-    if (!isResponseOk(queryResponse)) {
+
+    if (response.status >= 400 && queryResponse.payload?.message) {
+      throw new QueryClientError(queryResponse.payload?.message)
+    }
+
+    if (!isResponseOk(queryResponse, true)) {
       throw new QueryError("Query Response is not ok.")
     }
 
@@ -181,8 +199,14 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
       console.error(error)
     }
 
+    if (error instanceof QueryClientError) {
+      toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
+
+      return { error }
+    }
+
     if (error instanceof Error) {
-      toast.error("Error while fetching request: " + error.message)
+      toast.error("Query Error: " + error.message)
 
       return { error }
     }
