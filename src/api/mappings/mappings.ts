@@ -1,5 +1,5 @@
 import { APISchemas } from "api/data"
-import { LessonStatus, LessonType } from "app/areas/lesson/types"
+import { LessonMultipleContent, LessonStatus, LessonType } from "app/areas/lesson/types"
 import { PricingPlan } from "app/areas/purchase/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { USER_GUEST } from "store/reducers/user"
@@ -63,7 +63,7 @@ export function mapLesson(schema: APISchemas.Lesson) {
   }
 }
 
-function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]) {
+function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution,
     language: resourceLanguage.mapForward(schema.language),

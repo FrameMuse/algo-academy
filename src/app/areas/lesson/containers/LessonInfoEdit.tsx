@@ -1,22 +1,27 @@
 import useLesson from "api/hooks/lessons/useLesson"
+import useUpdateLesson from "api/hooks/lessons/useUpdateLesson"
 import { LessonType } from "app/areas/lesson/types"
 import Column from "app/layouts/Column/Column"
-import PopupConfirm from "app/popups/PopupConfirm/PopupConfirm"
+import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
-import Form from "app/ui/kit/Form/Form"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
-import { Modal } from "react-modal-global"
+import { useState } from "react"
+import { inputValue } from "utils/common"
 
 interface LessonInfoEditProps {
   id: string
 }
 
 function LessonInfoEdit(props: LessonInfoEditProps) {
+  const [title, setTitle] = useState<string>("")
+  const [type, setType] = useState<LessonType>()
+
   const { lesson, isLoading } = useLesson(props.id)
+  const updateLesson = useUpdateLesson()
 
   if (isLoading) {
     return <LoaderCover />
@@ -27,19 +32,21 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
   }
 
   async function onSubmit() {
-    Modal.open(PopupConfirm, { weak: true })
+    if (!await confirmAction()) return
+
+    await updateLesson(props.id, { title, type })
   }
 
   return (
-    <Form style={{ width: "30vw" }} onSubmit={onSubmit}>
+    <div style={{ width: "30vw" }}>
       <Column>
-        <Field defaultValue="Welcome" placeholder="e.g. Lowest Common Ancestor">Title</Field>
-        <Selector<LessonType> label="Type" defaultValue={lesson.type}>
+        <Field defaultValue={lesson.title} onChange={inputValue(setTitle)}>Title</Field>
+        <Selector<LessonType> label="Type" defaultValue={lesson.type} onChange={setType}>
           {optionsFromEnum(LessonType)}
         </Selector>
-        <Button color="dark" type="submit">Save</Button>
+        <Button color="dark" await onClick={onSubmit}>Save</Button>
       </Column>
-    </Form>
+    </div>
   )
 }
 

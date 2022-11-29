@@ -3,7 +3,7 @@ import Headings from "app/layouts/Headings/Headings"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 import Button from "app/ui/kit/Button/Button"
 import { useEffect, useState } from "react"
-import { useModalContext } from "react-modal-global"
+import { Modal, useModalContext } from "react-modal-global"
 import Time from "utils/transform/time"
 
 interface PopupConfirmProps {
@@ -34,6 +34,14 @@ function PopupConfirm(props: PopupConfirmProps) {
       </Buttons>
     </PopupLayout>
   )
+}
+
+export async function confirmAction() {
+  let confirmed = false
+  const onConfirm = () => confirmed = true
+  await Modal.open(PopupConfirm, { weak: true, onConfirm })
+
+  return confirmed
 }
 
 export default PopupConfirm

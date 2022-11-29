@@ -4,13 +4,12 @@ import { DiffEditor } from "@monaco-editor/react"
 import ButtonGroup from "app/layouts/ButtonGroup/ButtonGroup"
 import Headings from "app/layouts/Headings/Headings"
 import Row from "app/layouts/Row/Row"
-import PopupConfirm from "app/popups/PopupConfirm/PopupConfirm"
+import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
 import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
 import Button from "app/ui/kit/Button/Button"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import { useEffect, useState } from "react"
-import { Modal } from "react-modal-global"
 import { classWithModifiers } from "utils/common"
 
 import Editor from "../Editor/Editor"
@@ -49,14 +48,12 @@ function EditorPreview(props: EditorPreviewProps) {
   }
 
   async function onSave() {
-    const confirmed = await confirmAction()
-    if (!confirmed) return
+    if (!await confirmAction()) return
 
     await props.onSave?.(value)
   }
   async function onReset() {
-    const confirmed = await confirmAction()
-    if (!confirmed) return
+    if (!await confirmAction()) return
 
     if (props.original == null) return
     setValue(props.original)
@@ -102,7 +99,7 @@ function EditorPreview(props: EditorPreviewProps) {
     <div className="editor-preview">
       <Headings>
         <h3>Editor Preview</h3>
-        <p>Data was not edited yet.</p>
+        <p>{dirty ? "Content has changed." : "Content hasn't changed yet."}</p>
       </Headings>
       <div className="editor-preview__tools">
         <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
@@ -131,14 +128,6 @@ function EditorPreview(props: EditorPreviewProps) {
       </div>
     </div>
   )
-}
-
-async function confirmAction() {
-  let confirmed = false
-  const onConfirm = () => confirmed = true
-  await Modal.open(PopupConfirm, { weak: true, onConfirm })
-
-  return confirmed
 }
 
 export default EditorPreview
