@@ -9,6 +9,7 @@
   background: white;
   border-top: 1px solid $color-gray;
   transition: 250ms ease background-color;
+  overflow: hidden;
 
   &--dark {
     background: #25262b;
