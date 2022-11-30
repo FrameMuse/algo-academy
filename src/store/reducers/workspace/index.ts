@@ -3,10 +3,11 @@ import { EditorTheme } from "app/ui/synthetic/Editor/Editor.types"
 import { MapActions } from "store/store.types"
 import { ValuesOf } from "types"
 
-import { Workspace } from "./types"
+import { Workspace, WorkspaceEditorLanguage } from "./types"
 
 const initialState: Workspace = {
   instances: {},
+  editorLanguage: WorkspaceEditorLanguage.Python,
   settings: {
     editorTheme: EditorTheme.Light,
     codeTheme: CodeTheme.dark,

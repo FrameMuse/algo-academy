@@ -2,6 +2,7 @@ import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
 import { isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
+import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
 function useRunCode() {
   async function getLesson(id: string) {
@@ -19,8 +20,7 @@ function useRunCode() {
   }
 
   async function runCode(id: string, data: {
-    lessonId: string
-    languageId: number
+    languageId: EditorLanguage
     sourceCode: string
   }) {
     const lesson = await getLesson(id)
@@ -34,7 +34,7 @@ function useRunCode() {
       chapter_id: chapter.id,
       chapter_name: chapter.title,
 
-      lesson_id: data.lessonId,
+      lesson_id: id,
       language_id: data.languageId,
       source_code: data.sourceCode
     }))

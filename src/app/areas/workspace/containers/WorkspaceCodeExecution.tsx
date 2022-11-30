@@ -1,13 +1,15 @@
 import useRunCode from "api/hooks/useRunCode"
+import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "store/hooks"
-import { updateWorkspaceInstances } from "store/reducers/workspace"
+import { updateWorkspace } from "store/reducers/workspace"
 import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 
 import { CodeExecution } from ".."
 
 interface WorkspaceCodeExecutionProps {
-  id: string
+  draftId: string
+  lessonId: string
 }
 
 function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
@@ -17,22 +19,18 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
   const workspace = useAppSelector(state => state.workspace)
   const dispatch = useAppDispatch()
 
-  const instance = workspace.instances[props.id]
+  const instance = workspace.instances[props.draftId]
 
   function updateLanguage(editorLanguage: WorkspaceEditorLanguage) {
-    dispatch(updateWorkspaceInstances({
-      [props.id]: { ...instance, editorLanguage }
-    }))
+    dispatch(updateWorkspace({ editorLanguage }))
   }
 
   async function onRun() {
     if (instance == null) return
     if (instance.editorValue == null) return
 
-
-    const response = await runCode(props.id, {
-      languageId: 74,
-      lessonId: props.id,
+    const response = await runCode(props.lessonId, {
+      languageId: workspace.editorLanguage as unknown as EditorLanguage,
       sourceCode: instance.editorValue
     })
 
@@ -40,7 +38,7 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
   }
 
   return (
-    <CodeExecution result={result} onRun={onRun} defaultLanguage={instance?.editorLanguage} onLanguageChange={updateLanguage} />
+    <CodeExecution result={result} onRun={onRun} defaultLanguage={workspace.editorLanguage} onLanguageChange={updateLanguage} />
   )
 }
 

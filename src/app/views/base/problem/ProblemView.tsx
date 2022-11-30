@@ -25,6 +25,7 @@ import Timer from "app/ui/synthetic/Timer/Timer"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { useAppSelector } from "store/hooks"
+import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { classWithModifiers } from "utils/common"
 import useParam from "utils/hooks/useParam"
 
@@ -130,7 +131,7 @@ function ProblemLeftSection(props: { id: string }) {
 }
 
 function ProblemRightSection(props: { id: string }) {
-  // const workspace = useAppSelector(state => state.workspace)
+  const workspace = useAppSelector(state => state.workspace)
 
   const { lesson, isLoading } = useLesson(props.id)
 
@@ -142,9 +143,8 @@ function ProblemRightSection(props: { id: string }) {
     return <ErrorCover>Chapter is null.</ErrorCover>
   }
 
-
-  // const instance = workspace.instances[props.id]
-  const resource = lesson.resources.find(resource => resource.language)
+  const id = `${props.id}-${workspace.editorLanguage}`
+  const resource = lesson.resources.find(resource => (resource.language as unknown as WorkspaceEditorLanguage) === workspace.editorLanguage)
 
   return (
     <div className="problem-layout__section">
@@ -159,8 +159,8 @@ function ProblemRightSection(props: { id: string }) {
         </TabLinks>
 
         <TabRoute path={TabRoutes.Code}>
-          <WorkspaceEditor id={props.id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
-          <WorkspaceCodeExecution id={props.id} />
+          <WorkspaceEditor draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
+          <WorkspaceCodeExecution draftId={id} lessonId={props.id} />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Templates}>

@@ -4,7 +4,6 @@ import { EditorTheme } from "app/ui/synthetic/Editor/Editor.types"
 
 export interface WorkspaceInstance {
   editorValue: string
-  editorLanguage: WorkspaceEditorLanguage
 }
 
 /**
@@ -12,6 +11,7 @@ export interface WorkspaceInstance {
  */
 export interface Workspace {
   instances: Record<string | number, Partial<WorkspaceInstance> | undefined>
+  editorLanguage: WorkspaceEditorLanguage
   settings: WorkspaceSettings
 }
 

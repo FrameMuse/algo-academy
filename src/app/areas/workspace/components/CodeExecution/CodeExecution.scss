@@ -9,7 +9,6 @@
   background: white;
   border-top: 1px solid $color-gray;
   transition: 250ms ease background-color;
-  overflow: hidden;
 
   &--dark {
     background: #25262b;
@@ -185,10 +184,13 @@
 
 
 
-.code-execution-result {}
+.code-execution-result {
+  overflow: hidden;
+}
 
 .code-execution-result__container {
   height: 0px;
+  max-height: 50vh;
   transition: 350ms ease height;
 
   &--expanded {
