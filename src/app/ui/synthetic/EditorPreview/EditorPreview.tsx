@@ -80,7 +80,7 @@ function EditorPreview(props: EditorPreviewProps) {
       value={value}
       defaultValue={value}
 
-
+      options={{ tabSize: 2 }}
 
       onChange={onChange}
     />

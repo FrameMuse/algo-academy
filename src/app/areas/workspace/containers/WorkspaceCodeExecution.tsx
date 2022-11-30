@@ -35,11 +35,9 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
       lessonId: props.id,
       sourceCode: instance.editorValue
     })
-    // console.log(response)
 
     setResult(response?.payload)
   }
-  function onReset() { }
 
   return (
     <CodeExecution result={result} onRun={onRun} defaultLanguage={instance?.editorLanguage} onLanguageChange={updateLanguage} />

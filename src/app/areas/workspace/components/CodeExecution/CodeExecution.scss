@@ -180,3 +180,41 @@
   line-height: 1.27;
   margin-bottom: 0.4166666667vw;
 }
+
+
+
+
+.code-execution-result {}
+
+.code-execution-result__container {
+  height: 0px;
+  transition: 350ms ease height;
+
+  &--expanded {
+    height: calc(var(--height) * 1px);
+  }
+}
+
+.code-execution-result__inner {
+  display: grid;
+  align-content: flex-start;
+  gap: 1em;
+  padding: 0.75em 2.5em;
+
+
+  height: 50vh;
+
+  overflow: overlay;
+  overflow: auto;
+
+  @include Scrollbar(1em, var(--scrollbar-thumb-color), var(--scrollbar-track-color));
+
+
+  transition: 250ms ease opacity, 250ms ease transform;
+
+  :not(.code-execution-result__container--expanded)>& {
+    opacity: 0;
+    transform: translateY(5%);
+    pointer-events: none;
+  }
+}

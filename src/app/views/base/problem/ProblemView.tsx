@@ -4,7 +4,7 @@ import useLesson from "api/hooks/lessons/useLesson"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
 import { LessonStatusSelector } from "app/areas/lesson"
-import { Templates, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { Templates, WorkspaceCode, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
 import { WorkspaceCodeExecution } from "app/areas/workspace/types"
@@ -13,7 +13,6 @@ import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
 import Button from "app/ui/kit/Button/Button"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
-import Code from "app/ui/kit/Code/Code"
 import Icon from "app/ui/kit/Icon/Icon"
 import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
@@ -170,7 +169,7 @@ function ProblemRightSection(props: { id: string }) {
 
         <TabRoute path={TabRoutes.Tests}>
           {resource?.tests && (
-            <Code>{resource.tests}</Code>
+            <WorkspaceCode>{resource.tests}</WorkspaceCode>
           )}
         </TabRoute>
 

@@ -7,33 +7,41 @@ import List from "app/ui/kit/List/List"
 import ListItem from "app/ui/kit/List/ListItem"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
+import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
-import { Dispatch, useState } from "react"
+import { Dispatch, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { classWithModifiers } from "utils/common"
+import Progress, { ProgressEntry } from "utils/transform/progress"
 
 import { WorkspaceCode } from "../.."
 
 interface CodeExecutionProps {
-  onRun?(): void
+  onRun?(): void | Promise<void>
   onReset?(): void
 
   defaultLanguage?: WorkspaceEditorLanguage
   onLanguageChange?: Dispatch<WorkspaceEditorLanguage>
 
-  result: any
+  result?: {
+    compile_output: string | null
+  }
 }
 
 function CodeExecution(props: CodeExecutionProps) {
   const theme = useTheme()
   const [expanded, setExpanded] = useState(false)
-  // console.log(props.result)
+
+  useEffect(() => setExpanded(!!props.result), [props.result])
+
   return (
     <div className={classWithModifiers("code-execution", theme)}>
       <div className="code-execution__tools">
         <Buttons>
-          <Button size="small" onClick={props.onRun}>Run Code</Button>
-          <Button size="small" color="gray" onClick={props.onReset}>Reset</Button>
+          <Button size="small" await onClick={props.onRun}>Run Code</Button>
+          {props.result && (
+            <Button size="small" color="gray" onClick={() => setExpanded(!expanded)}>{expanded ? "Hide" : "Show"} results</Button>
+          )}
         </Buttons>
         <div className="code-bottom-lang">
           <Selector size="big" upwards defaultValue={props.defaultLanguage ?? WorkspaceEditorLanguage.Python} onChange={props.onLanguageChange}>
@@ -41,23 +49,21 @@ function CodeExecution(props: CodeExecutionProps) {
           </Selector>
         </div>
       </div>
-      <div className="code-execution-result">
-        <div className="code-execution-result__title">Test Results</div>
-        {props.result && (
-          <List>
-            {JSON.parse(props.result.compile_output.replace("<---+++ CODE RESULT +++--->", "")).results.map((result: any, index: any) => (
-              <ListItem key={index}>{result.description} --- {result.passed ? "Passed" : "Failed"}</ListItem>
-            ))}
-          </List>
-        )}
-      </div>
-      {expanded && (
-        <div className="code-execution__tests">
-          <TestCase title="" />
-        </div>
+      {props.result && (
+        <CodeExecutionResult result={props.result} expanded={expanded} />
       )}
     </div>
   )
+}
+
+const testResult = {
+  "time": "0.033",
+  "memory": 7432,
+  "compile_output": "<---+++ CODE RESULT +++--->\n{\"results\":[{\"passed\":false,\"description\":\"palindrome string\",\"expected\":true,\"userAnswer\":false},{\"passed\":false,\"description\":\"single character string\",\"expected\":true,\"userAnswer\":false},{\"passed\":false,\"description\":\"n duplicates of single character\",\"expected\":true,\"userAnswer\":false},{\"passed\":true,\"description\":\"non palindrome string\",\"expected\":false,\"userAnswer\":false},{\"passed\":false,\"description\":\"double center palindrome string\",\"expected\":true,\"userAnswer\":false},{\"passed\":false,\"description\":\"single center palindrome string\",\"expected\":true,\"userAnswer\":false},{\"passed\":false,\"description\":\"large palindrome string\",\"expected\":true,\"userAnswer\":false}]}\n",
+  "status": {
+    "id": 3,
+    "description": "Accepted"
+  }
 }
 
 
@@ -114,6 +120,85 @@ function TestCase(props: TestCaseProps) {
           </div>
         </div>
       )}
+    </div>
+  )
+}
+
+
+
+
+interface Output {
+  results: {
+    passed: boolean
+    description: string
+    expected: boolean
+    userAnswer: boolean
+  }[]
+}
+
+
+interface CodeExecutionResultProps {
+  result: {
+    compile_output: string | null
+  }
+
+  expanded?: boolean
+}
+
+function CodeExecutionResult(props: CodeExecutionResultProps) {
+  const [output, setOutput] = useState<Output>()
+
+  const innerRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState<number | undefined>()
+
+  useLayoutEffect(() => {
+    if (!innerRef.current) return
+
+    setHeight(innerRef.current.scrollHeight)
+  }, [props.expanded])
+
+  useEffect(() => {
+    if (props.result.compile_output == null) return
+
+    try {
+      const output = JSON.parse(props.result.compile_output.replace("<---+++ CODE RESULT +++--->", ""))
+
+      setOutput(output)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [props.result])
+
+  if (props.result.compile_output == null && output == null) {
+    return (
+      <div className="code-execution-result">
+        <h6>Test Results - Error</h6>
+        <ErrorCover>Something went wrong.</ErrorCover>
+      </div>
+    )
+  }
+
+  const progress: ProgressEntry | undefined = output && {
+    completed: output.results.filter(result => result.passed).length,
+    total: output.results.length
+  }
+
+  return (
+    <div className="code-execution-result">
+      <div className={classWithModifiers("code-execution-result__container", props.expanded && "expanded")} aria-hidden={!props.expanded} style={{ "--height": height }}>
+        <div className="code-execution-result__inner" ref={innerRef}>
+          <h6>Test Results - ({progress && Progress.humanize(progress)})</h6>
+          {output && (
+            <List>
+              {output.results.map((result, index) => (
+                <ListItem icon={result.passed ? "check" : "cross"} key={index}>
+                  {result.description} --- {result.passed ? "Passed" : "Failed"}
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
