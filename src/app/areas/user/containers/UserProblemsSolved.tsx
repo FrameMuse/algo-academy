@@ -21,7 +21,7 @@ function ProblemsSolvedContainer(props: ProblemsSolvedContainerProps) {
   const problems = chapters.filter(chapter => chapter.showInProfile)
   const problemsProgress = problems.map(chapter => {
     const chapterProgress = chapter.progress || { completed: 0, total: 0 }
-    const progress = Progress.subtractTotal(chapterProgress, chapter.learningLessons.length)
+    const progress = Progress.subtract(chapterProgress, chapter.learningLessons.length)
 
     return { ...chapter, progress }
   })

@@ -11,6 +11,7 @@ import { QueryAction } from "../types"
 import {
   Chapter,
   CreateUser,
+  Feedback,
   JudgeConfig,
   JudgeLanguage,
   JudgeLanguages,
@@ -216,7 +217,6 @@ export const deleteLessonsId = (id: string): QueryAction => ({
 export const patchLessonsIdResourcesLanguageId = (language_id: number, id: string, body: Partial<NonNullable<Lesson["resources"]>[0]>): QueryAction => ({
   method: "PATCH",
   endpoint: `/lessons/${id}/resources/${language_id}`,
-  body,
   operationId: "updateResourcesLesson"
 })
 
@@ -334,6 +334,25 @@ export const deletePromoId = (id: string): QueryAction => ({
   method: "DELETE",
   endpoint: `/promo/${id}`,
   operationId: "deletePromo"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const getFeedbacks = (): QueryAction<Feedback[]> => ({
+  method: "GET",
+  endpoint: `/feedbacks`,
+  operationId: "allFeedback"
+})
+
+/**
+ * Sending feedback
+ */
+export const postFeedbacks = (body: Feedback): QueryAction => ({
+  method: "POST",
+  endpoint: `/feedbacks`,
+  body,
+  operationId: "createFeedback"
 })
 
 export const getJudge0ConfigInfo = (): QueryAction<JudgeConfig> => ({

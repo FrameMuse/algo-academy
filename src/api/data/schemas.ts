@@ -8,6 +8,11 @@
 */
 
 
+export interface Feedback {
+  title: string
+  content: string
+}
+
 export interface Promo {
   name: string
 }
