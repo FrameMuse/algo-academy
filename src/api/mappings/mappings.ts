@@ -26,14 +26,14 @@ export function mapUser(schema: APISchemas.User): User {
   }
 }
 
-export function mapChapterProgress(schema: APISchemas.User["progress"][0]) {
+export function mapUserProgress(schema: APISchemas.User["progress"][0]) {
   return {
     id: schema.chapter_id,
     title: schema.chapter_name,
-    progress: {
-      completed: schema.lessons.completed,
-      total: schema.lessons.all
-    }
+    lessons: schema.lessons.map(lesson => ({
+      id: lesson.id,
+      status: lessonStatus.mapForward(lesson.status)
+    }))
   }
 }
 
@@ -92,8 +92,7 @@ export function mapChapter(schema: APISchemas.Chapter) {
 function mapLessonPreview(schema: APISchemas.Chapter["learning_list"][0]) {
   return {
     id: schema.id,
-    title: schema.name,
-    status: lessonStatus.mapForward(schema.status)
+    title: schema.name
   }
 }
 

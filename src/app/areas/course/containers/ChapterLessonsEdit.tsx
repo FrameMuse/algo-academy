@@ -13,7 +13,7 @@ import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Picker from "app/ui/synthetic/Picker/Picker"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface ChapterLessonsEditProps {
   id: string
@@ -65,7 +65,12 @@ function Azd(props: AzdProps) {
     if (!await confirmAction()) return
 
     await props.onSave?.(lessonIds)
+    setLessonIds(undefined)
   }
+
+  useEffect(() => {
+    setLessonIds(undefined)
+  }, [props.lessonType, props.defaultLessons])
 
   return (
     <Column>

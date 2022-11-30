@@ -4,7 +4,6 @@ import useAppQuery from "api/useAppQuery"
 import { useLocalStorage } from "react-use"
 import { User } from "store/reducers/user/types"
 
-
 function useUser(): User | undefined {
   const [userToken, setUserToken] = useLocalStorage<string | null>("user-token")
 

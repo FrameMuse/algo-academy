@@ -1,4 +1,4 @@
-import useChapters from "api/hooks/chapters/useChapters"
+import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
 import { CourseContents, CourseElement } from "app/areas/course"
 import { LessonPreview, LessonPreviews } from "app/areas/lesson"
 import Box from "app/layouts/Box/Box"
@@ -6,7 +6,7 @@ import Headings from "app/layouts/Headings/Headings"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 
 function AdminChaptersView() {
-  const { chapters } = useChapters()
+  const { chaptersWithProgress: chapters } = useChaptersWithProgress()
   return (
     <Box>
       <Headings>

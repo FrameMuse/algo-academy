@@ -52,9 +52,9 @@ export interface User {
     chapter_id: string
     chapter_name: string
     lessons: {
-      completed: number
-      all: number
-    }
+      id: string,
+      status: string,
+    }[]
   }[]
   history: Plan[]
   role: string
@@ -97,12 +97,10 @@ export interface Chapter {
   learning_list: {
     id: string
     name: string
-    status: string
   }[]
   practice_list: {
     id: string
     name: string
-    status: string
   }[]
 }
 

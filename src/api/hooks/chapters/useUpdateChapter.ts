@@ -1,6 +1,7 @@
 import appQuery from "api/appQuery"
+import queryClient from "api/client"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
+import { getActionQueryKey, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { toast } from "react-toastify"
 
@@ -18,6 +19,8 @@ function useUpdateChapter() {
     if (!isResponseOk(response)) return
 
     toast.success(`Chapter ${chapter.title} has been updated.`)
+
+    queryClient.refetchQueries([getActionQueryKey(APIActions.getChaptersId(id))])
 
     return APIMappings.mapChapter(response.payload)
   }

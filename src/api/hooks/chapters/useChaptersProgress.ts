@@ -5,7 +5,7 @@ import useAppQuery from "api/useAppQuery"
 function useChaptersProgress() {
   const { data, isLoading } = useAppQuery(APIActions.getUsersMe())
 
-  const chaptersProgress = data?.payload?.progress.map(APIMappings.mapChapterProgress)
+  const chaptersProgress = data?.payload?.progress.map(APIMappings.mapUserProgress)
 
   return { chaptersProgress, isLoading }
 }

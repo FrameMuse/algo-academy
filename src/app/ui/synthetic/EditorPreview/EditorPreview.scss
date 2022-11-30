@@ -32,5 +32,10 @@
 }
 
 .editor-preview__editor {
+  position: sticky;
+  top: 0;
+
   flex: 1;
+
+  max-height: 100vh;
 }
