@@ -146,6 +146,8 @@ function ProblemRightSection(props: { id: string }) {
   const id = `${props.id}-${workspace.editorLanguage}`
   const resource = lesson.resources.find(resource => (resource.language as unknown as WorkspaceEditorLanguage) === workspace.editorLanguage)
 
+  console.log(id, resource)
+
   return (
     <div className="problem-layout__section">
       <TabRouter defaultPath={TabRoutes.Code}>

@@ -20,7 +20,7 @@ function useRunCode() {
   }
 
   async function runCode(id: string, data: {
-    languageId: EditorLanguage
+    language: EditorLanguage
     sourceCode: string
   }) {
     const lesson = await getLesson(id)
@@ -35,7 +35,7 @@ function useRunCode() {
       chapter_name: chapter.title,
 
       lesson_id: id,
-      language_id: data.languageId,
+      language_id: APIMappings.resourceLanguage.mapBackward(data.language),
       source_code: data.sourceCode
     }))
 

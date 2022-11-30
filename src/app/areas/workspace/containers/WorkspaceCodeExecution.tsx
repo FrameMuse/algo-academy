@@ -19,6 +19,7 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
   const workspace = useAppSelector(state => state.workspace)
   const dispatch = useAppDispatch()
 
+  // TODO: Rework/Rewise draft system
   const instance = workspace.instances[props.draftId]
 
   function updateLanguage(editorLanguage: WorkspaceEditorLanguage) {
@@ -30,7 +31,7 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
     if (instance.editorValue == null) return
 
     const response = await runCode(props.lessonId, {
-      languageId: workspace.editorLanguage as unknown as EditorLanguage,
+      language: workspace.editorLanguage as unknown as EditorLanguage,
       sourceCode: instance.editorValue
     })
 

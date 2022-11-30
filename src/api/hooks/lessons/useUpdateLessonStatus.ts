@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 /**
  * @returns a updater function, which will return true if request is successful and vice versa.
  */
-function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<void> {
+function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<boolean> {
   async function getLesson(id: string) {
     const response = await appQuery(APIActions.getLessonsId(id))
     if (!isResponseOk(response)) return
@@ -25,11 +25,11 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
 
   async function updateStatus(id: string, status: LessonStatus) {
     const lesson = await getLesson(id)
-    if (lesson == null) return
-    if (lesson.chapterRelation == null) return
+    if (lesson == null) return false
+    if (lesson.chapterRelation == null) return false
 
     const chapter = await getChapter(lesson.chapterRelation.id)
-    if (chapter == null) return
+    if (chapter == null) return false
 
     const response = await appQuery(APIActions.patchUsersMeProgress({
       chapter_id: chapter.id,
@@ -38,9 +38,11 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
       lesson_id: id,
       status: APIMappings.lessonStatus.mapBackward(status)
     }))
-    if (!isResponseOk(response)) return
+    if (!isResponseOk(response)) return false
 
     toast.success("Lesson status has been updated.")
+
+    return true
   }
 
   return updateStatus

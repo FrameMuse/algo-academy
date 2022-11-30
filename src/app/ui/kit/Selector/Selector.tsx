@@ -1,7 +1,7 @@
 import "./Selector.scss"
 
 import useTheme from "app/ui/synthetic/Theme/useTheme"
-import { Children, Dispatch, ReactNode, useRef, useState } from "react"
+import { Children, Dispatch, ReactNode, useEffect, useRef, useState } from "react"
 import { useClickAway } from "react-use"
 import { classWithModifiers } from "utils/common"
 
@@ -12,6 +12,7 @@ import { SelectorOptionElement } from "./Selector.types"
 interface SelectorProps<V> {
   name?: string
   width?: string
+  value?: V
   defaultValue?: V
   placeholder?: string
   /**
@@ -39,6 +40,13 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
     setExpanded(false)
   }
   useClickAway(parentRef, () => setExpanded(false))
+  useEffect(() => {
+    if (props.value == null) return
+
+    setChildren(
+      options.find(option => option.value === props.value)?.children || null
+    )
+  }, [props.value])
   return (
     <div className="selector" style={{ "--selector-width": props.width }} ref={parentRef}>
       {props.label && (

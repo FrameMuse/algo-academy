@@ -186,6 +186,11 @@
 
 .code-execution-result {
   overflow: hidden;
+  transition: 250ms ease color;
+
+  .code-execution--dark & {
+    color: white;
+  }
 }
 
 .code-execution-result__container {
