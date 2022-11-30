@@ -40,7 +40,7 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     }))
     if (!isResponseOk(response)) return
 
-    toast.success("Lesson status updated.")
+    toast.success("Lesson status has been updated.")
   }
 
   return updateStatus

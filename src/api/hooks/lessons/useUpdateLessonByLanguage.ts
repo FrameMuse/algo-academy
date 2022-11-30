@@ -22,7 +22,7 @@ function useUpdateLessonByLanguage() {
 
     queryClient.refetchQueries(getActionQueryKey(APIActions.getLessonsId(id)))
 
-    toast.success(`Lesson ${id} was updated.`)
+    toast.success(`Lesson ${id} has been updated.`)
   }
   return updateLesson
 }

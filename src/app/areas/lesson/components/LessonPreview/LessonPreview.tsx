@@ -1,5 +1,6 @@
 import "./LessonPreview.scss"
 
+import { StaticRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import { ReactNode } from "react"
 
@@ -23,7 +24,7 @@ function LessonPreview(props: LessonPreviewProps) {
 }
 
 function LessonPreviewButton(props: LessonPreviewProps) {
-  const link = `lessons/${props.id}`
+  const link = `${StaticRoutes.FullCourse}/lessons/${props.id}`
 
   switch (props.status) {
     case LessonStatus.Complete:

@@ -26,7 +26,7 @@ function useUpdateLesson() {
 
     queryClient.refetchQueries([APIActions.getLessonsId(id).endpoint, APIActions.getLessonsId(id).operationId])
 
-    toast.success(`Lesson ${id} was updated.`)
+    toast.success(`Lesson ${id} has been updated.`)
   }
   return updateLesson
 }

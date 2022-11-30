@@ -1,17 +1,19 @@
 import useChapter from "api/hooks/chapters/useChapter"
-import useUpdateChapter from "api/hooks/chapters/useUpdateChapter"
+import useUpdateChapterLessons from "api/hooks/chapters/useUpdateChapterLessons"
 import useLessonsUnused from "api/hooks/lessons/useLessonsUnused"
-import { LessonPreview, LessonPreviews } from "app/areas/lesson"
 import { LessonType } from "app/areas/lesson/types"
-import PopupConfirm from "app/popups/PopupConfirm/PopupConfirm"
+import ButtonGroup from "app/layouts/ButtonGroup/ButtonGroup"
+import Column from "app/layouts/Column/Column"
+import Headings from "app/layouts/Headings/Headings"
+import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
 import Button from "app/ui/kit/Button/Button"
+import List from "app/ui/kit/List/List"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Picker from "app/ui/synthetic/Picker/Picker"
 import { useState } from "react"
-import { Modal } from "react-modal-global"
 
 interface ChapterLessonsEditProps {
   id: string
@@ -21,50 +23,75 @@ function ChapterLessonsEdit(props: ChapterLessonsEditProps) {
   const [lessonType, setLessonType] = useState(LessonType.Learning)
 
   const { chapter, isLoading } = useChapter(props.id)
+  const updateChapterLessons = useUpdateChapterLessons()
 
   if (isLoading) {
     return <LoaderCover />
   }
-
   if (chapter == null) {
     return <ErrorCover>Chapter is null.</ErrorCover>
   }
 
-  async function onSubmit() {
-    Modal.open(PopupConfirm, { weak: true })
+  async function onSave(lessonIds: string[]) {
+    await updateChapterLessons(props.id, lessonType, lessonIds)
   }
+
+  const lessons = lessonType === LessonType.Learning ? chapter.learningLessons : chapter.practiceLessons
 
   return (
     <>
-      <Selector<LessonType> label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
+      <Selector label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
         {optionsFromEnum(LessonType)}
       </Selector>
-      <LessonPreviews title={LessonType[lessonType]}>
-        {chapter.learningLessons.map(lesson => (
-          <LessonPreview {...lesson} key={lesson.id}>{lesson.title}</LessonPreview>
-        ))}
-
-        <Button color="gray" iconLeft="plus">Add Lesson</Button>
-        <Azd id={props.id} />
-      </LessonPreviews>
-
+      <Azd defaultLessons={lessons} lessonType={lessonType} onSave={onSave} />
     </>
   )
 }
 
-function Azd(props: { id: string }) {
-  const updateChapter = useUpdateChapter()
 
-  function onChange(lessonIds: string[]) {
-    // updateChapter(props.id, { lessonIds })
+
+interface AzdProps {
+  lessonType?: LessonType
+  defaultLessons?: LessonsPickerProps["defaultLessons"]
+  onSave?(lessonIds: string[]): void | Promise<void>
+}
+
+function Azd(props: AzdProps) {
+  const [lessonIds, setLessonIds] = useState<string[]>()
+  const dirty = lessonIds != null
+
+  async function onSave() {
+    if (lessonIds == null) return
+    if (!await confirmAction()) return
+
+    await props.onSave?.(lessonIds)
   }
 
   return (
-    <LessonsPicker onChange={onChange} />
+    <Column>
+      <Headings>
+        <h4>Lessons Picker</h4>
+        <p>
+          <List icon="chevron-right">
+            <li>There is a search, it will highlight and filter.</li>
+            <li>Picked lessons at the top are ones that already in chapter.</li>
+            <li>Unchosen ones are lessons which are not used anywhere yet.</li>
+          </List>
+        </p>
+      </Headings>
+      <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
+        <Button await onClick={onSave}>Save</Button>
+        <Button>Cancel</Button>
+      </ButtonGroup>
+      <LessonsPicker defaultLessons={props.defaultLessons} lessonType={props.lessonType} onChange={setLessonIds} />
+    </Column>
   )
 }
 
+
+
 interface LessonsPickerProps {
+  lessonType?: LessonType
   defaultLessons?: {
     id: string
     title: string
@@ -73,7 +100,7 @@ interface LessonsPickerProps {
 }
 
 function LessonsPicker(props: LessonsPickerProps) {
-  const { lessons, isLoading } = useLessonsUnused()
+  const { lessons, isLoading } = useLessonsUnused(props.lessonType)
 
   if (isLoading) {
     return <LoaderCover />

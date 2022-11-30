@@ -17,7 +17,7 @@ function useUpdateChapter() {
     }))
     if (!isResponseOk(response)) return
 
-    toast.success(`Chapter ${chapter.title} was updated.`)
+    toast.success(`Chapter ${chapter.title} has been updated.`)
 
     return APIMappings.mapChapter(response.payload)
   }
