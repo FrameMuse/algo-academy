@@ -38,7 +38,7 @@ function EditorPreview(props: EditorPreviewProps) {
 
   const [diffMode, setDiffMode] = useState(false)
 
-  function onChange(value: string | undefined) {
+  function updateValue(value: string | undefined) {
     if (value == null) return
 
     setValue(value)
@@ -56,7 +56,7 @@ function EditorPreview(props: EditorPreviewProps) {
     if (!await confirmAction()) return
 
     if (props.original == null) return
-    setValue(props.original)
+    updateValue(props.original)
   }
 
   useEffect(() => {
@@ -65,14 +65,14 @@ function EditorPreview(props: EditorPreviewProps) {
     const dirty = props.original !== value
     if (dirty) return
 
-    setValue(props.original)
-    setDirty(false)
+    updateValue(props.original)
   }, [props.original])
 
   const plainEditor = (
     <Editor
       height="100%"
       theme={editorTheme}
+      options={{ tabSize: 2 }}
 
       defaultLanguage={props.language}
       language={props.language}
@@ -80,18 +80,18 @@ function EditorPreview(props: EditorPreviewProps) {
       value={value}
       defaultValue={value}
 
-      options={{ tabSize: 2 }}
-
-      onChange={onChange}
+      onChange={updateValue}
     />
   )
 
   const diffEditor = (
     <DiffEditor
+      height="100%"
+      theme={editorTheme}
+      options={{ readOnly: true }}
+
       original={props.original}
       modified={value}
-
-      options={{ readOnly: true }}
     />
   )
 
@@ -118,7 +118,7 @@ function EditorPreview(props: EditorPreviewProps) {
       <div className="editor-preview__layout">
         <div className={classWithModifiers("editor-preview__preview", articleTheme === "dark" && "dark")}>
           <Theme theme={articleTheme}>
-            <ArticleMarkdown content={value} />
+            <ArticleMarkdown content={value} fontSize="small" />
           </Theme>
         </div>
         <div className="editor-preview__editor">

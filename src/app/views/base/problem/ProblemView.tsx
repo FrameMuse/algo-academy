@@ -115,11 +115,11 @@ function ProblemLeftSection(props: { id: string }) {
         </TabLinks>
 
         <TabRoute path={TabRoutes.Problem}>
-          <ArticleMarkdown content={lesson.statement} />
+          <ArticleMarkdown content={lesson.statement} fontSize="small" />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Hints}>
-          <ArticleMarkdown content={lesson.hints} />
+          <ArticleMarkdown content={lesson.hints} fontSize="small" />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Solution}>

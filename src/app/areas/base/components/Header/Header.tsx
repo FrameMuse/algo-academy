@@ -4,8 +4,12 @@ import { StaticRoutes } from "app/AppRoutes"
 import { ProfileWidget } from "app/areas/user"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
+import { useAppSelector } from "store/hooks"
+import { UserType } from "store/reducers/user/types"
 
 function Header() {
+  const user = useAppSelector(state => state.user)
+
   return (
     <header>
       <section className="mob-menu-section">
@@ -37,9 +41,12 @@ function Header() {
           <Logo />
           <div className="header-right">
             <nav className="menu">
-              {/* <ENV type={["test", "development"]}> */}
-              <AppNavLink className="menu-item-link" to={StaticRoutes.UIShowcase}>UI Showcase</AppNavLink>
-              {/* </ENV> */}
+              {user.signed && user.type >= UserType.Admin && (
+                <>
+                  <AppNavLink className="menu-item-link" to={StaticRoutes.AdminHome}>Admin Panel</AppNavLink>
+                  <AppNavLink className="menu-item-link" to={StaticRoutes.UIShowcase}>UI Showcase</AppNavLink>
+                </>
+              )}
 
               <AppNavLink className="menu-item-link" to={StaticRoutes.Home} end>What is Algo Academy?</AppNavLink>
               <AppNavLink className="menu-item-link" to={StaticRoutes.AboutUs}>About us</AppNavLink>

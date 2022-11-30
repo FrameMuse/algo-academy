@@ -58,10 +58,10 @@ export function mapLesson(schema: APISchemas.Lesson) {
     } : undefined,
     status: lessonStatus.mapForward(schema.status),
 
-    content: schema.content ?? "unknown",
+    content: schema.content ?? "",
 
-    statement: schema.statement ?? "unknown",
-    hints: schema.hints ?? "unknown",
+    statement: schema.statement ?? "",
+    hints: schema.hints ?? "",
     resources: schema.resources?.map(mapLessonResource) ?? []
   }
 }

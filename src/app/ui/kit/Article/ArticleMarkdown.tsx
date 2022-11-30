@@ -12,13 +12,15 @@ const ReactMarkdownLazy = lazy(() => import("react-markdown"))
 interface ArticleMarkdownProps {
   theme?: "dark" // "light" by default
   content: string
+
+  fontSize?: "small"
 }
 
 function ArticleMarkdown(props: ArticleMarkdownProps) {
   const { value: rehypeRaw } = useAsync(() => import("rehype-raw"))
 
   return (
-    <Article fontSize="small">
+    <Article fontSize={props.fontSize}>
       <Suspense fallback={<pre>{props.content}</pre>}>
         <ReactMarkdownLazy
           rehypePlugins={rehypeRaw && [rehypeRaw.default]}

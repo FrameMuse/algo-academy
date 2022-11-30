@@ -217,6 +217,7 @@ export const deleteLessonsId = (id: string): QueryAction => ({
 export const patchLessonsIdResourcesLanguageId = (language_id: number, id: string, body: Partial<NonNullable<Lesson["resources"]>[0]>): QueryAction => ({
   method: "PATCH",
   endpoint: `/lessons/${id}/resources/${language_id}`,
+  body,
   operationId: "updateResourcesLesson"
 })
 

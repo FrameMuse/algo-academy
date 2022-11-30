@@ -26,29 +26,34 @@ function LessonArticleEdit(props: LessonArticleEditProps) {
   }
 
   return (
-    <EditorPreview language={EditorLanguage.Markdown} original={lesson.content || ArticleExample} onSave={onSave} />
+    <EditorPreview language={EditorLanguage.Markdown} original={lesson.content || SAMPLE_ARTICLE} onSave={onSave} />
   )
 }
 
-const ArticleExample = `### Overview
+const SAMPLE_ARTICLE = `## Understanding the Problem
 
-Recursion, simply put, is a function that calls another function.
+// <video poster="/static/images/video1.jpg"></video>
 
-Think of recursion as a Russian nesting doll, every time you open a doll you’ll find a smaller one inside, this repeats until there are no more dolls.
+// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-In order for a recursive function to come to a stop it needs to have a base case. A base case is just a condition, that if met, will stop the recursion. Without a base case the function will call itself repeatedly until the computer runs out of memory. For the Russian doll example, our base case would be if we find no doll within another doll.
+// ### Section 1
+// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-After reaching the base case, the functions start to return, with the first function call being returned last.
+// - item 1
+// - item 2
+// - item 3
 
-The reason for our functions being returned in reverse order (Last in first out) is because recursion puts all function calls on a call stack.
+// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
-Let’s look at how the call stack works with a real-world example:
+// ![People sitting face to face](/static/images/video1.jpg)
 
-If we’re trying to find the sum of 6 factorial then we would need to multiply 6 and all of its subsequent numbers to find our answer. With recursion we can start at 6 and recurse until we hit 1 (our base case), after which we will start performing the math to get our answer (ex: 12345*6). Essentially, recursion does computation on the way back, not while it"s recursing.
+// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-Here is an image depicting how our functions will look on our call stack, notice the pattern.
+// 1. item 1
+// 1. item 2
+// 1. item 3
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/https://www.filepicker.io/api/file/hdpWWtaQvm2ftBTSSIF8)
-`
+// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet`
+
 
 export default LessonArticleEdit

@@ -54,31 +54,6 @@ Explanation: Subarray with maximum sum is [5, 1, 3].
 - sample constraint two
 - sample constraint three`
 
-const SAMPLE_ARTICLE = `## Understanding the Problem
-
-// <video poster="/static/images/video1.jpg"></video>
-
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-// ### Section 1
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-// - item 1
-// - item 2
-// - item 3
-
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
-
-// ![People sitting face to face](/static/images/video1.jpg)
-
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-// 1. item 1
-// 1. item 2
-// 1. item 3
-
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet`
-
 type SharedContentKey = "statement" | "hints"
 
 interface LessonSharedContentEditProps {
@@ -92,7 +67,7 @@ function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
   const [dirty, setDirty] = useState(false)
 
   // const multipleContent = props.multipleContents.find(content => content.language === language)
-  const content = tab && (props.content?.[tab] ?? SAMPLE_ARTICLE)
+  const content = tab && props.content?.[tab]
 
   function onSave(value: string) {
     if (tab == null) return
@@ -122,7 +97,7 @@ function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
       </Row>
       {tab && (
         // Pass a `key` attribute here to give to component states a depenency.
-        <EditorPreview language={EditorLanguage.Markdown} original={content} onSave={onSave} onDirtyChange={setDirty} key={tab} />
+        <EditorPreview language={EditorLanguage.Markdown} original={content || SAMPLE_PROBLEM_STATEMENT} onSave={onSave} onDirtyChange={setDirty} key={tab} />
       )}
     </>
   )
@@ -144,7 +119,7 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
   const [dirty, setDirty] = useState(false)
 
   const multipleContent = props.contents.find(content => content.language === language)
-  const content = tab && (multipleContent?.[tab] ?? SAMPLE_PROBLEM_STATEMENT)
+  const content = tab && multipleContent?.[tab]
 
   function onSave(value: string) {
     if (tab == null) return
@@ -177,7 +152,7 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
       </Row>
       {tab && language && (
         // Pass a `key` attribute here to give to component states a depenency.
-        <EditorPreview language={EditorLanguage.Markdown} original={content} onSave={onSave} onDirtyChange={setDirty} key={tab} />
+        <EditorPreview language={tab === "defaultCode" ? language : EditorLanguage.Markdown} original={content} onSave={onSave} onDirtyChange={setDirty} key={tab} />
       )}
     </>
   )
