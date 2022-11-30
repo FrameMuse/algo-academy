@@ -52,7 +52,10 @@ export function mapLesson(schema: APISchemas.Lesson) {
     id: schema.id,
     title: schema.name,
     type: lessonType.mapForward(schema.type),
-    chapterRelationId: schema.used_in[0] ?? "",
+    chapterRelation: schema.used_in ? {
+      id: schema.used_in.chapter_id,
+      title: schema.used_in.chapter_name,
+    } : undefined,
     status: lessonStatus.mapForward(schema.status),
 
     content: schema.content ?? "unknown",
@@ -65,7 +68,7 @@ export function mapLesson(schema: APISchemas.Lesson) {
 
 function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
-    solution: schema.solution,
+    solution: schema.solution ?? "",
     language: resourceLanguage.mapForward(schema.language),
     notes: schema.notes,
     tests: schema.tests,

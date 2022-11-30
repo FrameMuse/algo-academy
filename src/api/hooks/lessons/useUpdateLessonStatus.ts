@@ -26,8 +26,9 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
   async function updateStatus(id: string, status: LessonStatus) {
     const lesson = await getLesson(id)
     if (lesson == null) return
+    if (lesson.chapterRelation == null) return
 
-    const chapter = await getChapter(lesson.chapterRelationId)
+    const chapter = await getChapter(lesson.chapterRelation.id)
     if (chapter == null) return
 
     const response = await appQuery(APIActions.patchUsersMeProgress({

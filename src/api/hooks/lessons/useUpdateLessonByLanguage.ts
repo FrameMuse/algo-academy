@@ -3,25 +3,21 @@ import queryClient from "api/client"
 import { APIActions } from "api/data"
 import { getActionQueryKey, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
-import { LessonType } from "app/areas/lesson/types"
+import { LessonMultipleContent } from "app/areas/lesson/types"
+import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { toast } from "react-toastify"
 
 function useUpdateLessonByLanguage() {
-  async function updateLesson(id: string, lesson: {
-    title?: string
-    type?: LessonType
+  async function updateLesson(id: string, language: EditorLanguage, content: Partial<LessonMultipleContent>) {
+    const languageId = APIMappings.resourceLanguage.mapBackward(language)
+    const action = APIActions.patchLessonsIdResourcesLanguageId(languageId, id, {
+      default_code: content.defaultCode,
+      tests: content.tests,
+      notes: content.notes,
+      solution: content.solution,
+    })
 
-    content?: string
-    statement?: string
-    hints?: string
-  }) {
-    const response = await appQuery(APIActions.patchLessonsId(id, {
-      type: lesson.type ? APIMappings.lessonType.mapBackward(lesson.type) : undefined,
-      name: lesson.title,
-      content: lesson.content,
-      statement: lesson.statement,
-      hints: lesson.hints
-    }))
+    const response = await appQuery(action)
     if (!isResponseOk(response)) return
 
     queryClient.refetchQueries(getActionQueryKey(APIActions.getLessonsId(id)))

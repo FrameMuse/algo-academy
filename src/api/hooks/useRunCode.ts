@@ -25,8 +25,9 @@ function useRunCode() {
   }) {
     const lesson = await getLesson(id)
     if (lesson == null) return
+    if (lesson.chapterRelation == null) return
 
-    const chapter = await getChapter(lesson.chapterRelationId)
+    const chapter = await getChapter(lesson.chapterRelation.id)
     if (chapter == null) return
 
     const response = await appQuery(APIActions.postJudge0Compile({

@@ -64,6 +64,7 @@ export interface ResponseLesson {
 }
 
 export interface Lesson {
+  id: string
   name: string
   type: string
   statement: string | null
@@ -84,6 +85,7 @@ export interface Lesson {
 }
 
 export interface Chapter {
+  id: string
   name: string
   order_number: number
   user_topic: boolean

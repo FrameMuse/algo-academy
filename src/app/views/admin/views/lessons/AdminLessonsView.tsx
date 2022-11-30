@@ -41,10 +41,10 @@ function AdminLessonsView() {
               <td>{lesson.title}</td>
               <td>{_.startCase(LessonType[lesson.type])}</td>
               <td>
-                {lesson.chapterRelationId && (
+                {lesson.chapterRelation && (
                   <div>
-                    <ButtonLink color="dark" size="smaller" to={StaticRoutes.AdminChapters + "/" + lesson.chapterRelationId}>
-                      {lesson.chapterRelationId}
+                    <ButtonLink color="dark" size="smaller" to={StaticRoutes.AdminChapters + "/" + lesson.chapterRelation.id}>
+                      {lesson.chapterRelation.title}
                     </ButtonLink>
                   </div>
                 )}

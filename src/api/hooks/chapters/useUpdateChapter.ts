@@ -9,13 +9,11 @@ function useUpdateChapter() {
     title?: string
     order?: number
     showInProfile?: boolean
-    lessonIds?: string[]
   }) {
     const response = await appQuery(APIActions.patchChaptersId(id, {
       name: chapter.title,
       order_number: chapter.order,
-      user_topic: chapter.showInProfile,
-      list: chapter.lessonIds
+      user_topic: chapter.showInProfile
     }))
     if (!isResponseOk(response)) return
 

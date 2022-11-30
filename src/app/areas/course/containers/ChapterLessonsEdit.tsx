@@ -56,7 +56,7 @@ function Azd(props: { id: string }) {
   const updateChapter = useUpdateChapter()
 
   function onChange(lessonIds: string[]) {
-    updateChapter(props.id, { lessonIds })
+    // updateChapter(props.id, { lessonIds })
   }
 
   return (

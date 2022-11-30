@@ -166,7 +166,7 @@ export const getLessons = (): QueryAction<Lesson[]> => ({
 /**
  * This can only be done by an administrator.
  */
-export const postLessons = (body: Lesson): QueryAction<Lesson> => ({
+export const postLessons = (body: Partial<Lesson>): QueryAction<Lesson> => ({
   method: "POST",
   endpoint: `/lessons`,
   body,
@@ -213,9 +213,10 @@ export const deleteLessonsId = (id: string): QueryAction => ({
 /**
  * Update information resources. This can only be done by an administrator.
  */
-export const patchLessonsIdResourcesLanguageId = (language_id: string, id: string): QueryAction => ({
+export const patchLessonsIdResourcesLanguageId = (language_id: number, id: string, body: Partial<NonNullable<Lesson["resources"]>[0]>): QueryAction => ({
   method: "PATCH",
   endpoint: `/lessons/${id}/resources/${language_id}`,
+  body,
   operationId: "updateResourcesLesson"
 })
 

@@ -1,5 +1,6 @@
 import useLesson from "api/hooks/lessons/useLesson"
 import useUpdateLesson from "api/hooks/lessons/useUpdateLesson"
+import useUpdateLessonByLanguage from "api/hooks/lessons/useUpdateLessonByLanguage"
 import Headings from "app/layouts/Headings/Headings"
 import Row from "app/layouts/Row/Row"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
@@ -103,7 +104,7 @@ function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
     <>
       <Headings>
         <h3>Shared Content</h3>
-        <p>Choose, at least a tab to start editing.</p>
+        <p>Choose a tab to start editing.</p>
       </Headings>
       <Row>
         {dirty && (
@@ -156,7 +157,7 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
     <>
       <Headings>
         <h3>Language specific Content</h3>
-        <p>Choose, at least a tab to start editing.</p>
+        <p>Choose a tab and a language to start editing.</p>
       </Headings>
       <Row>
         {dirty && (
@@ -164,17 +165,17 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
         )}
         {!dirty && (
           <Selector onChange={setTab}>
-            <option value="solution">asdasd</option>
-            <option value="notes">asdasd</option>
-            <option value="tests">asdasd</option>
-            <option value="defaultCode">asdasd</option>
+            <option value="solution">Solution</option>
+            <option value="notes">Notes</option>
+            <option value="tests">Tests</option>
+            <option value="defaultCode">Default Code</option>
           </Selector>
         )}
         <Selector onChange={setLanguage}>
           {optionsFromEnum(WorkspaceEditorLanguage, false)}
         </Selector>
       </Row>
-      {tab && (
+      {tab && language && (
         // Pass a `key` attribute here to give to component states a depenency.
         <EditorPreview language={EditorLanguage.Markdown} original={content} onSave={onSave} onDirtyChange={setDirty} key={tab} />
       )}
@@ -185,6 +186,7 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
 function LessonProblemEdit(props: { id: string }) {
   const { lesson, isLoading } = useLesson(props.id)
   const updateLesson = useUpdateLesson()
+  const updateLessonByLanguage = useUpdateLessonByLanguage()
 
   if (isLoading) {
     return <LoaderCover />
@@ -199,9 +201,7 @@ function LessonProblemEdit(props: { id: string }) {
   }
 
   async function onLanguageSpecificSave(value: string, contentKey: MultipleContentKey, language: EditorLanguage) {
-    await updateLesson(props.id, {
-      [contentKey]: value
-    })
+    await updateLessonByLanguage(props.id, language, { [contentKey]: value })
   }
 
   return (
