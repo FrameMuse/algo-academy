@@ -99,7 +99,7 @@ function EditorPreview(props: EditorPreviewProps) {
     <div className="editor-preview">
       <Headings>
         <h3>Editor Preview</h3>
-        <p>{dirty ? "Content has changed." : "Content hasn't changed yet."}</p>
+        <p>{dirty ? "Content has been changed." : "Content hasn't been changed yet."}</p>
       </Headings>
       <div className="editor-preview__tools">
         <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>

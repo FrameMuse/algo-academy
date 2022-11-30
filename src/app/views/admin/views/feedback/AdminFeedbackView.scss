@@ -1,0 +1,11 @@
+@import "~assets/scss/bundle.scss";
+
+.admin-feedback {}
+
+.admin-feedback__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5em 1em;
+
+  width: 100%;
+}

@@ -73,8 +73,8 @@ function Azd(props: AzdProps) {
         <h4>Lessons Picker</h4>
         <p>
           <List icon="chevron-right">
-            <li>There is a search, it will highlight and filter.</li>
-            <li>Picked lessons at the top are ones that already in chapter.</li>
+            <li>The Search panel will highlight discovered and filter undiscovered lessons.</li>
+            <li>Highlighted lessons at the top are ones that already in the chapter.</li>
             <li>Unchosen ones are lessons which are not used anywhere yet.</li>
           </List>
         </p>

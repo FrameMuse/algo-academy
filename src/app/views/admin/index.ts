@@ -7,3 +7,5 @@ export { default as AdminLessonsEditView } from "./views/lessons/AdminLessonsEdi
 export { default as AdminChaptersView } from "./views/chapters/AdminChaptersView"
 export { default as AdminChaptersNewView } from "./views/chapters/AdminChaptersNewView"
 export { default as AdminChaptersEditView } from "./views/chapters/AdminChaptersEditView"
+
+export { default as AdminFeedbackView } from "./views/feedback/AdminFeedbackView"
