@@ -1,4 +1,4 @@
-import useChaptersProgress from "api/hooks/chapters/useChaptersProgress"
+import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Progress from "utils/transform/progress"
@@ -8,8 +8,8 @@ import CourseProgress from "../components/CourseProgress/CourseProgress"
 interface CourseProgressContainerProps { }
 
 function CourseProgressContainer(props: CourseProgressContainerProps) {
-  const { chaptersProgress: chaptersProgress, isLoading } = useChaptersProgress()
-
+  const { chaptersWithProgress: chaptersProgress, isLoading } = useChaptersWithProgress()
+  console.log(chaptersProgress)
   if (isLoading) {
     return <LoaderCover />
   }

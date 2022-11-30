@@ -43,7 +43,7 @@ function AdminLessonsView() {
               <td>
                 {lesson.chapterRelation && (
                   <div>
-                    <ButtonLink color="dark" size="smaller" to={StaticRoutes.AdminChapters + "/" + lesson.chapterRelation.id}>
+                    <ButtonLink color="dark" size="smaller" to={StaticRoutes.AdminHome + "/" + lesson.chapterRelation.id}>
                       {lesson.chapterRelation.title}
                     </ButtonLink>
                   </div>

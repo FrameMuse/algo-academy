@@ -18,7 +18,7 @@ function CourseContents(props: CourseContentsProps) {
   return (
     <div className="course-contents">
       <div className="course-contents__title">
-        <h4>Course Contents</h4>
+        <h4>Course Chapters</h4>
         <Selector defaultValue={CourseContentsFilter.ShowAll}>
           {optionsFromEnum(CourseContentsFilter)}
         </Selector>

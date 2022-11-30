@@ -4,7 +4,7 @@ import { UserType } from "store/reducers/user/types"
 
 import { AdminLayout } from "./areas/admin"
 import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
-import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView } from "./views/admin"
+import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView } from "./views/admin"
 import { AboutUsView } from "./views/base/about-us"
 import { ContactUsView } from "./views/base/contact-us"
 import FullCourseView from "./views/base/full-course/FullCourseView"
@@ -47,6 +47,7 @@ function AppRoutes() {
       <Route element={<AdminLayout />}>
         {isAdmin && (
           <>
+            <Route path={StaticRoutes.AdminHome} element={<AdminHomeView />} />
             <Route path={StaticRoutes.AdminChapters}>
               <Route index element={<AdminChaptersView />} />
 
@@ -84,6 +85,7 @@ export enum StaticRoutes {
 
   UIShowcase = "/ui-showcase",
 
+  AdminHome = "/admin",
   AdminChapters = "/admin/chapters",
   AdminLessons = "/admin/lessons",
 }

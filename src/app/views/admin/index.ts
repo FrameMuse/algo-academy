@@ -1,3 +1,5 @@
+export { default as AdminHomeView } from "./views/home/AdminHomeView"
+
 export { default as AdminLessonsView } from "./views/lessons/AdminLessonsView"
 export { default as AdminLessonsNewView } from "./views/lessons/AdminLessonsNewView"
 export { default as AdminLessonsEditView } from "./views/lessons/AdminLessonsEditView"
