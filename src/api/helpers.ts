@@ -51,4 +51,8 @@ export function buildActionURL<T>(action: QueryAction<T>): URL {
   return url
 }
 
+export function getActionQueryKey(action: QueryAction): string[] {
+  return [action.endpoint, action.operationId]
+}
+
 export { }

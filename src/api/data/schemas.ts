@@ -59,8 +59,11 @@ export interface User {
   date_of_creation: string
 }
 
-export interface Lesson {
+export interface ResponseLesson {
   id: string
+}
+
+export interface Lesson {
   name: string
   type: string
   statement: string | null
@@ -68,17 +71,19 @@ export interface Lesson {
   hints: string | null
   status: string
   resources: {
-    solution: string
+    solution: string | null
     language: number
     notes: string
     tests: string
     default_code: string
   }[] | null
-  used_in: string[]
+  used_in: {
+    chapter_id: string
+    chapter_name: string
+  } | null
 }
 
 export interface Chapter {
-  id: string
   name: string
   order_number: number
   user_topic: boolean

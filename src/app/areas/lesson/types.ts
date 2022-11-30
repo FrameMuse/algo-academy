@@ -8,9 +8,11 @@ export enum LessonType {
   Learning, Practice
 }
 
+
+/**
+ * This is related to language specific content. 
+ */
 export interface LessonMultipleContent {
-  // statement: string
-  // hints: string
   solution: string
   language: EditorLanguage
   notes: string

@@ -1,11 +1,11 @@
 import { useQuery, UseQueryOptions } from "@tanstack/react-query"
 
 import appQuery from "./appQuery"
-import { QueryClientError } from "./helpers"
+import { getActionQueryKey, QueryClientError } from "./helpers"
 import { QueryAction, QueryResponse } from "./types"
 
 function useAppQuery<T>(action: QueryAction<T>, options?: Omit<UseQueryOptions<QueryResponse<T>>, "queryFn" | "queryKey">) {
-  return useQuery<QueryResponse<T>>([action.endpoint, action.operationId], {
+  return useQuery<QueryResponse<T>>(getActionQueryKey(action), {
     cacheTime: Number(process.env.REACT_APP_API_CACHE_TIME),
     refetchOnWindowFocus: () => false,
     retry(_failureCount, error) {

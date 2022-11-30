@@ -2,6 +2,7 @@ import "./ProblemView.scss"
 
 import useLesson from "api/hooks/lessons/useLesson"
 import { formatAppTitle } from "app/App"
+import { StaticRoutes } from "app/AppRoutes"
 import { LessonStatusSelector } from "app/areas/lesson"
 import { Templates, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
@@ -11,6 +12,7 @@ import TabLinks from "app/layouts/TabLinks/TabLinks"
 import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
 import Button from "app/ui/kit/Button/Button"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
+import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Code from "app/ui/kit/Code/Code"
 import Icon from "app/ui/kit/Icon/Icon"
 import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
@@ -108,7 +110,8 @@ function ProblemLeftSection(props: { id: string }) {
           <TabLink to={TabRoutes.Problem}>Problem Statment</TabLink>
           <TabLink to={TabRoutes.Hints}>Hints</TabLink>
           <TabLink to={TabRoutes.Solution}>Solution</TabLink>
-          <ButtonIcon name="home" color="gray" size="smaller" squared ariaLabel="go home" />
+
+          <ButtonLink iconLeft="arrow-left" iconRight="" color="gray" size="smaller" squared to={StaticRoutes.FullCourse}>To course</ButtonLink>
         </TabLinks>
 
         <TabRoute path={TabRoutes.Problem}>

@@ -22,7 +22,7 @@ interface EditorPreviewProps {
   language?: EditorLanguage
   original?: string
   onSave?(value: string): void | Promise<void>
-  onDirtyUpdate?(dirty: boolean): void
+  onDirtyChange?(dirty: boolean): void
 }
 
 
@@ -44,7 +44,7 @@ function EditorPreview(props: EditorPreviewProps) {
     setValue(value)
     setDirty(value !== props.original)
 
-    props.onDirtyUpdate?.(value !== props.original)
+    props.onDirtyChange?.(value !== props.original)
   }
 
   async function onSave() {
@@ -52,7 +52,7 @@ function EditorPreview(props: EditorPreviewProps) {
 
     await props.onSave?.(value)
   }
-  async function onReset() {
+  async function onCancel() {
     if (!await confirmAction()) return
 
     if (props.original == null) return
@@ -104,7 +104,7 @@ function EditorPreview(props: EditorPreviewProps) {
       <div className="editor-preview__tools">
         <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
           <Button await onClick={onSave}>Save</Button>
-          <Button onClick={onReset}>Reset</Button>
+          <Button onClick={onCancel}>Cancel</Button>
           <Button color={diffMode ? "blue" : "gray"} onClick={() => setDiffMode(!diffMode)}>Diff</Button>
         </ButtonGroup>
         <Row>

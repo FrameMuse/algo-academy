@@ -131,14 +131,14 @@ export const patchUsersMeAvatar = (body: Partial<{
 })
 
 /**
- * Update avatar. Only for authorized users.
+ * Update progress. Only for authorized users.
  */
-export const patchUsersMeProgress = (body: {
+export const patchUsersMeProgress = (body: Partial<{
   chapter_id: string
   chapter_name: string
   lesson_id: string
   status: string
-}): QueryAction => ({
+}>): QueryAction => ({
   method: "PATCH",
   endpoint: `/users/me/progress`,
   body,
@@ -166,7 +166,7 @@ export const getLessons = (): QueryAction<Lesson[]> => ({
 /**
  * This can only be done by an administrator.
  */
-export const postLessons = (body: Partial<Lesson>): QueryAction<Lesson> => ({
+export const postLessons = (body: Lesson): QueryAction<Lesson> => ({
   method: "POST",
   endpoint: `/lessons`,
   body,
@@ -194,7 +194,7 @@ export const getLessonsId = (id: string): QueryAction<Lesson> => ({
 /**
  * Update information about lesson. This can only be done by an administrator.
  */
-export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction => ({
+export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<Lesson> => ({
   method: "PATCH",
   endpoint: `/lessons/${id}`,
   body,
@@ -208,6 +208,15 @@ export const deleteLessonsId = (id: string): QueryAction => ({
   method: "DELETE",
   endpoint: `/lessons/${id}`,
   operationId: "deleteLesson"
+})
+
+/**
+ * Update information resources. This can only be done by an administrator.
+ */
+export const patchLessonsIdResourcesLanguageId = (language_id: string, id: string): QueryAction => ({
+  method: "PATCH",
+  endpoint: `/lessons/${id}/resources/${language_id}`,
+  operationId: "updateResourcesLesson"
 })
 
 /**
@@ -251,7 +260,8 @@ export const patchChaptersId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
-  list: string[]
+  learning_list: string[] | null
+  practice_list: string[] | null
 }>): QueryAction<Chapter> => ({
   method: "PATCH",
   endpoint: `/chapters/${id}`,
