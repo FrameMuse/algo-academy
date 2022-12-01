@@ -29,10 +29,6 @@ class FileTransform {
     return formData
   }
 
-  // static asd(urlDataBase64: string) {
-
-  // }
-
   /**
    * https://stackoverflow.com/a/61321728/12468111
    */

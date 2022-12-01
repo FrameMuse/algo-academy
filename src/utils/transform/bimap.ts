@@ -28,4 +28,13 @@ class BiMap<A1 extends keyof never, A2 extends keyof never> {
   }
 }
 
+
+// function createKeysBiMap<I extends Record<string, unknown>>(map: Record<string, keyof I>) {
+//   return 1 as never
+// }
+
+// const lessonPreviewBiMap = createKeysBiMap<APISchemas.Chapter["learning_list"][0]>({
+//   title: "name"
+// })
+
 export default BiMap
