@@ -18,16 +18,16 @@ function ProblemsSolvedContainer(props: ProblemsSolvedContainerProps) {
     return <ErrorCover>chapters is null.</ErrorCover>
   }
 
-  const problems = chapters.filter(chapter => chapter.showInProfile)
-  const problemsProgress = problems.map(chapter => {
+  const chaptersShownInProfile = chapters.filter(chapter => chapter.showInProfile)
+  const problems = chaptersShownInProfile.map(chapter => {
     const chapterProgress = chapter.progress || { completed: 0, total: 0 }
     const progress = Progress.subtract(chapterProgress, chapter.learningLessons.length)
 
-    return { ...chapter, progress }
+    return { title: chapter.title, progress }
   })
 
   return (
-    <ProblemsSolved problems={problemsProgress} />
+    <ProblemsSolved problems={problems} />
   )
 }
 

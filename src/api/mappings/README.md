@@ -1,6 +1,6 @@
 # Mappings
 
-Mappings are nothing but helpers, there is always a place for mapping on a spot.
+Mappings are nothing but helpers, just plain transfomers. Note that they **have to** be pure functions. There is always a place for mapping on a spot.
 
 ## Features
 

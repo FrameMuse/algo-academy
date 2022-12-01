@@ -88,7 +88,7 @@ enum TabRoutes {
   Solution,
   Code,
   Tests,
-  Templates,
+  Snippets,
   Notes,
 }
 
@@ -146,7 +146,70 @@ function ProblemRightSection(props: { id: string }) {
   const id = `${props.id}-${workspace.editorLanguage}`
   const resource = lesson.resources.find(resource => (resource.language as unknown as WorkspaceEditorLanguage) === workspace.editorLanguage)
 
-  console.log(id, resource)
+  // const asd = `function dfs(state, res) {
+  //   if (isSolution(state)) {
+  //       // add a copy of the state to the result
+  //       res.push(new Array(state));
+  //       return;
+  //   }
+  //   for (const choice of choices) {
+  //       state.push(choice);
+  //       dfs(state, res);
+  //       state.pop();
+  //   }
+  // }`
+
+  // const monaco = useMonaco()
+  // useEffect(() => {
+  //   if (monaco == null) return
+
+  //   const languages = monaco.languages
+  //   languages.registerCompletionItemProvider("typescript", {
+  //     provideCompletionItems(model, position) {
+  //       const snippets: ISnippet[] = [{
+  //         label: "DFS",
+  //         detail: "Depth-first search",
+  //         description: "Run Time: O(n); Space: O(n)",
+
+  //         insertText: asd
+  //       },
+  //       {
+  //         label: "Depth-first search",
+  //         description: "Run Time: O(n); Space: O(n)",
+
+  //         insertText: asd
+  //       }]
+
+  //       const word = model.getWordUntilPosition(position)
+  //       const range = {
+  //         startLineNumber: position.lineNumber,
+  //         endLineNumber: position.lineNumber,
+  //         startColumn: word.startColumn,
+  //         endColumn: word.endColumn
+  //       }
+
+  //       function mapSnippet(snippet: ISnippet): languages.CompletionItem {
+  //         return {
+  //           kind: languages.CompletionItemKind.Snippet,
+  //           range,
+  //           label: snippet,
+  //           insertText: snippet.insertText
+  //         }
+  //       }
+
+  //       return { suggestions: snippets.map(mapSnippet) }
+  //     },
+  //   })
+  // }, [monaco])
+
+  // interface ISnippet {
+  //   label: string
+  //   insertText: string
+  //   detail?: string
+  //   description?: string
+  // }
+
+
 
   return (
     <div className="problem-layout__section">
@@ -154,18 +217,18 @@ function ProblemRightSection(props: { id: string }) {
         <TabLinks>
           <TabLink to={TabRoutes.Code}>Code</TabLink>
           <TabLink to={TabRoutes.Tests}>Tests</TabLink>
-          <TabLink to={TabRoutes.Templates}>Templates</TabLink>
+          <TabLink to={TabRoutes.Snippets}>Snippets</TabLink>
           <TabLink to={TabRoutes.Notes}>Notes</TabLink>
 
           <Button iconLeft="gear" color="gray" size="smaller" squared onClick={() => Modal.open(PopupWorkspaceSettings)}>Settings</Button>
         </TabLinks>
 
         <TabRoute path={TabRoutes.Code}>
-          <WorkspaceEditor draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
+          <WorkspaceEditor options={{ quickSuggestions: true }} draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
           <WorkspaceCodeExecution draftId={id} lessonId={props.id} />
         </TabRoute>
 
-        <TabRoute path={TabRoutes.Templates}>
+        <TabRoute path={TabRoutes.Snippets}>
           <Templates templates={[{ name: "DFS", content: EDITOR_DEFAULT_VALUE, runTime: "O(n)", space: "O(n)" }]} />
         </TabRoute>
 

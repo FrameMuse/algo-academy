@@ -1,43 +1,49 @@
+import useSubmitFeedback from "api/hooks/feedbacks/useSubmitFeedback"
 import { APP_TITLE } from "app/App"
-import Box from "app/layouts/Box/Box"
+import Column from "app/layouts/Column/Column"
 import Headings from "app/layouts/Headings/Headings"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
-import Row from "app/layouts/Row/Row"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
-import Form from "app/ui/kit/Form/Form"
 import Textarea from "app/ui/kit/Textarea/Textarea"
 import Callout from "app/ui/synthetic/Callout/Callout"
-import { FormEvent } from "react"
+import { useState } from "react"
 import { Helmet } from "react-helmet"
 import { Modal, useModalContext } from "react-modal-global"
+import { useAppSelector } from "store/hooks"
+import { inputValue } from "utils/common"
 
 function ContactUsView() {
-  async function onSubmit(state: unknown, event: FormEvent<HTMLFormElement>) {
-    const target = event.currentTarget
+  const user = useAppSelector(state => state.user)
+  const submitFeedback = useSubmitFeedback()
 
-    await Modal.open(PopupSentMessage)
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
 
-    target.reset()
+  async function onSubmit() {
+    await submitFeedback({ title, content })
+
+    Modal.open(PopupSentMessage)
   }
 
   return (
-    <section className="page-section">
+    <section className="page-section" style={{ maxWidth: "40em" }}>
       <Helmet>
         <title>{APP_TITLE + " | " + "Contact Us"}</title>
       </Helmet>
-      <h1>Contact Us</h1>
-      <Form onSubmit={onSubmit}>
-        <Box style={{ justifyItems: "stretch", width: "43em", margin: "auto" }}>
-          <Row>
-            <Field autoComplete="given-name" placeholder="Darryl" required>First Name</Field>
-            <Field autoComplete="family-name" placeholder="Garrison" required>Last Name</Field>
-          </Row>
-          <Field type="email" autoComplete="email" placeholder="email@example.com" required>E-mail Address</Field>
-          <Textarea placeholder="I'd like to say that..." rows={8} required>Message</Textarea>
-          <Button type="submit">Send Message</Button>
-        </Box>
-      </Form>
+      <Column>
+        <h1>Contact Us</h1>
+        <Column>
+          <div style={{ margin: "0 auto" }}>
+            {!user.signed && (
+              <Callout>{"You're"} not logged in, this will be submited anonymously.</Callout>
+            )}
+          </div>
+          <Field placeholder="e.g. Workspace issue" onChange={inputValue(setTitle)}>Title</Field>
+          <Textarea rows={8} placeholder="e.g. The editor isn't working" onChange={inputValue(setContent)}>Content</Textarea>
+          <Button await onClick={onSubmit}>Submit</Button>
+        </Column>
+      </Column>
     </section>
   )
 }

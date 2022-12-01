@@ -1,7 +1,7 @@
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
 export enum LessonStatus {
-  Complete, Incomplete, NeedsReviews
+  Incomplete, NeedsReviews, Complete
 }
 
 export enum LessonType {

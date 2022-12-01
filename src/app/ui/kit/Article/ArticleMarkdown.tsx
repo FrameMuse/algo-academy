@@ -1,3 +1,4 @@
+import ErrorBoundary from "app/containers/ErrorBoundary/ErrorBoundary"
 import Video from "app/ui/kit/Video/Video"
 import { lazy, Suspense } from "react"
 import { useAsync } from "react-use"
@@ -21,19 +22,21 @@ function ArticleMarkdown(props: ArticleMarkdownProps) {
 
   return (
     <Article fontSize={props.fontSize}>
-      <Suspense fallback={<pre>{props.content}</pre>}>
-        <ReactMarkdownLazy
-          rehypePlugins={rehypeRaw && [rehypeRaw.default]}
-          components={{
-            blockquote: BlockQuote,
-            video: Video,
-            details: detailsProps => <Details summary={detailsProps.title} defaultExpanded={detailsProps.open}>{detailsProps.children}</Details>,
-            code: codeProps => codeProps.inline ? <CodeInline>{codeProps.children}</CodeInline> : <Code lang={codeProps.className?.replace("language-", "")}>{codeProps.children}</Code>
-          }}
-        >
-          {props.content}
-        </ReactMarkdownLazy>
-      </Suspense>
+      <ErrorBoundary fallback={<pre>{props.content}</pre>}>
+        <Suspense fallback={<pre>{props.content}</pre>}>
+          <ReactMarkdownLazy
+            rehypePlugins={rehypeRaw && [rehypeRaw.default]}
+            components={{
+              blockquote: BlockQuote,
+              video: Video,
+              details: detailsProps => <Details summary={detailsProps.title} defaultExpanded={detailsProps.open}>{detailsProps.children}</Details>,
+              code: codeProps => codeProps.inline ? <CodeInline>{codeProps.children}</CodeInline> : <Code lang={codeProps.className?.replace("language-", "")}>{codeProps.children}</Code>
+            }}
+          >
+            {props.content}
+          </ReactMarkdownLazy>
+        </Suspense>
+      </ErrorBoundary>
     </Article>
   )
 }

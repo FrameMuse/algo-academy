@@ -16,11 +16,12 @@ function useChapter(id: string) {
   function findLessonStatus(id: string): LessonStatus {
     if (chapterProgress) {
       const lesson = chapterProgress.lessons.find(lesson => lesson.id === id)
-      return lesson?.status || LessonStatus.Incomplete
+      return lesson?.status ?? LessonStatus.Incomplete
     }
 
     return LessonStatus.Incomplete
   }
+
   return {
     chapter: chapter && {
       ...chapter,

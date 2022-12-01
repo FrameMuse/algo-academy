@@ -168,7 +168,7 @@ function LessonProblemEdit(props: { id: string }) {
   }
 
   if (lesson == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
+    return <ErrorCover>Lesson is null.</ErrorCover>
   }
 
   async function onSharedSave(value: string, contentKey: SharedContentKey) {

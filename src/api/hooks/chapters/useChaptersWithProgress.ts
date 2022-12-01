@@ -1,4 +1,3 @@
-
 import { LessonStatus } from "app/areas/lesson/types"
 import { ProgressEntry } from "utils/transform/progress"
 
@@ -13,13 +12,9 @@ function useChaptersWithProgress() {
   const chaptersWithProgress = chapters?.map(chapterA => {
     const chapterProgress = chaptersProgress?.find(chapterB => chapterA.id === chapterB.id)
 
-    const progress: ProgressEntry | undefined = chapterProgress && {
-      completed: chapterProgress.lessons.filter(lesson => lesson.status === LessonStatus.Complete).length,
-      total: chapterProgress.lessons.length
-    }
-
-    const progressDefault: ProgressEntry = {
-      completed: 0,
+    const completed = chapterProgress?.lessons.filter(lesson => lesson.status === LessonStatus.Complete).length
+    const progress: ProgressEntry = {
+      completed: completed || 0,
       total: chapterA.learningLessons.length + chapterA.practiceLessons.length
     }
 
@@ -34,7 +29,7 @@ function useChaptersWithProgress() {
 
     return {
       ...chapterA,
-      progress: progress || progressDefault,
+      progress,
 
       learningLessons: chapterA.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
       practiceLessons: chapterA.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
