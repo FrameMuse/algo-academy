@@ -1,4 +1,4 @@
-import useUserPurcaseHistory from "api/hooks/useUserPurcaseHistory"
+import useUserPurcaseHistory from "api/hooks/user/useUserPurcaseHistory"
 import Box from "app/layouts/Box/Box"
 import Table from "app/ui/kit/Table/Table"
 import { humanizeDate } from "utils/transform/date"

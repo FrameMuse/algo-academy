@@ -1,6 +1,6 @@
 import "./ProfileView.scss"
 
-import useUserResetData from "api/hooks/useUserResetData"
+import useUserResetData from "api/hooks/user/useUserResetData"
 import { APP_TITLE } from "app/App"
 import { UserGeneralInfo, UserHasNoPlanNotice, UserProblemsSolved, UserPurchaseHistory } from "app/areas/user"
 import Box from "app/layouts/Box/Box"

@@ -1,4 +1,4 @@
-import useUserGetAuthLink from "api/hooks/useUserGetAuthLink"
+import useUserGetAuthLink from "api/hooks/user/useUserGetAuthLink"
 import Headings from "app/layouts/Headings/Headings"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 

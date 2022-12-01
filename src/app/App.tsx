@@ -4,7 +4,7 @@ import "react-toastify/scss/main.scss"
 
 import { QueryClientProvider } from "@tanstack/react-query"
 import queryClient from "api/client"
-import useUser from "api/hooks/useUser"
+import useUser from "api/hooks/user/useUser"
 import { ReactNode, StrictMode, Suspense, useEffect } from "react"
 import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"

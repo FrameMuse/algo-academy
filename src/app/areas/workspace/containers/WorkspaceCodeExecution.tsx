@@ -1,4 +1,4 @@
-import useRunCode from "api/hooks/useRunCode"
+import useRunCode from "api/hooks/user/useRunCode"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "store/hooks"
