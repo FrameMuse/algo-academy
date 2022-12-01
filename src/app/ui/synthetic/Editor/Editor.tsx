@@ -11,7 +11,10 @@ export const EDITOR_DEFAULT_THEME = EditorTheme.Light
 export const EDITOR_DEFAULT_OPTIONS: EditorProps["options"] = {
   fontFamily: "JetBrains Mono, Roboto Mono, Source Code Pro, Fira Code Retina, Fira Code",
   fontSize: 13,
-  fontLigatures: true
+  fontLigatures: true,
+
+  tabSize: 2,
+  wordWrap: "bounded"
 }
 
 function Editor(props: EditorProps) {

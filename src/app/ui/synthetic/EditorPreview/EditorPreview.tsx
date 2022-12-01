@@ -72,7 +72,6 @@ function EditorPreview(props: EditorPreviewProps) {
     <Editor
       height="100%"
       theme={editorTheme}
-      options={{ tabSize: 2 }}
 
       defaultLanguage={props.language}
       language={props.language}
