@@ -1,11 +1,9 @@
 import "./CourseContents.scss"
 
-import { Dispatch, ReactNode } from "react"
+import { ReactNode } from "react"
 
-import { CourseContentsFilter } from "../../types"
 
 interface CourseContentsProps {
-  onFilterChange?: Dispatch<CourseContentsFilter>
   children: ReactNode
 }
 

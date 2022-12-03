@@ -27,7 +27,6 @@ function Button(props: ButtonProps) {
     if (props.await) {
       setPending(true)
       await props.onClick?.(event)
-      console.log("asd")
       setPending(false)
     } else {
       props.onClick?.(event)

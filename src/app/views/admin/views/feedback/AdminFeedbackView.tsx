@@ -4,19 +4,9 @@ import useFeedbacks from "api/hooks/feedbacks/useFeedbacks"
 import { Review } from "app/areas/base"
 import Box from "app/layouts/Box/Box"
 import Headings from "app/layouts/Headings/Headings"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 
 function AdminFeedbackView() {
-  const { feedbacks, isLoading } = useFeedbacks()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (feedbacks == null) {
-    return <ErrorCover>Feedbacks is null.</ErrorCover>
-  }
+  const feedbacks = useFeedbacks()
 
   return (
     <Box className="admin-feedback">

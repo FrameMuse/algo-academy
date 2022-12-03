@@ -237,8 +237,7 @@ export const postChapters = (body: {
   name: string
   order_number: number
   user_topic: boolean
-  learning_list?: string[] | null
-  practice_list?: string[] | null
+  list?: string[] | null
 }): QueryAction<Chapter> => ({
   method: "POST",
   endpoint: `/chapters`,
@@ -262,8 +261,7 @@ export const patchChaptersId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
-  learning_list: string[] | null
-  practice_list: string[] | null
+  list: string[] | null
 }>): QueryAction<Chapter> => ({
   method: "PATCH",
   endpoint: `/chapters/${id}`,

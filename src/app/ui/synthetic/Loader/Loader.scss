@@ -40,7 +40,10 @@
 	justify-content: center;
 
 	flex: 1;
-	padding: 10em 5em;
+
+	margin: auto;
+	padding: 5em;
+
 
 	&--absolute {
 		position: absolute;
@@ -55,9 +58,6 @@
 	&--dimmed {
 		background: rgba(black, 0.75);
 	}
-
-	padding: 1em;
-	margin: auto;
 
 	@include Mobile {}
 }

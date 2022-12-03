@@ -42,9 +42,9 @@ export function formatAppTitle(...titles: (string | null | undefined)[]): string
 function App() {
   return (
     <StrictMode>
-      <AppProviders>
-        <Suspense fallback="Loading...">
-          <ErrorBoundary fallback={ErrorFallback}>
+      <Suspense fallback="Loading...">
+        <ErrorBoundary fallback={ErrorFallback}>
+          <AppProviders>
             <AppRoutes />
             <FetchAndSupplyUser />
 
@@ -53,9 +53,9 @@ function App() {
             <ToastContainer {...DEFAULT_TOAST_CONFIG} />
 
             <DevNavigation />
-          </ErrorBoundary>
-        </Suspense>
-      </AppProviders>
+          </AppProviders>
+        </ErrorBoundary>
+      </Suspense>
     </StrictMode>
   )
 }

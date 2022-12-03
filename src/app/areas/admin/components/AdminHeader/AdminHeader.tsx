@@ -13,6 +13,7 @@ function AdminHeader() {
       <Logo title="<Admin />" to="/admin" />
       <nav>
         <Buttons>
+          <ButtonLink color="gray" size="small" squared to={StaticRoutes.Home}>Back to site</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminHome}>Home</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminChapters}>Chapters</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>

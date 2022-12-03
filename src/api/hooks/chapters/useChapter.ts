@@ -23,8 +23,9 @@ function useChapter(id: string) {
 
   return {
     ...chapter,
-    learningLessons: chapter.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-    practiceLessons: chapter.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
+    lessons: chapter.lessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
+    // learningLessons: chapter.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
+    // practiceLessons: chapter.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
   }
 }
 

@@ -29,14 +29,12 @@ function ChapterLessonsEdit(props: ChapterLessonsEditProps) {
     await updateChapterLessons(props.id, lessonType, lessonIds)
   }
 
-  const lessons = lessonType === LessonType.Learning ? chapter.learningLessons : chapter.practiceLessons
-
   return (
     <>
       <Selector label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
         {optionsFromEnum(LessonType)}
       </Selector>
-      <Azd defaultLessons={lessons} lessonType={lessonType} onSave={onSave} />
+      <Azd defaultLessons={chapter.lessons} lessonType={lessonType} onSave={onSave} />
     </>
   )
 }

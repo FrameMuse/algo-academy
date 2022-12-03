@@ -23,6 +23,12 @@ interface QueryBoundaryProps {
   children: ReactNode
 }
 
+/**
+ * Provides:
+ * - Error boundary
+ * - Suspense boundary
+ * - User access level boundary
+ */
 function QueryBoundary(props: QueryBoundaryProps) {
   const errorFallback: ErrorBoundaryProps["fallback"] = (reset, error?) => (
     <ErrorCover>

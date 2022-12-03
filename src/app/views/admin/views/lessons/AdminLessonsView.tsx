@@ -5,20 +5,10 @@ import Box from "app/layouts/Box/Box"
 import Buttons from "app/layouts/Buttons/Buttons"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Table from "app/ui/kit/Table/Table"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import _ from "lodash"
 
 function AdminLessonsView() {
-  const { lessons, isLoading } = useLessons()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lessons == null) {
-    return <ErrorCover>Lesson is null.</ErrorCover>
-  }
+  const lessons = useLessons()
 
   return (
     <Box>

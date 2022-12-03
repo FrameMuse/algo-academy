@@ -1,4 +1,5 @@
 import { ChapterInfoEdit, ChapterLessonsEdit } from "app/areas/course"
+import QueryBoundary from "app/containers/QueryBoundary"
 import Box from "app/layouts/Box/Box"
 import Headings from "app/layouts/Headings/Headings"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
@@ -15,18 +16,20 @@ function AdminChaptersEditView() {
       <Headings>
         <h2>Chapter</h2>
       </Headings>
-      <TabRouter defaultPath="general">
-        <TabLinks>
-          <TabLink to="general">General</TabLink>
-          <TabLink to="lessons">Lessons</TabLink>
-        </TabLinks>
-        <TabRoute path="general">
-          <ChapterInfoEdit id={chapterId} />
-        </TabRoute>
-        <TabRoute path="lessons">
-          <ChapterLessonsEdit id={chapterId} />
-        </TabRoute>
-      </TabRouter>
+      <QueryBoundary>
+        <TabRouter defaultPath="general">
+          <TabLinks>
+            <TabLink to="general">General</TabLink>
+            <TabLink to="lessons">Lessons</TabLink>
+          </TabLinks>
+          <TabRoute path="general">
+            <ChapterInfoEdit id={chapterId} />
+          </TabRoute>
+          <TabRoute path="lessons">
+            <ChapterLessonsEdit id={chapterId} />
+          </TabRoute>
+        </TabRouter>
+      </QueryBoundary>
     </Box>
   )
 }

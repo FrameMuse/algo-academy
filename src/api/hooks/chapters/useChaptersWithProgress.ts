@@ -1,4 +1,4 @@
-import { LessonStatus } from "app/areas/lesson/types"
+import { LessonStatus, LessonType } from "app/areas/lesson/types"
 import { ProgressEntry } from "utils/transform/progress"
 
 import useChapters from "./useChapters"
@@ -14,7 +14,7 @@ function useChaptersWithProgress() {
     const completed = chapterProgress?.lessons.filter(lesson => lesson.status === LessonStatus.Complete).length
     const progress: ProgressEntry = {
       completed: completed || 0,
-      total: chapterA.learningLessons.length + chapterA.practiceLessons.length
+      total: chapterA.lessons.length
     }
 
     function findLessonStatus(id: string): LessonStatus {
@@ -26,12 +26,16 @@ function useChaptersWithProgress() {
       return LessonStatus.Incomplete
     }
 
+    const lessons = chapterA.lessons.map(lesson => ({
+      ...lesson,
+      status: findLessonStatus(lesson.id)
+    }))
+
     return {
       ...chapterA,
       progress,
-
-      learningLessons: chapterA.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-      practiceLessons: chapterA.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
+      learningLessons: lessons.filter(lesson => lesson.type === LessonType.Learning),
+      practiceLessons: lessons.filter(lesson => lesson.type === LessonType.Practice),
     }
   })
 

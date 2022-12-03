@@ -8,10 +8,8 @@ interface CourseContentsContainerProps { }
 function CourseContentsContainer(props: CourseContentsContainerProps) {
   const chapters = useChaptersWithProgress()
 
-  function onFilterChange() { }
-
   return (
-    <CourseContents onFilterChange={onFilterChange}>
+    <CourseContents>
       {chapters.map((chapter, index) => (
         <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded key={index}>
           {chapter.learningLessons.length > 0 && (

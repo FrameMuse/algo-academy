@@ -94,12 +94,9 @@ export interface Chapter {
   name: string
   order_number: number
   user_topic: boolean
-  learning_list: {
+  list: {
     id: string
-    name: string
-  }[]
-  practice_list: {
-    id: string
+    type: string
     name: string
   }[]
 }

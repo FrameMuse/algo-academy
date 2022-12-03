@@ -1,4 +1,5 @@
 import { LessonContentEdit, LessonInfoEdit } from "app/areas/lesson"
+import QueryBoundary from "app/containers/QueryBoundary"
 import Box from "app/layouts/Box/Box"
 import Headings from "app/layouts/Headings/Headings"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
@@ -14,19 +15,21 @@ export function AdminLessonsEditView() {
       <Headings>
         <h2>Lesson #{lessonId}</h2>
       </Headings>
-      <TabRouter defaultPath="general">
-        <TabLinks>
-          <TabLink to="general">General</TabLink>
-          <TabLink to="content">Content</TabLink>
-        </TabLinks>
+      <QueryBoundary>
+        <TabRouter defaultPath="general">
+          <TabLinks>
+            <TabLink to="general">General</TabLink>
+            <TabLink to="content">Content</TabLink>
+          </TabLinks>
 
-        <TabRoute path="general">
-          <LessonInfoEdit id={lessonId} />
-        </TabRoute>
-        <TabRoute path="content">
-          <LessonContentEdit id={lessonId} />
-        </TabRoute>
-      </TabRouter>
+          <TabRoute path="general">
+            <LessonInfoEdit id={lessonId} />
+          </TabRoute>
+          <TabRoute path="content">
+            <LessonContentEdit id={lessonId} />
+          </TabRoute>
+        </TabRouter>
+      </QueryBoundary>
     </Box>
   )
 }

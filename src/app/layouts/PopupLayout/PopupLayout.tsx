@@ -1,5 +1,6 @@
 import "./PopupLayout.scss"
 
+import QueryBoundary from "app/containers/QueryBoundary"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import { ReactNode, useEffect, useRef } from "react"
 import ReactGA from "react-ga4"
@@ -31,7 +32,11 @@ function PopupLayout(props: PopupLayoutProps) {
       <div className="popup-layout__close">
         <ButtonIcon name="cross" size="small" color="white" onClick={modal.close} ariaLabel="Close modal" />
       </div>
-      <div className="popup-layout__container">{props.children}</div>
+      <div className="popup-layout__container">
+        <QueryBoundary>
+          {props.children}
+        </QueryBoundary>
+      </div>
     </div>
   )
 }

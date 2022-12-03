@@ -1,3 +1,4 @@
+import QueryBoundary from "app/containers/QueryBoundary"
 import { ReactNode } from "react"
 import { Outlet } from "react-router-dom"
 
@@ -14,7 +15,9 @@ function BaseLayout(props: BaseLayout) {
     <>
       <Header />
       <main>
-        {props.children || <Outlet />}
+        <QueryBoundary>
+          {props.children || <Outlet />}
+        </QueryBoundary>
       </main>
       <Footer />
     </>

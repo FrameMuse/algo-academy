@@ -3,11 +3,11 @@ import { APIMappings } from "api/mappings"
 import useAppQuery from "api/useAppQuery"
 
 function useLessons() {
-  const { data, isLoading } = useAppQuery(APIActions.getLessons())
+  const { data } = useAppQuery(APIActions.getLessons())
 
   const lessons = data?.payload?.map(APIMappings.mapLesson)
 
-  return { lessons, isLoading }
+  return lessons
 }
 
 export default useLessons

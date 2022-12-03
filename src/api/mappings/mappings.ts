@@ -91,7 +91,7 @@ export function mapChapter(schema: APISchemas.Chapter) {
 function mapLessonPreview(schema: APISchemas.Chapter["list"][0]) {
   return {
     id: schema.id,
-    type: lessonType.forward()
+    type: lessonType.forward(schema.type),
     title: schema.name
   }
 }
