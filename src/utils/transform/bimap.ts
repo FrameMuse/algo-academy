@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import { APISchemas } from "api/data"
 
 /**
  * This class represent keys and values swapping.
@@ -13,21 +12,21 @@ import { APISchemas } from "api/data"
  * - https://www.npmjs.com/package/bi-directional-map
  */
 class BiMap<A1 extends keyof never, A2 extends keyof never> {
-  private forwardMap: Record<A1, A2>
-  private backwardMap: Record<A2, A1>
+  protected forwardMap: Record<A1, A2>
+  protected backwardMap: Record<A2, A1>
 
-  constructor(mapping: Record<A1, A2>) {
-    const mappingKeys = Object.keys(mapping) as A1[]
+  constructor(map: Record<A1, A2>) {
+    const mapKeys = Object.keys(map) as A1[]
 
-    this.forwardMap = { ...mapping }
-    this.backwardMap = mappingKeys.reduce((result, key) => ({ ...result, [mapping[key]]: key }), {} as Record<A2, A1>)
+    this.forwardMap = { ...map }
+    this.backwardMap = mapKeys.reduce((result, key) => ({ ...result, [map[key]]: key }), {} as Record<A2, A1>)
   }
 
-  public mapForward(key: A1): A2 {
+  public value(key: A1): A2 {
     return this.forwardMap[key]
   }
 
-  public mapBackward(key: A2): A1 {
+  public key(key: A2): A1 {
     return this.backwardMap[key]
   }
 }
@@ -37,38 +36,34 @@ class BiMap<A1 extends keyof never, A2 extends keyof never> {
 
 
 
-type SnakeToCamelCase<S> = S extends `${infer Start}_${infer Rest}` ? `${Start}${Capitalize<SnakeToCamelCase<Rest>>}` : S
-// type SnakeToCamelCase__TEST__ = SnakeToCamelCase<"my_account_profile"> // myAccountProfile
+// type SnakeToCamelCase<S> = S extends `${infer Start}_${infer Rest}` ? `${Start}${Capitalize<SnakeToCamelCase<Rest>>}` : S
+// // type SnakeToCamelCase__TEST__ = SnakeToCamelCase<"my_account_profile"> // myAccountProfile
 
-class BiMapKeys<I = {}> {
-  private forwardMap: {
-    [K in keyof I]?: SnakeToCamelCase<K> | string
-  }
-  // private backwardMap: Record<A2, A1>
+// class BiMapKeys<O, F extends { [K in keyof O]?: FK } = {}, FK extends keyof never = keyof never> {
+//   private forwardMap: F
+//   // private backwardMap: Record<A2, A1>
 
-  constructor(map: {
-    [K in keyof I]?: SnakeToCamelCase<K> | (string & {})
-  }) {
-    this.forwardMap = map
-  }
+//   constructor(map: F) {
+//     this.forwardMap = map
+//   }
 
-  public mapForward<LI extends Partial<I>>(i: LI): {
-    [K in (keyof LI) as (LI[K] extends never ? never : K)]: LI[K]
-  } {
-    return i as never
-  }
-}
+//   public mapForward<$O extends Partial<O>>(i: $O): {
+//     [K in keyof $O as NonNullable<(F[(K extends keyof F ? K : never)])>]: $O[K]
+//   } {
+//     return i as never
+//   }
+// }
 
-const lessonPreviewBiMap = new BiMapKeys<APISchemas.Chapter>({
-  name: "title",
-  learning_list: "learningList",
-  id: "id",
-  order_number: "orderNumber",
-  practice_list: "practiceList",
-  user_topic: "userTopic"
-})
+// const lessonPreviewBiMap = new BiMapKeys<APISchemas.Chapter>({
+//   name: "title",
+//   learning_list: "learningList",
+//   id: "id",
+//   order_number: "orderNumber",
+//   practice_list: "practiceList",
+//   user_topic: "userTopic"
+// })
 
-const asd = lessonPreviewBiMap.mapForward({ id: "123123", learning_list: [] })
-asd
+// const asd = lessonPreviewBiMap.mapForward({ id: "123123", learning_list: [] })
+// asd
 
 export default BiMap

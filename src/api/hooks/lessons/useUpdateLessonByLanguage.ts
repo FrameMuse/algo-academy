@@ -9,7 +9,7 @@ import { toast } from "react-toastify"
 
 function useUpdateLessonByLanguage() {
   async function updateLesson(id: string, language: EditorLanguage, content: Partial<LessonMultipleContent>) {
-    const languageId = APIMappings.resourceLanguage.mapBackward(language)
+    const languageId = APIMappings.resourceLanguage.key(language)
     const action = APIActions.patchLessonsIdResourcesLanguageId(languageId, id, {
       default_code: content.defaultCode,
       tests: content.tests,
@@ -22,7 +22,7 @@ function useUpdateLessonByLanguage() {
 
     queryClient.refetchQueries(getActionQueryKey(APIActions.getLessonsId(id)))
 
-    toast.success(`Lesson ${id} has been updated.`)
+    toast.success("Lesson has been updated.")
   }
   return updateLesson
 }

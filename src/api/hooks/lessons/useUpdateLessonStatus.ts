@@ -36,7 +36,7 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
       chapter_name: chapter.title,
 
       lesson_id: id,
-      status: APIMappings.lessonStatus.mapBackward(status)
+      status: APIMappings.lessonStatus.key(status)
     }))
     if (!isResponseOk(response)) return false
 

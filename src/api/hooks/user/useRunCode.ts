@@ -35,7 +35,7 @@ function useRunCode() {
       chapter_name: chapter.title,
 
       lesson_id: id,
-      language_id: APIMappings.resourceLanguage.mapBackward(data.language),
+      language_id: APIMappings.resourceLanguage.key(data.language),
       source_code: data.sourceCode
     }))
 

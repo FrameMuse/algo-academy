@@ -21,7 +21,7 @@ export function mapUser(schema: APISchemas.User): User {
     createdAt: new Date(schema.date_of_creation),
 
     pricingPlan: schema.current_plan ? mapPricingPlan(schema.current_plan) : undefined,
-    type: userType.mapForward(schema.role),
+    type: userType.value(schema.role),
     signed: true,
   }
 }
@@ -32,7 +32,7 @@ export function mapUserProgress(schema: APISchemas.User["progress"][0]) {
     title: schema.chapter_name,
     lessons: schema.lessons.map(lesson => ({
       id: lesson.id,
-      status: lessonStatus.mapForward(lesson.status)
+      status: lessonStatus.value(lesson.status)
     }))
   }
 }
@@ -51,12 +51,12 @@ export function mapLesson(schema: APISchemas.Lesson) {
   return {
     id: schema.id,
     title: schema.name,
-    type: lessonType.mapForward(schema.type),
+    type: lessonType.value(schema.type),
     chapterRelation: schema.used_in ? {
       id: schema.used_in.chapter_id,
       title: schema.used_in.chapter_name,
     } : undefined,
-    status: lessonStatus.mapForward(schema.status),
+    status: lessonStatus.value(schema.status),
 
     content: schema.content ?? "",
 
@@ -69,7 +69,7 @@ export function mapLesson(schema: APISchemas.Lesson) {
 function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution ?? "",
-    language: resourceLanguage.mapForward(schema.language),
+    language: resourceLanguage.value(schema.language),
     notes: schema.notes,
     tests: schema.tests,
     defaultCode: schema.default_code
