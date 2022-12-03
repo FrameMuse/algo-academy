@@ -9,8 +9,6 @@ import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import Callout from "app/ui/synthetic/Callout/Callout"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import EditorPreview from "app/ui/synthetic/EditorPreview/EditorPreview"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
@@ -159,17 +157,9 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
 }
 
 function LessonProblemEdit(props: { id: string }) {
-  const { lesson, isLoading } = useLesson(props.id)
+  const lesson = useLesson(props.id)
   const updateLesson = useUpdateLesson()
   const updateLessonByLanguage = useUpdateLessonByLanguage()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Lesson is null.</ErrorCover>
-  }
 
   async function onSharedSave(value: string, contentKey: SharedContentKey) {
     await updateLesson(props.id, { [contentKey]: value })

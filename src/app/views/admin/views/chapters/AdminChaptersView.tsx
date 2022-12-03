@@ -6,7 +6,7 @@ import Headings from "app/layouts/Headings/Headings"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 
 function AdminChaptersView() {
-  const { chaptersWithProgress: chapters } = useChaptersWithProgress()
+  const chapters = useChaptersWithProgress()
   return (
     <Box>
       <Headings>

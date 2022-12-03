@@ -15,11 +15,11 @@ export interface QueryAction<T = unknown> {
 }
 
 export interface QueryResponse<T = unknown> {
-  nativeResponse?: Response
+  nativeResponse: Response
   error?: Error
-  status?: number
-  headers?: Headers
-  payload?: T & Partial<QueryClientError>
+  status: number
+  headers: Headers
+  payload: T & Partial<QueryClientError>
 }
 
 interface QueryClientError {

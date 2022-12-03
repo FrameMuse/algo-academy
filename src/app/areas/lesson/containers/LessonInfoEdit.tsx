@@ -7,8 +7,6 @@ import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import { useState } from "react"
 import { inputValue } from "utils/common"
 
@@ -20,16 +18,8 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
   const [title, setTitle] = useState<string>("")
   const [type, setType] = useState<LessonType>()
 
-  const { lesson, isLoading } = useLesson(props.id)
+  const lesson = useLesson(props.id)
   const updateLesson = useUpdateLesson()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Lesson is null.</ErrorCover>
-  }
 
   async function onSubmit() {
     if (!await confirmAction()) return

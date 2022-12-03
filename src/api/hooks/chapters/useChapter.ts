@@ -6,11 +6,10 @@ import { LessonStatus } from "app/areas/lesson/types"
 import useChaptersProgress from "./useChaptersProgress"
 
 function useChapter(id: string) {
-  const { data, isLoading: isChapterLoading } = useAppQuery(APIActions.getChaptersId(id))
-  const { chaptersProgress, isLoading: isChaptersProgress } = useChaptersProgress()
+  const { data } = useAppQuery(APIActions.getChaptersId(id))
+  const chaptersProgress = useChaptersProgress()
 
-  const isLoading = isChapterLoading && isChaptersProgress
-  const chapter = data?.payload && APIMappings.mapChapter(data.payload)
+  const chapter = APIMappings.mapChapter(data.payload)
   const chapterProgress = chaptersProgress?.find(chapterA => chapterA.id === chapter?.id)
 
   function findLessonStatus(id: string): LessonStatus {
@@ -23,11 +22,9 @@ function useChapter(id: string) {
   }
 
   return {
-    chapter: chapter && {
-      ...chapter,
-      learningLessons: chapter.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-      practiceLessons: chapter.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-    }, isLoading
+    ...chapter,
+    learningLessons: chapter.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
+    practiceLessons: chapter.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
   }
 }
 

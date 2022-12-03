@@ -15,8 +15,6 @@ import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Icon from "app/ui/kit/Icon/Icon"
 import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Logo from "app/ui/synthetic/Logo/Logo"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
@@ -33,15 +31,7 @@ function ProblemView() {
   const settings = useAppSelector(state => state.workspace.settings)
 
   const lessonId = useParam("lessonId")
-  const { lesson, isLoading } = useLesson(lessonId)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
+  const lesson = useLesson(lessonId)
 
   return (
     <>
@@ -93,15 +83,7 @@ enum TabRoutes {
 }
 
 function ProblemLeftSection(props: { id: string }) {
-  const { lesson, isLoading } = useLesson(props.id)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
+  const lesson = useLesson(props.id)
 
   return (
     <div className="problem-layout__section problem-layout__section--shrink">
@@ -133,15 +115,7 @@ function ProblemLeftSection(props: { id: string }) {
 function ProblemRightSection(props: { id: string }) {
   const workspace = useAppSelector(state => state.workspace)
 
-  const { lesson, isLoading } = useLesson(props.id)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
+  const lesson = useLesson(props.id)
 
   const id = `${props.id}-${workspace.editorLanguage}`
   const resource = lesson.resources.find(resource => (resource.language as unknown as WorkspaceEditorLanguage) === workspace.editorLanguage)

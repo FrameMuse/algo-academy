@@ -3,11 +3,11 @@ import { APIMappings } from "api/mappings"
 import useAppQuery from "api/useAppQuery"
 
 function useChapters() {
-  const { data, isLoading } = useAppQuery(APIActions.getChapters())
+  const { data } = useAppQuery(APIActions.getChapters())
 
-  const chapters = data?.payload?.map(APIMappings.mapChapter).sort((a, b) => a.order - b.order)
+  const chapters = data.payload.map(APIMappings.mapChapter).sort((a, b) => a.order - b.order)
 
-  return { chapters, isLoading }
+  return chapters
 }
 
 export default useChapters

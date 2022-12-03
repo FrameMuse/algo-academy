@@ -5,12 +5,11 @@ import useChapters from "./useChapters"
 import useChaptersProgress from "./useChaptersProgress"
 
 function useChaptersWithProgress() {
-  const { chapters, isLoading: isChaptersLoading } = useChapters()
-  const { chaptersProgress, isLoading: isChaptersProgress } = useChaptersProgress()
+  const chapters = useChapters()
+  const chaptersProgress = useChaptersProgress()
 
-  const isLoading = isChaptersLoading && isChaptersProgress
-  const chaptersWithProgress = chapters?.map(chapterA => {
-    const chapterProgress = chaptersProgress?.find(chapterB => chapterA.id === chapterB.id)
+  const chaptersWithProgress = chapters.map(chapterA => {
+    const chapterProgress = chaptersProgress.find(chapterB => chapterA.id === chapterB.id)
 
     const completed = chapterProgress?.lessons.filter(lesson => lesson.status === LessonStatus.Complete).length
     const progress: ProgressEntry = {
@@ -36,7 +35,7 @@ function useChaptersWithProgress() {
     }
   })
 
-  return { chaptersWithProgress, isLoading }
+  return chaptersWithProgress
 }
 
 export default useChaptersWithProgress

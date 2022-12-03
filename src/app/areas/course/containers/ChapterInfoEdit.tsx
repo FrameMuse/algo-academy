@@ -5,8 +5,6 @@ import PopupConfirm from "app/popups/PopupConfirm/PopupConfirm"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import { useState } from "react"
 import { Modal } from "react-modal-global"
 import { inputValue } from "utils/common"
@@ -17,20 +15,12 @@ interface ChapterInfoEditProps {
 
 function ChapterInfoEdit(props: ChapterInfoEditProps) {
 
-  const { chapter, isLoading } = useChapter(props.id)
+  const chapter = useChapter(props.id)
   const updateChapter = useUpdateChapter()
 
   const [title, setTitle] = useState<string>()
   const [order, setOrder] = useState<number>()
   const [showInProfile, setShowInProfile] = useState<boolean>()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (chapter == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
 
   async function onSubmit() {
     let confirmed = false

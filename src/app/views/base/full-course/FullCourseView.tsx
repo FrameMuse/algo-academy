@@ -2,6 +2,7 @@ import "./FullCourseView.scss"
 
 import { APP_TITLE } from "app/App"
 import { CourseContentsContainer, CourseFreeNotice, CourseProgressContainer } from "app/areas/course"
+import QueryBoundary from "app/containers/QueryBoundary"
 import { Helmet } from "react-helmet"
 
 function FullCourseView() {
@@ -15,9 +16,11 @@ function FullCourseView() {
         <p>Our curriculum spans topics such as, algorithms, system design, coding patterns, space time complexity, behavioral interviews and much more. Start practicing today and learn everything you need to ace your next coding interview.</p>
       </div>
       <div className="course-section__container">
-        <CourseFreeNotice />
-        <CourseProgressContainer />
-        <CourseContentsContainer />
+        <QueryBoundary userType>
+          <CourseFreeNotice />
+          <CourseProgressContainer />
+          <CourseContentsContainer />
+        </QueryBoundary>
       </div>
     </section>
   )

@@ -2,24 +2,14 @@ import useLesson from "api/hooks/lessons/useLesson"
 import useUpdateLesson from "api/hooks/lessons/useUpdateLesson"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import EditorPreview from "app/ui/synthetic/EditorPreview/EditorPreview"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 
 interface LessonArticleEditProps {
   id: string
 }
 
 function LessonArticleEdit(props: LessonArticleEditProps) {
-  const { lesson, isLoading } = useLesson(props.id)
+  const lesson = useLesson(props.id)
   const updateLesson = useUpdateLesson()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Lesson is null.</ErrorCover>
-  }
 
   async function onSave(content: string) {
     await updateLesson(props.id, { content })

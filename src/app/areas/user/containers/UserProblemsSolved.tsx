@@ -1,6 +1,4 @@
 import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Progress from "utils/transform/progress"
 
 import ProblemsSolved from "../components/ProblemsSolved/ProblemsSolved"
@@ -8,15 +6,7 @@ import ProblemsSolved from "../components/ProblemsSolved/ProblemsSolved"
 interface ProblemsSolvedContainerProps { }
 
 function ProblemsSolvedContainer(props: ProblemsSolvedContainerProps) {
-  const { chaptersWithProgress: chapters, isLoading } = useChaptersWithProgress()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (chapters == null) {
-    return <ErrorCover>chapters is null.</ErrorCover>
-  }
+  const chapters = useChaptersWithProgress()
 
   const chaptersShownInProfile = chapters.filter(chapter => chapter.showInProfile)
   const problems = chaptersShownInProfile.map(chapter => {

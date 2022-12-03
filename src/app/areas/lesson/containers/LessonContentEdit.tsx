@@ -1,6 +1,4 @@
 import useLesson from "api/hooks/lessons/useLesson"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 
 import { LessonType } from "../types"
 import LessonArticleEdit from "./LessonArticleEdit"
@@ -11,15 +9,7 @@ interface LessonContentEditProps {
 }
 
 function LessonContentEdit(props: LessonContentEditProps) {
-  const { lesson, isLoading } = useLesson(props.id)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Lesson is null.</ErrorCover>
-  }
+  const lesson = useLesson(props.id)
 
 
   if (lesson.type === LessonType.Learning) {

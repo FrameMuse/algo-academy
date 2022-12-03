@@ -1,22 +1,12 @@
 import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
 import { LessonPreview, LessonPreviews } from "app/areas/lesson"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 
 import { CourseContents, CourseElement } from ".."
 
 interface CourseContentsContainerProps { }
 
 function CourseContentsContainer(props: CourseContentsContainerProps) {
-  const { chaptersWithProgress: chapters, isLoading } = useChaptersWithProgress()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (chapters == null) {
-    return <ErrorCover>Chapters is null.</ErrorCover>
-  }
+  const chapters = useChaptersWithProgress()
 
   function onFilterChange() { }
 

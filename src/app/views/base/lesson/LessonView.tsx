@@ -7,8 +7,6 @@ import { LessonType } from "app/areas/lesson/types"
 import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import { Helmet } from "react-helmet"
 import { Navigate } from "react-router-dom"
 import useParam from "utils/hooks/useParam"
@@ -17,15 +15,7 @@ function LessonView() {
   window.scrollTo(0, 0)
 
   const lessonId = useParam("lessonId")
-  const { lesson, isLoading } = useLesson(lessonId)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lesson == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
+  const lesson = useLesson(lessonId)
 
   if (lesson.type === LessonType.Practice) {
     return <Navigate replace to="problem" />

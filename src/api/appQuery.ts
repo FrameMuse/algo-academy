@@ -1,10 +1,8 @@
-import _ from "lodash"
-import { toast } from "react-toastify"
 import { isDictionary } from "utils/common"
 import FileTransform from "utils/transform/file"
 import JWT from "utils/transform/jwt"
 
-import { buildActionURL, isResponseOk, QueryClientError, QueryError } from "./helpers"
+import { buildActionURL, isResponseOk, QueryClientError, QueryError, QueryServerError } from "./helpers"
 import { QueryAction, QueryResponse } from "./types"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -123,10 +121,11 @@ async function handleResponse<T>(response: Response, action: QueryAction<T>): Pr
   const queryResponse: QueryResponse<T> = {
     nativeResponse: response,
     status: response.status,
-    headers: response.headers
+    headers: response.headers,
+    payload: null as any
   }
 
-  // Skip empty responses.
+  // Empty responses.
   if ([203, 204].includes(response.status)) {
     return queryResponse
   }
@@ -185,9 +184,16 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     const queryResponse = await handleResponse(response, action)
 
 
-    if (response.status >= 400 && queryResponse.payload?.message) {
-      throw new QueryClientError(queryResponse.payload?.message)
+
+    if (response.status >= 500) {
+      throw new QueryServerError(queryResponse.payload.message)
     }
+
+    if (response.status >= 400) {
+      throw new QueryClientError(queryResponse.payload.message)
+    }
+
+
 
     if (!isResponseOk(queryResponse, true)) {
       throw new QueryError("Query Response is not ok.")
@@ -196,20 +202,20 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     return queryResponse
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
-      console.error(error)
+      console.error("[DEVELOPMENT ONLY ERROR]", error)
     }
 
-    if (error instanceof QueryClientError) {
-      toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
+    // if (error instanceof QueryClientError) {
+    //   toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
 
-      return { error }
-    }
+    //   return { error }
+    // }
 
-    if (error instanceof Error) {
-      toast.error("Query Error: " + error.message)
+    // if (error instanceof Error) {
+    //   toast.error("Query Error: " + error.message)
 
-      return { error }
-    }
+    //   return { error }
+    // }
 
     throw error
   }

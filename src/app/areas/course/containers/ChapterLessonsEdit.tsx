@@ -22,15 +22,8 @@ interface ChapterLessonsEditProps {
 function ChapterLessonsEdit(props: ChapterLessonsEditProps) {
   const [lessonType, setLessonType] = useState(LessonType.Learning)
 
-  const { chapter, isLoading } = useChapter(props.id)
+  const chapter = useChapter(props.id)
   const updateChapterLessons = useUpdateChapterLessons()
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-  if (chapter == null) {
-    return <ErrorCover>Chapter is null.</ErrorCover>
-  }
 
   async function onSave(lessonIds: string[]) {
     await updateChapterLessons(props.id, lessonType, lessonIds)

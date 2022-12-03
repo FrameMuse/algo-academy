@@ -1,11 +1,11 @@
 import useChaptersProgress from "./useChaptersProgress"
 
 function useChapterProgress(id: string) {
-  const { chaptersProgress, isLoading } = useChaptersProgress()
+  const chaptersProgress = useChaptersProgress()
 
-  const chapterProgress = chaptersProgress?.find(chapter => chapter.id === id)
+  const chapterProgress = chaptersProgress.find(chapter => chapter.id === id)
 
-  return { chapterProgress, isLoading }
+  return chapterProgress
 }
 
 export default useChapterProgress

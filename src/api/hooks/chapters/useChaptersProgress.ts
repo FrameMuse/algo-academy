@@ -3,11 +3,11 @@ import { APIMappings } from "api/mappings"
 import useAppQuery from "api/useAppQuery"
 
 function useChaptersProgress() {
-  const { data, isLoading } = useAppQuery(APIActions.getUsersMe())
+  const { data } = useAppQuery(APIActions.getUsersMe())
 
-  const chaptersProgress = data?.payload?.progress.map(APIMappings.mapUserProgress)
+  const chaptersProgress = data.payload.progress.map(APIMappings.mapUserProgress)
 
-  return { chaptersProgress, isLoading }
+  return chaptersProgress
 }
 
 export default useChaptersProgress

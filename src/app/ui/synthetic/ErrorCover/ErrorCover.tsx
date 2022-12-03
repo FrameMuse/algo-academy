@@ -10,7 +10,7 @@ function ErrorCover(props: ErrorCoverProps) {
   return (
     <div className="error-cover">
       <div className="error-cover__container">
-        <div className="error-cover__text">{props.children}</div>
+        {props.children}
       </div>
     </div>
   )
