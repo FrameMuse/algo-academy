@@ -12,7 +12,7 @@ function useAddLesson() {
   }) {
     const response = await appQuery(APIActions.postLessons({
       name: lesson.title,
-      type: APIMappings.lessonType.key(lesson.type)
+      type: APIMappings.lessonType.backward(lesson.type)
     }))
     if (!isResponseOk(response)) return
 

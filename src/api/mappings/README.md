@@ -17,7 +17,8 @@ Mappings are nothing but helpers, just plain transfomers. Note that they **have 
 
 ### Guidelines
 
-When using BiDirectional (two ways) mapping, there is rule that forward direction is always from **outside** to **inside**, that is to say from data which comes from **API** to what **App** consumes.
+- When using BiDirectional (two ways) mapping, there is rule that forward direction is always from **outside** to **inside**, that is to say from data which comes from **API** to what **App** consumes.
+- Mappings **should not** filter, split, remove or add any data from array, objects (but can skip **fields**).
 
 ### Live example
 

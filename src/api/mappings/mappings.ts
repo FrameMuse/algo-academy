@@ -21,7 +21,7 @@ export function mapUser(schema: APISchemas.User): User {
     createdAt: new Date(schema.date_of_creation),
 
     pricingPlan: schema.current_plan ? mapPricingPlan(schema.current_plan) : undefined,
-    type: userType.value(schema.role),
+    type: userType.forward(schema.role),
     signed: true,
   }
 }
@@ -32,7 +32,7 @@ export function mapUserProgress(schema: APISchemas.User["progress"][0]) {
     title: schema.chapter_name,
     lessons: schema.lessons.map(lesson => ({
       id: lesson.id,
-      status: lessonStatus.value(lesson.status)
+      status: lessonStatus.forward(lesson.status)
     }))
   }
 }
@@ -51,12 +51,12 @@ export function mapLesson(schema: APISchemas.Lesson) {
   return {
     id: schema.id,
     title: schema.name,
-    type: lessonType.value(schema.type),
+    type: lessonType.forward(schema.type),
     chapterRelation: schema.used_in ? {
       id: schema.used_in.chapter_id,
       title: schema.used_in.chapter_name,
     } : undefined,
-    status: lessonStatus.value(schema.status),
+    status: lessonStatus.forward(schema.status),
 
     content: schema.content ?? "",
 
@@ -69,7 +69,7 @@ export function mapLesson(schema: APISchemas.Lesson) {
 function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution ?? "",
-    language: resourceLanguage.value(schema.language),
+    language: resourceLanguage.forward(schema.language),
     notes: schema.notes,
     tests: schema.tests,
     defaultCode: schema.default_code
@@ -84,14 +84,14 @@ export function mapChapter(schema: APISchemas.Chapter) {
     order: schema.order_number,
     title: schema.name,
     showInProfile: schema.user_topic,
-    learningLessons: schema.learning_list.map(mapLessonPreview),
-    practiceLessons: schema.practice_list.map(mapLessonPreview)
+    lessons: schema.list.map(mapLessonPreview)
   }
 }
 
-function mapLessonPreview(schema: APISchemas.Chapter["learning_list"][0]) {
+function mapLessonPreview(schema: APISchemas.Chapter["list"][0]) {
   return {
     id: schema.id,
+    type: lessonType.forward()
     title: schema.name
   }
 }

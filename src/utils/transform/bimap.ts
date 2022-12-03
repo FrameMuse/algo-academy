@@ -22,11 +22,11 @@ class BiMap<A1 extends keyof never, A2 extends keyof never> {
     this.backwardMap = mapKeys.reduce((result, key) => ({ ...result, [map[key]]: key }), {} as Record<A2, A1>)
   }
 
-  public value(key: A1): A2 {
+  public forward(key: A1): A2 {
     return this.forwardMap[key]
   }
 
-  public key(key: A2): A1 {
+  public backward(key: A2): A1 {
     return this.backwardMap[key]
   }
 }

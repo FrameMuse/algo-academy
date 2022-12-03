@@ -16,7 +16,7 @@ function useUpdateLesson() {
     hints?: string
   }) {
     const response = await appQuery(APIActions.patchLessonsId(id, {
-      type: lesson.type ? APIMappings.lessonType.key(lesson.type) : undefined,
+      type: lesson.type ? APIMappings.lessonType.backward(lesson.type) : undefined,
       name: lesson.title,
       content: lesson.content,
       statement: lesson.statement,
