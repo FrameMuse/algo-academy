@@ -20,7 +20,7 @@ function useUpdateChapter() {
 
     toast.success(`Chapter ${chapter.title} has been updated.`)
 
-    queryClient.refetchQueries([getActionQueryKey(APIActions.getChaptersId(id))])
+    queryClient.refetchQueries(getActionQueryKey(APIActions.getChaptersId(id)))
 
     return APIMappings.mapChapter(response.payload)
   }

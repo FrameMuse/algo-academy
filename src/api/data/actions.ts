@@ -380,7 +380,7 @@ export const getJudge0LanguagesId = (id: string): QueryAction<JudgeLanguage> => 
 
 export const postJudge0Compile = (body: {
   chapter_id: string
-  chapter_name: string
+
   lesson_id: string
   language_id: number
   source_code: string

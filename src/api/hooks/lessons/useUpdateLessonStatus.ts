@@ -16,24 +16,13 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     return APIMappings.mapLesson(response.payload)
   }
 
-  async function getChapter(id: string) {
-    const response = await appQuery(APIActions.getChaptersId(id))
-    if (!isResponseOk(response)) return
-
-    return APIMappings.mapChapter(response.payload)
-  }
-
   async function updateStatus(id: string, status: LessonStatus) {
     const lesson = await getLesson(id)
     if (lesson == null) return false
     if (lesson.chapterRelation == null) return false
 
-    const chapter = await getChapter(lesson.chapterRelation.id)
-    if (chapter == null) return false
-
     const response = await appQuery(APIActions.patchUsersMeProgress({
-      chapter_id: chapter.id,
-      chapter_name: chapter.title,
+      chapter_id: lesson.chapterRelation.id,
 
       lesson_id: id,
       status: APIMappings.lessonStatus.backward(status)

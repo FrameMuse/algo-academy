@@ -10,7 +10,7 @@ function useUpdateChapterLessons() {
     const response = await appQuery(APIActions.patchChaptersId(id, { list: ids }))
     if (!isResponseOk(response)) return
 
-    queryClient.refetchQueries([getActionQueryKey(APIActions.getChaptersId(id))])
+    queryClient.refetchQueries(getActionQueryKey(APIActions.getChaptersId(id)))
 
     toast.success(`Chapter ${LessonType[lessonType]} Lessons have been updated.`)
   }

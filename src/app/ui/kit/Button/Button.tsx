@@ -1,12 +1,12 @@
 import "./Button.scss"
 
+import Loader from "app/ui/synthetic/Loader/Loader"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
 import { GAEventAction, GAEventCategory, GAEventLabel } from "services/ga"
 import { classMerge, classWithModifiers } from "utils/common"
 
-import LoaderCover from "../../synthetic/Loader/LoaderCover"
 import { buttonColorMap, ButtonIconize } from "./Button.helpers"
 import { ButtonBaseProps } from "./Button.types"
 
@@ -56,7 +56,7 @@ function Button(props: ButtonProps) {
       <div className="button__text">{props.children}</div>
       <ButtonIconize icon={props.iconRight} />
       <div className="button__loader">
-        <LoaderCover white />
+        <Loader />
       </div>
     </button>
   )

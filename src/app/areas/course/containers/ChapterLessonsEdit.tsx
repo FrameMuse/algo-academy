@@ -34,7 +34,7 @@ function ChapterLessonsEdit(props: ChapterLessonsEditProps) {
       <Selector label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
         {optionsFromEnum(LessonType)}
       </Selector>
-      <Azd defaultLessons={chapter.lessons} lessonType={lessonType} onSave={onSave} />
+      <Azd defaultLessons={chapter.lessons.filter(lesson => lesson.type === lessonType)} lessonType={lessonType} onSave={onSave} />
     </>
   )
 }
