@@ -26,7 +26,7 @@ function PopupWorkspaceSettings() {
       <h3>Workspace Settings</h3>
       <Column>
         <h5>Editor Theme</h5>
-        <WorkspaceEditor height="7.5em" defaultLanguage={WorkspaceEditorLanguage.Python} />
+        <WorkspaceEditor height="8em" defaultValue={"// Enter your lovely code below\n\nfunction example(_arg1: number, arg2: string) {\n\treturn {\n\t\tfield1: \"value1\"\n\t}\n}"} defaultLanguage={WorkspaceEditorLanguage.TypeScript} />
         <Row justifyContent="space-between">
           <p>Theme</p>
           <Selector upwards defaultValue={settings.editorTheme} onChange={editorTheme => updateSettings({ editorTheme })}>

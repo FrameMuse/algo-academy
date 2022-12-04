@@ -10,7 +10,7 @@ const initialState: Workspace = {
   editorLanguage: WorkspaceEditorLanguage.Python,
   settings: {
     editorTheme: EditorTheme.Light,
-    codeTheme: CodeTheme.dark,
+    codeTheme: CodeTheme.monoBlue,
     darkThemeEnabled: false,
     useDrafts: true
   }
