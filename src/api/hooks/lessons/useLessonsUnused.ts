@@ -4,11 +4,11 @@ import useAppQuery from "api/useAppQuery"
 import { LessonType } from "app/areas/lesson/types"
 
 function useLessonsUnused(filterByType?: LessonType) {
-  const { data, isLoading } = useAppQuery(APIActions.getLessonsUnused())
+  const { data } = useAppQuery(APIActions.getLessonsUnused())
 
-  const lessons = data?.payload?.map(APIMappings.mapLesson).filter(lesson => lesson.type === filterByType)
+  const lessons = data.payload.map(APIMappings.mapLesson).filter(lesson => lesson.type === filterByType)
 
-  return { lessons, isLoading }
+  return lessons
 }
 
 export default useLessonsUnused

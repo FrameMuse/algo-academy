@@ -33,7 +33,6 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
   function shiftChoicePointer(by: 1 | -1) {
     setChoicePointer(choicePointer => {
       const newChoicePointer = choicePointer + by
-      console.log(choicePointer, newChoicePointer)
       if (newChoicePointer >= options.length) {
         return 0
       }

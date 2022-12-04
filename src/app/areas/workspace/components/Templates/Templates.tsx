@@ -9,36 +9,36 @@ import useAppCopyToClipboard from "utils/hooks/useAppCopyToClipboard"
 
 import { WorkspaceCode } from "../.."
 
-interface Template {
-  name: string
+interface Snippet {
+  label: string
   content: string
   runTime: string
   space: string
 }
 
 interface TemplatesProps {
-  templates: Template[]
+  Snippets: Snippet[]
 }
 
-function Templates(props: TemplatesProps) {
+function Snippets(props: TemplatesProps) {
   const theme = useTheme()
 
   const [activeIndex, setActiveIndex] = useState<number>(0)
-  const template = props.templates[activeIndex]
+  const template = props.Snippets[activeIndex]
 
   const { copyToClipboard } = useAppCopyToClipboard()
   return (
     <div className={classWithModifiers("templates", theme)}>
       <div className="templates__menu">
         <TabLinks>
-          {props.templates.map((template, index) => (
+          {props.Snippets.map((template, index) => (
             <button
               className={classWithModifiers("tab-links__link", index === activeIndex && "active")}
               type="button"
               onClick={() => setActiveIndex(index)}
               key={index}
             >
-              {template.name}
+              {template.label}
             </button>
           ))}
         </TabLinks>
@@ -57,4 +57,4 @@ function Templates(props: TemplatesProps) {
   )
 }
 
-export default Templates
+export default Snippets

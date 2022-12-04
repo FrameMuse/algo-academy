@@ -21,8 +21,6 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
   const instance = workspace.settings.useDrafts ? workspace.instances[props.draftId ?? ""] : undefined
 
   function onChange(editorValue: string | undefined) {
-    console.log(props.draftId, editorValue, props.defaultValue, instance?.editorValue)
-
     if (editorValue == null) return
     if (props.draftId == null) return
 

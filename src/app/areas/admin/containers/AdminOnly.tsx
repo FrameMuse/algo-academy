@@ -9,8 +9,6 @@ interface AdminOnlyProps {
 function AdminOnly(props: AdminOnlyProps) {
   const user = useAppSelector(state => state.user)
 
-  console.log(user)
-
   if (!user.signed) return null
   if (user.type < UserType.Admin) return null
 

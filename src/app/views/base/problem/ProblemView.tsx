@@ -4,7 +4,7 @@ import useLesson from "api/hooks/lessons/useLesson"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
 import { LessonStatusSelector } from "app/areas/lesson"
-import { Templates, WorkspaceCode, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { Snippets, WorkspaceCode, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
 import { WorkspaceCodeExecution } from "app/areas/workspace/types"
@@ -198,12 +198,12 @@ function ProblemRightSection(props: { id: string }) {
         </TabLinks>
 
         <TabRoute path={TabRoutes.Code}>
-          <WorkspaceEditor options={{ quickSuggestions: true }} draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
+          <WorkspaceEditor draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
           <WorkspaceCodeExecution draftId={id} lessonId={props.id} />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Snippets}>
-          <Templates templates={[{ name: "DFS", content: EDITOR_DEFAULT_VALUE, runTime: "O(n)", space: "O(n)" }]} />
+          <Snippets Snippets={[{ label: "DFS", content: EDITOR_DEFAULT_VALUE, runTime: "O(n)", space: "O(n)" }]} />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Tests}>

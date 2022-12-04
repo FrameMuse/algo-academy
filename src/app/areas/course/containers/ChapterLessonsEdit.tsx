@@ -10,8 +10,6 @@ import Button from "app/ui/kit/Button/Button"
 import List from "app/ui/kit/List/List"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
-import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
-import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import Picker from "app/ui/synthetic/Picker/Picker"
 import { useEffect, useState } from "react"
 
@@ -96,15 +94,7 @@ interface LessonsPickerProps {
 }
 
 function LessonsPicker(props: LessonsPickerProps) {
-  const { lessons, isLoading } = useLessonsUnused(props.lessonType)
-
-  if (isLoading) {
-    return <LoaderCover />
-  }
-
-  if (lessons == null) {
-    return <ErrorCover>Lessons is null.</ErrorCover>
-  }
+  const lessons = useLessonsUnused(props.lessonType)
 
   return (
     <Picker defaultPicks={props.defaultLessons?.map(lesson => lesson.id)} onChange={props.onChange}>
