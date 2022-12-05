@@ -2,6 +2,10 @@
 
 .reviews-section {
   padding: 175px 0;
+
+  @include DesktopLowResolution {
+    padding: 5vw 0;
+  }
 }
 
 .reviews-title {

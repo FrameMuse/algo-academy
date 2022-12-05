@@ -12,6 +12,10 @@
   &--dark {
     background: $color-dark;
   }
+
+  @include Tablet {
+    max-height: unset;
+  }
 }
 
 .problem-header-wrap {
@@ -65,27 +69,10 @@
 
   font-size: 1.125rem;
   color: white;
-}
 
-.problem-header-status {}
-
-.problem-header-time {
-  margin-right: calc(32 / 1920 * 100vw);
-  border: 1px solid #f5f5f5;
-  border-radius: calc(10 / 1920 * 100vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: calc(18 / 1920 * 100vw);
-  line-height: 1.27;
-  padding: calc(12 / 1920 * 100vw) calc(24 / 1920 * 100vw);
-  color: #fff;
-}
-
-.problem-header-time-img {
-  width: calc(24 / 1920 * 100vw);
-  margin-right: calc(6 / 1920 * 100vw);
+  .icon {
+    flex-shrink: 0;
+  }
 }
 
 .problem-layout__container {
@@ -99,6 +86,13 @@
     .problem-layout--dark & {
       border-color: $color-dark-75;
     }
+  }
+
+  @include Tablet {
+    display: grid;
+    gap: 1em;
+
+    height: unset;
   }
 }
 
@@ -122,6 +116,10 @@
 
   &--shrink {
     max-width: 42%;
+
+    @include Tablet {
+      max-width: 100%;
+    }
   }
 
   .problem-layout--dark & {

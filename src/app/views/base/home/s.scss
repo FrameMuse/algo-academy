@@ -2,14 +2,22 @@
 
 .main-title-section {
   background: $color-blue-80;
-  padding-top: 116px;
-  padding-bottom: 140px;
+  padding: 140px 0;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .main-title-wrap {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  @include Tablet {
+    display: grid;
+    gap: 2.5em;
+  }
 }
 
 .main-title-left {
@@ -26,6 +34,19 @@
 
   .button-wrap {
     margin-top: 40px;
+
+    @include Mobile {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @include Tablet {
+    grid-row: 2;
+
+    width: 100%;
+
+    padding-right: unset;
   }
 }
 
@@ -34,6 +55,13 @@
 
   .video-block-padding {
     padding-top: 70%;
+  }
+
+  @include Tablet {
+    grid-row: 1;
+
+    width: 100%;
+    max-width: 600px;
   }
 }
 
@@ -47,6 +75,14 @@
   justify-content: center;
 
   padding: 175px 0;
+
+  @include DesktopLowResolution {
+    display: grid;
+    justify-items: center;
+    gap: 2.5em;
+
+    padding: 10vw 0;
+  }
 }
 
 .main-second-img {
@@ -56,6 +92,11 @@
 
   img {
     max-width: 100%;
+  }
+
+  @include DesktopLowResolution {
+    width: 100%;
+    max-width: 400px;
   }
 }
 
@@ -76,6 +117,11 @@
   p:not(:last-child) {
     margin-bottom: 24px;
   }
+
+  @include DesktopLowResolution {
+    width: auto;
+    padding-left: unset;
+  }
 }
 
 
@@ -86,16 +132,31 @@
 .features-section {
   padding: 175px 0;
   background: $color-blue-10;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .features-wrap {
   display: flex;
   align-items: flex-start;
+
+  @include DesktopLowResolution {
+    display: grid;
+    gap: 2.5em;
+  }
 }
 
 .features-title {
   width: 500px;
   padding-right: 90px;
+
+  @include DesktopLowResolution {
+    width: auto;
+
+    padding-right: unset;
+  }
 }
 
 .features-list {
@@ -103,12 +164,30 @@
   margin: 0 -20px;
   display: flex;
   flex-wrap: wrap;
+
+  @include DesktopLowResolution {
+    width: 100%;
+  }
+
+  @include Tablet {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17.5em, 1fr));
+    gap: 2.5em;
+
+    margin: unset;
+  }
 }
 
 .features-item {
   width: calc(33.33% - 40px);
   margin: 0 20px;
   margin-bottom: 50px;
+
+  @include Tablet {
+    width: auto;
+
+    margin: unset;
+  }
 }
 
 .features-item-icon {
@@ -142,12 +221,20 @@
 
 .curriculum-section {
   padding: 175px 0;
-  // padding-bottom: 0;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .curriculum-block {
   display: flex;
   align-items: flex-start;
+
+  @include DesktopLowResolution {
+    display: grid;
+    gap: 2.5em;
+  }
 }
 
 .curriculum-title {
@@ -156,6 +243,20 @@
 
   .button-wrap {
     margin-top: 40px;
+
+    @include DesktopLowResolution {
+      margin-top: unset;
+    }
+
+    @include Tablet {
+      margin: 0 auto;
+    }
+  }
+
+  @include DesktopLowResolution {
+    width: auto;
+
+    padding-right: unset;
   }
 }
 
@@ -164,23 +265,31 @@
   gap: 2.5em;
 
   width: calc(100% - 500px);
+
+  @include DesktopLowResolution {
+    width: 100%;
+  }
 }
 
 .curriculum-wrap {
-  margin: 0 -15px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 15em);
+  gap: 2em;
+
+  width: 100%;
+  overflow: auto;
+
+  @include Mobile {}
 }
 
 .curriculum-item {
-  width: calc(25% - 30px);
-  margin: 0 15px;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   padding: 25px 32px;
-  padding-bottom: 23px;
   background: $color-blue-10;
   border-radius: 20px;
-  line-height: 1.25;
 }
 
 .curriculum-item-digit {
@@ -200,21 +309,44 @@
 .main-six-section {
   padding: 175px 0;
   background: $color-blue-10;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .main-six-wrap {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  @include Tablet {
+    display: grid;
+    justify-items: center;
+    gap: 2.5em;
+  }
 }
 
 .main-six-right {
   width: 55%;
+
+  @include Tablet {
+    grid-row: 1;
+
+    width: 100%;
+    max-width: 600px;
+  }
 }
 
 .main-six-left {
   width: 45%;
   padding-right: 63px;
+
+  @include Tablet {
+    width: 100%;
+
+    padding-right: unset;
+  }
 }
 
 .main-six-item {
@@ -252,20 +384,53 @@
   justify-content: space-between;
 
   padding: 175px 0;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
+
+  @include Tablet {
+    display: grid;
+    justify-items: center;
+
+    gap: 2.5em;
+  }
 }
 
 .lang-title {
   width: 37%;
   padding-right: 30px;
+
+  @include DesktopLowResolution {
+    width: 45%;
+    margin-top: unset;
+  }
+
+  @include Tablet {
+    width: 100%;
+
+    padding-right: unset;
+  }
 }
 
 .lang-items {
-  width: 53%;
-  max-width: 63%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+
+  width: 53%;
+  max-width: 63%;
+
   margin: 0 -15px;
+
+  @include Tablet {
+    width: 100%;
+    max-width: 75%;
+  }
+
+  @include Mobile {
+    max-width: 100%;
+  }
 }
 
 .lang-item {
@@ -281,6 +446,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  @include Mobile {
+    width: 40%;
+    min-height: unset;
+
+    margin: 8px;
+    padding: 1.5em;
+  }
 }
 
 .lang-item-icon {
@@ -291,6 +464,10 @@
 
   img {
     width: 100%;
+  }
+
+  @include Mobile {
+    width: 50px;
   }
 }
 
@@ -306,6 +483,10 @@
 .ace-section {
   background: $color-blue-80;
   padding: 75px 0;
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .ace-wrap {
@@ -313,6 +494,12 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @include Tablet {
+    display: grid;
+    justify-items: center;
+    gap: 2.5em;
+  }
 }
 
 .ace-img {
@@ -325,6 +512,19 @@
   img {
     max-width: 100%;
   }
+
+  @include Tablet {
+    justify-content: center;
+
+    grid-row: 1;
+
+    width: 100%;
+    max-width: 400px;
+  }
+
+  @include Mobile {
+    max-width: 300px;
+  }
 }
 
 .ace-text {
@@ -336,6 +536,13 @@
   h2 {
     color: #fff;
   }
+
+  @include Tablet {
+    width: 100%;
+    max-width: 100%;
+
+    padding-right: unset;
+  }
 }
 
 .ace-buttons {
@@ -343,11 +550,13 @@
   display: flex;
   align-items: center;
 
-  .button {
-    margin-right: 16px;
+  @include column-gap(1em);
 
-    &:last-child {
-      margin-right: 0;
-    }
+  @include Mobile {
+    display: grid;
+    justify-items: center;
+    gap: 1.5em;
+
+    @include column-gap(unset);
   }
 }

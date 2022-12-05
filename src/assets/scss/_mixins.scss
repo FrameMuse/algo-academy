@@ -76,7 +76,20 @@
 	}
 }
 
-/* Adaptive */
+/* Adaptive (Goes from `DesktopLowResolution` to `Mobile`) */
+
+@mixin DesktopLowResolution {
+	@media screen and (max-width: #{$width-desktop}) {
+		@content;
+	}
+}
+
+@mixin Tablet {
+	@media screen and (max-width: #{$width-desktop-low-resolution}) {
+		@content;
+	}
+}
+
 
 @mixin Mobile {
 	@media screen and (max-width: #{$width-tablet}) {
@@ -84,11 +97,6 @@
 	}
 }
 
-@mixin Tablet {
-	@media screen and (max-width: #{$width-desktop}) {
-		@content;
-	}
-}
 
 /* Utils */
 

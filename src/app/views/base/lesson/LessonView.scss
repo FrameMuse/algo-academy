@@ -6,12 +6,14 @@
 }
 
 .article-top {
-  max-width: 950px;
-  margin: 0 auto;
-  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 
   &>* {
     flex: 1;
@@ -22,8 +24,11 @@
     }
   }
 
-  &:last-child {
-    margin-bottom: 0;
+  @include Mobile {
+    display: grid;
+    justify-items: center;
+    justify-content: unset;
+    gap: 1.5em;
   }
 }
 

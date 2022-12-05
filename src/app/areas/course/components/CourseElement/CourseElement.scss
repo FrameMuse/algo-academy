@@ -37,6 +37,10 @@
     font-weight: 500;
 
     color: $color-dark-75;
+
+    @include Mobile {
+      display: none;
+    }
   }
 }
 

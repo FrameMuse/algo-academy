@@ -3,6 +3,10 @@
 .slider {
 	display: grid;
 	gap: 1em;
+
+	@include Mobile {
+		margin-top: 2.5em;
+	}
 }
 
 .slider__buttons {
@@ -12,6 +16,10 @@
 
 	.button {
 		border-radius: 0.5em;
+	}
+
+	@include Mobile {
+		display: none;
 	}
 }
 
@@ -23,11 +31,6 @@
 	overflow: hidden;
 
 	@include column-gap(3.5em);
-
-	// @include Mobile {
-	// 	width: 100vw;
-	// 	margin: -5vw;
-	// }
 }
 
 .slider__button {
@@ -44,8 +47,8 @@
 
 	overflow: hidden;
 
-	// @include Mobile {
-	// 	grid-auto-columns: 80vw;
-	// 	overflow: auto;
-	// }
+	@include Mobile {
+		grid-auto-columns: 80vw;
+		overflow: auto;
+	}
 }

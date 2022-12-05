@@ -4,11 +4,18 @@ import { StaticRoutes } from "app/AppRoutes"
 import { ProfileWidget } from "app/areas/user"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { useAppSelector } from "store/hooks"
 import { UserType } from "store/reducers/user/types"
+import { classWithModifiers, toggleState } from "utils/common"
 
 function Header() {
   const user = useAppSelector(state => state.user)
+
+  const [mobileNavExpanded, setMobileNavExpanded] = useState(false)
+  const location = useLocation()
+  useEffect(() => setMobileNavExpanded(false), [location])
 
   return (
     <header>
@@ -33,14 +40,14 @@ function Header() {
       </section>
       <div className="wrapper">
         <div className="header-wrap">
-          <div className="burger">
+          <button className={classWithModifiers("burger", mobileNavExpanded && "active")} type="button" onClick={toggleState(setMobileNavExpanded)}>
             <div className="line"></div>
             <div className="line"></div>
             <div className="line"></div>
-          </div>
+          </button>
           <Logo />
           <div className="header-right">
-            <nav className="menu">
+            <nav className={classWithModifiers("menu", mobileNavExpanded && "mobile-expanded")}>
               {user.signed && user.type >= UserType.Admin && (
                 <>
                   <AppNavLink className="menu-item-link" to={StaticRoutes.AdminHome}>Admin Panel</AppNavLink>

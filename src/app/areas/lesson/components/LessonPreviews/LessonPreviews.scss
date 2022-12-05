@@ -8,6 +8,10 @@
 .lesson-previews__title {
   font-size: $font-size-h6;
   font-weight: 700;
+
+  @include Mobile {
+    text-align: center;
+  }
 }
 
 .lesson-previews__container {

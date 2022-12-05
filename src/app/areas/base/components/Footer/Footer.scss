@@ -9,6 +9,10 @@ footer {
   .logo {
     margin-bottom: 32px;
   }
+
+  @include DesktopLowResolution {
+    padding: 10vw 0;
+  }
 }
 
 .copyright {
@@ -20,12 +24,18 @@ footer {
 
 .footer-menu {
   display: flex;
+  flex-wrap: wrap;
+
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+
+  gap: 1.5em;
+
   font-weight: 600;
 
   margin-bottom: 15px;
+
+  text-align: center;
 }
 
 a.footer-menu-link {
@@ -43,9 +53,5 @@ a.footer-menu-link {
   &--active {
     // font-weight: 800;
     text-decoration: underline;
-  }
-
-  &:not(:first-child) {
-    margin-left: 30px;
   }
 }

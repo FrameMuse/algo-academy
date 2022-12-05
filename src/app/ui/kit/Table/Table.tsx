@@ -8,7 +8,9 @@ interface TableProps extends HTMLAttributes<HTMLTableElement> {
 
 function Table(props: TableProps) {
   return (
-    <table {...props} className="table" />
+    <div className="table-wrapper">
+      <table {...props} className="table" />
+    </div>
   )
 }
 

@@ -54,9 +54,11 @@ h6 {
 }
 
 .wrapper {
+  $indent: 5vw;
+
   width: 100%;
-  max-width: 1650px;
-  padding: 0 15px;
+  max-width: calc(1650px + ($indent * 2));
+  padding: 0 $indent;
   margin: 0 auto;
 }
 

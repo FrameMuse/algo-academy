@@ -1,5 +1,14 @@
 @import "~assets/scss/bundle.scss";
 
+.table-wrapper {
+  @include Mobile {
+    width: 100%;
+    overflow: auto;
+
+    white-space: nowrap;
+  }
+}
+
 table.table {
   width: 100%;
   border-collapse: collapse;

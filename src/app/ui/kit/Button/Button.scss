@@ -225,4 +225,8 @@ a.button {
 	display: grid;
 	background: rgba($color-dark, 0.5);
 	border-radius: inherit;
+
+	.loader-cover {
+		padding: unset;
+	}
 }

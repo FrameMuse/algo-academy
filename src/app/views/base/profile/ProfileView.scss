@@ -12,16 +12,38 @@
 .account-big-block {
   display: flex;
   align-items: flex-start;
+
+  @include Tablet {
+    display: grid;
+    gap: 2em;
+  }
 }
 
 .account-left {
   width: 280px;
   padding-right: 2em;
+
+  @include Tablet {
+    width: 100%;
+    padding-right: unset;
+  }
+
+  @include Mobile {
+    display: grid;
+  }
 }
 
 .account-menu {
   display: grid;
   gap: 1em;
+
+  @include Tablet {
+    display: flex;
+  }
+
+  @include Mobile {
+    display: grid;
+  }
 }
 
 .account-menu-link {
@@ -47,9 +69,24 @@
 
 .account-right {
   width: calc(100% - 280px);
+
+  @include Tablet {
+    width: 100%;
+  }
 }
 
 .account-info {
   display: flex;
   @include column-gap(2em);
+
+  @include Mobile {
+    display: grid;
+    gap: 2em;
+
+    @include column-gap(unset);
+
+    &>* {
+      width: 100%;
+    }
+  }
 }

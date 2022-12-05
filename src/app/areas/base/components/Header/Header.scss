@@ -6,12 +6,18 @@ header {
 }
 
 .header-wrap {
-  min-height: 88px;
-  padding: 16px 0;
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+
+  padding: 16px 0;
+  min-height: 88px;
+
+  @include Mobile {
+    justify-content: center;
+  }
 }
 
 .burger {
@@ -19,6 +25,8 @@ header {
   position: absolute;
   top: 50%;
   left: 0;
+
+  z-index: 2;
   transform: translate(0, -50%);
 
   .line {
@@ -27,14 +35,14 @@ header {
     background: #fff;
     margin-bottom: 6px;
     border-radius: 5px;
-    transition: .5s;
+    transition: 300ms ease transform;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
-  &.active .line {
+  &--active .line {
     &:nth-child(2) {
       opacity: 0;
     }
@@ -47,11 +55,21 @@ header {
       transform: rotate(45deg) translate(-7px, -6px);
     }
   }
+
+  @include Mobile {
+    display: block;
+  }
 }
 
 .header-right {
   display: flex;
   align-items: center;
+
+  @include Tablet {
+    &>*:not(nav.menu) {
+      display: none;
+    }
+  }
 }
 
 .menu {
@@ -61,9 +79,29 @@ header {
   font-weight: 700;
   line-height: 1.25;
 
-  &:last-child {
-    margin-right: 0;
+  @include Mobile {
+    position: fixed;
+    inset: 0;
+
+    display: grid;
+    gap: 2em;
+
+    padding: 5em;
+    margin: unset;
+    background: $color-blue-80;
+
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    z-index: 1;
+    transition: 200ms ease opacity;
+
+    &:not(&--mobile-expanded) {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
+
 }
 
 .menu-item-link {
@@ -88,6 +126,14 @@ header {
 
   &:not(:first-child) {
     margin-left: 0.5em;
+
+    @include Mobile {
+      margin: unset;
+    }
+  }
+
+  @include Mobile {
+    text-align: center;
   }
 }
 

@@ -15,4 +15,9 @@
   &--gray {
     background: $color-blue-10;
   }
+
+  @include Mobile {
+    gap: 1.5em;
+    padding: 1.5em;
+  }
 }

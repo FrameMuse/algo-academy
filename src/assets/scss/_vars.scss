@@ -7,9 +7,11 @@ $font-size-h5: 1.5rem;
 $font-size-h6: 1.25rem;
 $font-size-text: 1rem;
 
-/* Widths */
-$width-desktop: 1100px;
-$width-tablet: 800px;
+/* Widths (the maximal thershold of a device type) */
+$width-desktop: 1500px;
+$width-desktop-low-resolution: 1200px;
+$width-tablet: 900px;
+// Mobile width below 800px
 
 /* Radiuses */
 $border-radius-1: 0.35em;

@@ -21,6 +21,7 @@
   cursor: initial;
 
   @include Mobile {
+    padding: 1.25em;
     max-width: 90vw;
   }
 

@@ -1,12 +1,17 @@
 @import "~assets/scss/bundle.scss";
 
 .notice {
+  display: flex;
+  align-items: center;
+
   background: rgba($color-red, 0.1);
   border-radius: 1.25em;
   padding: 2em 2.5em;
 
-  display: flex;
-  align-items: center;
+  @include Mobile {
+    display: grid;
+    gap: 1.5em;
+  }
 }
 
 .notice__info {
@@ -17,6 +22,10 @@
 .notice__title {
   font-size: $font-size-h5;
   font-weight: 800;
+
+  @include DesktopLowResolution {
+    text-align: center;
+  }
 }
 
 .notice__desc {
@@ -27,9 +36,17 @@
 
   color: $color-black-main;
   opacity: 0.75;
+
+  @include DesktopLowResolution {
+    max-width: 100%;
+  }
 }
 
 .notice__element {
   flex-shrink: 0;
   margin-left: auto;
+
+  @include DesktopLowResolution {
+    margin-right: auto;
+  }
 }

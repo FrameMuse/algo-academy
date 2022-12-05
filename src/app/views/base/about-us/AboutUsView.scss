@@ -40,6 +40,11 @@
   align-items: flex-start;
   background: $color-blue-10;
   border-radius: 50px;
+
+  @include Mobile {
+    display: grid;
+    gap: 1.5em;
+  }
 }
 
 .founder-left {
@@ -48,6 +53,11 @@
 
   width: calc(47% - 60px);
   margin: 0 30px;
+
+  @include Mobile {
+    width: 100%;
+    margin: unset;
+  }
 }
 
 .founder-img {
@@ -88,5 +98,10 @@
 
   p {
     margin-bottom: 20px;
+  }
+
+  @include Mobile {
+    width: 100%;
+    margin: unset;
   }
 }
