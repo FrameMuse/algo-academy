@@ -12,6 +12,13 @@ function useRunCode() {
     return APIMappings.mapLesson(response.payload)
   }
 
+  async function getChapter(id: string) {
+    const response = await appQuery(APIActions.getChaptersId(id))
+    if (!isResponseOk(response)) return
+
+    return APIMappings.mapChapter(response.payload)
+  }
+
   async function runCode(id: string, data: {
     language: EditorLanguage
     sourceCode: string
@@ -20,8 +27,12 @@ function useRunCode() {
     if (lesson == null) return
     if (lesson.chapterRelation == null) return
 
+    const chapter = await getChapter(lesson.chapterRelation.id)
+    if (chapter == null) return
+
     const response = await appQuery(APIActions.postJudge0Compile({
-      chapter_id: lesson.chapterRelation.id,
+      chapter_id: chapter.id,
+      chapter_name: chapter.title,
 
       lesson_id: id,
       language_id: APIMappings.resourceLanguage.backward(data.language),

@@ -134,12 +134,12 @@ export const patchUsersMeAvatar = (body: Partial<{
 /**
  * Update progress. Only for authorized users.
  */
-export const patchUsersMeProgress = (body: Partial<{
+export const patchUsersMeProgress = (body: {
   chapter_id: string
   chapter_name: string
   lesson_id: string
   status: string
-}>): QueryAction => ({
+}): QueryAction => ({
   method: "PATCH",
   endpoint: `/users/me/progress`,
   body,
@@ -380,6 +380,7 @@ export const getJudge0LanguagesId = (id: string): QueryAction<JudgeLanguage> => 
 
 export const postJudge0Compile = (body: {
   chapter_id: string
+  chapter_name: string
 
   lesson_id: string
   language_id: number
