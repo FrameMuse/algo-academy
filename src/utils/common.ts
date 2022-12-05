@@ -1,5 +1,5 @@
 // import { Buffer } from "buffer"
-import { SyntheticEvent } from "react"
+import { Dispatch, SetStateAction, SyntheticEvent } from "react"
 
 /**
  *
@@ -101,4 +101,8 @@ export function minFill<T>(array: T[], minLevel?: number): T[] {
 
 export function isDictionary(object: unknown): object is Record<keyof never, unknown> {
   return object instanceof Object && object.constructor === Object
+}
+
+export function toggleState(setAction: Dispatch<SetStateAction<boolean>>): () => void {
+  return () => setAction(state => !state)
 }

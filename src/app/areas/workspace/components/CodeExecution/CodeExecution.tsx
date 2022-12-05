@@ -11,7 +11,7 @@ import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { Dispatch, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 import Progress, { ProgressEntry } from "utils/transform/progress"
 
 import { WorkspaceCode } from "../.."
@@ -40,7 +40,7 @@ function CodeExecution(props: CodeExecutionProps) {
         <Buttons>
           <Button size="small" await onClick={props.onRun}>Run Code</Button>
           {props.result && (
-            <Button size="small" color="gray" onClick={() => setExpanded(!expanded)}>{expanded ? "Hide" : "Show"} results</Button>
+            <Button size="small" color="gray" onClick={toggleState(setExpanded)}>{expanded ? "Hide" : "Show"} results</Button>
           )}
         </Buttons>
         <div className="code-bottom-lang">
@@ -92,7 +92,7 @@ function TestCase(props: TestCaseProps) {
 
   return (
     <div className="text-case">
-      <div className="text-case-top" onClick={() => setExpanded(!expanded)}>
+      <div className="text-case-top" onClick={toggleState(setExpanded)}>
         <div className="text-case-name">Test Case #1</div>
         <div className="text-case-arrow">
           <Icon name="chevron-down" />

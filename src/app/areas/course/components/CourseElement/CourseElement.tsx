@@ -2,7 +2,7 @@ import "./CourseElement.scss"
 
 import Icon from "app/ui/kit/Icon/Icon"
 import { ReactNode, useLayoutEffect, useRef, useState } from "react"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 import Progress, { ProgressEntry } from "utils/transform/progress"
 
 interface CourseElementProps {
@@ -32,7 +32,7 @@ function CourseElement(props: CourseElementProps) {
 
   return (
     <div className="course-element">
-      <button className="course-element__info" type="button" onClick={() => setExpanded(!expanded)} aria-details="Toggle content display">
+      <button className="course-element__info" type="button" onClick={toggleState(setExpanded)} aria-details="Toggle content display">
         <div className="course-element__title">{props.title}</div>
         {props.progress && (
           <div className="course-element__right">

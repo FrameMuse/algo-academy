@@ -6,7 +6,7 @@ import Icon from "app/ui/kit/Icon/Icon"
 import Selector from "app/ui/kit/Selector/Selector"
 import { useRef, useState } from "react"
 import { useClickAway } from "react-use"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 import useCountdown from "utils/hooks/useCountdown"
 
 interface TimerProps { }
@@ -23,7 +23,7 @@ function Timer(props: TimerProps) {
 
   return (
     <div className="timer">
-      <button className="timer-toggle" type="button" onClick={() => setExpanded(!expanded)}>
+      <button className="timer-toggle" type="button" onClick={toggleState(setExpanded)}>
         <Icon className="timer-toggle__icon" name="timer" />
         <span className="timer-toggle__text">{countdown}</span>
       </button>

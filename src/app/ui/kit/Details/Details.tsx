@@ -2,7 +2,7 @@ import "./Details.scss"
 
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { ReactNode, useEffect, useRef, useState } from "react"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 
 interface DetailsProps {
   defaultExpanded?: boolean
@@ -23,7 +23,7 @@ function Details(props: DetailsProps) {
   }, [expanded])
   return (
     <div className={classWithModifiers("details", theme)} aria-expanded={expanded}>
-      <div className="details__summary" onClick={() => setExpanded(!expanded)}>
+      <div className="details__summary" onClick={toggleState(setExpanded)}>
         <div className="details__text">{props.summary}</div>
       </div>
       <div className={classWithModifiers("details__body", expanded && "expanded")} style={{ "--details-height": height }} aria-hidden={!expanded}>

@@ -10,7 +10,7 @@ import Button from "app/ui/kit/Button/Button"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import { useEffect, useState } from "react"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 
 import Editor from "../Editor/Editor"
 import { EditorLanguage, EditorTheme } from "../Editor/Editor.types"
@@ -104,7 +104,7 @@ function EditorPreview(props: EditorPreviewProps) {
         <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
           <Button await onClick={onSave}>Save</Button>
           <Button onClick={onCancel}>Cancel</Button>
-          <Button color={diffMode ? "blue" : "gray"} onClick={() => setDiffMode(!diffMode)}>Diff</Button>
+          <Button color={diffMode ? "blue" : "gray"} onClick={toggleState(setDiffMode)}>Diff</Button>
         </ButtonGroup>
         <Row>
           <Selector label="Article Theme" defaultValue={articleTheme} onChange={setArticleTheme}>

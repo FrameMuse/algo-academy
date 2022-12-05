@@ -1,6 +1,7 @@
 import "./Video.scss"
 
 import { useEffect, useRef, useState } from "react"
+import { toggleState } from "utils/common"
 
 import Icon from "../Icon/Icon"
 
@@ -37,7 +38,7 @@ function Video(props: VideoProps) {
         {/* <source src="movie.ogg" type="video/ogg" /> */}
         Your browser does not support the video tag.
       </video>
-      <button className="video-play" type="button" hidden={playing} onClick={() => setPlaying(!playing)} aria-label="play video">
+      <button className="video-play" type="button" hidden={playing} onClick={toggleState(setPlaying)} aria-label="play video">
         <Icon className="video-play__icon" name="play-circle" />
       </button>
     </div >

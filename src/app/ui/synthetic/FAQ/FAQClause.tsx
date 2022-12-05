@@ -2,7 +2,7 @@ import "./FAQ.scss"
 
 import Icon from "app/ui/kit/Icon/Icon"
 import { ReactNode, useLayoutEffect, useRef, useState } from "react"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 
 interface FAQClauseProps {
   summary: ReactNode
@@ -22,7 +22,7 @@ function FAQClause(props: FAQClauseProps) {
 
   return (
     <div className="faq__clause" aria-expanded={expanded}>
-      <div className={classWithModifiers("faq__summary", expanded && "expanded")} onClick={() => setExpanded(!expanded)} aria-details="Toggle content display">
+      <div className={classWithModifiers("faq__summary", expanded && "expanded")} onClick={toggleState(setExpanded)} aria-details="Toggle content display">
         <Icon name={expanded ? "minus" : "plus"} className="faq__icon" />
         <div className="faq__title">{props.summary}</div>
       </div>

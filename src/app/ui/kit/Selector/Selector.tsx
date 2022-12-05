@@ -3,7 +3,7 @@ import "./Selector.scss"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { Children, Dispatch, ReactNode, useEffect, useRef, useState } from "react"
 import { useClickAway } from "react-use"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, toggleState } from "utils/common"
 
 import DropDown from "../DropDown/DropDown"
 import Icon from "../Icon/Icon"
@@ -52,7 +52,7 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
       {props.label && (
         <div className="selector__label">{props.label}</div>
       )}
-      <button className={classWithModifiers("selector__appearance", props.size, props.transparent && "transparent", theme)} type="button" onClick={() => setExpanded(!expanded)}>
+      <button className={classWithModifiers("selector__appearance", props.size, props.transparent && "transparent", theme)} type="button" onClick={toggleState(setExpanded)}>
         <div className={classWithModifiers("selector__current", !children && "empty")}>{children || props.placeholder || "Choose from list..."}</div>
         <Icon className={classWithModifiers("selector__icon", expanded && "up")} name="chevron-down" />
       </button>
