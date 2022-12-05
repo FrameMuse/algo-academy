@@ -3,16 +3,26 @@ import { createQuery } from "utils/common"
 import { QueryAction, QueryResponse } from "./types"
 
 export class QueryError extends Error { }
-export class QueryClientError extends Error { }
-export class QueryServerError extends Error { }
+export class QueryClientError extends Error {
+  response: QueryResponse
 
-// export async function resolveBodyType(contentType?: string): Promise<void> {
-//   if (contentType?.startsWith("application/json")) {
-//     return 
-//   }
+  constructor(response: QueryResponse) {
+    super(response.payload.message)
 
-//   return 1
-// }
+    this.name = QueryClientError.name
+    this.response = response
+  }
+}
+export class QueryServerError extends Error {
+  response: QueryResponse
+
+  constructor(response: QueryResponse) {
+    super(response.payload.message)
+
+    this.name = QueryServerError.name
+    this.response = response
+  }
+}
 
 export function isResponseOk<T>(response: QueryResponse<T>, throwError = false): response is Required<typeof response> {
   if (response.error) {
@@ -54,5 +64,3 @@ export function buildActionURL<T>(action: QueryAction<T>): URL {
 export function getActionQueryKey(action: QueryAction): string[] {
   return [action.endpoint, action.operationId]
 }
-
-export { }

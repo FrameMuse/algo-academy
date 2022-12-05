@@ -186,11 +186,11 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
 
 
     if (response.status >= 500) {
-      throw new QueryServerError(queryResponse.payload.message)
+      throw new QueryServerError(queryResponse)
     }
 
     if (response.status >= 400) {
-      throw new QueryClientError(queryResponse.payload.message)
+      throw new QueryClientError(queryResponse)
     }
 
 
