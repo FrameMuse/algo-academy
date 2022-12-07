@@ -18,7 +18,7 @@ function ProblemsSolved(props: ProblemsSolvedProps) {
     <div className="solved-problems">
       <div className="solved-problems__title">
         <h5>Solved Problems</h5>
-        <Callout>{totalProgress.total} Solved</Callout>
+        <Callout>{totalProgress.completed} Solved</Callout>
       </div>
 
       <ProgressBar value={Progress.percentile(totalProgress)} />
