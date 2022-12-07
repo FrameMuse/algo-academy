@@ -1,5 +1,3 @@
-// import "./QueryBoundary.scss"
-
 import PopupUserAuth from "app/areas/user/popups/PopupUserAuth"
 import Column from "app/layouts/Column/Column"
 import Headings from "app/layouts/Headings/Headings"
@@ -12,7 +10,6 @@ import { useAppSelector } from "store/hooks"
 import { UserType } from "store/reducers/user/types"
 
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary"
-import { ErrorBoundaryProps } from "./ErrorBoundary/ErrorBoundary.types"
 
 interface QueryBoundaryProps {
   /**
@@ -30,16 +27,25 @@ interface QueryBoundaryProps {
  * - User access level boundary
  */
 function QueryBoundary(props: QueryBoundaryProps) {
-  const errorFallback: ErrorBoundaryProps["fallback"] = (reset, error?) => (
+  const errorDefinedFallback = (error: Error) => (
     <ErrorCover>
       <Column justifyItems="center">
         <Headings>
-          <h4>Error - {error?.name || "Unknown"}</h4>
-          <p>{error?.message}</p>
+          <h4>{error.name}</h4>
+          <p>{error.message}</p>
+        </Headings>
+      </Column>
+    </ErrorCover>
+  )
+  const errorUnknownFallback = (
+    <ErrorCover>
+      <Column justifyItems="center">
+        <Headings>
+          <h4>Error</h4>
+          <p>Something went wrong.</p>
         </Headings>
 
         <p>Try again in a few minutes.</p>
-        {/* <Button color="dark" size="small" onClick={reset}>Try again</Button> */}
       </Column>
     </ErrorCover>
   )
@@ -78,13 +84,13 @@ function QueryBoundary(props: QueryBoundaryProps) {
   }
 
   return (
-    <ErrorBoundary fallback={errorFallback}>
+    <ErrorBoundary fallback={(_reset, error) => error ? errorDefinedFallback(error) : errorUnknownFallback}>
       <Suspense fallback={suspenseFallback}>
         {/* <UserBoundary fallback={userFallback} userType={props.userType}> */}
         {props.children}
         {/* </UserBoundary> */}
       </Suspense>
-    </ErrorBoundary>
+    </ErrorBoundary >
   )
 }
 
