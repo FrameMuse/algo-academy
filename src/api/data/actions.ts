@@ -19,6 +19,7 @@ import {
   JudgeStatuses,
   Lesson,
   Promo,
+  Snippet,
   Stripe,
   User
 } from "./schemas"
@@ -134,12 +135,12 @@ export const patchUsersMeAvatar = (body: Partial<{
 /**
  * Update progress. Only for authorized users.
  */
-export const patchUsersMeProgress = (body: {
+export const patchUsersMeProgress = (body: Partial<{
   chapter_id: string
   chapter_name: string
   lesson_id: string
   status: string
-}): QueryAction => ({
+}>): QueryAction => ({
   method: "PATCH",
   endpoint: `/users/me/progress`,
   body,
@@ -237,7 +238,7 @@ export const postChapters = (body: {
   name: string
   order_number: number
   user_topic: boolean
-  list?: string[] | null
+  list?: string[]
 }): QueryAction<Chapter> => ({
   method: "POST",
   endpoint: `/chapters`,
@@ -261,8 +262,8 @@ export const patchChaptersId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
-  list: string[] | null
-}>): QueryAction<Chapter> => ({
+  list: string[]
+}>): QueryAction => ({
   method: "PATCH",
   endpoint: `/chapters/${id}`,
   body,
@@ -338,7 +339,55 @@ export const deletePromoId = (id: string): QueryAction => ({
 /**
  * This can only be done by an administrator.
  */
-export const getFeedbacks = (): QueryAction<Feedback[]> => ({
+export const postSnippets = (body: Snippet): QueryAction<Snippet> => ({
+  method: "POST",
+  endpoint: `/snippets`,
+  body,
+  operationId: "createSnippet"
+})
+
+/**
+ * Only for authorized users.
+ */
+export const getSnippetsLanguage = (language: string): QueryAction<Snippet[]> => ({
+  method: "GET",
+  endpoint: `/snippets/${language}`,
+  operationId: "snippetsByLanguageId"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const patchSnippetsId = (id: string, body: Partial<{
+  name: string
+  language: number
+  code: string
+  space_complex: string
+  time_complex: string
+}>): QueryAction => ({
+  method: "PATCH",
+  endpoint: `/snippets/${id}`,
+  body,
+  operationId: "updateSnippet"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const deleteSnippetsId = (id: string): QueryAction => ({
+  method: "DELETE",
+  endpoint: `/snippets/${id}`,
+  operationId: "deleteSnippet"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const getFeedbacks = (): QueryAction<{
+  title: string
+  content: string
+  user_id: string
+}[]> => ({
   method: "GET",
   endpoint: `/feedbacks`,
   operationId: "allFeedback"
@@ -381,7 +430,6 @@ export const getJudge0LanguagesId = (id: string): QueryAction<JudgeLanguage> => 
 export const postJudge0Compile = (body: {
   chapter_id: string
   chapter_name: string
-
   lesson_id: string
   language_id: number
   source_code: string

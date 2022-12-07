@@ -40,6 +40,10 @@
       "description": "Endpoints for feedbacks users"
     },
     {
+      "name": "Snippet",
+      "description": "Endpoints for snippets"
+    },
+    {
       "name": "Judge0",
       "description": "Endpoints for judge"
     },
@@ -907,16 +911,7 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "learning_list": {
-                    "nullable": true,
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "example": "5fva36hd873d761bd1c7ae4f"
-                    }
-                  },
-                  "practice_list": {
-                    "nullable": true,
+                  "list": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -1041,16 +1036,7 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "learning_list": {
-                    "nullable": true,
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "example": "5fva36hd873d761bd1c7ae4f"
-                    }
-                  },
-                  "practice_list": {
-                    "nullable": true,
+                  "list": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -1063,15 +1049,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Chapter"
-                }
-              }
-            }
+          "204": {
+            "description": ""
           },
           "400": {
             "description": "Bad request"
@@ -1398,6 +1377,216 @@
         }
       }
     },
+    "/snippets": {
+      "post": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Create snippet",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createSnippet",
+        "requestBody": {
+          "description": "Created snnipet object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snippet"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snippet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/snippets/{language}": {
+      "get": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Get snippet by language",
+        "description": "Only for authorized users.",
+        "operationId": "snippetsByLanguageId",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "path",
+            "description": "language of snippets to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Snippet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/snippets/{id}": {
+      "patch": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Update snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updateSnippet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of snippet to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "language": {
+                    "type": "number"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "space_complex": {
+                    "type": "string"
+                  },
+                  "time_complex": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Delete Snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteSnippet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of Snippet need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/feedbacks": {
       "get": {
         "tags": [
@@ -1415,7 +1604,21 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Feedback"
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "example": "Problem lesson #2"
+                      },
+                      "content": {
+                        "type": "string",
+                        "example": "error during lesson"
+                      },
+                      "user_id": {
+                        "type": "string",
+                        "example": "6387663011927596af93055b",
+                        "default": "Unauthorized user"
+                      }
+                    }
                   }
                 }
               }
@@ -1448,7 +1651,7 @@
           "required": true
         },
         "responses": {
-          "201": {
+          "204": {
             "description": ""
           },
           "400": {
@@ -1715,6 +1918,34 @@
   },
   "components": {
     "schemas": {
+      "Snippet": {
+        "type": "object",
+        "required": [
+          "name",
+          "language",
+          "code",
+          "space_complex",
+          "time_complex"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "language": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "space_complex": {
+            "type": "string"
+          },
+          "time_complex": {
+            "type": "string"
+          }
+        }
+      },
       "Feedback": {
         "type": "object",
         "required": [
@@ -1885,15 +2116,22 @@
                   "example": "Three"
                 },
                 "lessons": {
-                  "type": "object",
-                  "properties": {
-                    "completed": {
-                      "type": "number",
-                      "example": "1"
-                    },
-                    "all": {
-                      "type": "number",
-                      "example": "4"
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "lesson_id": {
+                        "type": "string",
+                        "example": "6383befbe25c834cdb762ae6"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Completed",
+                        "enum": [
+                          "Not Completed",
+                          "Needs Review",
+                          "Completed"
+                        ]
+                      }
                     }
                   }
                 }
@@ -1974,15 +2212,6 @@
             "type": "string",
             "example": "Coding Question"
           },
-          "status": {
-            "type": "string",
-            "example": "Not Completed",
-            "enum": [
-              "Not Completed",
-              "Needs Review",
-              "Completed"
-            ]
-          },
           "resources": {
             "nullable": true,
             "type": "array",
@@ -2002,6 +2231,10 @@
                   "example": "Coding Question"
                 },
                 "tests": {
+                  "type": "string"
+                },
+                "validation_func": {
+                  "description": "Should always return JSON.stringify(results). results is an array and contains the required fields of the { passed:boolean, description: string, ...any fields } ",
                   "type": "string"
                 },
                 "default_code": {
@@ -2040,7 +2273,7 @@
             "type": "boolean",
             "example": true
           },
-          "learning_list": {
+          "list": {
             "type": "array",
             "items": {
               "properties": {
@@ -2048,42 +2281,13 @@
                   "type": "string",
                   "example": "5fva36hd873d761bd1c7ae4f"
                 },
-                "name": {
+                "type": {
                   "type": "string",
-                  "example": "Common Patterns"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "Not Completed",
-                  "enum": [
-                    "Not Completed",
-                    "Needs Review",
-                    "Completed"
-                  ]
-                }
-              }
-            }
-          },
-          "practice_list": {
-            "type": "array",
-            "items": {
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "5fva36hd873d761bd1c7ae4f"
+                  "example": "learning"
                 },
                 "name": {
                   "type": "string",
                   "example": "Common Patterns"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "Not Completed",
-                  "enum": [
-                    "Not Completed",
-                    "Needs Review",
-                    "Completed"
-                  ]
                 }
               }
             }
@@ -2322,34 +2526,29 @@
       "JudgeResult": {
         "type": "object",
         "properties": {
-          "stdout": {
-            "type": "string",
-            "format": "base64",
-            "example": "aGVsbG8sIEp1ZGdlMAo"
-          },
           "time": {
+            "nullable": true,
             "type": "string",
             "example": "0.007"
           },
           "memory": {
+            "nullable": true,
             "type": "number",
             "example": 1332
           },
-          "stderr": {
-            "type": "string",
-            "example": null
-          },
-          "token": {
-            "type": "string",
-            "example": "13436421-bc5a-4640-ba2a-b8dc84de02f0"
-          },
           "compile_output": {
-            "type": "string",
-            "example": null
-          },
-          "message": {
-            "type": "string",
-            "example": null
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "passed": {
+                  "type": "boolean"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "status": {
             "type": "object",

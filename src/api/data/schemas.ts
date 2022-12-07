@@ -8,6 +8,14 @@
 */
 
 
+export interface Snippet {
+  name: string
+  language: number
+  code: string
+  space_complex: string
+  time_complex: string
+}
+
 export interface Feedback {
   title: string
   content: string
@@ -52,8 +60,8 @@ export interface User {
     chapter_id: string
     chapter_name: string
     lessons: {
-      id: string,
-      status: string,
+      lesson_id: string
+      status: string
     }[]
   }[]
   history: Plan[]
@@ -75,12 +83,12 @@ export interface Lesson {
   statement: string | null
   content: string | null
   hints: string | null
-  status: string
   resources: {
     solution: string | null
     language: number
     notes: string
     tests: string
+    validation_func: string
     default_code: string
   }[] | null
   used_in: {
@@ -168,13 +176,12 @@ export interface JudgeLanguage {
 }
 
 export interface JudgeResult {
-  stdout: string
-  time: string
-  memory: number
-  stderr: string
-  token: string
-  compile_output: string
-  message: string
+  time: string | null
+  memory: number | null
+  compile_output: {
+    passed: boolean
+    description: string
+  }[] | null
   status: {
     id: number
     description: string

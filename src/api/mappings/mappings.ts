@@ -31,7 +31,7 @@ export function mapUserProgress(schema: APISchemas.User["progress"][0]) {
     id: schema.chapter_id,
     title: schema.chapter_name,
     lessons: schema.lessons.map(lesson => ({
-      id: lesson.id,
+      id: lesson.lesson_id,
       status: lessonStatus.forward(lesson.status)
     }))
   }
@@ -56,7 +56,6 @@ export function mapLesson(schema: APISchemas.Lesson) {
       id: schema.used_in.chapter_id,
       title: schema.used_in.chapter_name,
     } : undefined,
-    status: lessonStatus.forward(schema.status),
 
     content: schema.content ?? "",
 
@@ -69,7 +68,7 @@ export function mapLesson(schema: APISchemas.Lesson) {
 function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution ?? "",
-    language: resourceLanguage.forward(schema.language),
+    language: editorLanguage.forward(schema.language),
     notes: schema.notes,
     tests: schema.tests,
     defaultCode: schema.default_code
@@ -103,7 +102,7 @@ export const userType = new BiMap<APISchemas.User["role"], UserType>({
 })
 
 
-export const resourceLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
+export const editorLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
   51: EditorLanguage["C#"],
   62: EditorLanguage.Java,
   63: EditorLanguage.JavaScript,
@@ -119,7 +118,7 @@ export const resourceLanguage = new BiMap<NonNullable<APISchemas.Lesson["resourc
   87: EditorLanguage["F#"]
 })
 
-export const lessonStatus = new BiMap<APISchemas.Lesson["status"], LessonStatus>({
+export const lessonStatus = new BiMap<APISchemas.User["progress"][0]["lessons"][0]["status"], LessonStatus>({
   "Completed": LessonStatus.Complete,
   "Not Completed": LessonStatus.Incomplete,
   "Needs Review": LessonStatus.NeedsReviews
