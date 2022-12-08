@@ -1,29 +1,36 @@
 import "./ProblemView.scss"
 
 import useLesson from "api/hooks/lessons/useLesson"
+import useLessonContents from "api/hooks/lessons/useLessonContents"
+import useUpdateLessonByLanguage from "api/hooks/lessons/useUpdateLessonByLanguage"
+import useSnippets from "api/hooks/snippets/useSnippets"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
 import { LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
-import { Snippets, WorkspaceCode, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { Snippets, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
 import { WorkspaceCodeExecution } from "app/areas/workspace/types"
+import QueryBoundary from "app/containers/QueryBoundary"
+import Headings from "app/layouts/Headings/Headings"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
 import ArticleMarkdown from "app/ui/kit/Article/ArticleMarkdown"
 import Button from "app/ui/kit/Button/Button"
 import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Icon from "app/ui/kit/Icon/Icon"
-import { EDITOR_DEFAULT_VALUE } from "app/ui/synthetic/Editor/Editor"
+import { EditorLanguage, EdtitorSnippet } from "app/ui/synthetic/Editor/Editor.types"
+import Loader from "app/ui/synthetic/Loader/Loader"
 import Logo from "app/ui/synthetic/Logo/Logo"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 import Timer from "app/ui/synthetic/Timer/Timer"
+import _ from "lodash"
+import { useState } from "react"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { useAppSelector } from "store/hooks"
-import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { classWithModifiers } from "utils/common"
 import useParam from "utils/hooks/useParam"
 
@@ -65,8 +72,12 @@ function ProblemView() {
         </header>
         <WorkspaceTheme>
           <div className="problem-layout__container">
-            <ProblemLeftSection id={lessonId} />
-            <ProblemRightSection id={lessonId} />
+            <QueryBoundary>
+              <ProblemLeftSection id={lessonId} />
+            </QueryBoundary>
+            <QueryBoundary>
+              <ProblemRightSection id={lessonId} />
+            </QueryBoundary>
           </div>
         </WorkspaceTheme>
       </div>
@@ -86,6 +97,10 @@ enum TabRoutes {
 
 function ProblemLeftSection(props: { id: string }) {
   const lesson = useLesson(props.id)
+
+  const workspace = useAppSelector(state => state.workspace)
+  const editorLanguage = workspace.editorLanguage as unknown as EditorLanguage
+  const contents = useLessonContents(props.id, editorLanguage)
 
   return (
     <div className="problem-layout__section problem-layout__section--shrink">
@@ -107,7 +122,7 @@ function ProblemLeftSection(props: { id: string }) {
         </TabRoute>
 
         <TabRoute path={TabRoutes.Solution}>
-          {/* <ArticleMarkdown content={lesson} /> */}
+          <ArticleMarkdown content={contents.solution} />
         </TabRoute>
       </TabRouter>
     </div>
@@ -116,76 +131,19 @@ function ProblemLeftSection(props: { id: string }) {
 
 function ProblemRightSection(props: { id: string }) {
   const workspace = useAppSelector(state => state.workspace)
-
-  const lesson = useLesson(props.id)
-
-  const id = `${props.id}-${workspace.editorLanguage}`
-  const resource = lesson.resources.find(resource => (resource.language as unknown as WorkspaceEditorLanguage) === workspace.editorLanguage)
-
-  // const asd = `function dfs(state, res) {
-  //   if (isSolution(state)) {
-  //       // add a copy of the state to the result
-  //       res.push(new Array(state));
-  //       return;
-  //   }
-  //   for (const choice of choices) {
-  //       state.push(choice);
-  //       dfs(state, res);
-  //       state.pop();
-  //   }
-  // }`
-
-  // const monaco = useMonaco()
-  // useEffect(() => {
-  //   if (monaco == null) return
-
-  //   const languages = monaco.languages
-  //   languages.registerCompletionItemProvider("typescript", {
-  //     provideCompletionItems(model, position) {
-  //       const snippets: ISnippet[] = [{
-  //         label: "DFS",
-  //         detail: "Depth-first search",
-  //         description: "Run Time: O(n); Space: O(n)",
-
-  //         insertText: asd
-  //       },
-  //       {
-  //         label: "Depth-first search",
-  //         description: "Run Time: O(n); Space: O(n)",
-
-  //         insertText: asd
-  //       }]
-
-  //       const word = model.getWordUntilPosition(position)
-  //       const range = {
-  //         startLineNumber: position.lineNumber,
-  //         endLineNumber: position.lineNumber,
-  //         startColumn: word.startColumn,
-  //         endColumn: word.endColumn
-  //       }
-
-  //       function mapSnippet(snippet: ISnippet): languages.CompletionItem {
-  //         return {
-  //           kind: languages.CompletionItemKind.Snippet,
-  //           range,
-  //           label: snippet,
-  //           insertText: snippet.insertText
-  //         }
-  //       }
-
-  //       return { suggestions: snippets.map(mapSnippet) }
-  //     },
-  //   })
-  // }, [monaco])
-
-  // interface ISnippet {
-  //   label: string
-  //   insertText: string
-  //   detail?: string
-  //   description?: string
-  // }
+  const editorLanguage = workspace.editorLanguage as unknown as EditorLanguage
 
 
+  const id = `${props.id}-${editorLanguage}-code`
+  const contents = useLessonContents(props.id, editorLanguage)
+
+
+  const snippets = useSnippets(editorLanguage)
+  const editorSnippets: EdtitorSnippet[] = snippets.map(snippet => ({
+    label: snippet.label,
+    insertText: snippet.content,
+    description: `Run time: ${snippet.runTime}; Space: ${snippet.space}`
+  }))
 
   return (
     <div className="problem-layout__section">
@@ -200,22 +158,96 @@ function ProblemRightSection(props: { id: string }) {
         </TabLinks>
 
         <TabRoute path={TabRoutes.Code}>
-          <WorkspaceEditor draftId={id} defaultLanguage={resource?.language} defaultValue={resource?.defaultCode} height="100%" />
+          <WorkspaceEditor
+            height="100%"
+
+            draftId={id}
+            snippets={editorSnippets}
+            defaultLanguage={contents?.language}
+            defaultValue={contents?.defaultCode}
+          />
           <WorkspaceCodeExecution draftId={id} lessonId={props.id} />
         </TabRoute>
 
+        {/* <TabRoute path={TabRoutes.Tests}>
+          {contents?.tests && (
+            <WorkspaceCode>{contents.tests}</WorkspaceCode>
+          )}
+        </TabRoute> */}
+
         <TabRoute path={TabRoutes.Snippets}>
-          <Snippets Snippets={[{ label: "DFS", content: EDITOR_DEFAULT_VALUE, runTime: "O(n)", space: "O(n)" }]} />
+          <Headings>
+            <h4>Snippets</h4>
+            <p>Pieces of code that could help you solving a problem.</p>
+            {/* <p>Tip: Try typing <CodeInline>{snippets[0]?.label}</CodeInline> in code section.</p> */}
+          </Headings>
+          <Snippets snippets={snippets} />
         </TabRoute>
 
-        <TabRoute path={TabRoutes.Tests}>
-          {resource?.tests && (
-            <WorkspaceCode>{resource.tests}</WorkspaceCode>
-          )}
+        <TabRoute path={TabRoutes.Notes}>
+          <ProblemNotes id={props.id} language={editorLanguage} />
         </TabRoute>
 
       </TabRouter>
     </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface ProblemNotesProps {
+  id: string
+  language: EditorLanguage
+}
+
+function ProblemNotes(props: ProblemNotesProps) {
+  const [pending, setPending] = useState(false)
+
+  const id = `${props.id}-${props.language}-notes`
+
+  const lessonContents = useLessonContents(props.id, props.language)
+  const updateLesson = useUpdateLessonByLanguage()
+
+  async function onChange(value: string | undefined) {
+    if (value == null) return
+
+    setPending(true)
+    await updateLesson(props.id, props.language, { notes: value })
+    setPending(false)
+  }
+  const onChangeThrottled = _.debounce(onChange, 1000, { trailing: true })
+
+
+  const pendingSavingElement = <p>Saving... <div><Loader /></div></p>
+  const upToDateElement = <p>Up to date <Icon name="check" /></p>
+  return (
+    <>
+      <Headings>
+        <h4>Notes</h4>
+        <p>Here you can quicly take a note.</p>
+        {pending ? pendingSavingElement : upToDateElement}
+      </Headings>
+      <WorkspaceEditor
+        draftId={id}
+        height="100%"
+
+        value="" // to prevent updating default value when lesson is refetched.
+        defaultValue={lessonContents.notes}
+        defaultLanguage={EditorLanguage.Markdown}
+
+        onChange={onChangeThrottled}
+      />
+    </>
   )
 }
 

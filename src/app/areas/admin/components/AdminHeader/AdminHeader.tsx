@@ -17,6 +17,7 @@ function AdminHeader() {
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminHome}>Home</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminChapters}>Chapters</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>
+          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminSnippets}>Snippets</ButtonLink>
           <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminFeedback}>Feedback</ButtonLink>
         </Buttons>
       </nav>

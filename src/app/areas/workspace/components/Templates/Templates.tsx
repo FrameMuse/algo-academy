@@ -17,21 +17,26 @@ interface Snippet {
 }
 
 interface TemplatesProps {
-  Snippets: Snippet[]
+  snippets: Snippet[]
 }
 
+/**
+ * TODO: Rename other related things to `Snippets` insteand of `Templates`.
+ */
 function Snippets(props: TemplatesProps) {
   const theme = useTheme()
 
   const [activeIndex, setActiveIndex] = useState<number>(0)
-  const template = props.Snippets[activeIndex]
+
+  const template = props.snippets[activeIndex] as Snippet | undefined
+  if (template == null) return null
 
   const { copyToClipboard } = useAppCopyToClipboard()
   return (
     <div className={classWithModifiers("templates", theme)}>
       <div className="templates__menu">
         <TabLinks>
-          {props.Snippets.map((template, index) => (
+          {props.snippets.map((template, index) => (
             <button
               className={classWithModifiers("tab-links__link", index === activeIndex && "active")}
               type="button"

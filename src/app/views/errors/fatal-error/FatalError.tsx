@@ -1,3 +1,5 @@
+import "./FatalError.scss"
+
 import Button from "app/ui/kit/Button/Button"
 import { ErrorInfo } from "react"
 

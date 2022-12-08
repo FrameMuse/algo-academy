@@ -1,10 +1,12 @@
 import "./PurchaseView.scss"
 
 import { APP_TITLE } from "app/App"
+import { PopupCheckout } from "app/areas/purchase"
 import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import List from "app/ui/kit/List/List"
 import { Helmet } from "react-helmet"
+import { Modal } from "react-modal-global"
 import Price from "utils/transform/price"
 
 function PurchaseView() {
@@ -97,7 +99,7 @@ function PricingItem(props: PricingItemProps) {
           <li key={index}>{benefit}</li>
         ))}
       </List>
-      <Button>Get Started</Button>
+      <Button onClick={() => Modal.open(PopupCheckout)}>Get Started</Button>
     </div>
   )
 }

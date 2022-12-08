@@ -4,7 +4,7 @@ import { UserType } from "store/reducers/user/types"
 
 import { AdminLayout } from "./areas/admin"
 import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
-import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView } from "./views/admin"
+import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView, AdminSnippetsEditView, AdminSnippetsNewView, AdminSnippetsView } from "./views/admin"
 import { AboutUsView } from "./views/base/about-us"
 import { ContactUsView } from "./views/base/contact-us"
 import FullCourseView from "./views/base/full-course/FullCourseView"
@@ -48,17 +48,25 @@ function AppRoutes() {
         {isAdmin && (
           <>
             <Route path={StaticRoutes.AdminHome} element={<AdminHomeView />} />
+
             <Route path={StaticRoutes.AdminChapters}>
               <Route index element={<AdminChaptersView />} />
 
               <Route path="new" element={<AdminChaptersNewView />} />
               <Route path=":chapterId" element={<AdminChaptersEditView />} />
             </Route>
+
             <Route path={StaticRoutes.AdminLessons}>
               <Route index element={<AdminLessonsView />} />
 
               <Route path="new" element={<AdminLessonsNewView />} />
               <Route path=":lessonId" element={<AdminLessonsEditView />} />
+            </Route>
+            <Route path={StaticRoutes.AdminSnippets}>
+              <Route index element={<AdminSnippetsView />} />
+
+              <Route path="new" element={<AdminSnippetsNewView />} />
+              <Route path=":snippetId" element={<AdminSnippetsEditView />} />
             </Route>
             <Route path={StaticRoutes.AdminFeedback} element={<AdminFeedbackView />} />
           </>
@@ -89,6 +97,7 @@ export enum StaticRoutes {
   AdminHome = "/admin",
   AdminChapters = "/admin/chapters",
   AdminLessons = "/admin/lessons",
+  AdminSnippets = "/admin/snippets",
   AdminFeedback = "/admin/feedback",
 }
 
