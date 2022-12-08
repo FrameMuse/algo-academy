@@ -5,3 +5,5 @@ export { default as LessonStatusSelector } from "./containers/LessonStatusSelect
 
 export { default as LessonInfoEdit } from "./containers/LessonInfoEdit"
 export { default as LessonContentEdit } from "./containers/LessonContentEdit"
+
+export { default as useLessonNavigate } from "./hooks/useLessonNavigate"

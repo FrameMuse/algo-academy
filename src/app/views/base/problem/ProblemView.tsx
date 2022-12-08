@@ -3,7 +3,7 @@ import "./ProblemView.scss"
 import useLesson from "api/hooks/lessons/useLesson"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
-import { LessonStatusSelector } from "app/areas/lesson"
+import { LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
 import { Snippets, WorkspaceCode, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
@@ -33,6 +33,8 @@ function ProblemView() {
   const lessonId = useParam("lessonId")
   const lesson = useLesson(lessonId)
 
+  const { navigateToPrev, navigateToNext } = useLessonNavigate(lesson.id, lesson.chapterRelation?.id)
+
   return (
     <>
       <Helmet>
@@ -44,9 +46,9 @@ function ProblemView() {
             <Logo />
 
             <div className="problem-header-level">
-              <ButtonIcon name="chevron-left" size="smaller" squared ariaLabel="Previous" />
+              <ButtonIcon name="chevron-left" size="smaller" squared ariaLabel="Previous" onClick={navigateToPrev} />
               <div className="problem-header-level-text">{lesson.title}</div>
-              <ButtonIcon name="chevron-right" size="smaller" squared ariaLabel="Next" />
+              <ButtonIcon name="chevron-right" size="smaller" squared ariaLabel="Next" onClick={navigateToNext} />
             </div>
 
             <div className="problem-header__right">
