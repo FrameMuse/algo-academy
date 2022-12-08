@@ -61,10 +61,8 @@ interface LessonSharedContentEditProps {
 
 function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
   const [tab, setTab] = useState<SharedContentKey>()
-  // const [language, setLanguage] = useState<EditorLanguage>()
   const [dirty, setDirty] = useState(false)
 
-  // const multipleContent = props.multipleContents.find(content => content.language === language)
   const content = tab && props.content?.[tab]
 
   function onSave(value: string) {
@@ -179,7 +177,7 @@ function LessonProblemEdit(props: { id: string }) {
         <LessonSharedContentEdit content={lesson} onSave={onSharedSave} />
       </TabRoute>
       <TabRoute path="specific">
-        <LessonMultipleContentEdit contents={lesson.resources} onSave={onLanguageSpecificSave} />
+        <LessonMultipleContentEdit contents={lesson.contents} onSave={onLanguageSpecificSave} />
       </TabRoute>
     </TabRouter>
   )

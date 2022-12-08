@@ -22,7 +22,7 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
   // TODO: Rework/Rewise draft system
   const instance = workspace.instances[props.draftId]
 
-  function updateLanguage(editorLanguage: WorkspaceEditorLanguage) {
+  function onLanguageChange(editorLanguage: WorkspaceEditorLanguage) {
     dispatch(updateWorkspace({ editorLanguage }))
   }
 
@@ -39,7 +39,7 @@ function WorkspaceCodeExecution(props: WorkspaceCodeExecutionProps) {
   }
 
   return (
-    <CodeExecution result={result} onRun={onRun} defaultLanguage={workspace.editorLanguage} onLanguageChange={updateLanguage} />
+    <CodeExecution result={result} onRun={onRun} defaultLanguage={workspace.editorLanguage} onLanguageChange={onLanguageChange} />
   )
 }
 

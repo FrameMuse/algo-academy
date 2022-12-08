@@ -11,7 +11,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
   return (
     <CourseContents>
       {chapters.map((chapter, index) => (
-        <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded key={index}>
+        <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded={chapter.progress.completed < chapter.progress.total} key={index}>
           {chapter.learningLessons.length > 0 && (
             <LessonPreviews title="Learning">
               {chapter.learningLessons.map(lesson => (

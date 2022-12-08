@@ -3,17 +3,29 @@ import { APIMappings } from "api/mappings"
 import useAppQuery from "api/useAppQuery"
 import { LessonStatus } from "app/areas/lesson/types"
 
-import useChaptersProgress from "../chapters/useChaptersProgress"
+import useChapterProgress from "../chapters/useChapterProgress"
+
+const LESSON_STATUS_DEFAULT = LessonStatus.Incomplete
 
 function useLesson(id: string) {
   const { data } = useAppQuery(APIActions.getLessonsId(id))
-  const chaptersProgress = useChaptersProgress()
 
   const lesson = APIMappings.mapLesson(data.payload)
-  const lessonStatus = chaptersProgress?.flatMap(chapterA => chapterA.lessons).find(lesson => lesson.id === id)?.status
-  const lessonStatusDefault = LessonStatus.Incomplete
+  if (lesson.chapterRelation == null) {
+    return { ...lesson, status: LESSON_STATUS_DEFAULT }
+  }
 
-  return { ...lesson, status: lessonStatus ?? lessonStatusDefault }
+  const lessonChapter = useChapterProgress(lesson.chapterRelation.id)
+  if (lessonChapter == null) {
+    return { ...lesson, status: LESSON_STATUS_DEFAULT }
+  }
+
+  const lessonStatus = lessonChapter.lessons.find(lesson => lesson.id === id)?.status
+  if (lessonStatus == null) {
+    return { ...lesson, status: LESSON_STATUS_DEFAULT }
+  }
+
+  return { ...lesson, status: lessonStatus }
 }
 
 export default useLesson

@@ -1,4 +1,6 @@
 import { QueryClient } from "@tanstack/react-query"
+import _ from "lodash"
+import { toast } from "react-toastify"
 
 import { QueryClientError } from "./helpers"
 
@@ -26,7 +28,20 @@ const queryClient = new QueryClient({
         }
 
         return failureCount * 5 * 1000
-      }
+      },
+      onError(error) {
+        if (error instanceof QueryClientError) {
+          toast.error(`[${_.startCase(error.action.operationId)}] - ${error.message}`)
+
+          return { error }
+        }
+
+        if (error instanceof Error) {
+          toast.error("Query Error: " + error.message)
+
+          return { error }
+        }
+      },
     }
   }
 })

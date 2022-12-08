@@ -34,3 +34,10 @@ export enum EditorTheme {
   Dark = "vs-dark",
   HighContrastDark = "hc-black"
 }
+
+export interface EdtitorSnippet {
+  label: string
+  insertText: string
+  detail?: string
+  description?: string
+}

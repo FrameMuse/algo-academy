@@ -1,3 +1,5 @@
+import _ from "lodash"
+import { toast } from "react-toastify"
 import { isDictionary } from "utils/common"
 import FileTransform from "utils/transform/file"
 import JWT from "utils/transform/jwt"
@@ -186,11 +188,11 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
 
 
     if (response.status >= 500) {
-      throw new QueryServerError(queryResponse)
+      throw new QueryServerError(action, queryResponse)
     }
 
     if (response.status >= 400) {
-      throw new QueryClientError(queryResponse)
+      throw new QueryClientError(action, queryResponse)
     }
 
 
@@ -205,17 +207,21 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
       console.error("[DEVELOPMENT ONLY ERROR]", error)
     }
 
-    // if (error instanceof QueryClientError) {
-    //   toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
+    if (action.method === "GET") {
+      throw error
+    }
 
-    //   return { error }
-    // }
+    if (error instanceof QueryClientError) {
+      toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
 
-    // if (error instanceof Error) {
-    //   toast.error("Query Error: " + error.message)
+      throw error
+    }
 
-    //   return { error }
-    // }
+    if (error instanceof Error) {
+      toast.error("Query Error: " + error.message)
+
+      throw error
+    }
 
     throw error
   }

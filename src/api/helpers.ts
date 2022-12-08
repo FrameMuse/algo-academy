@@ -4,22 +4,26 @@ import { QueryAction, QueryResponse } from "./types"
 
 export class QueryError extends Error { }
 export class QueryClientError extends Error {
+  action: QueryAction
   response: QueryResponse
 
-  constructor(response: QueryResponse) {
+  constructor(action: QueryAction, response: QueryResponse) {
     super(response.payload.message)
 
     this.name = QueryClientError.name
+    this.action = action
     this.response = response
   }
 }
 export class QueryServerError extends Error {
+  action: QueryAction
   response: QueryResponse
 
-  constructor(response: QueryResponse) {
+  constructor(action: QueryAction, response: QueryResponse) {
     super(response.payload.message)
 
     this.name = QueryServerError.name
+    this.action = action
     this.response = response
   }
 }

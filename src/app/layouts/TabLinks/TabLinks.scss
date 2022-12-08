@@ -3,6 +3,12 @@
 .tab-links {
   --link-color: #{$color-black-main};
 
+  &--dark {
+    --link-color: white;
+  }
+}
+
+.tab-links__container {
   display: flex;
   align-items: center;
 
@@ -13,10 +19,6 @@
 
   &>.button {
     margin-left: auto;
-  }
-
-  &--dark {
-    --link-color: white;
   }
 }
 

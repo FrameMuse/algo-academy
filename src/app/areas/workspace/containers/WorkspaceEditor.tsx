@@ -1,5 +1,4 @@
-import { EditorProps } from "@monaco-editor/react"
-import Editor from "app/ui/synthetic/Editor/Editor"
+import Editor, { EditorProps } from "app/ui/synthetic/Editor/Editor"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceInstances } from "store/reducers/workspace"
 
@@ -40,11 +39,11 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
         theme={workspace.settings.editorTheme}
         options={workspace.settings.editorOptions}
 
-        language={workspace.editorLanguage}
-        defaultLanguage={workspace.editorLanguage}
-
         path={props.draftId}
         defaultPath={props.draftId}
+
+        language={workspace.editorLanguage}
+        defaultLanguage={workspace.editorLanguage}
 
         value={instance?.editorValue ?? props.defaultValue}
         defaultValue={instance?.editorValue ?? props.defaultValue}

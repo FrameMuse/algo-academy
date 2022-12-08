@@ -21,6 +21,7 @@ import AppRoutes from "./AppRoutes"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
 import ErrorBoundary from "./containers/ErrorBoundary/ErrorBoundary"
 import ErrorFallback from "./containers/ErrorFallback/ErrorFallback"
+import Loader from "./ui/synthetic/Loader/Loader"
 
 /**
  * TODO: Better move it from here
@@ -42,11 +43,12 @@ export function formatAppTitle(...titles: (string | null | undefined)[]): string
 function App() {
   return (
     <StrictMode>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary fallback={ErrorFallback}>
           <AppProviders>
             <AppRoutes />
-            <FetchAndSupplyUser />
+
+            <Suspense><FetchAndSupplyUser /></Suspense>  {/* Make this request invisible to user */}
 
             <CookiesNotice />
             <ModalContainer />

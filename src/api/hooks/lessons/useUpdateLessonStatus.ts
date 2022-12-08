@@ -1,6 +1,7 @@
 import appQuery from "api/appQuery"
+import queryClient from "api/client"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
+import { getActionQueryKey, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonStatus } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -41,6 +42,7 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     if (!isResponseOk(response)) return false
 
     toast.success("Lesson status has been updated.")
+    queryClient.refetchQueries(getActionQueryKey(APIActions.getUsersMe()))
 
     return true
   }
