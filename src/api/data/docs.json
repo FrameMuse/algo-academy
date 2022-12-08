@@ -44,6 +44,10 @@
       "description": "Endpoints for snippets"
     },
     {
+      "name": "Subscription",
+      "description": "Endpoints for snippets"
+    },
+    {
       "name": "Judge0",
       "description": "Endpoints for judge"
     },
@@ -527,7 +531,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Lesson"
+                    "$ref": "#/components/schemas/LessonResponse"
                   }
                 }
               }
@@ -566,7 +570,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Lesson"
+                  "$ref": "#/components/schemas/LessonResponse"
                 }
               }
             }
@@ -606,7 +610,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Lesson"
+                    "$ref": "#/components/schemas/LessonResponse"
                   }
                 }
               }
@@ -646,7 +650,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Lesson"
+                  "$ref": "#/components/schemas/LessonResponse"
                 }
               }
             }
@@ -696,15 +700,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Lesson"
-                }
-              }
-            }
+          "204": {
+            "description": ""
           },
           "400": {
             "description": "Bad request"
@@ -865,7 +862,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Chapter"
+                    "$ref": "#/components/schemas/ChapterResponse"
                   }
                 }
               }
@@ -930,7 +927,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Chapter"
+                  "$ref": "#/components/schemas/ChapterResponse"
                 }
               }
             }
@@ -979,7 +976,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Chapter"
+                  "$ref": "#/components/schemas/ChapterResponse"
                 }
               }
             }
@@ -1127,7 +1124,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Promo"
+                    "$ref": "#/components/schemas/PromoResponse"
                   }
                 }
               }
@@ -1166,7 +1163,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Promo"
+                  "$ref": "#/components/schemas/PromoResponse"
                 }
               }
             }
@@ -1204,7 +1201,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Promo"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
               }
             }
           },
@@ -1212,7 +1214,14 @@
         },
         "responses": {
           "204": {
-            "description": "promo success"
+            "description": "promo success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoCheckResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request"
@@ -1258,7 +1267,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Promo"
+                  "$ref": "#/components/schemas/PromoResponse"
                 }
               }
             }
@@ -1301,7 +1310,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Promo"
+                "$ref": "#/components/schemas/PromoResponse"
               }
             }
           },
@@ -1377,21 +1386,50 @@
         }
       }
     },
-    "/snippets": {
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get all subscriptions",
+        "description": "This can only be done by an administrator.",
+        "operationId": "allSubscriptions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubscriptionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
       "post": {
         "tags": [
-          "Snippet",
+          "Subscription",
           "Admin"
         ],
-        "summary": "Create snippet",
+        "summary": "Create subscription",
         "description": "This can only be done by an administrator.",
-        "operationId": "createSnippet",
+        "operationId": "createSubscription",
         "requestBody": {
-          "description": "Created snnipet object",
+          "description": "Created subscription object",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Snippet"
+                "$ref": "#/components/schemas/Subscription"
               }
             }
           },
@@ -1403,7 +1441,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Snippet"
+                  "$ref": "#/components/schemas/SubscriptionResponse"
                 }
               }
             }
@@ -1427,12 +1465,199 @@
         "x-codegen-request-body-name": "body"
       }
     },
-    "/snippets/{language}": {
+    "/subscriptions/{id}": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get subscription by id",
+        "description": "Only for authorized users.",
+        "operationId": "subscriptionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Subscription",
+          "Admin"
+        ],
+        "summary": "Update subscription by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updateSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update subscription object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscription"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Subscription",
+          "Admin"
+        ],
+        "summary": "Delete subscription by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/snippets": {
+      "post": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Create snippet",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createSnippet",
+        "requestBody": {
+          "description": "Created snippet object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snippet"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnippetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/snippets/language/{language}": {
       "get": {
         "tags": [
           "Snippet"
         ],
-        "summary": "Get snippet by language",
+        "summary": "Get array snippets by language",
         "description": "Only for authorized users.",
         "operationId": "snippetsByLanguageId",
         "parameters": [
@@ -1454,7 +1679,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Snippet"
+                    "$ref": "#/components/schemas/SnippetResponse"
                   }
                 }
               }
@@ -1476,6 +1701,50 @@
       }
     },
     "/snippets/{id}": {
+      "get": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Get snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "snippetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnippetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "Snippet",
@@ -1867,9 +2136,8 @@
         "tags": [
           "Stripe"
         ],
-        "security": [],
         "summary": "plan payment",
-        "description": "Tariff plan payment",
+        "description": "Tariff plan payment. Only for authorized users.",
         "operationId": "paymentStripe",
         "requestBody": {
           "description": "Payment data",
@@ -1918,6 +2186,68 @@
   },
   "components": {
     "schemas": {
+      "Subscription": {
+        "type": "object",
+        "required": [
+          "title",
+          "subtitle",
+          "cost",
+          "period",
+          "descriptions"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string",
+            "example": "1y-2m-3d",
+            "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months), 1m-14d (1 month, 14 days)"
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SubscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string",
+            "example": "1y-2m-3d",
+            "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months),1m-14d (1 month, 14 days)"
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "Snippet": {
         "type": "object",
         "required": [
@@ -1928,6 +2258,30 @@
           "time_complex"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "language": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "space_complex": {
+            "type": "string"
+          },
+          "time_complex": {
+            "type": "string"
+          }
+        }
+      },
+      "SnippetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
             "type": "string",
             "uniqueItems": true
@@ -1967,8 +2321,32 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "example": "algo-free"
+            "type": "string"
+          },
+          "discount_percent": {
+            "type": "number"
+          }
+        }
+      },
+      "PromoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "discount_percent": {
+            "type": "number"
+          }
+        }
+      },
+      "PromoCheckResponse": {
+        "type": "object",
+        "properties": {
+          "discount_percent": {
+            "type": "number"
           }
         }
       },
@@ -1987,6 +2365,10 @@
             "type": "string",
             "example": "Job Seeker"
           },
+          "expiration_date": {
+            "type": "string",
+            "format": "date-time"
+          },
           "total_cost": {
             "type": "string",
             "example": "50"
@@ -1995,34 +2377,32 @@
       },
       "Stripe": {
         "type": "object",
+        "required": [
+          "subscription_id",
+          "promo_name",
+          "card_number",
+          "card_exp_month",
+          "card_exp_year",
+          "card_CVC"
+        ],
         "properties": {
-          "plan_name": {
-            "type": "string",
-            "example": "Job Seeker"
+          "subscription_id": {
+            "type": "string"
           },
-          "amount": {
-            "type": "number",
-            "example": 50
-          },
-          "email": {
-            "type": "string",
-            "example": "test@email.com"
+          "promo_name": {
+            "type": "string"
           },
           "card_number": {
-            "type": "string",
-            "example": "4242424242424242"
+            "type": "string"
           },
           "card_exp_month": {
-            "type": "string",
-            "example": "12"
+            "type": "string"
           },
           "card_exp_year": {
-            "type": "string",
-            "example": "32"
+            "type": "string"
           },
           "card_CVC": {
-            "type": "string",
-            "example": "567"
+            "type": "string"
           }
         }
       },
@@ -2109,7 +2489,7 @@
               "properties": {
                 "chapter_id": {
                   "type": "string",
-                  "example": "105061111241845470000"
+                  "example": "6383befbe25c834cdb762ae6"
                 },
                 "chapter_name": {
                   "type": "string",
@@ -2119,7 +2499,7 @@
                   "type": "array",
                   "items": {
                     "properties": {
-                      "lesson_id": {
+                      "id": {
                         "type": "string",
                         "example": "6383befbe25c834cdb762ae6"
                       },
@@ -2173,15 +2553,6 @@
           }
         }
       },
-      "ResponseLesson": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "635a518e488d761bd1c787f1"
-          }
-        }
-      },
       "Lesson": {
         "type": "object",
         "properties": {
@@ -2196,6 +2567,93 @@
               "learning",
               "practice"
             ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
+          },
+          "statement": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "hints": {
+            "nullable": true,
+            "type": "string",
+            "example": "Coding Question"
+          },
+          "resources": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "solution": {
+                  "nullable": true,
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "language": {
+                  "type": "number",
+                  "example": 45
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "tests": {
+                  "type": "string"
+                },
+                "validation_func": {
+                  "description": "Should always return JSON.stringify(results). results is an array and contains the required fields of the { passed:boolean, description: string, ...any fields } ",
+                  "type": "string"
+                },
+                "default_code": {
+                  "type": "string",
+                  "example": "Coding Question"
+                }
+              }
+            }
+          },
+          "used_in": {
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "chapter_id": {
+                "type": "string"
+              },
+              "chapter_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "LessonResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "type": {
+            "type": "string",
+            "example": "learning",
+            "enum": [
+              "learning",
+              "practice"
+            ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
           },
           "statement": {
             "nullable": true,
@@ -2261,6 +2719,45 @@
       "Chapter": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "example": "Trees"
+          },
+          "order_number": {
+            "type": "number",
+            "example": 9
+          },
+          "user_topic": {
+            "type": "boolean",
+            "example": true
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "5fva36hd873d761bd1c7ae4f"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "learning"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Common Patterns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ChapterResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
             "type": "string",
             "example": "Trees"

@@ -8,7 +8,33 @@
 */
 
 
+export interface Subscription {
+  title: string
+  subtitle: string
+  cost: number
+  period: string
+  descriptions: string[]
+}
+
+export interface SubscriptionResponse {
+  id: string
+  title: string
+  subtitle: string
+  cost: number
+  period: string
+  descriptions: string[]
+}
+
 export interface Snippet {
+  name: string
+  language: number
+  code: string
+  space_complex: string
+  time_complex: string
+}
+
+export interface SnippetResponse {
+  id: string
   name: string
   language: number
   code: string
@@ -23,19 +49,30 @@ export interface Feedback {
 
 export interface Promo {
   name: string
+  discount_percent: number
+}
+
+export interface PromoResponse {
+  id: string
+  name: string
+  discount_percent: number
+}
+
+export interface PromoCheckResponse {
+  discount_percent: number
 }
 
 export interface Plan {
   receipt_id: string
   purchase_date: string
   plan_name: string
+  expiration_date: string
   total_cost: string
 }
 
 export interface Stripe {
-  plan_name: string
-  amount: number
-  email: string
+  subscription_id: string
+  promo_name: string
   card_number: string
   card_exp_month: string
   card_exp_year: string
@@ -60,7 +97,7 @@ export interface User {
     chapter_id: string
     chapter_name: string
     lessons: {
-      lesson_id: string
+      id: string
       status: string
     }[]
   }[]
@@ -72,14 +109,32 @@ export interface User {
   date_of_creation: string
 }
 
-export interface ResponseLesson {
-  id: string
+export interface Lesson {
+  name: string
+  type: string
+  free: boolean
+  statement: string | null
+  content: string | null
+  hints: string | null
+  resources: {
+    solution: string | null
+    language: number
+    notes: string
+    tests: string
+    validation_func: string
+    default_code: string
+  }[] | null
+  used_in: {
+    chapter_id: string
+    chapter_name: string
+  } | null
 }
 
-export interface Lesson {
+export interface LessonResponse {
   id: string
   name: string
   type: string
+  free: boolean
   statement: string | null
   content: string | null
   hints: string | null
@@ -98,6 +153,17 @@ export interface Lesson {
 }
 
 export interface Chapter {
+  name: string
+  order_number: number
+  user_topic: boolean
+  list: {
+    id: string
+    type: string
+    name: string
+  }[]
+}
+
+export interface ChapterResponse {
   id: string
   name: string
   order_number: number

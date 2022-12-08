@@ -26,12 +26,12 @@ export function mapUser(schema: APISchemas.User): User {
   }
 }
 
-export function mapUserProgress(schema: APISchemas.User["progress"][0]) {
+export function mapChaptersProgress(schema: APISchemas.User["progress"][0]) {
   return {
     id: schema.chapter_id,
     title: schema.chapter_name,
     lessons: schema.lessons.map(lesson => ({
-      id: lesson.lesson_id,
+      id: lesson.id,
       status: lessonStatus.forward(lesson.status)
     }))
   }
@@ -47,7 +47,7 @@ export function mapPricingPlan(schema: APISchemas.Plan): PricingPlan {
 }
 
 
-export function mapLesson(schema: APISchemas.Lesson) {
+export function mapLesson(schema: APISchemas.LessonResponse) {
   return {
     id: schema.id,
     title: schema.name,
@@ -61,11 +61,11 @@ export function mapLesson(schema: APISchemas.Lesson) {
 
     statement: schema.statement ?? "",
     hints: schema.hints ?? "",
-    resources: schema.resources?.map(mapLessonResource) ?? []
+    contents: schema.resources?.map(mapLessonContent) ?? []
   }
 }
 
-function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
+function mapLessonContent(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution ?? "",
     language: editorLanguage.forward(schema.language),
@@ -77,7 +77,7 @@ function mapLessonResource(schema: NonNullable<APISchemas.Lesson["resources"]>[0
 
 
 
-export function mapChapter(schema: APISchemas.Chapter) {
+export function mapChapter(schema: APISchemas.ChapterResponse) {
   return {
     id: schema.id,
     order: schema.order_number,
@@ -92,6 +92,17 @@ function mapLessonPreview(schema: APISchemas.Chapter["list"][0]) {
     id: schema.id,
     type: lessonType.forward(schema.type),
     title: schema.name
+  }
+}
+
+export function mapSnippet(schema: APISchemas.SnippetResponse) {
+  return {
+    id: schema.id,
+    label: schema.name,
+    content: schema.code,
+    language: editorLanguage.forward(schema.language),
+    space: schema.space_complex,
+    runTime: schema.time_complex
   }
 }
 

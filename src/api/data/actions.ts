@@ -9,7 +9,7 @@
 
 import { QueryAction } from "../types"
 import {
-  Chapter,
+  ChapterResponse,
   CreateUser,
   Feedback,
   JudgeConfig,
@@ -18,9 +18,15 @@ import {
   JudgeResult,
   JudgeStatuses,
   Lesson,
+  LessonResponse,
   Promo,
+  PromoCheckResponse,
+  PromoResponse,
   Snippet,
+  SnippetResponse,
   Stripe,
+  Subscription,
+  SubscriptionResponse,
   User
 } from "./schemas"
 /**
@@ -159,7 +165,7 @@ export const postUsersRevokeAccessMe = (): QueryAction<User> => ({
 /**
  * Get information about all lessons. Only for authorized users.
  */
-export const getLessons = (): QueryAction<Lesson[]> => ({
+export const getLessons = (): QueryAction<LessonResponse[]> => ({
   method: "GET",
   endpoint: `/lessons`,
   operationId: "allLessons"
@@ -168,7 +174,7 @@ export const getLessons = (): QueryAction<Lesson[]> => ({
 /**
  * This can only be done by an administrator.
  */
-export const postLessons = (body: Partial<Lesson>): QueryAction<Lesson> => ({
+export const postLessons = (body: Partial<Lesson>): QueryAction<LessonResponse> => ({
   method: "POST",
   endpoint: `/lessons`,
   body,
@@ -178,7 +184,7 @@ export const postLessons = (body: Partial<Lesson>): QueryAction<Lesson> => ({
 /**
  * Learning lessons unused in chapter. This can only be done by an administrator.
  */
-export const getLessonsUnused = (): QueryAction<Lesson[]> => ({
+export const getLessonsUnused = (): QueryAction<LessonResponse[]> => ({
   method: "GET",
   endpoint: `/lessons/unused`,
   operationId: "ununsedLessons"
@@ -187,7 +193,7 @@ export const getLessonsUnused = (): QueryAction<Lesson[]> => ({
 /**
  * Get information about lesson. Only for authorized users.
  */
-export const getLessonsId = (id: string): QueryAction<Lesson> => ({
+export const getLessonsId = (id: string): QueryAction<LessonResponse> => ({
   method: "GET",
   endpoint: `/lessons/${id}`,
   operationId: "lessonById"
@@ -196,7 +202,7 @@ export const getLessonsId = (id: string): QueryAction<Lesson> => ({
 /**
  * Update information about lesson. This can only be done by an administrator.
  */
-export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction<Lesson> => ({
+export const patchLessonsId = (id: string, body: Partial<Lesson>): QueryAction => ({
   method: "PATCH",
   endpoint: `/lessons/${id}`,
   body,
@@ -225,7 +231,7 @@ export const patchLessonsIdResourcesLanguageId = (language_id: number, id: strin
 /**
  * Get information about all chapters. Only for authorized users.
  */
-export const getChapters = (): QueryAction<Chapter[]> => ({
+export const getChapters = (): QueryAction<ChapterResponse[]> => ({
   method: "GET",
   endpoint: `/chapters`,
   operationId: "allChapters"
@@ -239,7 +245,7 @@ export const postChapters = (body: {
   order_number: number
   user_topic: boolean
   list?: string[]
-}): QueryAction<Chapter> => ({
+}): QueryAction<ChapterResponse> => ({
   method: "POST",
   endpoint: `/chapters`,
   body,
@@ -249,7 +255,7 @@ export const postChapters = (body: {
 /**
  * Get information about chapter. Only for authorized users.
  */
-export const getChaptersId = (id: string): QueryAction<Chapter> => ({
+export const getChaptersId = (id: string): QueryAction<ChapterResponse> => ({
   method: "GET",
   endpoint: `/chapters/${id}`,
   operationId: "chapterById"
@@ -282,7 +288,7 @@ export const deleteChaptersId = (id: string): QueryAction => ({
 /**
  * This can only be done by an administrator.
  */
-export const getPromo = (): QueryAction<Promo[]> => ({
+export const getPromo = (): QueryAction<PromoResponse[]> => ({
   method: "GET",
   endpoint: `/promo`,
   operationId: "allPromo"
@@ -291,7 +297,7 @@ export const getPromo = (): QueryAction<Promo[]> => ({
 /**
  * This can only be done by an administrator.
  */
-export const postPromo = (body: Promo): QueryAction<Promo> => ({
+export const postPromo = (body: Promo): QueryAction<PromoResponse> => ({
   method: "POST",
   endpoint: `/promo`,
   body,
@@ -301,7 +307,9 @@ export const postPromo = (body: Promo): QueryAction<Promo> => ({
 /**
  * promo success
  */
-export const postPromoCheck = (body: Promo): QueryAction => ({
+export const postPromoCheck = (body: {
+  name: string
+}): QueryAction<PromoCheckResponse> => ({
   method: "POST",
   endpoint: `/promo/check`,
   body,
@@ -311,7 +319,7 @@ export const postPromoCheck = (body: Promo): QueryAction => ({
 /**
  * Only for authorized users.
  */
-export const getPromoId = (id: string): QueryAction<Promo> => ({
+export const getPromoId = (id: string): QueryAction<PromoResponse> => ({
   method: "GET",
   endpoint: `/promo/${id}`,
   operationId: "promoById"
@@ -320,7 +328,7 @@ export const getPromoId = (id: string): QueryAction<Promo> => ({
 /**
  * This can only be done by an administrator.
  */
-export const patchPromoId = (id: string, body: Partial<Promo>): QueryAction<Promo> => ({
+export const patchPromoId = (id: string, body: Partial<PromoResponse>): QueryAction<Promo> => ({
   method: "PATCH",
   endpoint: `/promo/${id}`,
   body,
@@ -339,7 +347,54 @@ export const deletePromoId = (id: string): QueryAction => ({
 /**
  * This can only be done by an administrator.
  */
-export const postSnippets = (body: Snippet): QueryAction<Snippet> => ({
+export const getSubscriptions = (): QueryAction<SubscriptionResponse[]> => ({
+  method: "GET",
+  endpoint: `/subscriptions`,
+  operationId: "allSubscriptions"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const postSubscriptions = (body: Subscription): QueryAction<SubscriptionResponse> => ({
+  method: "POST",
+  endpoint: `/subscriptions`,
+  body,
+  operationId: "createSubscription"
+})
+
+/**
+ * Only for authorized users.
+ */
+export const getSubscriptionsId = (id: string): QueryAction<SubscriptionResponse> => ({
+  method: "GET",
+  endpoint: `/subscriptions/${id}`,
+  operationId: "subscriptionById"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const patchSubscriptionsId = (id: string, body: Partial<Subscription>): QueryAction => ({
+  method: "PATCH",
+  endpoint: `/subscriptions/${id}`,
+  body,
+  operationId: "updateSubscription"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const deleteSubscriptionsId = (id: string): QueryAction => ({
+  method: "DELETE",
+  endpoint: `/subscriptions/${id}`,
+  operationId: "deleteSubscription"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const postSnippets = (body: Snippet): QueryAction<SnippetResponse> => ({
   method: "POST",
   endpoint: `/snippets`,
   body,
@@ -349,10 +404,19 @@ export const postSnippets = (body: Snippet): QueryAction<Snippet> => ({
 /**
  * Only for authorized users.
  */
-export const getSnippetsLanguage = (language: string): QueryAction<Snippet[]> => ({
+export const getSnippetsLanguageLanguage = (language: number): QueryAction<SnippetResponse[]> => ({
   method: "GET",
-  endpoint: `/snippets/${language}`,
+  endpoint: `/snippets/language/${language}`,
   operationId: "snippetsByLanguageId"
+})
+
+/**
+ * This can only be done by an administrator.
+ */
+export const getSnippetsId = (id: string): QueryAction<SnippetResponse> => ({
+  method: "GET",
+  endpoint: `/snippets/${id}`,
+  operationId: "snippetById"
 })
 
 /**
@@ -441,7 +505,7 @@ export const postJudge0Compile = (body: {
 })
 
 /**
- * Tariff plan payment
+ * Tariff plan payment. Only for authorized users.
  */
 export const postStripeCreateCharge = (body: Stripe): QueryAction<{
   receipt_url: string
