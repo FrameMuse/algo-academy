@@ -9,4 +9,4 @@ COPY . ./
 RUN npm run build
 
 # Serve command
-# CMD serve -s build
+CMD serve -s build
