@@ -4,6 +4,9 @@ import { UserType } from "store/reducers/user/types"
 
 import { AdminLayout } from "./areas/admin"
 import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
+import Column from "./layouts/Column/Column"
+import Headings from "./layouts/Headings/Headings"
+import ErrorCover from "./ui/synthetic/ErrorCover/ErrorCover"
 import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView, AdminSnippetsEditView, AdminSnippetsNewView, AdminSnippetsView } from "./views/admin"
 import { AboutUsView } from "./views/base/about-us"
 import { ContactUsView } from "./views/base/contact-us"
@@ -42,7 +45,32 @@ function AppRoutes() {
 
         <Route path={StaticRoutes.UIShowcase} element={<UIShowcaseView />} action={resetScroll} />
 
-        <Route path="*" element="Error 404" />
+        <Route path="*" element={(
+          <Column justifyItems="center">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <ErrorCover>
+              <Headings>
+                <h3>Not found</h3>
+                <p>{"Couldn't"} find the page.</p>
+              </Headings>
+            </ErrorCover>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+          </Column>
+        )} />
       </Route>
       <Route element={<AdminLayout />}>
         {isAdmin && (

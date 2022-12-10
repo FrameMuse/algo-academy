@@ -1,5 +1,6 @@
 import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
 import { LessonPreview, LessonPreviews } from "app/areas/lesson"
+import Progress from "utils/transform/progress"
 
 import { CourseContents, CourseElement } from ".."
 
@@ -11,7 +12,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
   return (
     <CourseContents>
       {chapters.map((chapter, index) => (
-        <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded={chapter.progress.completed < chapter.progress.total} key={index}>
+        <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded={!Progress.isMax(chapter.progress)} key={index}>
           {chapter.learningLessons.length > 0 && (
             <LessonPreviews title="Learning">
               {chapter.learningLessons.map(lesson => (

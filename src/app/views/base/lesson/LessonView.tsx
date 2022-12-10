@@ -18,12 +18,11 @@ function LessonView() {
   const lessonId = useParam("lessonId")
   const lesson = useLesson(lessonId)
 
+  const { navigateToPrev, navigateToNext } = useLessonNavigate(lesson.id, lesson.chapterRelation?.id, "../")
+
   if (lesson.type === LessonType.Practice) {
     return <Navigate replace to="problem" />
   }
-
-  // This hook is conditional but this should work well ^_^.
-  const { navigateToPrev, navigateToNext } = useLessonNavigate(lesson.id, lesson.chapterRelation?.id, "../")
 
   return (
     <div className="wrapper" key={lesson.id}>

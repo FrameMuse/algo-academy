@@ -1,0 +1,83 @@
+@import "~assets/scss/bundle.scss";
+
+.code-execution {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  background: white;
+  border-top: 1px solid $color-gray;
+  transition: 250ms ease background-color;
+
+  &--dark {
+    background: #25262b;
+    border-top-color: $color-dark-75;
+  }
+}
+
+.code-execution__tools {
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+
+  padding: 0.75em 2.5em;
+}
+
+
+
+.great-job {
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.great-job-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(8 / 1920 * 100vw);
+
+  img {
+    width: calc(100 / 1920 * 100vw);
+  }
+}
+
+.great-job-text {
+  font-weight: 900;
+  font-size: calc(24 / 1920 * 100vw);
+  line-height: 1.83;
+  color: #07b123;
+}
+
+
+
+
+
+.code-submition__result {
+  display: grid;
+  align-content: flex-start;
+  gap: 1.5em;
+
+  max-height: 40vh;
+  padding: 1.5em 2.5em;
+  background: $color-blue-10;
+
+  overflow: auto;
+  overflow: overlay;
+  transition: 250ms ease color;
+
+  @include Scrollbar(0.75em, var(--scrollbar-thumb-color), var(--scrollbar-track-color));
+
+  .code-execution--dark & {
+    color: white;
+  }
+}

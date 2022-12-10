@@ -1,7 +1,6 @@
 import appQuery from "api/appQuery"
-import queryClient from "api/client"
 import { APIActions } from "api/data"
-import { getActionQueryKey, isResponseOk } from "api/helpers"
+import { isResponseOk, refetchActionQueries } from "api/helpers"
 import { toast } from "react-toastify"
 
 function useSubmitFeedback() {
@@ -12,7 +11,7 @@ function useSubmitFeedback() {
     const response = await appQuery(APIActions.postFeedbacks(feedback))
     if (!isResponseOk(response)) return
 
-    queryClient.refetchQueries(getActionQueryKey(APIActions.getFeedbacks()))
+    refetchActionQueries(APIActions.getFeedbacks())
 
     toast.success(`Feedback has been submited.`)
   }

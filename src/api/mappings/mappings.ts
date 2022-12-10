@@ -1,6 +1,7 @@
 import { APISchemas } from "api/data"
 import { LessonMultipleContent, LessonStatus, LessonType } from "app/areas/lesson/types"
 import { PricingPlan } from "app/areas/purchase/types"
+import { ICodeSubmitionResult } from "app/areas/workspace/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { USER_GUEST } from "store/reducers/user"
 import { User, UserType } from "store/reducers/user/types"
@@ -103,6 +104,20 @@ export function mapSnippet(schema: APISchemas.SnippetResponse) {
     language: editorLanguage.forward(schema.language),
     space: schema.space_complex,
     runTime: schema.time_complex
+  }
+}
+
+export function mapJudge0Result(schema: APISchemas.JudgeResult): ICodeSubmitionResult {
+  return {
+    time: Number(schema.time) || 0,
+    memory: schema.memory || 0,
+    tests: schema.compile_output?.map(item => ({
+      passed: item.passed,
+      description: item.description,
+      expected: "false",
+      userAnswer: "true"
+    })) || [],
+    status: schema.status
   }
 }
 

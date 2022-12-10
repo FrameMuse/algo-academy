@@ -26,10 +26,15 @@
 }
 
 .field__input {
+	$font-size: 1rem;
+
 	width: 100%;
 
 	color: $color-black-main;
-	font-weight: 500;
+	font-size: $font-size;
+	font-weight: 600;
+
+	// height: $font-size; // To ensure input has the same height as font-size.
 
 	&::placeholder {
 		color: rgba($color-dark, 0.5);

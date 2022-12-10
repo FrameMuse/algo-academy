@@ -1,4 +1,4 @@
-import "./Templates.scss"
+import "./Snippets.scss"
 
 import TabLinks from "app/layouts/TabLinks/TabLinks"
 import Button from "app/ui/kit/Button/Button"
@@ -16,14 +16,14 @@ interface Snippet {
   space: string
 }
 
-interface TemplatesProps {
+interface SnippetsProps {
   snippets: Snippet[]
 }
 
 /**
  * TODO: Rename other related things to `Snippets` insteand of `Templates`.
  */
-function Snippets(props: TemplatesProps) {
+function Snippets(props: SnippetsProps) {
   const theme = useTheme()
 
   const [activeIndex, setActiveIndex] = useState<number>(0)
@@ -33,8 +33,8 @@ function Snippets(props: TemplatesProps) {
 
   const { copyToClipboard } = useAppCopyToClipboard()
   return (
-    <div className={classWithModifiers("templates", theme)}>
-      <div className="templates__menu">
+    <div className={classWithModifiers("snippets", theme)}>
+      <div className="snippets__menu">
         <TabLinks>
           {props.snippets.map((template, index) => (
             <button
@@ -48,12 +48,12 @@ function Snippets(props: TemplatesProps) {
           ))}
         </TabLinks>
       </div>
-      <div className="templates__container">
+      <div className="snippets__container">
         <WorkspaceCode>{template.content}</WorkspaceCode>
       </div>
-      <div className="templates__bottom">
+      <div className="snippets__bottom">
         <Button size="small" onClick={() => copyToClipboard(template.content)}>Copy to Clipboard</Button>
-        <div className="templates__info">
+        <div className="snippets__info">
           <div><strong>Run Time:</strong> {template.runTime}</div>
           <div><strong>Space:</strong> {template.space}</div>
         </div>

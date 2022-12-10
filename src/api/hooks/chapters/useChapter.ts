@@ -21,12 +21,10 @@ function useChapter(id: string) {
     return LessonStatus.Incomplete
   }
 
-  return {
-    ...chapter,
-    lessons: chapter.lessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-    // learningLessons: chapter.learningLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-    // practiceLessons: chapter.practiceLessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) })),
-  }
+  const lessons = chapter.lessons.map(lesson => ({ ...lesson, status: findLessonStatus(lesson.id) }))
+  const lessonsSorted = lessons.sort((a, b) => a.type - b.type)
+
+  return { ...chapter, lessons: lessonsSorted }
 }
 
 export default useChapter

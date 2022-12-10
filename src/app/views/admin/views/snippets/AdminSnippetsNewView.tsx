@@ -33,7 +33,7 @@ function AdminSnippetsNewView() {
     <Box>
       <Headings>
         <h2>New Snippet</h2>
-        {/* <p>After creating, you will be navigated to it.</p> */}
+        <p>After creating, you will be navigated to it.</p>
       </Headings>
       <Column>
         <Field placeholder="e.g. DFS" onChange={inputValue(setLabel)} required>Label</Field>

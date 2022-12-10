@@ -18,48 +18,31 @@ interface ChapterLessonsEditProps {
 }
 
 function ChapterLessonsEdit(props: ChapterLessonsEditProps) {
-  const [lessonType, setLessonType] = useState(LessonType.Learning)
-
   const chapter = useChapter(props.id)
   const updateChapterLessons = useUpdateChapterLessons()
 
-  async function onSave(lessonIds: string[]) {
-    await updateChapterLessons(props.id, lessonType, lessonIds)
-  }
 
-  return (
-    <>
-      <Selector label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
-        {optionsFromEnum(LessonType)}
-      </Selector>
-      <Azd defaultLessons={chapter.lessons.filter(lesson => lesson.type === lessonType)} lessonType={lessonType} onSave={onSave} />
-    </>
-  )
-}
+  const [lessonIds, setLessonIds] = useState<string[] | null>(null)
+  const [lessonType, setLessonType] = useState(LessonType.Learning)
 
+  const lessonsUnused = useLessonsUnused(lessonType)
+  const lessonsCurrent = chapter.lessons.filter(lesson => lesson.type === lessonType)
 
-
-interface AzdProps {
-  lessonType?: LessonType
-  defaultLessons?: LessonsPickerProps["defaultLessons"]
-  onSave?(lessonIds: string[]): void | Promise<void>
-}
-
-function Azd(props: AzdProps) {
-  const [lessonIds, setLessonIds] = useState<string[]>()
   const dirty = lessonIds != null
+
 
   async function onSave() {
     if (lessonIds == null) return
     if (!await confirmAction()) return
 
-    await props.onSave?.(lessonIds)
-    setLessonIds(undefined)
+    await updateChapterLessons(props.id, lessonType, lessonIds)
   }
 
-  useEffect(() => {
-    setLessonIds(undefined)
-  }, [props.lessonType, props.defaultLessons])
+  function onChange(ids: string[]) {
+    setLessonIds(ids)
+  }
+
+  useEffect(() => setLessonIds(null), [lessonType])
 
   return (
     <Column>
@@ -73,35 +56,19 @@ function Azd(props: AzdProps) {
           </List>
         </p>
       </Headings>
+      <Selector label="Lessons Type" defaultValue={lessonType} onChange={setLessonType}>
+        {optionsFromEnum(LessonType)}
+      </Selector>
       <ButtonGroup color={dirty ? "white" : "gray"} size="small" squared>
         <Button await onClick={onSave}>Save</Button>
         <Button>Cancel</Button>
       </ButtonGroup>
-      <LessonsPicker defaultLessons={props.defaultLessons} lessonType={props.lessonType} onChange={setLessonIds} />
+      <Picker defaultPicks={chapter.lessons.map(lesson => lesson.id)} onChange={onChange}>
+        {[...lessonsCurrent, ...lessonsUnused].map(lesson => (
+          <option value={lesson.id} key={lesson.id}>{lesson.title}</option>
+        ))}
+      </Picker>
     </Column>
-  )
-}
-
-
-
-interface LessonsPickerProps {
-  lessonType?: LessonType
-  defaultLessons?: {
-    id: string
-    title: string
-  }[]
-  onChange?(lessonIds: string[]): void
-}
-
-function LessonsPicker(props: LessonsPickerProps) {
-  const lessons = useLessonsUnused(props.lessonType)
-
-  return (
-    <Picker defaultPicks={props.defaultLessons?.map(lesson => lesson.id)} onChange={props.onChange}>
-      {[...props.defaultLessons || [], ...lessons].map(lesson => (
-        <option value={lesson.id} key={lesson.id}>{lesson.title}</option>
-      ))}
-    </Picker>
   )
 }
 

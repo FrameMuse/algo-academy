@@ -32,7 +32,7 @@ class FileTransform {
   /**
    * https://stackoverflow.com/a/61321728/12468111
    */
-  static parseURI(dataURI: string) {
+  static parseDataURI(dataURI: string): File {
     const splitDataURI = dataURI.split(",")
 
     const mimeString = splitDataURI[0].split(":")[1].split(";")[0]
@@ -43,7 +43,7 @@ class FileTransform {
   }
 
 
-  static async fetchFile(url: string) {
+  static async fetchFile(url: string): Promise<File> {
     const fileName = url.slice(url.lastIndexOf("/") + 1)
 
     const response = await fetch(url)

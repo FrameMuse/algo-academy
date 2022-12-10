@@ -44,7 +44,7 @@ function mapFormData(value: unknown, key?: string | number): [string, Blob | str
 
   if (typeof value === "string") {
     if (/^data:.*?;base64,.*$/gi.test(value)) {
-      const file = FileTransform.parseURI(value)
+      const file = FileTransform.parseDataURI(value)
 
       if (key) {
         result.push([String(key), file])

@@ -2,7 +2,7 @@ import "./Picker.scss"
 
 import Checkbox from "app/ui/kit/Checkbox/Checkbox"
 import Field from "app/ui/kit/Field/Field"
-import { Children, useEffect, useState } from "react"
+import { Children, useState } from "react"
 import { classWithModifiers, inputValue } from "utils/common"
 
 import { PickerOptionElement } from "./Picker.types"
@@ -36,12 +36,6 @@ function Picker(props: PickerProps) {
   function togglePick(value: PickerItemValue) {
     picks.includes(value) ? unpick(value) : pick(value)
   }
-
-  useEffect(() => {
-    if (props.defaultPicks == null) return
-
-    setPicks(props.defaultPicks)
-  }, [props.defaultPicks?.toString()])
 
   const options = Children.map(props.children, child => child.props)
 

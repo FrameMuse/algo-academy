@@ -1,0 +1,21 @@
+@import "~assets/scss/bundle.scss";
+
+.expander {
+  height: 0px;
+  overflow: hidden;
+  transition: 350ms ease height;
+
+  &--expanded {
+    height: calc(var(--height) * 1px);
+  }
+}
+
+.expander__inner {
+  transition: 250ms ease opacity, 250ms ease transform;
+
+  :not(.expander--expanded)>& {
+    opacity: 0;
+    transform: translateY(5%);
+    pointer-events: none;
+  }
+}

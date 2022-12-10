@@ -1,9 +1,9 @@
 import Column from "app/layouts/Column/Column"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 import Button from "app/ui/kit/Button/Button"
-import Field from "app/ui/kit/Field/Field"
 import Form from "app/ui/kit/Form/Form"
 
+import { PromoCodeInput } from "../.."
 import OrderSummary from "../OrderSummary/OrderSummary"
 
 function PopupCheckout() {
@@ -29,7 +29,7 @@ function PopupCheckout() {
             <Field autoComplete="family-name" placeholder="Garrison" required>Last Name</Field>
           </Row>
           <Field type="email" autoComplete="email" placeholder="email@example.com" required>E-mail Address</Field> */}
-          <Field iconName="tag" placeholder="WINTER20" style={{ textTransform: "uppercase" }}>Promo Code</Field>
+          <PromoCodeInput />
           <Button type="submit">Buy Risk-Free</Button>
         </Column>
       </Form>

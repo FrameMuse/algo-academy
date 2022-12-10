@@ -9,7 +9,7 @@ module ElementUtils {
    * This is possible via [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer) as well.
    * But in this case, it's simplier to use ["old method"](https://usefulangle.com/post/113/javascript-detecting-element-visible-during-scroll).
    */
-  export function inIntersected(element: Element, partial?: boolean) {
+  export function isIntersected(element: Element, partial?: boolean) {
     const position = element.getBoundingClientRect()
 
     // checking whether fully visible

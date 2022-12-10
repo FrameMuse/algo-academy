@@ -5,7 +5,7 @@ import useAppQuery from "api/useAppQuery"
 function useLessons() {
   const { data } = useAppQuery(APIActions.getLessons())
 
-  const lessons = data?.payload?.map(APIMappings.mapLesson)
+  const lessons = data.payload.map(APIMappings.mapLesson).sort((a, b) => a.type - b.type)
 
   return lessons
 }

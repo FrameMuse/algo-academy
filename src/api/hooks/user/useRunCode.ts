@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
+import { isResponseOk, refetchActionQueries } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
@@ -12,13 +12,6 @@ function useRunCode() {
     return APIMappings.mapLesson(response.payload)
   }
 
-  async function getChapter(id: string) {
-    const response = await appQuery(APIActions.getChaptersId(id))
-    if (!isResponseOk(response)) return
-
-    return APIMappings.mapChapter(response.payload)
-  }
-
   async function runCode(id: string, data: {
     language: EditorLanguage
     sourceCode: string
@@ -27,22 +20,45 @@ function useRunCode() {
     if (lesson == null) return
     if (lesson.chapterRelation == null) return
 
-    const chapter = await getChapter(lesson.chapterRelation.id)
-    if (chapter == null) return
-
     const response = await appQuery(APIActions.postJudge0Compile({
-      chapter_id: chapter.id,
-      chapter_name: chapter.title,
+      chapter_id: lesson.chapterRelation.id,
+      chapter_name: lesson.chapterRelation.title,
 
       lesson_id: id,
       language_id: APIMappings.editorLanguage.backward(data.language),
       source_code: data.sourceCode
     }))
 
-    return response
+    refetchActionQueries(APIActions.getUsersMe())
+
+    return APIMappings.mapJudge0Result(response.payload)
   }
 
   return runCode
 }
 
 export default useRunCode
+
+
+
+// const TEST_RESULT: ICodeSubmitionResult = {
+//   time: 0.033,
+//   memory: 7432,
+//   tests: [
+//     { description: "Check for zeros", userAnswer: "true", expected: "false", passed: true },
+//     { description: "Check for ones", userAnswer: "false", expected: "false", passed: true },
+//     { description: "Check for twoes", userAnswer: "false", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//     { description: "Check for threes", userAnswer: "true", expected: "true", passed: true },
+//   ],
+//   status: {
+//     id: 3,
+//     description: "Accepted"
+//   }
+// }

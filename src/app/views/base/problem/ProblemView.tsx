@@ -7,10 +7,9 @@ import useSnippets from "api/hooks/snippets/useSnippets"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
 import { LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
-import { Snippets, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { Snippets, WorkspaceCodeSubmition, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
-import { WorkspaceCodeExecution } from "app/areas/workspace/types"
 import QueryBoundary from "app/containers/QueryBoundary"
 import Headings from "app/layouts/Headings/Headings"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
@@ -40,7 +39,7 @@ function ProblemView() {
   const lessonId = useParam("lessonId")
   const lesson = useLesson(lessonId)
 
-  const { navigateToPrev, navigateToNext } = useLessonNavigate(lesson.id, lesson.chapterRelation?.id)
+  const { navigateToPrev, navigateToNext } = useLessonNavigate(lesson.id, lesson.chapterRelation?.id, "../../")
 
   return (
     <>
@@ -166,7 +165,7 @@ function ProblemRightSection(props: { id: string }) {
             defaultLanguage={contents?.language}
             defaultValue={contents?.defaultCode}
           />
-          <WorkspaceCodeExecution draftId={id} lessonId={props.id} />
+          <WorkspaceCodeSubmition draftId={id} lessonId={props.id} />
         </TabRoute>
 
         {/* <TabRoute path={TabRoutes.Tests}>

@@ -39,8 +39,52 @@ function Timer(props: TimerProps) {
           ))}
         </Selector>
       </div>
+      <div className={ClassName.modify("timer-toolbar", expanded && "expanded")} ref={toolbarElementRef}>
+        <ButtonGroup color="gray" size="smaller" squared>
+          <Button onClick={start}>Start</Button>
+          <Button onClick={pause}>Pause</Button>
+          <Button onClick={reset}>Reset</Button>
+        </ButtonGroup>
+        <Selector defaultValue={minutesChoice} onChange={setMinutesChoice}>
+          {minutesList.map(minute => (
+            <option value={minute} key={minute}>{minute} {minute > 1 ? "minutes" : "minute"}</option>
+          ))}
+        </Selector>
+      </div>
+      <div className={ClassName.merge("timer-toolbar", "timeout")} ref={toolbarElementRef}>
+        <ButtonGroup color="gray" size="smaller" squared>
+          <Button onClick={start}>Start</Button>
+          <Button onClick={pause}>Pause</Button>
+          <Button onClick={reset}>Reset</Button>
+        </ButtonGroup>
+        <Selector defaultValue={minutesChoice} onChange={setMinutesChoice}>
+          {minutesList.map(minute => (
+            <option value={minute} key={minute}>{minute} {minute > 1 ? "minutes" : "minute"}</option>
+          ))}
+        </Selector>
+      </div>
     </div>
   )
 }
 
 export default Timer
+
+
+
+class ClassName {
+  static modify(originClass: string, ...modifiers: Array<string | number | false | null | undefined>): string {
+    modifiers = modifiers.filter(Boolean)
+    if (!modifiers.length) return originClass
+
+    const space = " "
+    const separator = "--"
+
+    modifiers = modifiers.map(modifier => originClass + separator + modifier)
+    return originClass + space + modifiers.join(space)
+  }
+
+  static merge(...classNames: Array<string | null | undefined>) {
+    const space = " "
+    return classNames.filter(Boolean).join(space)
+  }
+}

@@ -1,7 +1,6 @@
 import appQuery from "api/appQuery"
-import queryClient from "api/client"
 import { APIActions } from "api/data"
-import { getActionQueryKey, isResponseOk } from "api/helpers"
+import { isResponseOk, refetchActionQueries } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonStatus } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -17,24 +16,14 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     return APIMappings.mapLesson(response.payload)
   }
 
-  async function getChapter(id: string) {
-    const response = await appQuery(APIActions.getChaptersId(id))
-    if (!isResponseOk(response)) return
-
-    return APIMappings.mapChapter(response.payload)
-  }
-
   async function updateStatus(id: string, status: LessonStatus) {
     const lesson = await getLesson(id)
     if (lesson == null) return false
     if (lesson.chapterRelation == null) return false
 
-    const chapter = await getChapter(lesson.chapterRelation.id)
-    if (chapter == null) return false
-
     const response = await appQuery(APIActions.patchUsersMeProgress({
-      chapter_id: chapter.id,
-      chapter_name: chapter.title,
+      chapter_id: lesson.chapterRelation.id,
+      chapter_name: lesson.chapterRelation.title,
 
       lesson_id: id,
       status: APIMappings.lessonStatus.backward(status)
@@ -42,7 +31,7 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     if (!isResponseOk(response)) return false
 
     toast.success("Lesson status has been updated.")
-    queryClient.refetchQueries(getActionQueryKey(APIActions.getUsersMe()))
+    refetchActionQueries(APIActions.getUsersMe())
 
     return true
   }

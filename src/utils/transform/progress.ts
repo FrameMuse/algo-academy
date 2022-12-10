@@ -4,7 +4,7 @@ export interface ProgressEntry {
 }
 
 class Progress {
-  static empty = Object.freeze({ completed: 0, total: 0 })
+  static zero = Object.freeze({ completed: 0, total: 0 })
 
   static humanize(entry: ProgressEntry): string {
     return `${entry.completed}/${entry.total}`
@@ -14,13 +14,20 @@ class Progress {
     return entry.completed / entry.total * 100
   }
 
+  /**
+   * Whether a progress is at its maximum in percentage (max is 100%, anything beyond it will be counted as max).
+   */
+  static isMax(entry: ProgressEntry): boolean {
+    return !(entry.completed < entry.total)
+  }
+
   static sum(...entries: ProgressEntry[]): ProgressEntry {
     return entries.reduce((result, nextEntry) => {
       return {
         completed: result.completed + nextEntry.completed,
         total: result.total + nextEntry.total
       }
-    }, Progress.empty)
+    }, Progress.zero)
   }
 
   static add(entry: ProgressEntry, value: number): ProgressEntry {

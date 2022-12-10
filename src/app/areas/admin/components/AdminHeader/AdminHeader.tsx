@@ -1,7 +1,7 @@
 import "./AdminHeader.scss"
 
 import { StaticRoutes } from "app/AppRoutes"
-import Buttons from "app/layouts/Buttons/Buttons"
+import ButtonGroup from "app/layouts/ButtonGroup/ButtonGroup"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 
@@ -12,14 +12,14 @@ function AdminHeader() {
     <header className="admin-header">
       <Logo title="<Admin />" to="/admin" />
       <nav>
-        <Buttons>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.Home}>Back to site</ButtonLink>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminHome}>Home</ButtonLink>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminChapters}>Chapters</ButtonLink>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminSnippets}>Snippets</ButtonLink>
-          <ButtonLink color="gray" size="small" squared to={StaticRoutes.AdminFeedback}>Feedback</ButtonLink>
-        </Buttons>
+        <ButtonGroup color="gray" size="smaller" squared>
+          <ButtonLink to={StaticRoutes.Home}>To site</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminHome}>Home</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminChapters}>Chapters</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminSnippets}>Snippets</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminFeedback}>Feedback</ButtonLink>
+        </ButtonGroup>
       </nav>
     </header>
   )

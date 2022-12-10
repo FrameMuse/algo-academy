@@ -1,7 +1,7 @@
 
 import _ from "lodash"
-import { Enum } from "types"
-import { getEnumEntries } from "utils/transform/enum"
+import { EnumType } from "types"
+import Enum from "utils/transform/enum"
 
 import { SelectorOptionElement } from "./Selector.types"
 
@@ -19,6 +19,6 @@ export function optionsFromEntries(entries: [key: string | number, value: string
  * @param startCase - whether or not transform keys to start case (default `true`).
  * 
  */
-export function optionsFromEnum(enumerator: Enum<never>, startCase = true): SelectorOptionElement[] {
-  return optionsFromEntries(getEnumEntries(enumerator), startCase)
+export function optionsFromEnum(enumerator: EnumType<never>, startCase = true): SelectorOptionElement[] {
+  return optionsFromEntries(Enum.entries(enumerator), startCase)
 }

@@ -55,7 +55,7 @@ export function createQuery(queryObject?: Record<string | number, unknown> | nul
  */
 export function interpolate<T extends string>(value: T, vars: Record<string, string | number>): string {
   const varKeys = Object.keys(vars)
-  return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+  return varKeys.reduce((result, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
 }
 
 

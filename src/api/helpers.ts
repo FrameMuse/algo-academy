@@ -1,5 +1,6 @@
 import { createQuery } from "utils/common"
 
+import queryClient from "./client"
 import { QueryAction, QueryResponse } from "./types"
 
 export class QueryError extends Error { }
@@ -55,7 +56,7 @@ export function isResponseOk<T>(response: QueryResponse<T>, throwError = false):
 }
 
 export function buildActionURL<T>(action: QueryAction<T>): URL {
-  const host = "https://algo-academy.online/"
+  const host = process.env.REACT_APP_API_HOST
   const url = new URL(action.endpoint, host)
 
   if (action.params) {
@@ -67,4 +68,8 @@ export function buildActionURL<T>(action: QueryAction<T>): URL {
 
 export function getActionQueryKey(action: QueryAction): string[] {
   return [action.endpoint, action.operationId]
+}
+
+export function refetchActionQueries(action: QueryAction) {
+  return queryClient.refetchQueries(getActionQueryKey(action))
 }

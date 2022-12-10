@@ -1,0 +1,17 @@
+@import "~assets/scss/bundle.scss";
+
+.promo-code-input {
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+
+  width: 100%;
+
+  .field {
+    flex: 1;
+
+    .field__input {
+      text-transform: uppercase;
+    }
+  }
+}
