@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://algo-academy.online",
+      "url": "https://algo-academyserver-production.up.railway.app",
       "description": ""
     }
   ],
@@ -46,6 +46,10 @@
     {
       "name": "Subscription",
       "description": "Endpoints for snippets"
+    },
+    {
+      "name": "Notes",
+      "description": "Endpoints for notes"
     },
     {
       "name": "Judge0",
@@ -798,10 +802,6 @@
               "schema": {
                 "properties": {
                   "solution": {
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "notes": {
                     "nullable": true,
                     "type": "string"
                   },
@@ -1933,6 +1933,100 @@
         "x-codegen-request-body-name": "body"
       }
     },
+    "/notes": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get user notes by lesson id",
+        "operationId": "notesByLessonId",
+        "parameters": [
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "description": "Lesson_id to return user notes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Update user notes by lesson id",
+        "operationId": "updateNotesByLessonId",
+        "parameters": [
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "description": "ID of snippet to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
     "/judge0/config_info": {
       "get": {
         "tags": [
@@ -2152,20 +2246,7 @@
         },
         "responses": {
           "200": {
-            "description": "successful payment",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "receipt_url": {
-                      "type": "string",
-                      "example": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xSXgxelZGbnJqTjlsYkJJKI_Nr5sGMgYLYYeMoj06LBalR--cecBi0rdEBMo8rlTfkUSUr0iWym1aLKGw2vs79mmoOooS12v1VHyX"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successful payment. Redirect to user '/profile'"
           },
           "400": {
             "description": "Bad request"
@@ -2186,6 +2267,28 @@
   },
   "components": {
     "schemas": {
+      "Notes": {
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "NotesResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
       "Subscription": {
         "type": "object",
         "required": [
@@ -2379,29 +2482,13 @@
         "type": "object",
         "required": [
           "subscription_id",
-          "promo_name",
-          "card_number",
-          "card_exp_month",
-          "card_exp_year",
-          "card_CVC"
+          "promo_name"
         ],
         "properties": {
           "subscription_id": {
             "type": "string"
           },
           "promo_name": {
-            "type": "string"
-          },
-          "card_number": {
-            "type": "string"
-          },
-          "card_exp_month": {
-            "type": "string"
-          },
-          "card_exp_year": {
-            "type": "string"
-          },
-          "card_CVC": {
             "type": "string"
           }
         }
@@ -2601,10 +2688,6 @@
                   "type": "number",
                   "example": 45
                 },
-                "notes": {
-                  "type": "string",
-                  "example": "Coding Question"
-                },
                 "tests": {
                   "type": "string"
                 },
@@ -2683,10 +2766,6 @@
                 "language": {
                   "type": "number",
                   "example": 45
-                },
-                "notes": {
-                  "type": "string",
-                  "example": "Coding Question"
                 },
                 "tests": {
                   "type": "string"
@@ -3042,6 +3121,12 @@
                   "type": "boolean"
                 },
                 "description": {
+                  "type": "string"
+                },
+                "expected": {
+                  "type": "string"
+                },
+                "userAnswer": {
                   "type": "string"
                 }
               }

@@ -27,13 +27,14 @@ interface QueryBoundaryProps {
  * - User access level boundary
  */
 function QueryBoundary(props: QueryBoundaryProps) {
-  const errorDefinedFallback = (error: Error) => (
+  const errorDefinedFallback = (error: Error, reset: () => void) => (
     <ErrorCover>
       <Column justifyItems="center">
         <Headings>
           <h4>{error.name}</h4>
           <p>{error.message}</p>
         </Headings>
+        <Button size="small" color="dark" onClick={reset}>Try again</Button>
       </Column>
     </ErrorCover>
   )
@@ -84,7 +85,7 @@ function QueryBoundary(props: QueryBoundaryProps) {
   }
 
   return (
-    <ErrorBoundary fallback={(_reset, error) => error ? errorDefinedFallback(error) : errorUnknownFallback}>
+    <ErrorBoundary fallback={(reset, error) => error ? errorDefinedFallback(error, reset) : errorUnknownFallback}>
       <Suspense fallback={suspenseFallback}>
         {/* <UserBoundary fallback={userFallback} userType={props.userType}> */}
         {props.children}

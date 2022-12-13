@@ -1,5 +1,6 @@
 import useChaptersWithProgress from "api/hooks/chapters/useChaptersWithProgress"
 import { LessonPreview, LessonPreviews } from "app/areas/lesson"
+import { useAppSelector } from "store/hooks"
 import Progress from "utils/transform/progress"
 
 import { CourseContents, CourseElement } from ".."
@@ -7,6 +8,7 @@ import { CourseContents, CourseElement } from ".."
 interface CourseContentsContainerProps { }
 
 function CourseContentsContainer(props: CourseContentsContainerProps) {
+  const user = useAppSelector(state => state.user)
   const chapters = useChaptersWithProgress()
 
   return (
@@ -16,14 +18,30 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
           {chapter.learningLessons.length > 0 && (
             <LessonPreviews title="Learning">
               {chapter.learningLessons.map(lesson => (
-                <LessonPreview id={lesson.id} status={lesson.status} key={lesson.id}>{lesson.title}</LessonPreview>
+                <LessonPreview
+                  id={lesson.id}
+                  title={lesson.title}
+                  status={lesson.status}
+
+                  locked={lesson.free && user.pricingPlan == null}
+                  lockedReason="You need to have an active plan to access this."
+                  key={lesson.id}
+                />
               ))}
             </LessonPreviews>
           )}
           {chapter.practiceLessons.length > 0 && (
             <LessonPreviews title="Practice">
               {chapter.practiceLessons.map(lesson => (
-                <LessonPreview id={lesson.id} status={lesson.status} key={lesson.id}>{lesson.title}</LessonPreview>
+                <LessonPreview
+                  id={lesson.id}
+                  title={lesson.title}
+                  status={lesson.status}
+
+                  locked={lesson.free}
+                  lockedReason="You need to have an active plan to access this."
+                  key={lesson.id}
+                />
               ))}
             </LessonPreviews>
           )}

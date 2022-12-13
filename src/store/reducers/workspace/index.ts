@@ -7,7 +7,7 @@ import { Workspace, WorkspaceEditorLanguage } from "./types"
 
 const initialState: Workspace = {
   instances: {},
-  editorLanguage: WorkspaceEditorLanguage.Python,
+  editorLanguage: WorkspaceEditorLanguage.TypeScript,
   settings: {
     editorTheme: EditorTheme.Light,
     codeTheme: CodeTheme.monoBlue,

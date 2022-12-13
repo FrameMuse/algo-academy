@@ -1,19 +1,14 @@
+import { LessonMultipleContent } from "app/areas/lesson/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
 import useLesson from "./useLesson"
 
-function useLessonContents(id: string, editorLanguage: EditorLanguage) {
+function useLessonContents(id: string, editorLanguage: EditorLanguage): LessonMultipleContent {
   const lesson = useLesson(id)
 
   const contents = lesson.contents.find(content => content.language === editorLanguage)
   if (contents == null) {
-    return {
-      solution: "",
-      language: EditorLanguage.TypeScript,
-      notes: "",
-      tests: "",
-      defaultCode: ""
-    }
+    throw new Error(`Could't find lesson content for ${editorLanguage}.`)
   }
 
   return contents

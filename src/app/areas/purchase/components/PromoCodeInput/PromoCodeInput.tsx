@@ -1,36 +1,35 @@
 import "./PromoCodeInput.scss"
 
-import appQuery from "api/appQuery"
-import { APIActions } from "api/data"
 import Button from "app/ui/kit/Button/Button"
+import { ButtonBaseProps } from "app/ui/kit/Button/Button.types"
 import Field from "app/ui/kit/Field/Field"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import { inputValue } from "utils/common"
 
 interface PromoCodeInputProps {
-  onSubmit?(value: string): void
+  /**
+   * Promocode is supposed to be applied.
+   */
+  valid?: boolean
+  onSubmit?(value: string): void | Promise<void>
 }
 
 function PromoCodeInput(props: PromoCodeInputProps) {
-  const [value, setValue] = useState<string>()
-  function onSubmit() {
-    if (value == null) return
+  const [value, setValue] = useState<string>("")
 
-    appQuery(APIActions.postStripeCreateCharge({
-      "subscription_id": "1",
-      "promo_name": "12",
-      "card_number": "12",
-      "card_exp_month": "12",
-      "card_exp_year": "2222",
-      "card_CVC": "121"
-    }))
-
-    props.onSubmit?.(value)
+  async function onSubmit() {
+    await props.onSubmit?.(value)
   }
+
+  const buttonText: ReactNode = props.valid ? "Applied" : "Apply"
+  const buttonColor: ButtonBaseProps["color"] = props.valid ? "green" : undefined
   return (
     <div className="promo-code-input">
-      <Field iconName="tag" placeholder="WINTER20" onChange={inputValue(setValue)}>Promo Code</Field>
-      <Button squared onClick={onSubmit}>Apply</Button>
+      <div className="promo-code-input__label">Promo Code</div>
+      <div className="promo-code-input__container">
+        <Field iconName="tag" placeholder="WINTER20" onChange={inputValue(setValue)} />
+        <Button color={buttonColor} size="small" squared disabled={props.valid} await onClick={onSubmit}>{buttonText}</Button>
+      </div>
     </div>
   )
 }

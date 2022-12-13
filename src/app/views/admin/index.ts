@@ -12,4 +12,8 @@ export { default as AdminSnippetsView } from "./views/snippets/AdminSnippetsView
 export { default as AdminSnippetsNewView } from "./views/snippets/AdminSnippetsNewView"
 export { default as AdminSnippetsEditView } from "./views/snippets/AdminSnippetsEditView"
 
+export { default as AdminPlansView } from "./views/plans/AdminPlansView"
+export { default as AdminPlansNewView } from "./views/plans/AdminPlansNewView"
+export { default as AdminPlansEditView } from "./views/plans/AdminPlansEditView"
+
 export { default as AdminFeedbackView } from "./views/feedback/AdminFeedbackView"

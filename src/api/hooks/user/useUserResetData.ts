@@ -1,14 +1,12 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
 import { toast } from "react-toastify"
 
-const SUCCESSFUL_RESET_TEXT = ""
+const SUCCESSFUL_RESET_TEXT = "Your progress has beed reset. This is irreversible."
 
-function useUserResetData(): () => void {
+function useUserResetData() {
   async function resetData() {
-    const response = await appQuery(APIActions.postUsersRevokeAccessMe())
-    if (!isResponseOk(response)) return
+    await appQuery(APIActions.postUsersRevokeAccessMe())
 
     toast.success(SUCCESSFUL_RESET_TEXT)
   }

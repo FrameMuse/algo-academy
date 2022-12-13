@@ -1,11 +1,12 @@
 import "./Button.scss"
 
+import Loader from "app/ui/synthetic/Loader/Loader"
 import useTheme from "app/ui/synthetic/Theme/useTheme"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
+import { GAEventAction, GAEventCategory } from "services/ga"
 import { classMerge, classWithModifiers } from "utils/common"
 
-import LoaderCover from "../../synthetic/Loader/LoaderCover"
 import Icon, { IconName } from "../Icon/Icon"
 import { buttonColorMap } from "./Button.helpers"
 import { ButtonBaseProps } from "./Button.types"
@@ -32,20 +33,29 @@ function ButtonIcon(props: ButtonIconProps) {
   const [pending, setPending] = useState(false)
   async function onClick(event: MouseEvent<HTMLButtonElement>) {
     if (props.await) {
-      setPending(true)
-      await props.onClick?.(event)
-      setPending(false)
+      await onClickPromise(event)
     } else {
       props.onClick?.(event)
     }
     /* --- Google Analytics --- */
     if (props.eventLabel) {
-      ReactGA.event({
-        category: "User",
-        action: "Clicked Button",
-        label: props.eventLabel
-      })
+      gaClickEvent()
     }
+  }
+  async function onClickPromise(event: MouseEvent<HTMLButtonElement>) {
+    setPending(true)
+    try {
+      await props.onClick?.(event)
+    } finally {
+      setPending(false)
+    }
+  }
+  function gaClickEvent() {
+    ReactGA.event({
+      category: GAEventCategory.User,
+      action: GAEventAction.ClickedButton,
+      label: String(props.eventLabel)
+    })
   }
 
   const modifiers: string[] = []
@@ -66,7 +76,7 @@ function ButtonIcon(props: ButtonIconProps) {
         <Icon name={props.name} />
       </div>
       <div className="button__loader">
-        <LoaderCover white />
+        <Loader />
       </div>
     </button>
   )

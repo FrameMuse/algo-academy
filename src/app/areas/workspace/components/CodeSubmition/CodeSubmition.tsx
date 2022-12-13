@@ -40,6 +40,7 @@ function CodeSubmition(props: CodeSubmitionProps) {
     setResult(result)
     setExpanded(true)
 
+    if (result.tests.length === 0) return
     if (result.tests.every(test => test.passed)) {
       Modal.open(GreatJob)
     }

@@ -9,6 +9,7 @@ function useUpdateLesson() {
   async function updateLesson(id: string, lesson: {
     title?: string
     type?: LessonType
+    free?: boolean
 
     content?: string
     statement?: string
@@ -17,6 +18,7 @@ function useUpdateLesson() {
     const response = await appQuery(APIActions.patchLessonsId(id, {
       type: lesson.type ? APIMappings.lessonType.backward(lesson.type) : undefined,
       name: lesson.title,
+      free: lesson.free,
       content: lesson.content,
       statement: lesson.statement,
       hints: lesson.hints

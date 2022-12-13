@@ -4,6 +4,8 @@
 	display: grid;
 	gap: 0.75em;
 
+	min-width: var(--input-width, fit-content);
+
 	cursor: text;
 }
 

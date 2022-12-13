@@ -8,11 +8,21 @@
 */
 
 
+export interface Notes {
+  content: string
+}
+
+export interface NotesResponse {
+  content: string
+  id: string
+}
+
 export interface Subscription {
   title: string
   subtitle: string
   cost: number
   period: string
+  most_popular?: boolean
   descriptions: string[]
 }
 
@@ -22,6 +32,7 @@ export interface SubscriptionResponse {
   subtitle: string
   cost: number
   period: string
+  most_popular?: boolean
   descriptions: string[]
 }
 
@@ -72,11 +83,7 @@ export interface Plan {
 
 export interface Stripe {
   subscription_id: string
-  promo_name: string
-  card_number: string
-  card_exp_month: string
-  card_exp_year: string
-  card_CVC: string
+  promo_name?: string
 }
 
 export interface CreateUser {
@@ -119,7 +126,6 @@ export interface Lesson {
   resources: {
     solution: string | null
     language: number
-    notes: string
     tests: string
     validation_func: string
     default_code: string
@@ -141,7 +147,6 @@ export interface LessonResponse {
   resources: {
     solution: string | null
     language: number
-    notes: string
     tests: string
     validation_func: string
     default_code: string
@@ -160,6 +165,7 @@ export interface Chapter {
     id: string
     type: string
     name: string
+    free?: boolean
   }[]
 }
 
@@ -247,6 +253,8 @@ export interface JudgeResult {
   compile_output: {
     passed: boolean
     description: string
+    expected: string
+    userAnswer: string
   }[] | null
   status: {
     id: number

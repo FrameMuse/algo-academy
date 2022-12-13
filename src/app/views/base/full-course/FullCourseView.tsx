@@ -16,7 +16,7 @@ function FullCourseView() {
         <p>Our curriculum spans topics such as, algorithms, system design, coding patterns, space time complexity, behavioral interviews and much more. Start practicing today and learn everything you need to ace your next coding interview.</p>
       </div>
       <div className="course-section__container">
-        <QueryBoundary userType>
+        <QueryBoundary>
           <CourseFreeNotice />
           <CourseProgressContainer />
           <CourseContentsContainer />

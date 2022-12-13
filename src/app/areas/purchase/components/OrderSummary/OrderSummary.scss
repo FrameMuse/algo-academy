@@ -12,6 +12,15 @@
 .order-summary__title {
   font-size: $font-size-h5;
   font-weight: 800;
+
+  em {
+    font-size: $font-size-h6;
+    font-style: normal;
+    font-weight: 400;
+
+    color: $color-green-80;
+    border-bottom: 1px solid;
+  }
 }
 
 .order-summary__summary {

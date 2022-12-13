@@ -21,7 +21,7 @@ export const USER_GUEST: User = {
 const initialState: User = { ...USER_GUEST }
 
 interface Actions {
-  USER_UPDATE: User
+  USER_UPDATE: Partial<User>
 }
 
 type Action = ValuesOf<MapActions<Actions>>

@@ -19,6 +19,8 @@ import {
   JudgeStatuses,
   Lesson,
   LessonResponse,
+  Notes,
+  NotesResponse,
   Promo,
   PromoCheckResponse,
   PromoResponse,
@@ -125,9 +127,7 @@ export const patchUsersMe = (body: Partial<User>): QueryAction<User> => ({
 /**
  * Update avatar. Only for authorized users.
  */
-export const patchUsersMeAvatar = (body: Partial<{
-  avatar: string
-}>): QueryAction<{
+export const patchUsersMeAvatar = (body: FormData): QueryAction<{
   data: string
   contentType: string
 }> => ({
@@ -467,6 +467,19 @@ export const postFeedbacks = (body: Feedback): QueryAction => ({
   operationId: "createFeedback"
 })
 
+export const getNotes = (lesson_id: string): QueryAction<NotesResponse> => ({
+  method: "GET",
+  endpoint: `/notes/${lesson_id}`,
+  operationId: "notesByLessonId"
+})
+
+export const patchNotes = (lesson_id: string, body: Partial<Notes>): QueryAction => ({
+  method: "PATCH",
+  endpoint: `/notes/${lesson_id}`,
+  body,
+  operationId: "updateNotesByLessonId"
+})
+
 export const getJudge0ConfigInfo = (): QueryAction<JudgeConfig> => ({
   method: "GET",
   endpoint: `/judge0/config_info`,
@@ -507,9 +520,7 @@ export const postJudge0Compile = (body: {
 /**
  * Tariff plan payment. Only for authorized users.
  */
-export const postStripeCreateCharge = (body: Stripe): QueryAction<{
-  receipt_url: string
-}> => ({
+export const postStripeCreateCharge = (body: Stripe): QueryAction<{ url: string }> => ({
   method: "POST",
   endpoint: `/stripe/create-charge`,
   body,

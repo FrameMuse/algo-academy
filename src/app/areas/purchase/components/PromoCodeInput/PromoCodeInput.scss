@@ -1,8 +1,17 @@
 @import "~assets/scss/bundle.scss";
 
 .promo-code-input {
+  display: grid;
+  gap: 1em;
+}
+
+.promo-code-input__label {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.promo-code-input__container {
   display: flex;
-  align-items: flex-end;
   gap: 1em;
 
   width: 100%;

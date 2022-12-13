@@ -4,6 +4,8 @@ import useUpdateLessonByLanguage from "api/hooks/lessons/useUpdateLessonByLangua
 import Headings from "app/layouts/Headings/Headings"
 import Row from "app/layouts/Row/Row"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
+import Code from "app/ui/kit/Code/Code"
+import CodeTheme from "app/ui/kit/Code/CodeTheme"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import Callout from "app/ui/synthetic/Callout/Callout"
@@ -93,7 +95,7 @@ function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
       </Row>
       {tab && (
         // Pass a `key` attribute here to give to component states a depenency.
-        <EditorPreview language={EditorLanguage.Markdown} original={content || SAMPLE_PROBLEM_STATEMENT} onSave={onSave} onDirtyChange={setDirty} key={tab} />
+        <EditorPreview language={EditorLanguage.Markdown} defaultValue={content || SAMPLE_PROBLEM_STATEMENT} onSave={onSave} onDirtyChange={setDirty} key={tab} />
       )}
     </>
   )
@@ -101,6 +103,32 @@ function LessonSharedContentEdit(props: LessonSharedContentEditProps) {
 
 
 
+const TEST_RESULT_INTERFACE = `
+interface TestResult {
+  /**
+   * If the test is passed.
+   */
+  passed: boolean
+  /**
+   * The description of the test.
+   */
+  description: string
+  /**
+   * The expected VALUE.
+   * it can be any value, but it should in its original type.
+   */
+  expected: unknown
+  /**
+   * This is what user's code evaluates.
+   * it can be any value, but it should in its original type.
+   */
+  userAnswer: unknown
+}
+
+interface IOutput {
+  results: TestResult[]
+}
+`
 
 type MultipleContentKey = Exclude<keyof LessonMultipleContent, "language">
 
@@ -124,6 +152,12 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
     props.onSave?.(value, tab, language)
   }
 
+  /**
+   * Tabs that needs only markdown as editor language.
+   */
+  const isMarkdownTabs = ["solution"].includes(tab || "")
+  const validationSample = tab === "testsValidation" ? (language && VALIDATION_SAMPLES[language]) : undefined
+
   return (
     <>
       <Headings>
@@ -137,18 +171,35 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
         {!dirty && (
           <Selector onChange={setTab}>
             <option value="solution">Solution</option>
-            <option value="notes">Notes</option>
             <option value="tests">Tests</option>
-            <option value="defaultCode">Default Code</option>
+            <option value="testsValidation">Tests Validation</option>
+            <option value="startingCode">Default Code</option>
           </Selector>
         )}
         <Selector onChange={setLanguage}>
           {optionsFromEnum(WorkspaceEditorLanguage, false)}
         </Selector>
       </Row>
+      {tab === "testsValidation" && (
+        <Headings>
+          <h3>NOTICE!</h3>
+          <p>
+            The output of the validation <strong>HAS TO</strong> follow these interfaces, otherwise it WILL break logic.
+          </p>
+          <Code theme={CodeTheme.lightfair} lang="typescript">{TEST_RESULT_INTERFACE}</Code>
+        </Headings>
+      )}
       {tab && language && (
-        // Pass a `key` attribute here to give to component states a depenency.
-        <EditorPreview language={tab === "defaultCode" ? language : EditorLanguage.Markdown} original={content} onSave={onSave} onDirtyChange={setDirty} key={tab} />
+        <EditorPreview
+          language={isMarkdownTabs ? EditorLanguage.Markdown : language}
+          disablePreview={!isMarkdownTabs}
+
+          defaultValue={content || validationSample}
+          onSave={onSave}
+          onDirtyChange={setDirty}
+          // Pass a `key` attribute to make this component default values update on `tab` and `language` change.
+          key={`${tab}-${language}`}
+        />
       )}
     </>
   )
@@ -184,3 +235,64 @@ function LessonProblemEdit(props: { id: string }) {
 }
 
 export default LessonProblemEdit
+
+
+
+const VALIDATION_TYPESCRIPT_SAMPLE = `// Don't log any other information such as \`<---+++ CODE RESULT +++--->\`, only \`IOutput\` in stringified JSON format.
+// Tip: write some autotests too, so users can't just brute-force the solution.
+
+interface TestResult {
+  /**
+   * If the test is passed.
+   */
+  passed: boolean
+  /**
+   * The description of the test.
+   */
+  description: string
+  /**
+   * The expected VALUE.
+   * it can be any value, but it should in its original type.
+   */
+  expected: unknown
+  /**
+   * This is what user's code evaluates.
+   * it can be any value, but it should in its original type.
+   */
+  userAnswer: unknown
+}
+
+interface IOutput {
+  results: TestResult[]
+}
+
+/**
+ * This is the end of the program.
+ */
+function Output(output: IOutput) {
+  console.log(JSON.stringify(output))
+}
+
+function validate({ input, expected, description }): TestResult {
+  // @ts-ignore As user's code will be merged with this file, the \`isPalindrome\` function should be here.
+  const userAnswer = isPalindrome(input)
+  const passed = expected === userAnswer
+
+  return { passed, description, expected, userAnswer }
+}
+
+// @ts-ignore Tests should be declared in \`tests\` tab.
+const results = tests.map(validate);
+const output = { results };
+
+Output(output)
+`
+const VALIDATION_OTHER_SAMPLE = `// Follow the TypeScipt example of output of the program should be.`
+
+const VALIDATION_SAMPLES: Record<string, string> = {
+  [EditorLanguage.TypeScript]: VALIDATION_TYPESCRIPT_SAMPLE,
+  [EditorLanguage.JavaScript]: VALIDATION_OTHER_SAMPLE,
+  [EditorLanguage["C++"]]: VALIDATION_OTHER_SAMPLE,
+  [EditorLanguage.Java]: VALIDATION_OTHER_SAMPLE,
+  [EditorLanguage.Python]: VALIDATION_OTHER_SAMPLE,
+}

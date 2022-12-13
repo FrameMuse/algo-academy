@@ -16,7 +16,7 @@ function LessonArticleEdit(props: LessonArticleEditProps) {
   }
 
   return (
-    <EditorPreview language={EditorLanguage.Markdown} original={lesson.content || SAMPLE_ARTICLE} onSave={onSave} />
+    <EditorPreview language={EditorLanguage.Markdown} defaultValue={lesson.content || SAMPLE_ARTICLE} onSave={onSave} />
   )
 }
 

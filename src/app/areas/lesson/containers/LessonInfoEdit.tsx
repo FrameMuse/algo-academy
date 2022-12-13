@@ -8,15 +8,16 @@ import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
 import { useState } from "react"
-import { inputValue } from "utils/common"
+import { inputValue, targetValue } from "utils/common"
 
 interface LessonInfoEditProps {
   id: string
 }
 
 function LessonInfoEdit(props: LessonInfoEditProps) {
-  const [title, setTitle] = useState<string>("")
+  const [title, setTitle] = useState<string>()
   const [type, setType] = useState<LessonType>()
+  const [free, setFree] = useState<boolean>()
 
   const lesson = useLesson(props.id)
   const updateLesson = useUpdateLesson()
@@ -24,7 +25,7 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
   async function onSubmit() {
     if (!await confirmAction()) return
 
-    await updateLesson(props.id, { title, type })
+    await updateLesson(props.id, { title, type, free })
   }
 
   return (
@@ -33,6 +34,10 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
         <Field defaultValue={lesson.title} onChange={inputValue(setTitle)}>Title</Field>
         <Selector<LessonType> label="Type" defaultValue={lesson.type} onChange={setType}>
           {optionsFromEnum(LessonType)}
+        </Selector>
+        <Selector label="Free?" defaultValue={String(lesson.free)} onChange={targetValue(setFree, Boolean)}>
+          <option value="true">True</option>
+          <option value="false">False</option>
         </Selector>
         <Button color="dark" await onClick={onSubmit}>Save</Button>
       </Column>

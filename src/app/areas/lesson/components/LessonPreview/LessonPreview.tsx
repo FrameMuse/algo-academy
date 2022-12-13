@@ -9,14 +9,22 @@ import { LessonStatus } from "../../types"
 interface LessonPreviewProps {
   id: string
   status: LessonStatus
-  children: ReactNode
+  locked?: boolean
+  lockedReason?: string
+  title: ReactNode
 }
 
 function LessonPreview(props: LessonPreviewProps) {
   return (
     <div className="lesson-preview">
+      {props.locked && (
+        <div className="lesson-preview-locked">
+          <p className="lesson-preview-locked__title">{props.lockedReason ?? "Locked"}</p>
+          {/* <Icon name="cross" /> */}
+        </div>
+      )}
       <div className="lesson-preview__info">
-        <p className="lesson-preview__text">{props.children}</p>
+        <p className="lesson-preview__text">{props.title}</p>
       </div>
       <LessonPreviewButton {...props} />
     </div>

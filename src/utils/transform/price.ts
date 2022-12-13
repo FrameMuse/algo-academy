@@ -1,4 +1,8 @@
 class Price {
+  /**
+   * @argument currency - default `"USD"`
+   * @argument locale - default `"EN"`
+   */
   static format(value: number, currency: Intl.NumberFormatOptions["currency"] = "USD", locale = "EN"): string {
     try {
       return value.toLocaleString(locale, { style: "currency", currency, minimumFractionDigits: 0 })

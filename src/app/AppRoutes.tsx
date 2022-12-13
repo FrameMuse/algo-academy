@@ -7,7 +7,7 @@ import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
 import Column from "./layouts/Column/Column"
 import Headings from "./layouts/Headings/Headings"
 import ErrorCover from "./ui/synthetic/ErrorCover/ErrorCover"
-import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView, AdminSnippetsEditView, AdminSnippetsNewView, AdminSnippetsView } from "./views/admin"
+import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView, AdminPlansEditView, AdminPlansNewView, AdminPlansView, AdminSnippetsEditView, AdminSnippetsNewView, AdminSnippetsView } from "./views/admin"
 import { AboutUsView } from "./views/base/about-us"
 import { ContactUsView } from "./views/base/contact-us"
 import FullCourseView from "./views/base/full-course/FullCourseView"
@@ -24,7 +24,7 @@ function resetScroll() {
 
 function AppRoutes() {
   const user = useAppSelector(state => state.user)
-  const isAdmin = true || user.signed && user.type >= UserType.Admin
+  const isAdmin = user.signed && user.type >= UserType.Admin
 
   return (
     <Routes>
@@ -96,6 +96,12 @@ function AppRoutes() {
               <Route path="new" element={<AdminSnippetsNewView />} />
               <Route path=":snippetId" element={<AdminSnippetsEditView />} />
             </Route>
+            <Route path={StaticRoutes.AdminPlans}>
+              <Route index element={<AdminPlansView />} />
+
+              <Route path="new" element={<AdminPlansNewView />} />
+              <Route path=":planId" element={<AdminPlansEditView />} />
+            </Route>
             <Route path={StaticRoutes.AdminFeedback} element={<AdminFeedbackView />} />
           </>
         )}
@@ -126,6 +132,7 @@ export enum StaticRoutes {
   AdminChapters = "/admin/chapters",
   AdminLessons = "/admin/lessons",
   AdminSnippets = "/admin/snippets",
+  AdminPlans = "/admin/plans",
   AdminFeedback = "/admin/feedback",
 }
 

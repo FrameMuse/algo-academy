@@ -1,4 +1,4 @@
-import { PricingPlan } from "app/areas/purchase/types"
+import { Purchase } from "app/areas/purchase/types"
 
 export interface Auth { }
 
@@ -19,7 +19,7 @@ export interface UserSigned {
   level: number
 
   createdAt: Date
-  pricingPlan?: PricingPlan
+  pricingPlan?: Purchase
 }
 
 export interface UserDefault {

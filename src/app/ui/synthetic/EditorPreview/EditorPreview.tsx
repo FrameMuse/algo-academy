@@ -19,8 +19,9 @@ import { AppTheme } from "../Theme/themeContext"
 
 
 interface EditorPreviewProps {
+  disablePreview?: boolean
   language?: EditorLanguage
-  original?: string
+  defaultValue?: string
   onSave?(value: string): void | Promise<void>
   onDirtyChange?(dirty: boolean): void
 }
@@ -30,8 +31,8 @@ interface EditorPreviewProps {
  * TODO: Currently uses outside class names and styles of `problem-layout`, but should be reworked to have its own.
  */
 function EditorPreview(props: EditorPreviewProps) {
-  const [value, setValue] = useState<string>(props.original ?? "")
-  const [dirty, setDirty] = useState(false)
+  const [value, setValue] = useState<string>(props.defaultValue ?? "")
+  const [dirty, setDirty] = useState<boolean>(false)
 
   const [articleTheme, setArticleTheme] = useState<AppTheme>("light")
   const [editorTheme, setEditorTheme] = useState<EditorTheme>(EditorTheme.Light)
@@ -42,31 +43,32 @@ function EditorPreview(props: EditorPreviewProps) {
     if (value == null) return
 
     setValue(value)
-    setDirty(value !== props.original)
+    setDirty(value !== props.defaultValue)
 
-    props.onDirtyChange?.(value !== props.original)
+    props.onDirtyChange?.(value !== props.defaultValue)
   }
 
   async function onSave() {
     if (!await confirmAction()) return
 
     await props.onSave?.(value)
+    props.onDirtyChange?.(false)
   }
   async function onCancel() {
     if (!await confirmAction()) return
 
-    if (props.original == null) return
-    updateValue(props.original)
+    if (props.defaultValue == null) return
+    updateValue(props.defaultValue)
   }
 
   useEffect(() => {
-    if (props.original == null) return
+    if (props.defaultValue == null) return
 
-    const dirty = props.original !== value
+    const dirty = props.defaultValue !== value
     if (dirty) return
 
-    updateValue(props.original)
-  }, [props.original])
+    updateValue(props.defaultValue)
+  }, [props.defaultValue])
 
   const plainEditor = (
     <Editor
@@ -89,7 +91,7 @@ function EditorPreview(props: EditorPreviewProps) {
       theme={editorTheme}
       options={{ readOnly: true }}
 
-      original={props.original}
+      original={props.defaultValue}
       modified={value}
     />
   )
@@ -115,11 +117,13 @@ function EditorPreview(props: EditorPreviewProps) {
         </Row>
       </div>
       <div className="editor-preview__layout">
-        <div className={classWithModifiers("editor-preview__preview", articleTheme === "dark" && "dark")}>
-          <Theme theme={articleTheme}>
-            <ArticleMarkdown content={value} fontSize="small" />
-          </Theme>
-        </div>
+        {!props.disablePreview && (
+          <div className={classWithModifiers("editor-preview__preview", articleTheme === "dark" && "dark")}>
+            <Theme theme={articleTheme}>
+              <ArticleMarkdown content={value} fontSize="small" />
+            </Theme>
+          </div>
+        )}
         <div className="editor-preview__editor">
           {diffMode && diffEditor}
           {!diffMode && plainEditor}

@@ -219,6 +219,9 @@ a.button {
 }
 
 .button__loader {
+	--loader-color: #{rgba(white, 0.5)};
+	--loader-part-color: #{rgba(white, 1)};
+
 	position: absolute;
 	inset: 0;
 
@@ -227,8 +230,4 @@ a.button {
 	display: grid;
 	background: rgba($color-dark, 0.5);
 	border-radius: inherit;
-
-	.loader-cover {
-		padding: unset;
-	}
 }

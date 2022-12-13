@@ -4,11 +4,13 @@ import { toast } from "react-toastify"
 
 import { QueryClientError } from "./helpers"
 
+const cacheTime = process.env.NODE_ENV === "development" ? 0 : Number(process.env.REACT_APP_API_CACHE_TIME)
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      cacheTime,
       suspense: true,
-      cacheTime: Number(process.env.REACT_APP_API_CACHE_TIME),
       refetchOnWindowFocus: () => false,
       retry(_failureCount, error) {
         if (error instanceof QueryClientError) {

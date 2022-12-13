@@ -1,4 +1,5 @@
 // import { Buffer } from "buffer"
+import { NoInfer } from "@reduxjs/toolkit/dist/tsHelpers"
 import { Dispatch, SetStateAction, SyntheticEvent } from "react"
 
 /**
@@ -74,9 +75,20 @@ export function stopPropagation(callback?: () => void | null) {
   }
 }
 
-export function inputValue(callback: (value: string) => void) {
+export function targetValue<M = string>(callback: (value: NoInfer<M>) => void, map?: (value: string) => M) {
+  return (value: string) => {
+    const valueMapped = map?.(value)
+
+    callback((valueMapped ?? value) as M)
+  }
+}
+
+export function inputValue<M = string>(callback: (value: NoInfer<M>) => void, map?: (value: string) => M) {
   return (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    callback(event.currentTarget.value)
+    const value = event.currentTarget.value
+    const valueMapped = map?.(value)
+
+    callback((valueMapped ?? value) as M)
   }
 }
 
@@ -105,4 +117,8 @@ export function isDictionary(object: unknown): object is Record<keyof never, unk
 
 export function toggleState(setAction: Dispatch<SetStateAction<boolean>>): () => void {
   return () => setAction(state => !state)
+}
+
+export function pluralize(count: number, noun: string, suffix = "s") {
+  return `${count} ${noun}${count !== 1 ? suffix : ""}`
 }

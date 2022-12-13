@@ -2,11 +2,10 @@ import "./ProblemView.scss"
 
 import useLesson from "api/hooks/lessons/useLesson"
 import useLessonContents from "api/hooks/lessons/useLessonContents"
-import useUpdateLessonByLanguage from "api/hooks/lessons/useUpdateLessonByLanguage"
 import useSnippets from "api/hooks/snippets/useSnippets"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
-import { LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
+import { LessonNotes, LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
 import { Snippets, WorkspaceCodeSubmition, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
@@ -19,14 +18,11 @@ import ButtonIcon from "app/ui/kit/Button/ButtonIcon"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Icon from "app/ui/kit/Icon/Icon"
 import { EditorLanguage, EdtitorSnippet } from "app/ui/synthetic/Editor/Editor.types"
-import Loader from "app/ui/synthetic/Loader/Loader"
 import Logo from "app/ui/synthetic/Logo/Logo"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
 import Timer from "app/ui/synthetic/Timer/Timer"
-import _ from "lodash"
-import { useState } from "react"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { useAppSelector } from "store/hooks"
@@ -149,7 +145,7 @@ function ProblemRightSection(props: { id: string }) {
       <TabRouter defaultPath={TabRoutes.Code}>
         <TabLinks>
           <TabLink to={TabRoutes.Code}>Code</TabLink>
-          <TabLink to={TabRoutes.Tests}>Tests</TabLink>
+          {/* <TabLink to={TabRoutes.Tests}>Tests</TabLink> */}
           <TabLink to={TabRoutes.Snippets}>Snippets</TabLink>
           <TabLink to={TabRoutes.Notes}>Notes</TabLink>
 
@@ -163,7 +159,7 @@ function ProblemRightSection(props: { id: string }) {
             draftId={id}
             snippets={editorSnippets}
             defaultLanguage={contents?.language}
-            defaultValue={contents?.defaultCode}
+            defaultValue={contents?.startingCode}
           />
           <WorkspaceCodeSubmition draftId={id} lessonId={props.id} />
         </TabRoute>
@@ -178,13 +174,12 @@ function ProblemRightSection(props: { id: string }) {
           <Headings>
             <h4>Snippets</h4>
             <p>Pieces of code that could help you solving a problem.</p>
-            {/* <p>Tip: Try typing <CodeInline>{snippets[0]?.label}</CodeInline> in code section.</p> */}
           </Headings>
           <Snippets snippets={snippets} />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Notes}>
-          <ProblemNotes id={props.id} language={editorLanguage} />
+          <LessonNotes id={props.id} />
         </TabRoute>
 
       </TabRouter>
@@ -192,62 +187,5 @@ function ProblemRightSection(props: { id: string }) {
   )
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-interface ProblemNotesProps {
-  id: string
-  language: EditorLanguage
-}
-
-function ProblemNotes(props: ProblemNotesProps) {
-  const [pending, setPending] = useState(false)
-
-  const id = `${props.id}-${props.language}-notes`
-
-  const lessonContents = useLessonContents(props.id, props.language)
-  const updateLesson = useUpdateLessonByLanguage()
-
-  async function onChange(value: string | undefined) {
-    if (value == null) return
-
-    setPending(true)
-    await updateLesson(props.id, props.language, { notes: value })
-    setPending(false)
-  }
-  const onChangeThrottled = _.debounce(onChange, 1000, { trailing: true })
-
-
-  const pendingSavingElement = <p>Saving... <div><Loader /></div></p>
-  const upToDateElement = <p>Up to date <Icon name="check" /></p>
-  return (
-    <>
-      <Headings>
-        <h4>Notes</h4>
-        <p>Here you can quicly take a note.</p>
-        {pending ? pendingSavingElement : upToDateElement}
-      </Headings>
-      <WorkspaceEditor
-        draftId={id}
-        height="100%"
-
-        value="" // to prevent updating default value when lesson is refetched.
-        defaultValue={lessonContents.notes}
-        defaultLanguage={EditorLanguage.Markdown}
-
-        onChange={onChangeThrottled}
-      />
-    </>
-  )
-}
 
 export default ProblemView

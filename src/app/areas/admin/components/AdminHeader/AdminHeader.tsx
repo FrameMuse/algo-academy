@@ -6,8 +6,6 @@ import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 
 function AdminHeader() {
-
-
   return (
     <header className="admin-header">
       <Logo title="<Admin />" to="/admin" />
@@ -18,6 +16,7 @@ function AdminHeader() {
           <ButtonLink to={StaticRoutes.AdminChapters}>Chapters</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminSnippets}>Snippets</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminPlans}>Plans</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminFeedback}>Feedback</ButtonLink>
         </ButtonGroup>
       </nav>

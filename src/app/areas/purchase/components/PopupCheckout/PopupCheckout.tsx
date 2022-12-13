@@ -1,38 +1,60 @@
+import useCreateCharge from "api/hooks/charges/useCreateCharge"
+import PopupUserAuth from "app/areas/user/popups/PopupUserAuth"
 import Column from "app/layouts/Column/Column"
 import PopupLayout from "app/layouts/PopupLayout/PopupLayout"
 import Button from "app/ui/kit/Button/Button"
-import Form from "app/ui/kit/Form/Form"
+import { useState } from "react"
+import { Modal } from "react-modal-global"
+import { useAppSelector } from "store/hooks"
 
-import { PromoCodeInput } from "../.."
+import PurchasePromoCode from "../../containers/PurchasePromoCode"
+import { formatDuration } from "../../helpers"
 import OrderSummary from "../OrderSummary/OrderSummary"
 
-function PopupCheckout() {
+interface PopupCheckoutProps {
+  planId: string,
+  cost: number
+  durationMonths: number
+}
+
+function PopupCheckout(props: PopupCheckoutProps) {
+  const user = useAppSelector(state => state.user)
+  const createCharge = useCreateCharge()
+
+  const [promocode, setPromocode] = useState<string>()
+  const [discount, setDiscount] = useState<number>(0)
+
+  function onValidation(promocode: string | undefined, discount: number) {
+    setPromocode(promocode)
+    setDiscount(discount)
+  }
+
+  async function onSubmit() {
+    if (!user.signed) {
+      await Modal.open(PopupUserAuth)
+
+      return
+    }
+
+    const url = await createCharge(props.planId, promocode)
+    window.open(url)
+  }
+
   return (
     <PopupLayout width="43.75em">
-      {/* <Headings>
-        <h5>Checkout</h5>
-        <p>Don’t worry about canceling any annoying subscriptions - this is a 1-time charge.</p>
-        <Callout color="red">30 days money-back guarantee if you’re not satisfied.</Callout>
-      </Headings> */}
-      <OrderSummary pay={249} per={"1 Year"}>
+      <OrderSummary cost={props.cost} duration={props.durationMonths} discount={discount}>
         <ul>
-          <li>{"You'll"} have access to Algo Academy for 1 year.</li>
+          <li>{"You'll"} have access to Algo Academy for {formatDuration(props.durationMonths)}.</li>
           <li>Your access to Algo Academy will be tied to this account.</li>
           <li>This is a 1-time charge.</li>
           <li>30 days money-back guarantee if you’re not satisfied.</li>
         </ul>
       </OrderSummary>
-      <Form>
-        <Column>
-          {/* <Row>
-            <Field autoComplete="given-name" placeholder="Darryl" required>First Name</Field>
-            <Field autoComplete="family-name" placeholder="Garrison" required>Last Name</Field>
-          </Row>
-          <Field type="email" autoComplete="email" placeholder="email@example.com" required>E-mail Address</Field> */}
-          <PromoCodeInput />
-          <Button type="submit">Buy Risk-Free</Button>
-        </Column>
-      </Form>
+      <Column>
+        <PurchasePromoCode onValidation={onValidation} />
+        <Button await onClick={onSubmit}>Buy Risk-Free</Button>
+        <p style={{ textAlign: "center" }}>Powered by <strong>stripe</strong></p>
+      </Column>
     </PopupLayout>
   )
 }

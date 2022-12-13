@@ -1,6 +1,6 @@
 import { APISchemas } from "api/data"
 import { LessonMultipleContent, LessonStatus, LessonType } from "app/areas/lesson/types"
-import { PricingPlan } from "app/areas/purchase/types"
+import { Plan, Purchase } from "app/areas/purchase/types"
 import { ICodeSubmitionResult } from "app/areas/workspace/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import { USER_GUEST } from "store/reducers/user"
@@ -21,7 +21,7 @@ export function mapUser(schema: APISchemas.User): User {
 
     createdAt: new Date(schema.date_of_creation),
 
-    pricingPlan: schema.current_plan ? mapPricingPlan(schema.current_plan) : undefined,
+    pricingPlan: schema.current_plan ? mapPurchase(schema.current_plan) : undefined,
     type: userType.forward(schema.role),
     signed: true,
   }
@@ -38,9 +38,56 @@ export function mapChaptersProgress(schema: APISchemas.User["progress"][0]) {
   }
 }
 
-export function mapPricingPlan(schema: APISchemas.Plan): PricingPlan {
+
+export function mapPlan(schema: APISchemas.SubscriptionResponse): Plan {
   return {
-    name: schema.plan_name,
+    id: schema.id,
+    title: schema.title,
+    description: schema.subtitle,
+    cost: schema.cost,
+    durationMonths: mapPlanDurationForward(schema.period),
+    benefits: schema.descriptions,
+    mostPopular: schema.most_popular
+  }
+}
+
+/**
+ * @returns amount of months.
+ */
+export function mapPlanDurationForward(period: string): number {
+  period = period.toLowerCase()
+
+  type Item = `${number}${("y" | "m" | "d")}`
+
+  const items = period.split("-") as [string, ...Item[]]
+
+  return items.reduce((result, nextItem) => {
+    const [value, type] = nextItem.split("") as [string, "y" | "m" | "d"]
+    const valueNumber = Number(value)
+
+    if (type === "d") {
+      return result + Math.floor(valueNumber / 30)
+    }
+
+    if (type === "m") {
+      return result + valueNumber
+    }
+
+    if (type === "y") {
+      return result + valueNumber * 12
+    }
+
+    return result
+  }, 0)
+}
+
+export function mapPlanDurationBackward(months: number): string {
+  return `${months}m`
+}
+
+export function mapPurchase(schema: APISchemas.Plan): Purchase {
+  return {
+    title: schema.plan_name,
     purchaseDate: new Date(schema.purchase_date),
     receiptId: schema.receipt_id,
     totalCost: Number(schema.total_cost)
@@ -51,6 +98,7 @@ export function mapPricingPlan(schema: APISchemas.Plan): PricingPlan {
 export function mapLesson(schema: APISchemas.LessonResponse) {
   return {
     id: schema.id,
+    free: schema.free,
     title: schema.name,
     type: lessonType.forward(schema.type),
     chapterRelation: schema.used_in ? {
@@ -70,9 +118,9 @@ function mapLessonContent(schema: NonNullable<APISchemas.Lesson["resources"]>[0]
   return {
     solution: schema.solution ?? "",
     language: editorLanguage.forward(schema.language),
-    notes: schema.notes,
     tests: schema.tests,
-    defaultCode: schema.default_code
+    testsValidation: schema.validation_func,
+    startingCode: schema.default_code
   }
 }
 
@@ -91,8 +139,9 @@ export function mapChapter(schema: APISchemas.ChapterResponse) {
 function mapLessonPreview(schema: APISchemas.Chapter["list"][0]) {
   return {
     id: schema.id,
-    type: lessonType.forward(schema.type),
-    title: schema.name
+    free: schema.free,
+    title: schema.name,
+    type: lessonType.forward(schema.type)
   }
 }
 
@@ -126,7 +175,6 @@ export const userType = new BiMap<APISchemas.User["role"], UserType>({
   "admin": UserType.Admin,
   "user": UserType.Default
 })
-
 
 export const editorLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
   51: EditorLanguage["C#"],

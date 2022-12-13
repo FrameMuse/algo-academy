@@ -25,12 +25,12 @@ function AdminChaptersView() {
 
               <LessonPreviews title="Learning">
                 {chapter.learningLessons.map(lesson => (
-                  <LessonPreview {...lesson} key={lesson.id}>{lesson.title}</LessonPreview>
+                  <LessonPreview {...lesson} key={lesson.id} />
                 ))}
               </LessonPreviews>
               <LessonPreviews title="Practice">
                 {chapter.practiceLessons.map(lesson => (
-                  <LessonPreview {...lesson} key={lesson.id}>{lesson.title}</LessonPreview>
+                  <LessonPreview {...lesson} key={lesson.id} />
                 ))}
               </LessonPreviews>
             </CourseElement>

@@ -1,7 +1,6 @@
 import _ from "lodash"
 import { toast } from "react-toastify"
 import { isDictionary } from "utils/common"
-import FileTransform from "utils/transform/file"
 import JWT from "utils/transform/jwt"
 
 import { buildActionURL, isResponseOk, QueryClientError, QueryError, QueryServerError } from "./helpers"
@@ -12,18 +11,11 @@ function bodyTransform(body: unknown, type: ("multipart/form-data" | "applicatio
   if (body == null) return null
 
   if (type === "multipart/form-data") {
-    if (!isDictionary(body)) throw new Error("Not implemented.")
-
-    const formData = new FormData
-    try {
-      mapFormData(body).forEach(([key, value]) => {
-        formData.append(key, value)
-      })
-    } catch (error) {
-      console.log(error)
+    if (body instanceof FormData) {
+      return body
     }
-    // throw new Error
-    return formData
+
+    if (!isDictionary(body)) throw new Error("Not implemented.")
   }
 
   if (type === "application/json") {
@@ -31,52 +23,12 @@ function bodyTransform(body: unknown, type: ("multipart/form-data" | "applicatio
       return body
     }
 
-    if (isDictionary(body)) {
+    if (isDictionary(body) || body instanceof Array) {
       return JSON.stringify(body)
     }
   }
 
   throw new Error("Not implemented.")
-}
-
-function mapFormData(value: unknown, key?: string | number): [string, Blob | string][] {
-  const result: [string, Blob | string][] = []
-
-  if (typeof value === "string") {
-    if (/^data:.*?;base64,.*$/gi.test(value)) {
-      const file = FileTransform.parseDataURI(value)
-
-      if (key) {
-        result.push([String(key), file])
-        return result
-      }
-    }
-  }
-
-  if (value instanceof Array) {
-    value.forEach(value2 => {
-      const key2 = (key ?? "") + "[]"
-
-      // result.push([key2, (value instanceof Blob) ? value : String(value)])
-      // console.log(value2, typeof value2 === "object")
-      result.push(...((typeof value2 === "object") ? mapFormData(value2, key2) : [[key2, value2]] as never))
-    })
-    return result
-  }
-
-  if (isDictionary(value)) {
-    Object.keys(value).forEach(key2 => {
-      const value2 = value[key2]
-      const key3 = key ? `${key}[${key2}]` : key2
-      // console.log(mapFormData(value2, key3))
-      result.push(...mapFormData(value2, key3))
-    })
-    return result
-  }
-
-  result.push([String(key ?? ""), (value instanceof Blob) ? value : String(value)])
-  // console.log(result)
-  return result
 }
 
 function resolveActionBody(action: QueryAction) {
@@ -124,13 +76,14 @@ async function handleResponse<T>(response: Response, action: QueryAction<T>): Pr
     nativeResponse: response,
     status: response.status,
     headers: response.headers,
-    payload: null as any
+    payload: {} as any
   }
 
   // Empty responses.
   if ([203, 204].includes(response.status)) {
     return queryResponse
   }
+
 
   // Check if contentful responses have correct content type.
   if (!response.headers.get("content-type")?.startsWith("application/json")) {
@@ -186,7 +139,6 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     const queryResponse = await handleResponse(response, action)
 
 
-
     if (response.status >= 500) {
       throw new QueryServerError(action, queryResponse)
     }
@@ -194,7 +146,6 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     if (response.status >= 400) {
       throw new QueryClientError(action, queryResponse)
     }
-
 
 
     if (!isResponseOk(queryResponse, true)) {
@@ -207,18 +158,20 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
       console.error("[DEVELOPMENT ONLY ERROR]", error)
     }
 
-    if (action.method === "GET") {
+    if (error instanceof QueryClientError) {
+      toast.error(`[${_.startCase(action.operationId)}]: ${error.message}`)
+
       throw error
     }
 
-    if (error instanceof QueryClientError) {
-      toast.error(`[${_.startCase(action.operationId)}] - ${error.message}`)
+    if (error instanceof QueryServerError) {
+      toast.error(`Server error: ${error.message}`)
 
       throw error
     }
 
     if (error instanceof Error) {
-      toast.error("Query Error: " + error.message)
+      toast.error(error.message)
 
       throw error
     }

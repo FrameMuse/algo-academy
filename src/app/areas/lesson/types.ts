@@ -15,7 +15,7 @@ export enum LessonType {
 export interface LessonMultipleContent {
   solution: string
   language: EditorLanguage
-  notes: string
   tests: string
-  defaultCode: string
+  testsValidation: string
+  startingCode: string
 }

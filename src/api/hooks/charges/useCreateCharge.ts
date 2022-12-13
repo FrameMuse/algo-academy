@@ -1,16 +1,15 @@
+import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { refetchActionQueries } from "api/helpers"
-import { LessonType } from "app/areas/lesson/types"
-import { toast } from "react-toastify"
 
 function useCreateCharge() {
-  async function createCharge(id: string, lessonType: LessonType, ids: string[]) {
-    // const response = await appQuery(APIActions.postStripeCreateCharge(id, { list: ids }))
-    // if (!isResponseOk(response)) return
+  async function createCharge(id: string, promocode?: string) {
+    const response = await appQuery(APIActions.postStripeCreateCharge({
+      subscription_id: id,
+      promo_name: promocode
+    }))
 
-    refetchActionQueries(APIActions.getChaptersId(id))
-
-    toast.success(`Chapter ${LessonType[lessonType]} Lessons have been updated.`)
+    const url = response.payload.url
+    return url
   }
   return createCharge
 }

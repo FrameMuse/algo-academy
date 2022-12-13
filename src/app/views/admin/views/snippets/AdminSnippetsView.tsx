@@ -1,6 +1,9 @@
+import useDeleteSnippet from "api/hooks/snippets/useDeleteSnippet"
 import useSnippets from "api/hooks/snippets/useSnippets"
 import Box from "app/layouts/Box/Box"
 import Buttons from "app/layouts/Buttons/Buttons"
+import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
+import Button from "app/ui/kit/Button/Button"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Selector from "app/ui/kit/Selector/Selector"
 import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
@@ -12,6 +15,13 @@ import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 function AdminSnippetsView() {
   const [language, setLanguage] = useState<EditorLanguage>(EditorLanguage.Python)
   const snippets = useSnippets(language)
+
+  const deleteSnippet = useDeleteSnippet()
+  async function onDelete(id: string) {
+    if (!await confirmAction()) return
+
+    deleteSnippet(id, language)
+  }
 
   return (
     <Box>
@@ -37,6 +47,7 @@ function AdminSnippetsView() {
               <td>Run Time: {snippet.runTime}; Space: {snippet.space}</td>
               <td>
                 <Buttons>
+                  <Button color="dark" size="smaller" onClick={() => onDelete(snippet.id)}>Delete</Button>
                   <ButtonLink color="blue" size="smaller" to={snippet.id}>Edit</ButtonLink>
                 </Buttons>
               </td>

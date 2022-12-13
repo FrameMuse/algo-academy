@@ -1,6 +1,8 @@
 @import "~assets/scss/bundle.scss";
 
 .lesson-preview {
+  position: relative;
+
   display: grid;
   align-content: space-between;
 
@@ -25,4 +27,24 @@
 .lesson-preview__text {
   font-size: 1.125rem;
   font-weight: 700;
+}
+
+
+
+.lesson-preview-locked {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  align-items: center;
+  padding: 2em 1.5em;
+  background: rgba($color-dark-75, 0.85);
+  color: white;
+}
+
+.lesson-preview-locked__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+
+  text-align: center;
 }

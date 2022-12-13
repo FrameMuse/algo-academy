@@ -5,10 +5,12 @@ import { APP_TITLE } from "app/App"
 import { UserGeneralInfo, UserHasNoPlanNotice, UserProblemsSolved, UserPurchaseHistory } from "app/areas/user"
 import Box from "app/layouts/Box/Box"
 import Headings from "app/layouts/Headings/Headings"
+import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
 import Button from "app/ui/kit/Button/Button"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import { Helmet } from "react-helmet"
 import { Route, Routes } from "react-router-dom"
+import { GAEventLabel } from "services/ga"
 
 enum ProfileViewRoutes {
   MyAccount = "", // relative root
@@ -65,13 +67,18 @@ function PurchaseView() {
 
 function ResetProgressView() {
   const resetData = useUserResetData()
+  async function onClick() {
+    if (!await confirmAction()) return
+
+    await resetData()
+  }
   return (
     <Box>
       <Headings>
         <h5>Reset Your Data</h5>
         <p>You may reset your account data here; this includes course progress, submissions, and rank. Note that resetting your data is irreversible.</p>
       </Headings>
-      <Button color="gray" await onClick={resetData}>Reset Data</Button>
+      <Button color="gray" await onClick={onClick} eventLabel={GAEventLabel.ResetUserData}>Reset Data</Button>
     </Box>
   )
 }

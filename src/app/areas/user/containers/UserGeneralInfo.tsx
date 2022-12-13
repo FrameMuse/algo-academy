@@ -1,11 +1,9 @@
-import appQuery from "api/appQuery"
-import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
-import { APIMappings } from "api/mappings"
+
+import useUpdateUser from "api/hooks/user/useUpdateUser"
+import useUpdateUserAvatar from "api/hooks/user/useUpdateUserAvatar"
 import { FormState } from "app/ui/kit/Form/Form"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateUser } from "store/reducers/user"
-import FileTransform from "utils/transform/file"
 
 import GeneralInfo from "../components/GeneralInfo/GeneralInfo"
 
@@ -19,20 +17,22 @@ enum FormInputs {
 interface UserGeneralInfoProps { }
 
 function UserGeneralInfo(props: UserGeneralInfoProps) {
+  const updateMyUser = useUpdateUser()
+  const updateMyUserAvatar = useUpdateUserAvatar()
+
   const user = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
 
   async function onSubmit(state: FormState<FormInputs, string>) {
-    const response = await appQuery(APIActions.patchUsersMe(state.values))
-    if (!isResponseOk(response)) return
-
-    const user = APIMappings.mapUser(response.payload)
+    const user = await updateMyUser(state.values)
     dispatch(updateUser(user))
   }
 
   async function onAvatarChange(file: File) {
-    const avatar = await FileTransform.toURLData(file)
-    const response = await appQuery(APIActions.patchUsersMeAvatar({ avatar }))
+    await updateMyUserAvatar(file)
+
+    const avatar = URL.createObjectURL(file)
+    dispatch(updateUser({ avatar }))
   }
   return (
     // Define key to update the component default values when user changes.

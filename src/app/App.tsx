@@ -6,12 +6,15 @@ import { QueryClientProvider } from "@tanstack/react-query"
 import queryClient from "api/client"
 import useUser from "api/hooks/user/useUser"
 import { ReactNode, StrictMode, Suspense, useEffect } from "react"
+import ReactGA from "react-ga4"
 import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
-import { BrowserRouter, useSearchParams } from "react-router-dom"
+import { BrowserRouter, useLocation, useSearchParams } from "react-router-dom"
 import { ToastContainer, ToastOptions } from "react-toastify"
 import { useLocalStorage } from "react-use"
 import { PersistGate } from "redux-persist/integration/react"
+import initGA from "services/ga"
+import initSentry from "services/sentry"
 import { useAppDispatch } from "store/hooks"
 import { updateUser, USER_GUEST } from "store/reducers/user"
 import store, { persistor } from "store/store"
@@ -49,6 +52,8 @@ function App() {
             <AppRoutes />
 
             <Suspense><FetchAndSupplyUser /></Suspense>  {/* Make this request invisible to user */}
+            <ServicesInit />
+            <GALocation />
 
             <CookiesNotice />
             <ModalContainer />
@@ -130,6 +135,28 @@ function useUserToken(): string | null {
   if (tokenParam === null) return userToken ?? null
 
   return tokenParam
+}
+
+function ServicesInit() {
+  useEffect(() => {
+    initGA()
+    initSentry()
+  }, [])
+
+  return null
+}
+
+function GALocation() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const hitType = "pageview"
+    const path = location.pathname + location.hash
+
+    ReactGA.send({ hitType, page: path })
+  }, [location])
+
+  return null
 }
 
 export default App

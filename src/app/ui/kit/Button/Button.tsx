@@ -14,6 +14,9 @@ interface ButtonProps extends ButtonBaseProps {
   type?: "reset" | "submit"
   eventLabel?: GAEventLabel
   disabled?: boolean
+  /**
+   * If `onClick` returns promise, the button will be blocked until resolved.
+   */
   await?: boolean
   pending?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
@@ -25,20 +28,29 @@ function Button(props: ButtonProps) {
   const [pending, setPending] = useState(false)
   async function onClick(event: MouseEvent<HTMLButtonElement>) {
     if (props.await) {
-      setPending(true)
-      await props.onClick?.(event)
-      setPending(false)
+      await onClickPromise(event)
     } else {
       props.onClick?.(event)
     }
     /* --- Google Analytics --- */
     if (props.eventLabel) {
-      ReactGA.event({
-        category: GAEventCategory.User,
-        action: GAEventAction.ClickedButton,
-        label: String(props.eventLabel)
-      })
+      gaClickEvent()
     }
+  }
+  async function onClickPromise(event: MouseEvent<HTMLButtonElement>) {
+    setPending(true)
+    try {
+      await props.onClick?.(event)
+    } finally {
+      setPending(false)
+    }
+  }
+  function gaClickEvent() {
+    ReactGA.event({
+      category: GAEventCategory.User,
+      action: GAEventAction.ClickedButton,
+      label: String(props.eventLabel)
+    })
   }
 
   const modifiers: string[] = []

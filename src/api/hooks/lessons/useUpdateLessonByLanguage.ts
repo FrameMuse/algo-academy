@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk, refetchActionQueries } from "api/helpers"
+import { refetchActionQueries } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonMultipleContent } from "app/areas/lesson/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
@@ -8,17 +8,19 @@ import { toast } from "react-toastify"
 
 function useUpdateLessonByLanguage() {
   async function updateLesson(id: string, language: EditorLanguage, content: Partial<LessonMultipleContent>) {
+    console.log(content)
+
     const languageId = APIMappings.editorLanguage.backward(language)
     const action = APIActions.patchLessonsIdResourcesLanguageId(languageId, id, {
-      default_code: content.defaultCode,
+      default_code: content.startingCode,
       tests: content.tests,
-      notes: content.notes,
       solution: content.solution,
+      validation_func: content.testsValidation
     })
 
-    const response = await appQuery(action)
-    if (!isResponseOk(response)) return
+    await appQuery(action)
 
+    refetchActionQueries(APIActions.getLessons())
     refetchActionQueries(APIActions.getLessonsId(id))
 
     toast.success("Lesson has been updated.")
