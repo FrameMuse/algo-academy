@@ -8,5 +8,7 @@ RUN npm i -g serve
 COPY . ./
 RUN npm run build
 
+ENV test myValue
+
 # Serve command
 CMD serve -s build
