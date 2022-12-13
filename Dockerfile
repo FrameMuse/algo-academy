@@ -5,8 +5,14 @@ WORKDIR /usr/src/app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+
+
 ARG REACT_APP_API_HOST
-ENV REACT_APP_API_HOST = $REACT_APP_API_HOST
+ARG REACT_APP_API_CACHE_TIME
+
+ARG REACT_APP_GA_ID
+
+
 
 COPY package.json package-lock.json ./
 RUN npm ci --silent

@@ -1,6 +1,0 @@
-services:
-  my-app:
-    build:
-      args:
-        dockerfile: Dockerfile
-        env_file: .env
