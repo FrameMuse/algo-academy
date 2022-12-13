@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 RUN npm i --silent
 RUN npm i -g serve
 COPY . ./
-RUN npm run build
+RUN CHOKIDAR_USEPOLLING=true && npm run build
 
 ENV test myValue
 
