@@ -10,8 +10,8 @@ ENV REACT_APP_API_HOST = $REACT_APP_API_HOST
 
 COPY package.json package-lock.json ./
 RUN npm ci --silent
-RUN npm install react-scripts -g --silent
-RUN npm ci serve -g  --silent
+RUN npm i react-scripts -g --silent
+RUN npm i serve -g  --silent
 COPY . ./
 RUN npm run build
 
