@@ -11,11 +11,17 @@ interface PromoCodeInputProps {
    * Promocode is supposed to be applied.
    */
   valid?: boolean
+  onChange?(value: string): void
   onSubmit?(value: string): void | Promise<void>
 }
 
 function PromoCodeInput(props: PromoCodeInputProps) {
   const [value, setValue] = useState<string>("")
+
+  function onChange(value: string) {
+    setValue(value)
+    props.onChange?.(value)
+  }
 
   async function onSubmit() {
     await props.onSubmit?.(value)
@@ -27,7 +33,7 @@ function PromoCodeInput(props: PromoCodeInputProps) {
     <div className="promo-code-input">
       <div className="promo-code-input__label">Promo Code</div>
       <div className="promo-code-input__container">
-        <Field iconName="tag" placeholder="WINTER20" onChange={inputValue(setValue)} />
+        <Field iconName="tag" onChange={inputValue(onChange)} />
         <Button color={buttonColor} size="small" squared disabled={props.valid} await onClick={onSubmit}>{buttonText}</Button>
       </div>
     </div>

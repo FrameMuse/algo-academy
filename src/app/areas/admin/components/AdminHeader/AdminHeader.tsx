@@ -17,6 +17,7 @@ function AdminHeader() {
           <ButtonLink to={StaticRoutes.AdminLessons}>Lessons</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminSnippets}>Snippets</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminPlans}>Plans</ButtonLink>
+          <ButtonLink to={StaticRoutes.AdminPromocodes}>Promocodes</ButtonLink>
           <ButtonLink to={StaticRoutes.AdminFeedback}>Feedback</ButtonLink>
         </ButtonGroup>
       </nav>

@@ -7,7 +7,23 @@ import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
 import Column from "./layouts/Column/Column"
 import Headings from "./layouts/Headings/Headings"
 import ErrorCover from "./ui/synthetic/ErrorCover/ErrorCover"
-import { AdminChaptersEditView, AdminChaptersNewView, AdminChaptersView, AdminFeedbackView, AdminHomeView, AdminLessonsEditView, AdminLessonsNewView, AdminLessonsView, AdminPlansEditView, AdminPlansNewView, AdminPlansView, AdminSnippetsEditView, AdminSnippetsNewView, AdminSnippetsView } from "./views/admin"
+import AdminChaptersEditView from "./views/admin/views/chapters/AdminChaptersEditView"
+import AdminChaptersNewView from "./views/admin/views/chapters/AdminChaptersNewView"
+import AdminChaptersView from "./views/admin/views/chapters/AdminChaptersView"
+import AdminFeedbackView from "./views/admin/views/feedback/AdminFeedbackView"
+import AdminHomeView from "./views/admin/views/home/AdminHomeView"
+import AdminLessonsEditView from "./views/admin/views/lessons/AdminLessonsEditView"
+import AdminLessonsNewView from "./views/admin/views/lessons/AdminLessonsNewView"
+import AdminLessonsView from "./views/admin/views/lessons/AdminLessonsView"
+import AdminPlansEditView from "./views/admin/views/plans/AdminPlansEditView"
+import AdminPlansNewView from "./views/admin/views/plans/AdminPlansNewView"
+import AdminPlansView from "./views/admin/views/plans/AdminPlansView"
+import AdminPromocodesEditView from "./views/admin/views/promocodes/AdminPromocodesEditView"
+import AdminPromocodesNewView from "./views/admin/views/promocodes/AdminPromocodesNewView"
+import AdminPromocodesView from "./views/admin/views/promocodes/AdminPromocodesView"
+import AdminSnippetsEditView from "./views/admin/views/snippets/AdminSnippetsEditView"
+import AdminSnippetsNewView from "./views/admin/views/snippets/AdminSnippetsNewView"
+import AdminSnippetsView from "./views/admin/views/snippets/AdminSnippetsView"
 import { AboutUsView } from "./views/base/about-us"
 import { ContactUsView } from "./views/base/contact-us"
 import FullCourseView from "./views/base/full-course/FullCourseView"
@@ -102,6 +118,12 @@ function AppRoutes() {
               <Route path="new" element={<AdminPlansNewView />} />
               <Route path=":planId" element={<AdminPlansEditView />} />
             </Route>
+            <Route path={StaticRoutes.AdminPromocodes}>
+              <Route index element={<AdminPromocodesView />} />
+
+              <Route path="new" element={<AdminPromocodesNewView />} />
+              <Route path=":promocodeId" element={<AdminPromocodesEditView />} />
+            </Route>
             <Route path={StaticRoutes.AdminFeedback} element={<AdminFeedbackView />} />
           </>
         )}
@@ -133,6 +155,7 @@ export enum StaticRoutes {
   AdminLessons = "/admin/lessons",
   AdminSnippets = "/admin/snippets",
   AdminPlans = "/admin/plans",
+  AdminPromocodes = "/admin/promocodes",
   AdminFeedback = "/admin/feedback",
 }
 

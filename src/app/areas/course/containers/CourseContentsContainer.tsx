@@ -11,8 +11,6 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
   const user = useAppSelector(state => state.user)
   const chapters = useChaptersWithProgress()
 
-  console.log(user.pricingPlan == null)
-
   return (
     <CourseContents>
       {chapters.map((chapter, index) => (
@@ -25,7 +23,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
                   title={lesson.title}
                   status={lesson.status}
 
-                  locked={lesson.free && user.pricingPlan == null}
+                  locked={!lesson.free && user.pricingPlan == null}
                   lockedReason="You need to have an active plan to access this."
                   key={lesson.id}
                 />
@@ -40,7 +38,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
                   title={lesson.title}
                   status={lesson.status}
 
-                  locked={lesson.free && user.pricingPlan == null}
+                  locked={!lesson.free && user.pricingPlan == null}
                   lockedReason="You need to have an active plan to access this."
                   key={lesson.id}
                 />

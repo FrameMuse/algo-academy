@@ -17,11 +17,16 @@ function PurchasePromoCode(props: PurchasePromoCodeProps) {
   const validatePromocode = useValidatePromocode()
   const [valid, setValid] = useState(false)
 
+  function onChange() {
+    setValid(false)
+    props.onValidation?.(undefined, 0)
+  }
+
   async function onSubmit(value: string) {
     if (value.length === 0) return
 
     const discount = await validatePromocode(value)
-    const discountValid = discount <= 0
+    const discountValid = discount > 0
 
     if (discountValid) {
       setValid(true)
@@ -35,7 +40,7 @@ function PurchasePromoCode(props: PurchasePromoCodeProps) {
   }
 
   return (
-    <PromoCodeInput valid={valid} onSubmit={onSubmit} />
+    <PromoCodeInput valid={valid} onChange={onChange} onSubmit={onSubmit} />
   )
 }
 

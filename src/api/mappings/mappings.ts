@@ -170,6 +170,13 @@ export function mapJudge0Result(schema: APISchemas.JudgeResult): ICodeSubmitionR
   }
 }
 
+export function mapPromocode(schema: APISchemas.PromoResponse) {
+  return {
+    id: schema.id,
+    name: schema.name,
+    discountPercentage: schema.discount_percent
+  }
+}
 
 export const userType = new BiMap<APISchemas.User["role"], UserType>({
   "admin": UserType.Admin,

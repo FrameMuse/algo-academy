@@ -8,8 +8,6 @@ import { toast } from "react-toastify"
 
 function useUpdateLessonByLanguage() {
   async function updateLesson(id: string, language: EditorLanguage, content: Partial<LessonMultipleContent>) {
-    console.log(content)
-
     const languageId = APIMappings.editorLanguage.backward(language)
     const action = APIActions.patchLessonsIdResourcesLanguageId(languageId, id, {
       default_code: content.startingCode,
