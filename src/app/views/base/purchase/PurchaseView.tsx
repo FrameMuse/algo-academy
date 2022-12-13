@@ -2,6 +2,9 @@ import "./PurchaseView.scss"
 
 import usePlans from "api/hooks/plans/usePlans"
 import { APP_TITLE } from "app/App"
+import FAQSection from "app/areas/base/sections/FAQ/FAQSection"
+import LessonArticles from "app/areas/base/sections/LessonArticles/LessonArticles"
+import ReviewsSection from "app/areas/base/sections/Reviews/ReviewsSection"
 import { PopupCheckout } from "app/areas/purchase"
 import { formatDuration } from "app/areas/purchase/helpers"
 import { Plan } from "app/areas/purchase/types"
@@ -15,27 +18,46 @@ import Price from "utils/transform/price"
 
 function PurchaseView() {
   return (
-    <section className="page-section pricing-section">
+    <>
       <Helmet>
         <title>{APP_TITLE + " | " + "Purchase"}</title>
       </Helmet>
-      <div className="wrapper">
-        <div className="title-block">
-          <h1>Pricing Plans</h1>
+      <section className="page-section pricing-section">
+        <div className="wrapper">
+          <div className="title-block">
+            <h1>Pricing Plans</h1>
+          </div>
+
+          <Headings className="pricing-subtitle">
+            <h2>Choose a plan that’s right for you</h2>
+            <p>
+              The quickest way to level up your coding interview skills. Fast-track your
+              <br />
+              interview prep time and land your dream job.
+            </p>
+          </Headings>
+
+          <PricingItems />
         </div>
 
-        <Headings className="pricing-subtitle">
-          <h2>Choose a plan that’s right for you</h2>
-          <p>
-            The quickest way to level up your coding interview skills. Fast-track your
-            <br />
-            interview prep time and land your dream job.
-          </p>
-        </Headings>
+      </section>
+      <LessonArticles />
 
-        <PricingItems />
-      </div>
-    </section>
+      <ReviewsSection />
+      <section className="faq-section" id="faq">
+        <div className="wrapper">
+          <div className="faq-wrap">
+            <Headings className="faq-title">
+              <h2>Frequently Asked Questions</h2>
+              <p>Any general questions should be answered in our FAQ. Contact us if {"you're"} still having problems or if your question {"isn't"} answered here.</p>
+            </Headings>
+            <div className="faq-block">
+              <FAQSection />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 

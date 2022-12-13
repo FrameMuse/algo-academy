@@ -4,6 +4,7 @@ import "react-toastify/scss/main.scss"
 
 import { QueryClientProvider } from "@tanstack/react-query"
 import queryClient from "api/client"
+import usePlans from "api/hooks/plans/usePlans"
 import useUser from "api/hooks/user/useUser"
 import { ReactNode, StrictMode, Suspense, useEffect } from "react"
 import ReactGA from "react-ga4"
@@ -51,7 +52,11 @@ function App() {
           <AppProviders>
             <AppRoutes />
 
-            <Suspense><FetchAndSupplyUser /></Suspense>  {/* Make this request invisible to user */}
+            <Suspense>
+              {/* Make these requests invisible to user */}
+              <PrefetchPlans />
+              <FetchAndSupplyUser />
+            </Suspense>
             <ServicesInit />
             <GALocation />
 
@@ -155,6 +160,12 @@ function GALocation() {
 
     ReactGA.send({ hitType, page: path })
   }, [location])
+
+  return null
+}
+
+function PrefetchPlans() {
+  usePlans()
 
   return null
 }

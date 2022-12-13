@@ -106,3 +106,54 @@
     color: $color-black-main;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.reviews-title {
+  max-width: 550px;
+  margin-bottom: 32px;
+}
+
+.faq-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 250px;
+
+  @include Mobile {
+    display: grid;
+    gap: 2.5em;
+  }
+}
+
+.faq-title {
+  width: 36%;
+  padding-right: 30px;
+
+  @include Mobile {
+    width: auto;
+  }
+}
+
+.faq-block {
+  width: 55%;
+  max-width: 64%;
+
+  @include Mobile {
+    width: auto;
+    max-width: 100%;
+  }
+}

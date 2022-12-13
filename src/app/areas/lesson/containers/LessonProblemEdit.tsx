@@ -275,17 +275,17 @@ function Output(output: IOutput) {
 
 function validate({ input, expected, description }): TestResult {
   // @ts-ignore As user's code will be merged with this file, the \`isPalindrome\` function should be here.
-  const userAnswer = isPalindrome(input)
-  const passed = expected === userAnswer
+  const userAnswer = isPalindrome(input);
+  const passed = expected === userAnswer;
 
-  return { passed, description, expected, userAnswer }
+  return { passed, description, expected, userAnswer };
 }
 
 // @ts-ignore Tests should be declared in \`tests\` tab.
 const results = tests.map(validate);
 const output = { results };
 
-Output(output)
+Output(output);
 `
 const VALIDATION_OTHER_SAMPLE = `// Follow the TypeScipt example of output of the program should be.`
 

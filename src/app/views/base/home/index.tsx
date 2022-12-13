@@ -24,7 +24,7 @@ function HomeView() {
             <div className="main-title-left">
               <Headings white>
                 <h1>Coding interviews made easy</h1>
-                <p>Learn the techniques to breakdown and solve any coding problem. algo academy is the ultimate resource for aceing the coding interview.</p>
+                <p>Learn the techniques to breakdown and solve any coding problem. Algo academy is the ultimate resource for aceing the coding interview.</p>
               </Headings>
               <div className="button-wrap">
                 <ButtonLink to={StaticRoutes.FullCourse}>Try a Question</ButtonLink>
@@ -243,7 +243,7 @@ function HomeView() {
               <div className="main-six-item">
                 <div className="main-six-item-title">In-depth video explanations</div>
                 <div className="main-six-item-text grey-color">
-                  <p>Studying for coding interviews is difficult enough. at algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
+                  <p>Studying for coding interviews is difficult enough. At algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
                   <div className="button-wrap">
                     <a href="#" className="read-more"> read more</a>
                   </div>

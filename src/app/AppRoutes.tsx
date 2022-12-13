@@ -139,8 +139,8 @@ export enum StaticRoutes {
   Home = "/",
 
   ContactUs = "/contact-us",
-  FAQ = "/faq",
-  Reviews = "/reviews",
+  FAQ = "/purchase#faq",
+  Reviews = "/purchase#reviews",
   PrivacyPolicy = "/privacy-policy",
   Terms = "/terms",
   AboutUs = "/about-us",

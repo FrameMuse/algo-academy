@@ -1,0 +1,75 @@
+@import "~assets/scss/bundle.scss";
+
+.articles-section {
+  padding: 110px 0;
+
+  padding-bottom: 110px;
+  overflow: hidden;
+
+  background: $color-blue-10;
+}
+
+.articles-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7.5vw;
+
+  @include Tablet {
+    gap: 2.5em;
+  }
+
+  @include Mobile {
+    grid-template-columns: unset;
+    gap: 5em;
+  }
+}
+
+.articles-item {
+  // @include Tablet {
+  //   display: grid;
+  //   gap: 2.5em;
+  // }
+}
+
+.articles-item-image {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.articles-item-image:last-child {
+  margin-bottom: 0;
+}
+
+.articles-item-image .padding {
+  padding-top: 77%;
+  display: block;
+}
+
+.articles-item-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.articles-item-title {
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.25;
+}
+
+.articles-item-title:last-child {
+  margin-bottom: 0;
+}
+
+.articles-item-description {
+  color: #4b5567;
+}
