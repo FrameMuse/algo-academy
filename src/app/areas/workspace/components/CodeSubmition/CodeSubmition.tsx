@@ -24,6 +24,7 @@ interface CodeSubmitionProps {
   defaultLanguage?: WorkspaceEditorLanguage
   onLanguageChange?: Dispatch<WorkspaceEditorLanguage>
 
+  runDisabled?: boolean
   onRun?(): Promise<ICodeSubmitionResult | undefined>
 }
 
@@ -34,6 +35,8 @@ function CodeSubmition(props: CodeSubmitionProps) {
   const [expanded, setExpanded] = useState(false)
 
   async function onRun() {
+    setExpanded(false)
+
     const result = await props.onRun?.()
     if (result == null) return
 
@@ -50,7 +53,9 @@ function CodeSubmition(props: CodeSubmitionProps) {
     <div className={classWithModifiers("code-execution", theme)}>
       <div className="code-execution__tools">
         <Buttons>
-          <Button size="small" await onClick={onRun}>Run Code</Button>
+          <Button size="small" color={props.runDisabled ? "gray" : undefined} disabled={props.runDisabled} await onClick={onRun}>
+            {props.runDisabled ? "Type something to start" : "Run Code"}
+          </Button>
           {result && (
             <Button size="small" color="gray" onClick={toggleState(setExpanded)}>{expanded ? "Hide" : "Show"} results</Button>
           )}

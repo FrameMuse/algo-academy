@@ -160,12 +160,7 @@ export function mapJudge0Result(schema: APISchemas.JudgeResult): ICodeSubmitionR
   return {
     time: Number(schema.time) || 0,
     memory: schema.memory || 0,
-    tests: schema.compile_output?.map(item => ({
-      passed: item.passed,
-      description: item.description,
-      expected: "false",
-      userAnswer: "true"
-    })) || [],
+    tests: schema.compile_output || [],
     status: schema.status
   }
 }

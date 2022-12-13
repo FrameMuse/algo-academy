@@ -37,7 +37,7 @@ function WorkspaceCodeSubmition(props: WorkspaceCodeSubmitionProps) {
   }
 
   return (
-    <CodeSubmition onRun={onRun} defaultLanguage={workspace.editorLanguage} onLanguageChange={onLanguageChange} />
+    <CodeSubmition runDisabled={!instance?.editorValue} onRun={onRun} defaultLanguage={workspace.editorLanguage} onLanguageChange={onLanguageChange} />
   )
 }
 
