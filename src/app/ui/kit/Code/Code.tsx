@@ -3,7 +3,7 @@ import "./Code.scss"
 import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import _ from "lodash"
-import { HTMLAttributes, useEffect, useState } from "react"
+import { HTMLAttributes, memo, useEffect, useState } from "react"
 import { useAsync } from "react-use"
 import { classMerge } from "utils/common"
 import { loadDocumentFormatter } from "utils/document-formatter"
@@ -87,4 +87,4 @@ function Code(props: CodeProps) {
 //   return contentFormatted
 // }
 
-export default Code
+export default memo(Code)

@@ -1,6 +1,6 @@
 import ErrorBoundary from "app/containers/ErrorBoundary/ErrorBoundary"
 import Video from "app/ui/kit/Video/Video"
-import { lazy, Suspense } from "react"
+import { lazy, memo, Suspense } from "react"
 import { useAsync } from "react-use"
 
 import BlockQuote from "../BlockQuote/BlockQuote"
@@ -41,4 +41,4 @@ function ArticleMarkdown(props: ArticleMarkdownProps) {
   )
 }
 
-export default ArticleMarkdown
+export default memo(ArticleMarkdown)
