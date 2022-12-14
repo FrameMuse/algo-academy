@@ -10,6 +10,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       cacheTime,
+      staleTime: cacheTime,
       suspense: true,
       refetchOnWindowFocus: () => false,
       retry(_failureCount, error) {
