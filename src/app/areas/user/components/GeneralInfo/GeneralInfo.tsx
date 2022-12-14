@@ -52,7 +52,7 @@ function GeneralInfo(props: GeneralInfoProps) {
           <Field required autoComplete="family-name" defaultValue={props.user.lastName} name={props.inputNames?.lastName}>Last Name</Field>
         </Row>
         <Field required type="email" disabled defaultValue={props.user.email} name={props.inputNames?.email}>Current Email</Field>
-        <Field autoComplete="nickname" disabled defaultValue={props.user.userName} name={props.inputNames?.userName}>User Name</Field>
+        <Field autoComplete="nickname" defaultValue={props.user.userName} name={props.inputNames?.userName}>User Name</Field>
         <Button pending={pending} type="submit">Save</Button>
       </Form>
     </Box>

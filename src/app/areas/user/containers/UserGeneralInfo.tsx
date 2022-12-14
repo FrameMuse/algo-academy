@@ -8,7 +8,7 @@ import { updateUser } from "store/reducers/user"
 import GeneralInfo from "../components/GeneralInfo/GeneralInfo"
 
 enum FormInputs {
-  userName = "user_name",
+  userName = "display_name",
   firstName = "first_name",
   lastName = "last_name",
   email = "email"
