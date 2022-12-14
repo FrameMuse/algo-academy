@@ -23,7 +23,7 @@ function UserPurchaseHistory() {
           {history?.map(chunk => (
             <tr key={chunk.receiptId}>
               <td>#{chunk.receiptId}</td>
-              <td>{humanizeDate(chunk.purchaseDate)} | May 21, 2022</td>
+              <td>{humanizeDate(chunk.purchaseDate)}</td>
               <td>{chunk.title}</td>
               <td>{Price.format(chunk.totalCost)}</td>
             </tr>
