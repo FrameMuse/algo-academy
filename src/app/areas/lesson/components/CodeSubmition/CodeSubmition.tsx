@@ -109,7 +109,7 @@ function CodeSubmitionResult(props: CodeSubmitionResultProps) {
       <List>
         {props.result.tests.map((test, index) => (
           <ListItem icon={test.passed ? "check" : "cross"} key={index}>
-            <strong>{test.description}</strong> - Got {test.userAnswer} instead of {test.expected}.
+            <strong>{test.description}</strong> - Got {JSON.stringify(test.userAnswer)} instead of {JSON.stringify(test.expected)}.
           </ListItem>
         ))}
       </List>
