@@ -5,8 +5,8 @@ import useLessonContents from "api/hooks/lessons/useLessonContents"
 import useSnippets from "api/hooks/snippets/useSnippets"
 import { formatAppTitle } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
-import { LessonNotes, LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
-import { Snippets, WorkspaceCodeSubmition, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
+import { LessonNotes, LessonProblemCodeSubmition, LessonStatusSelector, useLessonNavigate } from "app/areas/lesson"
+import { Snippets, WorkspaceEditor, WorkspaceTheme } from "app/areas/workspace"
 import PopupSubmitFeedback from "app/areas/workspace/popups/PopupSubmitFeedback"
 import PopupWorkspaceSettings from "app/areas/workspace/popups/PopupWorkspaceSettings"
 import QueryBoundary from "app/containers/QueryBoundary"
@@ -26,6 +26,7 @@ import Timer from "app/ui/synthetic/Timer/Timer"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { useAppSelector } from "store/hooks"
+import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { classWithModifiers } from "utils/common"
 import useParam from "utils/hooks/useParam"
 
@@ -140,6 +141,8 @@ function ProblemRightSection(props: { id: string }) {
     description: `Run time: ${snippet.runTime}; Space: ${snippet.space}`
   }))
 
+  const code = workspace.instances[id]?.editorValue || contents.startingCode
+
   return (
     <div className="problem-layout__section">
       <TabRouter defaultPath={TabRoutes.Code}>
@@ -159,9 +162,9 @@ function ProblemRightSection(props: { id: string }) {
             draftId={id}
             snippets={editorSnippets}
             defaultLanguage={contents?.language}
-            defaultValue={contents?.startingCode}
+            defaultValue={code}
           />
-          <WorkspaceCodeSubmition draftId={id} lessonId={props.id} />
+          <LessonProblemCodeSubmition id={props.id} language={editorLanguage as unknown as WorkspaceEditorLanguage} sourceCode={code} />
         </TabRoute>
 
         {/* <TabRoute path={TabRoutes.Tests}>

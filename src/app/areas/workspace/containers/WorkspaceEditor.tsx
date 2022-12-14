@@ -1,4 +1,5 @@
 import Editor, { EditorProps } from "app/ui/synthetic/Editor/Editor"
+import monaco from "monaco-editor/esm/vs/editor/editor.api"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { updateWorkspaceInstances } from "store/reducers/workspace"
 
@@ -19,15 +20,12 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
   // TODO: Rework/Rewise draft system
   const instance = workspace.settings.useDrafts ? workspace.instances[props.draftId ?? ""] : undefined
 
-  function onChange(editorValue: string | undefined) {
-    if (editorValue == null) return
+  function onChange(value: string | undefined, event: monaco.editor.IModelContentChangedEvent) {
+    props.onChange?.(value, event)
+
     if (props.draftId == null) return
-
-    if (editorValue === props.value) return
-    if (editorValue === props.defaultValue) return
-
     dispatch(updateWorkspaceInstances({
-      [props.draftId]: { ...instance, editorValue }
+      [props.draftId]: { ...instance, editorValue: value }
     }))
   }
 
@@ -48,8 +46,8 @@ function WorkspaceEditor(props: WorkspaceEditorProps) {
         value={instance?.editorValue ?? props.defaultValue}
         defaultValue={instance?.editorValue ?? props.defaultValue}
 
-        onChange={onChange}
         {...props}
+        onChange={onChange}
       />
     </div>
   )

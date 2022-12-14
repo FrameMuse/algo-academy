@@ -17,7 +17,7 @@ import { WorkspaceEditorLanguage } from "store/reducers/workspace/types"
 import { classWithModifiers, toggleState } from "utils/common"
 import Progress, { ProgressEntry } from "utils/transform/progress"
 
-import { ICodeSubmitionResult } from "../../types"
+import { ICodeSubmitionResult } from "../../../workspace/types"
 
 
 interface CodeSubmitionProps {
@@ -53,9 +53,7 @@ function CodeSubmition(props: CodeSubmitionProps) {
     <div className={classWithModifiers("code-execution", theme)}>
       <div className="code-execution__tools">
         <Buttons>
-          <Button size="small" color={props.runDisabled ? "gray" : undefined} disabled={props.runDisabled} await onClick={onRun}>
-            {props.runDisabled ? "Type something to start" : "Run Code"}
-          </Button>
+          <Button size="small" await onClick={onRun}>Run Code</Button>
           {result && (
             <Button size="small" color="gray" onClick={toggleState(setExpanded)}>{expanded ? "Hide" : "Show"} results</Button>
           )}
@@ -64,11 +62,11 @@ function CodeSubmition(props: CodeSubmitionProps) {
           {optionsFromEnum(WorkspaceEditorLanguage, false)}
         </Selector>
       </div>
-      {result && (
-        <Expander className="code-submition__result" expanded={expanded}>
+      <Expander className="code-submition__result" expanded={expanded}>
+        {result && (
           <CodeSubmitionResult result={result} />
-        </Expander>
-      )}
+        )}
+      </Expander>
     </div >
   )
 }

@@ -21,17 +21,16 @@ function CourseProgress(props: CourseProgressProps) {
 }
 
 function levelProgressSwitch(progress: number) {
-  if (progress >= 0) return "Beginner"
-  if (progress >= 10) return "Novice"
-  if (progress >= 20) return "Apprentice"
-  if (progress >= 30) return "Advanced Beginner"
-  if (progress >= 40) return "Adept"
-  if (progress >= 50) return "Intermediate"
-  if (progress >= 60) return "Veteran"
-  if (progress >= 70) return "Professional"
-  if (progress >= 80) return "Expert"
-  if (progress >= 90) return "Elite"
   if (progress >= 100) return "Algo Master"
+  if (progress >= 90) return "Elite"
+  if (progress >= 80) return "Expert"
+  if (progress >= 70) return "Professional"
+  if (progress >= 60) return "Veteran"
+  if (progress >= 50) return "Intermediate"
+  if (progress >= 40) return "Adept"
+  if (progress >= 30) return "Advanced Beginner"
+  if (progress >= 20) return "Apprentice"
+  if (progress >= 10) return "Novice"
 
   return "Beginner"
 }

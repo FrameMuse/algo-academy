@@ -65,19 +65,16 @@ export function mapPlanDurationForward(period: string): number {
     const [value, type] = nextItem.split("") as [string, "y" | "m" | "d"]
     const valueNumber = Number(value)
 
-    if (type === "d") {
-      return result + Math.floor(valueNumber / 30)
+    switch (type) {
+      case "d":
+        return result + Math.floor(valueNumber / 30)
+      case "m":
+        return result + valueNumber
+      case "y":
+        return result + valueNumber * 12
+      default:
+        return result
     }
-
-    if (type === "m") {
-      return result + valueNumber
-    }
-
-    if (type === "y") {
-      return result + valueNumber * 12
-    }
-
-    return result
   }, 0)
 }
 
