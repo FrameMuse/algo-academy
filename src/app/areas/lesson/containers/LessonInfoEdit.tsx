@@ -6,7 +6,7 @@ import { confirmAction } from "app/popups/PopupConfirm/PopupConfirm"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
-import { optionsFromEnum } from "app/ui/kit/Selector/Selector.helpers"
+import { optionsFromEnum, TrueFalseOptions } from "app/ui/kit/Selector/Selector.helpers"
 import { useState } from "react"
 import { inputValue, targetValue } from "utils/common"
 
@@ -35,9 +35,8 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
         <Selector<LessonType> label="Type" defaultValue={lesson.type} onChange={setType}>
           {optionsFromEnum(LessonType)}
         </Selector>
-        <Selector label="Free?" defaultValue={String(lesson.free)} onChange={targetValue(setFree, Boolean)}>
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <Selector label="Free?" defaultValue={Number(lesson.free)} onChange={targetValue(setFree, Boolean)}>
+          {TrueFalseOptions}
         </Selector>
         <Button color="dark" await onClick={onSubmit}>Save</Button>
       </Column>

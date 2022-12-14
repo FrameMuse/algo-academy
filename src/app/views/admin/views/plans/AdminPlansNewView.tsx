@@ -5,6 +5,7 @@ import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
+import { TrueFalseOptions } from "app/ui/kit/Selector/Selector.helpers"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { inputValue, targetValue } from "utils/common"
@@ -40,8 +41,7 @@ function AdminPlansNewView() {
         <Field placeholder="e.g. DFS" onChange={inputValue(setCost, Number)} required>Cost</Field>
         <Field placeholder="e.g. DFS" onChange={inputValue(setDurationMonths, Number)} required>Duration in Months</Field>
         <Selector label="Mark as `Most Popular`?" onChange={targetValue(setMostPopular, Boolean)}>
-          <option value="true">True</option>
-          <option value="false">False</option>
+          {TrueFalseOptions}
         </Selector>
         <Box>
           <Headings>

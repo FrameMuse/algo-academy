@@ -37,13 +37,14 @@
 
   display: grid;
   align-items: center;
-  padding: 2em 1.5em;
-  background: rgba($color-dark-75, 0.85);
-  color: white;
+  padding: 2em 4em;
+  background: rgba($color-blue-10, 0.65);
+  border: 1px solid $color-blue;
+  border-radius: inherit;
 }
 
 .lesson-preview-locked__title {
-  font-size: 1.125rem;
+  font-size: $font-size-h6;
   font-weight: 700;
 
   text-align: center;

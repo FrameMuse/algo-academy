@@ -22,3 +22,9 @@ export function optionsFromEntries(entries: [key: string | number, value: string
 export function optionsFromEnum(enumerator: EnumType<never>, startCase = true): SelectorOptionElement[] {
   return optionsFromEntries(Enum.entries(enumerator), startCase)
 }
+
+
+export const TrueFalseOptions = [
+  <option value={1} key={1}>True</option>,
+  <option value={0} key={0}>False</option>
+]

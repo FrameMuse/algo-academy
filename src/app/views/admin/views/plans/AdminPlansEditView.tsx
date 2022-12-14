@@ -6,6 +6,7 @@ import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import Field from "app/ui/kit/Field/Field"
 import Selector from "app/ui/kit/Selector/Selector"
+import { TrueFalseOptions } from "app/ui/kit/Selector/Selector.helpers"
 import { useState } from "react"
 import { inputValue, targetValue } from "utils/common"
 import useParam from "utils/hooks/useParam"
@@ -37,9 +38,8 @@ export function AdminPlansEditView() {
         <Field defaultValue={plan.description} onChange={inputValue(setDescription)} required>Description</Field>
         <Field defaultValue={plan.cost} onChange={inputValue(setCost, Number)} required>Cost</Field>
         <Field defaultValue={plan.durationMonths} onChange={inputValue(setDurationMonths, Number)} required>Duration in Months</Field>
-        <Selector label="Mark as `Most Popular`?" defaultValue={String(plan.mostPopular)} onChange={targetValue(setMostPopular, Boolean)}>
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <Selector label="Mark as `Most Popular`?" defaultValue={Number(plan.mostPopular)} onChange={targetValue(setMostPopular, Boolean)}>
+          {TrueFalseOptions}
         </Selector>
         <Box>
           <Headings>

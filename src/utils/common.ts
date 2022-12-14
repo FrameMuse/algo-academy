@@ -75,8 +75,8 @@ export function stopPropagation(callback?: () => void | null) {
   }
 }
 
-export function targetValue<M = string>(callback: (value: NoInfer<M>) => void, map?: (value: string) => M) {
-  return (value: string) => {
+export function targetValue<M = string, V = string>(callback: (value: NoInfer<M>) => void, map?: (value: V) => M) {
+  return (value: V) => {
     const valueMapped = map?.(value)
 
     callback((valueMapped ?? value) as M)

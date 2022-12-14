@@ -3,6 +3,7 @@ import "./LessonPreview.scss"
 import { StaticRoutes } from "app/AppRoutes"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import { ReactNode } from "react"
+import { NavLink } from "react-router-dom"
 
 import { LessonStatus } from "../../types"
 
@@ -21,6 +22,7 @@ function LessonPreview(props: LessonPreviewProps) {
         <div className="lesson-preview-locked">
           <p className="lesson-preview-locked__title">{props.lockedReason ?? "Locked"}</p>
           {/* <Icon name="cross" /> */}
+          <NavLink className="ghost" to={StaticRoutes.Purchase} />
         </div>
       )}
       <div className="lesson-preview__info">
