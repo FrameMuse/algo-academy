@@ -8,10 +8,12 @@ import { User, UserType } from "store/reducers/user/types"
 import BiMap from "utils/transform/bimap"
 
 export function mapUser(schema: APISchemas.User): User {
+  const avatar = schema.avatar && URL.createObjectURL(new Blob([new Uint8Array(schema.avatar.data.data).buffer], { type: schema.avatar.contentType }))
+
   return {
     id: schema.id,
 
-    avatar: schema.avatar || USER_GUEST["avatar"],
+    avatar: avatar || USER_GUEST["avatar"],
     firstName: schema.first_name,
     lastName: schema.last_name,
     userName: schema.display_name ?? "",

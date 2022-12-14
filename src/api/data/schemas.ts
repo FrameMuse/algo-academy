@@ -112,7 +112,7 @@ export interface User {
   role: string
   email: string
   providers: Provider[]
-  avatar?: string | null
+  avatar?: { data: { data: number[] }, contentType: string } | null
   date_of_creation: string
 }
 
