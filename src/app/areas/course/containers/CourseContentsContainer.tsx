@@ -39,7 +39,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
                   title={lesson.title}
                   status={lesson.status}
 
-                  locked={true}
+                  locked={!lesson.free && user.pricingPlan == null}
                   lockedReason={lockingReason}
                   key={lesson.id}
                 />
