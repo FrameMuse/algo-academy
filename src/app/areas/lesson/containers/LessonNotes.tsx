@@ -5,8 +5,8 @@ import Headings from "app/layouts/Headings/Headings"
 import Icon from "app/ui/kit/Icon/Icon"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import Loader from "app/ui/synthetic/Loader/Loader"
-import _ from "lodash"
-import { useRef, useState } from "react"
+import { useState } from "react"
+import useDebounceFunc from "utils/hooks/useDebounceFunc"
 
 interface LessonNotesProps {
   id: string
@@ -20,6 +20,7 @@ function LessonNotes(props: LessonNotesProps) {
   const notesContent = useLessonNotes(props.id)
   const updateLessonNotes = useUpdateLessonNotes()
 
+  const onChangeThrottled = useDebounceFunc(onChange, 1000)
   async function onChange(value: string | undefined) {
     if (value == null) return
 
@@ -27,8 +28,6 @@ function LessonNotes(props: LessonNotesProps) {
     await updateLessonNotes(props.id, value)
     setPending(false)
   }
-
-  const { current: onChangeThrottled } = useRef(_.debounce(onChange, 1000, { trailing: true }))
 
 
   const pendingSavingElement = <p>Saving... <div><Loader /></div></p>
