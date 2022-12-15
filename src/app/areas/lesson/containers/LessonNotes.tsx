@@ -6,7 +6,7 @@ import Icon from "app/ui/kit/Icon/Icon"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 import Loader from "app/ui/synthetic/Loader/Loader"
 import _ from "lodash"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 interface LessonNotesProps {
   id: string
@@ -27,7 +27,8 @@ function LessonNotes(props: LessonNotesProps) {
     await updateLessonNotes(props.id, value)
     setPending(false)
   }
-  const onChangeThrottled = _.debounce(onChange, 1000, { trailing: true })
+
+  const { current: onChangeThrottled } = useRef(_.debounce(onChange, 1000, { trailing: true }))
 
 
   const pendingSavingElement = <p>Saving... <div><Loader /></div></p>
