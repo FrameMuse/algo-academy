@@ -7,6 +7,7 @@ import Headings from "app/layouts/Headings/Headings"
 import TabLinks from "app/layouts/TabLinks/TabLinks"
 import ButtonLink from "app/ui/kit/Button/ButtonLink"
 import Video from "app/ui/kit/Video/Video"
+import ReadMore from "app/ui/synthetic/ReadMore/ReadMore"
 import TabLink from "app/ui/synthetic/TabRouter/TabLink"
 import TabRoute from "app/ui/synthetic/TabRouter/TabRoute"
 import TabRouter from "app/ui/synthetic/TabRouter/TabRouter"
@@ -31,7 +32,7 @@ function HomeView() {
               </div>
             </div>
             <div className="main-title-right">
-              <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" aspectRatio="1.25" />
+              <Video src="https://vod-progressive.akamaized.net/exp=1671064912~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2590%2F8%2F212952840%2F731971441.mp4~hmac=5c2e94277b8b701084f9f67c9e80c1c759ad20999ce62712abb5e1b34eea89bb/vimeo-prod-skyfire-std-us/01/2590/8/212952840/731971441.mp4?download=1&filename=plataforma_5_-_coding_bootcamp+%28720p%29.mp4" poster="/static/images/video1.jpg" aspectRatio="1.25" />
             </div>
           </div>
         </div>
@@ -238,37 +239,51 @@ function HomeView() {
 
       <section className="main-six-section">
         <div className="wrapper">
-          <div className="main-six-wrap">
-            <div className="main-six-left">
-              <div className="main-six-item">
-                <div className="main-six-item-title">In-depth video explanations</div>
-                <div className="main-six-item-text grey-color">
-                  <p>Studying for coding interviews is difficult enough. At algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
-                  <div className="button-wrap">
-                    <a href="#" className="read-more"> read more</a>
+          <TabRouter defaultPath="1">
+            <div className="main-six-wrap">
+              <div className="main-six-left">
+                <TabLink className="main-six-item" to="1">
+                  <div className="main-six-item-title">In-depth video explanations</div>
+                  <div className="main-six-item-text grey-color">
+                    <p>Studying for coding interviews is difficult enough. At algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
+                    <div className="button-wrap">
+                      <ReadMore>
+                        hidden content
+                      </ReadMore>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="main-six-item active">
-                <div className="main-six-item-title">Hands-on coding environment</div>
-                <div className="main-six-item-text grey-color">
-                  <p>Put your skills to the test. practice and learn interactively with our built-in coding workspace. pick a language. run your solution against our test cases. and if you get stuck, we got you covered with our in-depth solution videos. we have it all.</p>
-                </div>
-              </div>
-              <div className="main-six-item">
-                <div className="main-six-item-title">All-in-one solution</div>
-                <div className="main-six-item-text grey-color">
-                  <p>Studying algorithms is not enough to prepare for coding interviews anymore. many companies are stepping up their interview style and expect much...</p>
-                  <div className="button-wrap">
-                    <a href="#" className="read-more">Read more</a>
+                </TabLink>
+                <TabLink className="main-six-item" to="2">
+                  <div className="main-six-item-title">Hands-on coding environment</div>
+                  <div className="main-six-item-text grey-color">
+                    <p>Put your skills to the test. practice and learn interactively with our built-in coding workspace. pick a language. run your solution against our test cases. and if you get stuck, we got you covered with our in-depth solution videos. we have it all.</p>
                   </div>
-                </div>
+                </TabLink>
+                <TabLink className="main-six-item" to="3">
+                  <div className="main-six-item-title">All-in-one solution</div>
+                  <div className="main-six-item-text grey-color">
+                    <p>Studying algorithms is not enough to prepare for coding interviews anymore. many companies are stepping up their interview style and expect much...</p>
+                    <div className="button-wrap">
+                      <ReadMore>
+                        hidden content
+                      </ReadMore>
+                    </div>
+                  </div>
+                </TabLink>
+              </div>
+              <div className="main-six-right">
+                <TabRoute path="1">
+                  <Video src="https://vod-progressive.akamaized.net/exp=1671064912~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2590%2F8%2F212952840%2F731971441.mp4~hmac=5c2e94277b8b701084f9f67c9e80c1c759ad20999ce62712abb5e1b34eea89bb/vimeo-prod-skyfire-std-us/01/2590/8/212952840/731971441.mp4?download=1&filename=plataforma_5_-_coding_bootcamp+%28720p%29.mp4" poster="/static/images/video2.jpg" />
+                </TabRoute>
+                <TabRoute path="2">
+                  2
+                </TabRoute>
+                <TabRoute path="3">
+                  3
+                </TabRoute>
               </div>
             </div>
-            <div className="main-six-right">
-              <Video src={"__TESTVIDEO__"} poster="/static/images/video2.jpg" />
-            </div>
-          </div>
+          </TabRouter>
         </div>
       </section>
 

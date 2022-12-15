@@ -1,6 +1,6 @@
 import "./LessonArticles.scss"
 
-import { NavLink } from "react-router-dom"
+import ReadMore from "app/ui/synthetic/ReadMore/ReadMore"
 
 function LessonArticles() {
   return (
@@ -18,7 +18,9 @@ function LessonArticles() {
             <div className="articles-item-description">
               <p>We focus on the underlying patterns that most coding interview problems share. You will learn how to arrive at the answer, not just what the answer is. Our focus on technique, not rote memorization, is what allows our candidates to</p>
               <div className="button-wrap">
-                <NavLink className="read-more" to="">read more</NavLink>
+                <ReadMore>
+                  hidden content
+                </ReadMore>
               </div>
             </div>
           </div>
@@ -33,7 +35,9 @@ function LessonArticles() {
             <div className="articles-item-description">
               <p>Prep for your next interview with our all-in-one platform. No need to jump between YouTube tutorials, books, or Leetcode; our curriculum covers algorithms, data structures, coding patterns, system design, behavioral interviews, and more!</p>
               <div className="button-wrap">
-                <NavLink className="read-more" to="">read more</NavLink>
+                <ReadMore>
+                  hidden content
+                </ReadMore>
               </div>
             </div>
           </div>
@@ -48,7 +52,9 @@ function LessonArticles() {
             <div className="articles-item-description">
               <p>Statistically, the best way to increase your salary is to switch jobs. But you can only do that if you ace your coding interviews. Companies can’t afford to let qualified candidates slip by and will use money to fight for you. These negotiation</p>
               <div className="button-wrap">
-                <NavLink className="read-more" to="">read more</NavLink>
+                <ReadMore>
+                  hidden content
+                </ReadMore>
               </div>
             </div>
           </div>

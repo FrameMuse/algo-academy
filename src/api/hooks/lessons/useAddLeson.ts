@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
+import { isResponseOk, refetchActionQueries } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonType } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -16,7 +16,9 @@ function useAddLesson() {
     }))
     if (!isResponseOk(response)) return
 
-    toast.success(`Chapter ${lesson.title} was added.`)
+    toast.success(`Lesson ${lesson.title} was added.`)
+
+    refetchActionQueries(APIActions.getLessons())
 
     return APIMappings.mapLesson(response.payload)
   }

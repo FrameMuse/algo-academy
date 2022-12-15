@@ -9,6 +9,7 @@ function useUpdateChapterLessons() {
     const response = await appQuery(APIActions.patchChaptersId(id, { list: ids }))
     if (!isResponseOk(response)) return
 
+    refetchActionQueries(APIActions.getChapters())
     refetchActionQueries(APIActions.getChaptersId(id))
     refetchActionQueries(APIActions.getLessonsUnused())
 

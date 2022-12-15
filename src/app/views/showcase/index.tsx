@@ -173,9 +173,9 @@ function UIShowcaseView() {
         <h2>Callout</h2>
         <Callout>Plan - Job Seeker</Callout>
         <h2>Video</h2>
-        <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" />
+        <Video src="https://vod-progressive.akamaized.net/exp=1671064912~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2590%2F8%2F212952840%2F731971441.mp4~hmac=5c2e94277b8b701084f9f67c9e80c1c759ad20999ce62712abb5e1b34eea89bb/vimeo-prod-skyfire-std-us/01/2590/8/212952840/731971441.mp4?download=1&filename=plataforma_5_-_coding_bootcamp+%28720p%29.mp4" poster="/static/images/video1.jpg" />
         <h3>1 / 1.25 Aspect ratio</h3>
-        <Video src={"__TESTVIDEO__"} poster="/static/images/video1.jpg" aspectRatio="1.25" />
+        <Video src="https://vod-progressive.akamaized.net/exp=1671064912~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2590%2F8%2F212952840%2F731971441.mp4~hmac=5c2e94277b8b701084f9f67c9e80c1c759ad20999ce62712abb5e1b34eea89bb/vimeo-prod-skyfire-std-us/01/2590/8/212952840/731971441.mp4?download=1&filename=plataforma_5_-_coding_bootcamp+%28720p%29.mp4" poster="/static/images/video1.jpg" aspectRatio="1.25" />
         <h2>Selector</h2>
         <Selector>
           <option value="Incomplete">Not completed</option>

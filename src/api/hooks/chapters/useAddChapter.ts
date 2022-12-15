@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk } from "api/helpers"
+import { isResponseOk, refetchActionQueries } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { toast } from "react-toastify"
 
@@ -18,6 +18,8 @@ function useAddChapter() {
     if (!isResponseOk(response)) return
 
     toast.success(`Chapter ${chapter.title} was added.`)
+
+    refetchActionQueries(APIActions.getChapters())
 
     return APIMappings.mapChapter(response.payload)
   }

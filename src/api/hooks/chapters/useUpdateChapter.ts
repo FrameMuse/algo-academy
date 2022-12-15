@@ -18,6 +18,7 @@ function useUpdateChapter() {
 
     toast.success(`Chapter ${chapter.title} has been updated.`)
 
+    refetchActionQueries(APIActions.getChapters())
     refetchActionQueries(APIActions.getChaptersId(id))
   }
   return updateChapter

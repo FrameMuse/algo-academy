@@ -355,11 +355,13 @@
   border-radius: 20px;
   cursor: pointer;
 
+  transition: 250ms ease background-color;
+
   &:last-child {
     margin-bottom: 0;
   }
 
-  &.active {
+  &--active {
     background: #fff;
   }
 }
