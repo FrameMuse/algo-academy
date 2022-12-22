@@ -78,6 +78,7 @@
   @include Scrollbar(0.75em, var(--scrollbar-thumb-color), var(--scrollbar-track-color));
 
   .code-execution--dark & {
+    background: $color-dark-75;
     color: white;
   }
 }

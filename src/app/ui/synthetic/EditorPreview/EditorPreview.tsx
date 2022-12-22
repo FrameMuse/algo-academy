@@ -118,7 +118,7 @@ function EditorPreview(props: EditorPreviewProps) {
       </div>
       <div className="editor-preview__layout">
         {!props.disablePreview && (
-          <div className={classWithModifiers("editor-preview__preview", articleTheme === "dark" && "dark")}>
+          <div className={classWithModifiers("editor-preview__preview", articleTheme)}>
             <Theme theme={articleTheme}>
               <ArticleMarkdown content={value} fontSize="small" />
             </Theme>
