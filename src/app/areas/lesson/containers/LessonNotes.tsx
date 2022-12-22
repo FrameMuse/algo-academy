@@ -31,7 +31,7 @@ function LessonNotes(props: LessonNotesProps) {
 
 
   const pendingSavingElement = <p>Saving... <div><Loader /></div></p>
-  const upToDateElement = <p>Up to date <Icon name="check" /></p>
+  const upToDateElement = <p>Up to date <Icon name="check" style={{ color: "#07B123" }} /></p>
   return (
     <>
       <Headings>
