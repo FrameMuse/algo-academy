@@ -165,17 +165,12 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
         <p>Choose a tab and a language to start editing.</p>
       </Headings>
       <Row>
-        {dirty && (
-          <Callout>Save or cancel active edits.</Callout>
-        )}
-        {!dirty && (
-          <Selector onChange={setTab}>
-            <option value="solution">Solution</option>
-            <option value="tests">Tests</option>
-            <option value="testsValidation">Tests Validation</option>
-            <option value="startingCode">Default Code</option>
-          </Selector>
-        )}
+        <Selector defaultValue={tab} onChange={setTab}>
+          <option value="solution">Solution</option>
+          <option value="tests">Tests</option>
+          <option value="testsValidation">Tests Validation</option>
+          <option value="startingCode">Default Code</option>
+        </Selector>
         <Selector onChange={setLanguage}>
           {optionsFromEnum(WorkspaceEditorLanguage, false)}
         </Selector>
