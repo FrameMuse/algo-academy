@@ -19,6 +19,7 @@ function useAddLesson() {
     toast.success(`Lesson ${lesson.title} was added.`)
 
     refetchActionQueries(APIActions.getLessons())
+    refetchActionQueries(APIActions.getLessonsUnused())
 
     return APIMappings.mapLesson(response.payload)
   }

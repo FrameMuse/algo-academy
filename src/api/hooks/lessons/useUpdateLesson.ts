@@ -27,6 +27,7 @@ function useUpdateLesson() {
 
     refetchActionQueries(APIActions.getLessons())
     refetchActionQueries(APIActions.getLessonsId(id))
+    refetchActionQueries(APIActions.getLessonsUnused())
 
     toast.success(`Lesson has been updated.`)
   }
