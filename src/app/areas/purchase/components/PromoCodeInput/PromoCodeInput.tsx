@@ -33,7 +33,7 @@ function PromoCodeInput(props: PromoCodeInputProps) {
     <div className="promo-code-input">
       <div className="promo-code-input__label">Promo Code</div>
       <div className="promo-code-input__container">
-        <Field iconName="tag" onChange={inputValue(onChange)} />
+        <Field iconName="tag" maxLength={20} onChange={inputValue(onChange)} />
         <Button color={buttonColor} size="small" squared disabled={props.valid} await onClick={onSubmit}>{buttonText}</Button>
       </div>
     </div>
