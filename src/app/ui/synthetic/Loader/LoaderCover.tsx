@@ -2,6 +2,7 @@ import "./Loader.scss"
 
 import { classWithModifiers } from "utils/common"
 
+import useTheme from "../Theme/useTheme"
 import Loader from "./Loader"
 
 interface LoaderCoverProps {
@@ -11,8 +12,10 @@ interface LoaderCoverProps {
 }
 
 function LoaderCover(props: LoaderCoverProps) {
+  const theme = useTheme()
+
   return (
-    <div className={classWithModifiers("loader-cover", props.absolute && "absolute", props.white && "white", props.dimmed && "dimmed")}>
+    <div className={classWithModifiers("loader-cover", props.absolute && "absolute", (props.white || theme === "dark") && "white", props.dimmed && "dimmed")}>
       <Loader className="loader-cover__loader" />
     </div>
   )

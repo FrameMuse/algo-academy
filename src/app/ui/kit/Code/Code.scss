@@ -42,4 +42,9 @@ code.code-inline {
   padding: 0.1em 0.25em;
   background: $color-gray;
   border-radius: 0.25em;
+
+  &--dark {
+    background: $color-dark-75;
+    color: white;
+  }
 }
