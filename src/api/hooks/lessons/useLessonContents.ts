@@ -8,7 +8,14 @@ function useLessonContents(id: string, editorLanguage: EditorLanguage): LessonMu
 
   const contents = lesson.contents.find(content => content.language === editorLanguage)
   if (contents == null) {
-    throw new Error(`Could't find lesson content for ${editorLanguage}.`)
+    // throw new Error(`Could't find lesson content for ${editorLanguage}.`)
+    return {
+      language: editorLanguage,
+      solution: "",
+      startingCode: "",
+      tests: "",
+      testsValidation: "",
+    }
   }
 
   return contents
