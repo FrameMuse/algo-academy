@@ -11,38 +11,31 @@ import { Plan } from "app/areas/purchase/types"
 import Headings from "app/layouts/Headings/Headings"
 import Button from "app/ui/kit/Button/Button"
 import List from "app/ui/kit/List/List"
+import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import { Helmet } from "react-helmet"
 import { Modal } from "react-modal-global"
 import { GAEventLabel } from "services/ga"
+import { useAppSelector } from "store/hooks"
 import Price from "utils/transform/price"
 
 function PurchaseView() {
+  const user = useAppSelector(state => state.user)
+
   return (
     <>
       <Helmet>
         <title>{APP_TITLE + " | " + "Purchase"}</title>
       </Helmet>
-      <section className="page-section pricing-section">
-        <div className="wrapper">
-          <div className="title-block">
-            <h1>Pricing Plans</h1>
-          </div>
-
-          <Headings className="pricing-subtitle">
-            <h2>Choose a plan that’s right for you</h2>
-            <p>
-              The quickest way to level up your coding interview skills. Fast-track your
-              <br />
-              interview prep time and land your dream job.
-            </p>
+      {!user.pricingPlan && (<PricingPlansSection />)}
+      {user.pricingPlan && (
+        <ErrorCover>
+          <Headings>
+            <h2>Pricing Plans</h2>
+            <p>You already have an active plan - <strong>{user.pricingPlan.title}</strong></p>
           </Headings>
-
-          <PricingItems />
-        </div>
-
-      </section>
+        </ErrorCover>
+      )}
       <LessonArticles />
-
       <ReviewsSection />
       <section className="faq-section" id="faq">
         <div className="wrapper">
@@ -58,6 +51,30 @@ function PurchaseView() {
         </div>
       </section>
     </>
+  )
+}
+
+function PricingPlansSection() {
+  return (
+    <section className="page-section pricing-section">
+      <div className="wrapper">
+        <div className="title-block">
+          <h1>Pricing Plans</h1>
+        </div>
+
+        <Headings className="pricing-subtitle">
+          <h2>Choose a plan that’s right for you</h2>
+          <p>
+            The quickest way to level up your coding interview skills. Fast-track your
+            <br />
+            interview prep time and land your dream job.
+          </p>
+        </Headings>
+
+        <PricingItems />
+      </div>
+
+    </section>
   )
 }
 
