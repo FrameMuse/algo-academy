@@ -11,8 +11,10 @@
 
   @include column-gap(var(--row-indent));
 
-  @include Mobile {
+  @include DesktopLowResolution {
     display: grid;
     gap: var(--row-indent);
+
+    @include column-gap(0);
   }
 }
