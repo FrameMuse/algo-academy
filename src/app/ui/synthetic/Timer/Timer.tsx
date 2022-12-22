@@ -22,12 +22,12 @@ function Timer(props: TimerProps) {
   useClickAway(toolbarElementRef, () => setExpanded(false))
 
   return (
-    <div className="timer">
+    <div className="timer" ref={toolbarElementRef}>
       <button className="timer-toggle" type="button" onClick={toggleState(setExpanded)}>
         <Icon className="timer-toggle__icon" name="timer" />
         <span className="timer-toggle__text">{countdown}</span>
       </button>
-      <div className={classWithModifiers("timer-toolbar", expanded && "expanded")} ref={toolbarElementRef}>
+      <div className={classWithModifiers("timer-toolbar", expanded && "expanded")}>
         <ButtonGroup color="gray" size="smaller" squared>
           <Button onClick={start}>Start</Button>
           <Button onClick={pause}>Pause</Button>
@@ -39,7 +39,7 @@ function Timer(props: TimerProps) {
           ))}
         </Selector>
       </div>
-      <div className={ClassName.modify("timer-toolbar", expanded && "expanded")} ref={toolbarElementRef}>
+      <div className={ClassName.modify("timer-toolbar", expanded && "expanded")}>
         <ButtonGroup color="gray" size="smaller" squared>
           <Button onClick={start}>Start</Button>
           <Button onClick={pause}>Pause</Button>
@@ -51,7 +51,7 @@ function Timer(props: TimerProps) {
           ))}
         </Selector>
       </div>
-      <div className={ClassName.merge("timer-toolbar", "timeout")} ref={toolbarElementRef}>
+      <div className={ClassName.merge("timer-toolbar", "timeout")}>
         <ButtonGroup color="gray" size="smaller" squared>
           <Button onClick={start}>Start</Button>
           <Button onClick={pause}>Pause</Button>
