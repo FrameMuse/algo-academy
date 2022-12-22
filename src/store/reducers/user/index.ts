@@ -9,8 +9,8 @@ export const USER_GUEST: User = {
   signed: false,
   type: UserType.Default,
   avatar: "/static/images/guest-avatar.jpg",
-  firstName: "Mr.",
-  lastName: "Guest",
+  firstName: "",
+  lastName: "",
 
   createdAt: new Date(-1),
   email: "mr.guest@example.com",
