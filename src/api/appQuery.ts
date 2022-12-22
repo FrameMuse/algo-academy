@@ -125,7 +125,10 @@ function getAuthorization() {
   }
 }
 
-async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
+/**
+ * @param clientError - A quick implementation, should be rewised.
+ */
+async function appQuery<T>(action: QueryAction<T>, options?: { clientError?: string }): Promise<QueryResponse<T>> {
   try {
     // Create new instance to make sure we're not changing original `action` object.
     // Set authorization to the action headers.
@@ -159,7 +162,7 @@ async function appQuery<T>(action: QueryAction<T>): Promise<QueryResponse<T>> {
     }
 
     if (error instanceof QueryClientError) {
-      toast.error(`[${_.startCase(action.operationId)}]: ${error.message}`)
+      toast.error(options?.clientError || `[${_.startCase(action.operationId)}]: ${error.message}`)
 
       throw error
     }

@@ -6,7 +6,7 @@ function useValidatePromocode() {
    * @returns discount percentage - e.g. `25` (25%).
    */
   async function validatePromocode(code: string): Promise<number> {
-    const response = await appQuery(APIActions.postPromoCheck({ name: code }))
+    const response = await appQuery(APIActions.postPromoCheck({ name: code }), { clientError: "Promo code doesn't exist" })
 
     return response.payload.discount_percent
   }
