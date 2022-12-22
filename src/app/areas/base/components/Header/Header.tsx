@@ -6,6 +6,7 @@ import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import Logo from "app/ui/synthetic/Logo/Logo"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import { useLockBodyScroll } from "react-use"
 import { useAppSelector } from "store/hooks"
 import { UserType } from "store/reducers/user/types"
 import { classWithModifiers, toggleState } from "utils/common"
@@ -13,7 +14,10 @@ import { classWithModifiers, toggleState } from "utils/common"
 function Header() {
   const user = useAppSelector(state => state.user)
 
+
   const [mobileNavExpanded, setMobileNavExpanded] = useState(false)
+  useLockBodyScroll(mobileNavExpanded)
+
   const location = useLocation()
   useEffect(() => setMobileNavExpanded(false), [location])
 

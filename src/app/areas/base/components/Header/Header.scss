@@ -83,7 +83,11 @@ header {
     position: fixed;
     inset: 0;
 
+    width: 100%;
+    overflow: hidden;
+
     display: grid;
+    align-content: baseline;
     gap: 2em;
 
     padding: 5em;
