@@ -31,7 +31,7 @@ interface AuthPromptLinkProps {
 
 function AuthPromptLink(props: AuthPromptLinkProps) {
   return (
-    <OuterLink className={classWithModifiers("auth-prompt-link", props.color)} to={props.to}>
+    <OuterLink className={classWithModifiers("auth-prompt-link", props.color)} noTarget to={props.to}>
       <Icon className="auth-prompt-link__icon" name={props.iconName} />
       <div className="auth-prompt-link__text">{props.children}</div>
     </OuterLink>

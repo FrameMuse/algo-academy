@@ -37,7 +37,7 @@ function PopupCheckout(props: PopupCheckoutProps) {
     }
 
     const url = await createCharge(props.planId, promocode)
-    window.open(url)
+    window.location.href = url
   }
 
   return (
