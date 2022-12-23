@@ -60,10 +60,13 @@
   text-align: center;
   text-decoration: none;
 
-  &:hover,
-  &--active {
-    color: $color-blue;
-    border-color: $color-blue;
+  a#{&} {
+
+    &:hover,
+    &--active {
+      color: $color-blue;
+      border-color: $color-blue;
+    }
   }
 }
 
