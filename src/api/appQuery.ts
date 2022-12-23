@@ -119,7 +119,9 @@ function getAuthorization() {
     const userJWT = new JWT(userTokenParsed)
     return userJWT.authorization
   } catch (error) {
-    console.error(error)
+    if (process.env.NODE_ENV === "development") {
+      console.error(error)
+    }
 
     return ""
   }
