@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk, refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonType } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -18,8 +18,8 @@ function useAddLesson() {
 
     toast.success(`Lesson ${lesson.title} was added.`)
 
-    refetchActionQueries(APIActions.getLessons())
-    refetchActionQueries(APIActions.getLessonsUnused())
+    invalidateActionQuery(APIActions.getLessons())
+    invalidateActionQuery(APIActions.getLessonsUnused())
 
     return APIMappings.mapLesson(response.payload)
   }

@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk, refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonStatus } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -31,7 +31,7 @@ function useUpdateLessonStatus(): (id: string, status: LessonStatus) => Promise<
     if (!isResponseOk(response)) return false
 
     toast.success("Lesson status has been updated.")
-    refetchActionQueries(APIActions.getUsersMe())
+    invalidateActionQuery(APIActions.getUsersMe())
 
     return true
   }

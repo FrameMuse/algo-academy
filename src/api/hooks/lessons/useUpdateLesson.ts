@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk, refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonType } from "app/areas/lesson/types"
 import { toast } from "react-toastify"
@@ -25,9 +25,9 @@ function useUpdateLesson() {
     }))
     if (!isResponseOk(response)) return
 
-    refetchActionQueries(APIActions.getLessons())
-    refetchActionQueries(APIActions.getLessonsId(id))
-    refetchActionQueries(APIActions.getLessonsUnused())
+    invalidateActionQuery(APIActions.getLessons())
+    invalidateActionQuery(APIActions.getLessonsId(id))
+    invalidateActionQuery(APIActions.getLessonsUnused())
 
     toast.success(`Lesson has been updated.`)
   }

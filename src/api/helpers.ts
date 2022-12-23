@@ -73,3 +73,9 @@ export function getActionQueryKey(action: QueryAction): string[] {
 export function refetchActionQueries(action: QueryAction) {
   return queryClient.refetchQueries(getActionQueryKey(action))
 }
+
+export function invalidateActionQuery(action: QueryAction) {
+  const queryKey = getActionQueryKey(action)
+
+  queryClient.invalidateQueries({ queryKey })
+}

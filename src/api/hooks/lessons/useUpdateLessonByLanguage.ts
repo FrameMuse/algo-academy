@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { LessonMultipleContent } from "app/areas/lesson/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
@@ -18,9 +18,9 @@ function useUpdateLessonByLanguage() {
 
     await appQuery(action)
 
-    refetchActionQueries(APIActions.getLessons())
-    refetchActionQueries(APIActions.getLessonsId(id))
-    refetchActionQueries(APIActions.getLessonsUnused())
+    invalidateActionQuery(APIActions.getLessons())
+    invalidateActionQuery(APIActions.getLessonsId(id))
+    invalidateActionQuery(APIActions.getLessonsUnused())
 
     toast.success("Lesson has been updated.")
   }

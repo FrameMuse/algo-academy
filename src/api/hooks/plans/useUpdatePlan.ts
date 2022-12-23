@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { Plan } from "app/areas/purchase/types"
 import { toast } from "react-toastify"
@@ -16,8 +16,8 @@ function useUpdatePlan() {
       most_popular: plan.mostPopular
     }))
 
-    refetchActionQueries(APIActions.getSubscriptions())
-    refetchActionQueries(APIActions.getSubscriptionsId(id))
+    invalidateActionQuery(APIActions.getSubscriptions())
+    invalidateActionQuery(APIActions.getSubscriptionsId(id))
 
     toast.success(`Plan has been updated.`)
   }

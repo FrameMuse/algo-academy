@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { Plan } from "app/areas/purchase/types"
 import { toast } from "react-toastify"
@@ -16,7 +16,7 @@ function useAddPlan() {
       most_popular: plan.mostPopular
     }))
 
-    refetchActionQueries(APIActions.getSubscriptions())
+    invalidateActionQuery(APIActions.getSubscriptions())
 
     toast.success(`Plan has been added.`)
 

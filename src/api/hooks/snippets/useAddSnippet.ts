@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
@@ -20,7 +20,7 @@ function useAddSnippet() {
       time_complex: snippet.runTime
     }))
 
-    refetchActionQueries(APIActions.getSnippetsLanguageLanguage(language))
+    invalidateActionQuery(APIActions.getSnippetsLanguageLanguage(language))
 
     return APIMappings.mapSnippet(response.payload)
   }

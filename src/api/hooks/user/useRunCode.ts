@@ -1,6 +1,6 @@
 import appQuery from "api/appQuery"
 import { APIActions } from "api/data"
-import { isResponseOk, refetchActionQueries } from "api/helpers"
+import { invalidateActionQuery, isResponseOk } from "api/helpers"
 import { APIMappings } from "api/mappings"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
 
@@ -29,7 +29,7 @@ function useRunCode() {
       source_code: data.sourceCode
     }))
 
-    refetchActionQueries(APIActions.getUsersMe())
+    invalidateActionQuery(APIActions.getUsersMe())
 
     return APIMappings.mapJudge0Result(response.payload)
   }
