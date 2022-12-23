@@ -1,5 +1,6 @@
 import "./ProfileView.scss"
 
+import queryClient from "api/client"
 import useUserResetData from "api/hooks/user/useUserResetData"
 import { APP_TITLE } from "app/App"
 import { StaticRoutes } from "app/AppRoutes"
@@ -11,10 +12,10 @@ import Button from "app/ui/kit/Button/Button"
 import AppNavLink from "app/ui/kit/Link/AppNavLink"
 import { Helmet } from "react-helmet"
 import { Route, Routes, useNavigate } from "react-router-dom"
-import { useLocalStorage } from "react-use"
 import { GAEventLabel } from "services/ga"
 import { useAppDispatch } from "store/hooks"
 import { updateUser, USER_GUEST } from "store/reducers/user"
+import useObservableLocalStorage from "utils/hooks/useObservableLocalStorage"
 
 enum ProfileViewRoutes {
   MyAccount = "", // relative root
@@ -62,13 +63,14 @@ function ProfileView() {
  * TODO: Better move from here.
  */
 function useUserLogout() {
+  const [, setUserToken] = useObservableLocalStorage("user-token")
   const dispatch = useAppDispatch()
-  const [, setUserToken] = useLocalStorage("user-token")
   const navigate = useNavigate()
 
   function logout() {
-    dispatch(updateUser(USER_GUEST))
     setUserToken(null)
+    dispatch(updateUser(USER_GUEST))
+    queryClient.clear()
     navigate(StaticRoutes.Home)
   }
 

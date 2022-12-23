@@ -12,7 +12,6 @@ import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
 import { BrowserRouter, useLocation, useSearchParams } from "react-router-dom"
 import { ToastContainer, ToastOptions } from "react-toastify"
-import { useLocalStorage } from "react-use"
 import { PersistGate } from "redux-persist/integration/react"
 import initGA from "services/ga"
 import initSentry from "services/sentry"
@@ -20,6 +19,7 @@ import { useAppDispatch } from "store/hooks"
 import { updateUser, USER_GUEST } from "store/reducers/user"
 import store, { persistor } from "store/store"
 import DevNavigation from "utils/components/DevNavigation/DevNavigation"
+import useObservableLocalStorage from "utils/hooks/useObservableLocalStorage"
 
 import AppRoutes from "./AppRoutes"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
@@ -95,6 +95,7 @@ function FetchAndDispatchUser() {
   const userToken = useUserToken()
   const dispatch = useAppDispatch()
 
+
   useEffect(() => {
     if (user == null) return
     if (userToken == null) return
@@ -103,6 +104,8 @@ function FetchAndDispatchUser() {
   }, [user, userToken])
 
   useEffect(() => {
+    console.log(userToken)
+
     if (user != null) return
     if (userToken != null) return
 
@@ -122,7 +125,7 @@ function FetchAndDispatchUser() {
  */
 function useUserToken(): string | undefined {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [userToken, setUserToken] = useLocalStorage<string>("user-token")
+  const [userToken, setUserToken] = useObservableLocalStorage<string>("user-token")
 
   // Try to get token from search params.
   useEffect(() => {
