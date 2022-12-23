@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom"
+import { useEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
 import { useAppSelector } from "store/hooks"
 import { UserType } from "store/reducers/user/types"
 
@@ -42,24 +43,27 @@ function AppRoutes() {
   const user = useAppSelector(state => state.user)
   const isAdmin = user.signed && user.type >= UserType.Admin
 
+  const location = useLocation()
+  useEffect(() => resetScroll(), [location.pathname])
+
   return (
     <Routes>
       <Route path="/full-course/lessons/:lessonId/problem">
-        <Route index element={<ProblemView />} action={resetScroll} />
+        <Route index element={<ProblemView />} />
       </Route>
       <Route element={<BaseLayout />}>
-        <Route path={StaticRoutes.Home} element={<HomeView />} action={resetScroll} />
-        <Route path={StaticRoutes.AboutUs} element={<AboutUsView />} action={resetScroll} />
-        <Route path={StaticRoutes.ContactUs} element={<ContactUsView />} action={resetScroll} />
-        <Route path={StaticRoutes.Purchase} element={<PurchaseView />} action={resetScroll} />
-        <Route path={StaticRoutes.Profile + "/*"} element={<ProfileView />} action={resetScroll} />
+        <Route path={StaticRoutes.Home} element={<HomeView />} />
+        <Route path={StaticRoutes.AboutUs} element={<AboutUsView />} />
+        <Route path={StaticRoutes.ContactUs} element={<ContactUsView />} />
+        <Route path={StaticRoutes.Purchase} element={<PurchaseView />} />
+        <Route path={StaticRoutes.Profile + "/*"} element={<ProfileView />} />
 
-        <Route path={StaticRoutes.FullCourse} action={resetScroll}>
-          <Route index element={<FullCourseView />} action={resetScroll} />
-          <Route path="lessons/:lessonId" element={<LessonView />} action={resetScroll} />
+        <Route path={StaticRoutes.FullCourse}>
+          <Route index element={<FullCourseView />} />
+          <Route path="lessons/:lessonId" element={<LessonView />} />
         </Route>
 
-        <Route path={StaticRoutes.UIShowcase} element={<UIShowcaseView />} action={resetScroll} />
+        <Route path={StaticRoutes.UIShowcase} element={<UIShowcaseView />} />
 
         <Route path="*" element={(
           <Column justifyItems="center">
