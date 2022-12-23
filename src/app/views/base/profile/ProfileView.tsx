@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet"
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { GAEventLabel } from "services/ga"
 import { useAppDispatch } from "store/hooks"
-import { updateUser, USER_GUEST } from "store/reducers/user"
+import { resetUser } from "store/reducers/user"
 import useObservableLocalStorage from "utils/hooks/useObservableLocalStorage"
 
 enum ProfileViewRoutes {
@@ -69,7 +69,7 @@ function useUserLogout() {
 
   function logout() {
     setUserToken(null)
-    dispatch(updateUser(USER_GUEST))
+    dispatch(resetUser())
     queryClient.clear()
     navigate(StaticRoutes.Home)
   }

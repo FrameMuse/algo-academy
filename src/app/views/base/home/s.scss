@@ -76,7 +76,7 @@
 
   padding: 175px 0;
 
-  @include DesktopLowResolution {
+  @include Tablet {
     display: grid;
     justify-items: center;
     gap: 2.5em;
@@ -94,7 +94,7 @@
     max-width: 100%;
   }
 
-  @include DesktopLowResolution {
+  @include Tablet {
     width: 100%;
     max-width: 400px;
   }
@@ -118,7 +118,7 @@
     margin-bottom: 24px;
   }
 
-  @include DesktopLowResolution {
+  @include Tablet {
     width: auto;
     padding-left: unset;
   }

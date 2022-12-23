@@ -22,6 +22,7 @@ const initialState: User = { ...USER_GUEST }
 
 interface Actions {
   USER_UPDATE: Partial<User>
+  USER_RESET: void
 }
 
 type Action = ValuesOf<MapActions<Actions>>
@@ -33,6 +34,9 @@ export default (state = initialState, action: Action): User => {
     case "USER_UPDATE":
       return { ...state, ...action.payload }
 
+    case "USER_RESET":
+      return { ...USER_GUEST }
+
     default:
       return state
   }
@@ -42,4 +46,8 @@ export default (state = initialState, action: Action): User => {
 export const updateUser = (payload: Actions["USER_UPDATE"]) => ({
   type: "USER_UPDATE",
   payload
+}) as const
+
+export const resetUser = () => ({
+  type: "USER_RESET"
 }) as const
