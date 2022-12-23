@@ -52,10 +52,9 @@ function App() {
           <AppProviders>
             <AppRoutes />
 
-            <Suspense>
-              {/* Make these requests invisible to user */}
+            <Suspense> {/* Make these requests invisible to user */}
               <PrefetchPlans />
-              <FetchAndSupplyUser />
+              <FetchAndDispatchUser />
             </Suspense>
             <ServicesInit />
             <GALocation />
@@ -91,7 +90,7 @@ function AppProviders(props: { children: ReactNode }) {
  * 
  * TODO: Better move it from here
  */
-function FetchAndSupplyUser() {
+function FetchAndDispatchUser() {
   const user = useUser()
   const userToken = useUserToken()
   const dispatch = useAppDispatch()
@@ -121,10 +120,11 @@ function FetchAndSupplyUser() {
  * 
  * TODO: Better move it from here
  */
-function useUserToken(): string | null {
+function useUserToken(): string | undefined {
   const [searchParams, setSearchParams] = useSearchParams()
   const [userToken, setUserToken] = useLocalStorage<string>("user-token")
 
+  // Try to get token from search params.
   useEffect(() => {
     const tokenParam = searchParams.get("token")
     if (tokenParam === null) return
@@ -136,10 +136,7 @@ function useUserToken(): string | null {
     setSearchParams(searchParams)
   }, [searchParams])
 
-  const tokenParam = searchParams.get("token")
-  if (tokenParam === null) return userToken ?? null
-
-  return tokenParam
+  return userToken
 }
 
 function ServicesInit() {
