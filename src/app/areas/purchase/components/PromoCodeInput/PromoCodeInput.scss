@@ -23,4 +23,8 @@
       text-transform: uppercase;
     }
   }
+
+  @include Mobile {
+    display: grid;
+  }
 }

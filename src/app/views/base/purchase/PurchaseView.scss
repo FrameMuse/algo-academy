@@ -53,6 +53,10 @@
   &>:last-child {
     margin-top: auto;
   }
+
+  @include Mobile {
+    padding: 3.5em 1.5em;
+  }
 }
 
 .pricing-item-tag {
