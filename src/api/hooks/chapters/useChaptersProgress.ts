@@ -12,7 +12,8 @@ function useChaptersProgress() {
     onError: () => setUserToken(null)
   })
 
-  if (!userToken) return []
+  if (userToken == null) return []
+  if (data == null) return []
 
   const chaptersProgress = data.payload.progress.map(APIMappings.mapChaptersProgress)
   return chaptersProgress

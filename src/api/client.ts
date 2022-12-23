@@ -11,7 +11,10 @@ const queryClient = new QueryClient({
     queries: {
       cacheTime,
       staleTime: cacheTime,
+
       suspense: true,
+      useErrorBoundary: true,
+
       refetchOnWindowFocus: () => false,
       retry(_failureCount, error) {
         if (error instanceof QueryClientError) {
