@@ -73,11 +73,12 @@ header {
 }
 
 .menu {
-  margin-right: 20px;
   display: flex;
   align-items: center;
   font-weight: 700;
   line-height: 1.25;
+
+  @include column-gap(1em);
 
   @include Mobile {
     position: fixed;
@@ -100,9 +101,15 @@ header {
     z-index: 1;
     transition: 200ms ease opacity;
 
+    @include column-gap(0);
+
     &:not(&--mobile-expanded) {
       opacity: 0;
       pointer-events: none;
+    }
+
+    .profile-widget {
+      justify-content: center;
     }
   }
 
@@ -126,14 +133,6 @@ header {
 
   &--pending {
     background: rgba(255, 255, 255, 0);
-  }
-
-  &:not(:first-child) {
-    margin-left: 0.5em;
-
-    @include Mobile {
-      margin: unset;
-    }
   }
 
   @include Mobile {
