@@ -7,8 +7,10 @@ import useChapterProgress from "../chapters/useChapterProgress"
 
 const LESSON_STATUS_DEFAULT = LessonStatus.Incomplete
 
-function useLesson(id: string) {
-  const { data } = useAppQuery(APIActions.getLessonsId(id))
+function useLesson(id: string, includeAdminOnlyFields?: boolean) {
+  const action = includeAdminOnlyFields ? APIActions.getLessonsAdminId(id) : APIActions.getLessonsId(id)
+
+  const { data } = useAppQuery(action)
 
   const lesson = APIMappings.mapLesson(data.payload)
   if (lesson.chapterRelation == null) {

@@ -8,7 +8,7 @@ interface LessonArticleEditProps {
 }
 
 function LessonArticleEdit(props: LessonArticleEditProps) {
-  const lesson = useLesson(props.id)
+  const lesson = useLesson(props.id, true)
   const updateLesson = useUpdateLesson()
 
   async function onSave(content: string) {

@@ -9,7 +9,7 @@ interface LessonContentEditProps {
 }
 
 function LessonContentEdit(props: LessonContentEditProps) {
-  const lesson = useLesson(props.id)
+  const lesson = useLesson(props.id, true)
 
 
   if (lesson.type === LessonType.Learning) {

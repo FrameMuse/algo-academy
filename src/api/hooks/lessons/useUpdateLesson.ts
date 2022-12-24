@@ -27,6 +27,7 @@ function useUpdateLesson() {
 
     invalidateActionQuery(APIActions.getLessons())
     invalidateActionQuery(APIActions.getLessonsId(id))
+    invalidateActionQuery(APIActions.getLessonsAdminId(id))
     invalidateActionQuery(APIActions.getLessonsUnused())
 
     toast.success(`Lesson has been updated.`)

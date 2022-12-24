@@ -201,7 +201,7 @@ function LessonMultipleContentEdit(props: LessonMultipleContentEditProps) {
 }
 
 function LessonProblemEdit(props: { id: string }) {
-  const lesson = useLesson(props.id)
+  const lesson = useLesson(props.id, true)
   const updateLesson = useUpdateLesson()
   const updateLessonByLanguage = useUpdateLessonByLanguage()
 

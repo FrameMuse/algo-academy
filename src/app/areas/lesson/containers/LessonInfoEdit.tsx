@@ -19,7 +19,7 @@ function LessonInfoEdit(props: LessonInfoEditProps) {
   const [type, setType] = useState<LessonType>()
   const [free, setFree] = useState<boolean>()
 
-  const lesson = useLesson(props.id)
+  const lesson = useLesson(props.id, true)
   const updateLesson = useUpdateLesson()
 
   async function onSubmit() {
