@@ -8,7 +8,7 @@ import { User, UserType } from "store/reducers/user/types"
 import BiMap from "utils/transform/bimap"
 
 export function mapUser(schema: APISchemas.User): User {
-  const avatar = schema.avatar && URL.createObjectURL(new Blob([new Uint8Array(schema.avatar.data.data).buffer], { type: schema.avatar.contentType }))
+  const avatar = schema.avatar && (typeof schema.avatar === "string" ? schema.avatar : (URL.createObjectURL(new Blob([new Uint8Array(schema.avatar.data.data).buffer], { type: schema.avatar.contentType }))))
 
   return {
     id: schema.id,
@@ -94,7 +94,7 @@ export function mapPurchase(schema: APISchemas.Plan): Purchase {
 }
 
 
-export function mapLesson(schema: APISchemas.LessonResponse) {
+export function mapLesson(schema: APISchemas.LessonUserResponse | APISchemas.LessonAdminResponse) {
   return {
     id: schema.id,
     free: schema.free,
@@ -113,12 +113,12 @@ export function mapLesson(schema: APISchemas.LessonResponse) {
   }
 }
 
-function mapLessonContent(schema: NonNullable<APISchemas.Lesson["resources"]>[0]): LessonMultipleContent {
+function mapLessonContent(schema: NonNullable<APISchemas.LessonUserResponse["resources"]>[0] | NonNullable<APISchemas.LessonAdminResponse["resources"]>[0]): LessonMultipleContent {
   return {
     solution: schema.solution ?? "",
     language: editorLanguage.forward(schema.language),
     tests: schema.tests,
-    testsValidation: schema.validation_func,
+    testsValidation: ("validation_func" in schema ? schema.validation_func : ""),
     startingCode: schema.default_code
   }
 }

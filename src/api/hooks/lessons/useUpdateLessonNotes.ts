@@ -3,7 +3,7 @@ import { APIActions } from "api/data"
 
 function useUpdateLessonNotes() {
   async function updateLessonNotes(id: string, content: string) {
-    await appQuery(APIActions.patchNotes(id, { content }))
+    await appQuery(APIActions.patchNotesLessonId(id, { content }))
 
     // toast.success("Notes has beed updated.")
   }

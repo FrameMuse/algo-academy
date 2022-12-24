@@ -13,7 +13,7 @@ function useAddPlan() {
       cost: plan.cost,
       period: APIMappings.mapPlanDurationBackward(plan.durationMonths),
       descriptions: plan.benefits,
-      most_popular: plan.mostPopular
+      most_popular: !!plan.mostPopular
     }))
 
     invalidateActionQuery(APIActions.getSubscriptions())

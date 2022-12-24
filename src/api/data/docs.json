@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://algo-academyserver-production.up.railway.app",
+      "url": "https://api-algo-academy-dev.up.railway.app",
       "description": ""
     }
   ],
@@ -216,6 +216,33 @@
       }
     },
     "/users/{id}": {
+      "get": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Get user by ID",
+        "description": "Get information about user.",
+        "operationId": "getUserById",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "User",
@@ -405,14 +432,19 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "string",
-                      "format": "binary",
-                      "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
-                    },
-                    "contentType": {
-                      "type": "string",
-                      "example": "image/jpeg"
+                    "avatar": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "string",
+                          "format": "binary",
+                          "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+                        },
+                        "contentType": {
+                          "type": "string",
+                          "example": "image/jpeg"
+                        }
+                      }
                     }
                   }
                 }
@@ -535,7 +567,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LessonResponse"
+                    "$ref": "#/components/schemas/LessonUserResponse"
                   }
                 }
               }
@@ -574,7 +606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LessonResponse"
+                  "$ref": "#/components/schemas/LessonAdminResponse"
                 }
               }
             }
@@ -614,7 +646,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LessonResponse"
+                    "$ref": "#/components/schemas/LessonAdminResponse"
                   }
                 }
               }
@@ -654,7 +686,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LessonResponse"
+                  "$ref": "#/components/schemas/LessonUserResponse"
                 }
               }
             }
@@ -756,6 +788,52 @@
           },
           "403": {
             "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons/admin/{id}": {
+      "get": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Get lesson by id for Admin",
+        "description": "Get information about lesson.",
+        "operationId": "lessonByIdForAdmin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonAdminResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
           },
           "404": {
             "description": "Not found error"
@@ -1422,7 +1500,7 @@
           "Admin"
         ],
         "summary": "Create subscription",
-        "description": "This can only be done by an administrator.",
+        "description": "This can only be done by an administrator.\nThe subscription validity period can be specified in the formats ('1y-2m-14d', '1y-2m', '1y-14d', '1y', '2m-14d', '2m', '14d'). y - amount of years, m - amount of months, d - amount of days",
         "operationId": "createSubscription",
         "requestBody": {
           "description": "Created subscription object",
@@ -1933,7 +2011,7 @@
         "x-codegen-request-body-name": "body"
       }
     },
-    "/notes": {
+    "/notes/{lesson_id}": {
       "get": {
         "tags": [
           "Notes"
@@ -2246,7 +2324,18 @@
         },
         "responses": {
           "200": {
-            "description": "Successful payment. Redirect to user '/profile'"
+            "description": "Create session Stripe. After success redirect to 'profile'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request"
@@ -2267,6 +2356,20 @@
   },
   "components": {
     "schemas": {
+      "CustomAvatar": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "binary",
+            "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+          },
+          "contentType": {
+            "type": "string",
+            "example": "image/jpeg"
+          }
+        }
+      },
       "Notes": {
         "type": "object",
         "required": [
@@ -2296,6 +2399,7 @@
           "subtitle",
           "cost",
           "period",
+          "most_popular",
           "descriptions"
         ],
         "properties": {
@@ -2313,6 +2417,10 @@
             "type": "string",
             "example": "1y-2m-3d",
             "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months), 1m-14d (1 month, 14 days)"
+          },
+          "most_popular": {
+            "type": "boolean",
+            "example": true
           },
           "descriptions": {
             "type": "array",
@@ -2342,6 +2450,10 @@
             "type": "string",
             "example": "1y-2m-3d",
             "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months),1m-14d (1 month, 14 days)"
+          },
+          "most_popular": {
+            "type": "boolean",
+            "example": true
           },
           "descriptions": {
             "type": "array",
@@ -2424,7 +2536,9 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 20
           },
           "discount_percent": {
             "type": "number"
@@ -2438,7 +2552,9 @@
             "type": "string"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 20
           },
           "discount_percent": {
             "type": "number"
@@ -2481,8 +2597,7 @@
       "Stripe": {
         "type": "object",
         "required": [
-          "subscription_id",
-          "promo_name"
+          "subscription_id"
         ],
         "properties": {
           "subscription_id": {
@@ -2630,9 +2745,123 @@
             }
           },
           "avatar": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomAvatar"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "date_of_creation": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "635a518e488d761bd1c787f1"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "display_name": {
             "type": "string",
             "nullable": true,
-            "example": "http://localhost:3000/public/cf3a5ef3-15e8-461b-81b2-84ffb254fda4-1920x1200-px-cheetah-1653445.jpg"
+            "example": "John Snow"
+          },
+          "rank": {
+            "type": "number",
+            "example": 10
+          },
+          "current_plan": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Plan"
+              }
+            ]
+          },
+          "progress": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "chapter_id": {
+                  "type": "string",
+                  "example": "6383befbe25c834cdb762ae6"
+                },
+                "chapter_name": {
+                  "type": "string",
+                  "example": "Three"
+                },
+                "lessons": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "6383befbe25c834cdb762ae6"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Completed",
+                        "enum": [
+                          "Not Completed",
+                          "Needs Review",
+                          "Completed"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plan"
+            }
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          },
+          "avatar": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomAvatar"
+              },
+              {
+                "type": "string"
+              }
+            ]
           },
           "date_of_creation": {
             "type": "string",
@@ -2716,7 +2945,7 @@
           }
         }
       },
-      "LessonResponse": {
+      "LessonAdminResponse": {
         "type": "object",
         "properties": {
           "id": {
@@ -2772,6 +3001,81 @@
                 },
                 "validation_func": {
                   "description": "Should always return JSON.stringify(results). results is an array and contains the required fields of the { passed:boolean, description: string, ...any fields } ",
+                  "type": "string"
+                },
+                "default_code": {
+                  "type": "string",
+                  "example": "Coding Question"
+                }
+              }
+            }
+          },
+          "used_in": {
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "chapter_id": {
+                "type": "string"
+              },
+              "chapter_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "LessonUserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "type": {
+            "type": "string",
+            "example": "learning",
+            "enum": [
+              "learning",
+              "practice"
+            ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
+          },
+          "statement": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "hints": {
+            "nullable": true,
+            "type": "string",
+            "example": "Coding Question"
+          },
+          "resources": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "solution": {
+                  "nullable": true,
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "language": {
+                  "type": "number",
+                  "example": 45
+                },
+                "tests": {
                   "type": "string"
                 },
                 "default_code": {
@@ -2864,6 +3168,10 @@
                 "name": {
                   "type": "string",
                   "example": "Common Patterns"
+                },
+                "free": {
+                  "type": "boolean",
+                  "example": true
                 }
               }
             }

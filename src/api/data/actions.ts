@@ -18,7 +18,8 @@ import {
   JudgeResult,
   JudgeStatuses,
   Lesson,
-  LessonResponse,
+  LessonAdminResponse,
+  LessonUserResponse,
   Notes,
   NotesResponse,
   Promo,
@@ -29,7 +30,8 @@ import {
   Stripe,
   Subscription,
   SubscriptionResponse,
-  User
+  User,
+  UserResponse
 } from "./schemas"
 /**
  * Authorization with google.
@@ -87,6 +89,15 @@ export const postUsers = (body: CreateUser): QueryAction<User> => ({
 })
 
 /**
+ * Get information about user.
+ */
+export const getUsersId = (id: string): QueryAction<UserResponse> => ({
+  method: "GET",
+  endpoint: `/users/${id}`,
+  operationId: "getUserById"
+})
+
+/**
  * This can only be done by an administrator.
  */
 export const patchUsersId = (id: string, body: Partial<User>): QueryAction<User> => ({
@@ -128,8 +139,10 @@ export const patchUsersMe = (body: Partial<User>): QueryAction<User> => ({
  * Update avatar. Only for authorized users.
  */
 export const patchUsersMeAvatar = (body: FormData): QueryAction<{
-  data: string
-  contentType: string
+  avatar: {
+    data: string
+    contentType: string
+  }
 }> => ({
   method: "PATCH",
   endpoint: `/users/me/avatar`,
@@ -165,7 +178,7 @@ export const postUsersRevokeAccessMe = (): QueryAction<User> => ({
 /**
  * Get information about all lessons. Only for authorized users.
  */
-export const getLessons = (): QueryAction<LessonResponse[]> => ({
+export const getLessons = (): QueryAction<LessonUserResponse[]> => ({
   method: "GET",
   endpoint: `/lessons`,
   operationId: "allLessons"
@@ -174,7 +187,7 @@ export const getLessons = (): QueryAction<LessonResponse[]> => ({
 /**
  * This can only be done by an administrator.
  */
-export const postLessons = (body: Partial<Lesson>): QueryAction<LessonResponse> => ({
+export const postLessons = (body: Partial<Lesson>): QueryAction<LessonAdminResponse> => ({
   method: "POST",
   endpoint: `/lessons`,
   body,
@@ -184,7 +197,7 @@ export const postLessons = (body: Partial<Lesson>): QueryAction<LessonResponse> 
 /**
  * Learning lessons unused in chapter. This can only be done by an administrator.
  */
-export const getLessonsUnused = (): QueryAction<LessonResponse[]> => ({
+export const getLessonsUnused = (): QueryAction<LessonAdminResponse[]> => ({
   method: "GET",
   endpoint: `/lessons/unused`,
   operationId: "ununsedLessons"
@@ -193,7 +206,7 @@ export const getLessonsUnused = (): QueryAction<LessonResponse[]> => ({
 /**
  * Get information about lesson. Only for authorized users.
  */
-export const getLessonsId = (id: string): QueryAction<LessonResponse> => ({
+export const getLessonsId = (id: string): QueryAction<LessonUserResponse> => ({
   method: "GET",
   endpoint: `/lessons/${id}`,
   operationId: "lessonById"
@@ -216,6 +229,15 @@ export const deleteLessonsId = (id: string): QueryAction => ({
   method: "DELETE",
   endpoint: `/lessons/${id}`,
   operationId: "deleteLesson"
+})
+
+/**
+ * Get information about lesson.
+ */
+export const getLessonsAdminId = (id: string): QueryAction<LessonAdminResponse> => ({
+  method: "GET",
+  endpoint: `/lessons/admin/${id}`,
+  operationId: "lessonByIdForAdmin"
 })
 
 /**
@@ -355,6 +377,7 @@ export const getSubscriptions = (): QueryAction<SubscriptionResponse[]> => ({
 
 /**
  * This can only be done by an administrator.
+ * The subscription validity period can be specified in the formats ('1y-2m-14d', '1y-2m', '1y-14d', '1y', '2m-14d', '2m', '14d'). y - amount of years, m - amount of months, d - amount of days
  */
 export const postSubscriptions = (body: Subscription): QueryAction<SubscriptionResponse> => ({
   method: "POST",
@@ -467,13 +490,13 @@ export const postFeedbacks = (body: Feedback): QueryAction => ({
   operationId: "createFeedback"
 })
 
-export const getNotes = (lesson_id: string): QueryAction<NotesResponse> => ({
+export const getNotesLessonId = (lesson_id: string): QueryAction<NotesResponse> => ({
   method: "GET",
   endpoint: `/notes/${lesson_id}`,
   operationId: "notesByLessonId"
 })
 
-export const patchNotes = (lesson_id: string, body: Partial<Notes>): QueryAction => ({
+export const patchNotesLessonId = (lesson_id: string, body: Partial<Notes>): QueryAction => ({
   method: "PATCH",
   endpoint: `/notes/${lesson_id}`,
   body,

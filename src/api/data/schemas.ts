@@ -8,6 +8,11 @@
 */
 
 
+export interface CustomAvatar {
+  data: any
+  contentType: string
+}
+
 export interface Notes {
   content: string
 }
@@ -22,7 +27,7 @@ export interface Subscription {
   subtitle: string
   cost: number
   period: string
-  most_popular?: boolean
+  most_popular: boolean
   descriptions: string[]
 }
 
@@ -32,7 +37,7 @@ export interface SubscriptionResponse {
   subtitle: string
   cost: number
   period: string
-  most_popular?: boolean
+  most_popular: boolean
   descriptions: string[]
 }
 
@@ -112,7 +117,30 @@ export interface User {
   role: string
   email: string
   providers: Provider[]
-  avatar?: { data: { data: number[] }, contentType: string } | null
+  avatar?: CustomAvatar | string
+  date_of_creation: string
+}
+
+export interface UserResponse {
+  id: string
+  first_name: string
+  last_name: string
+  display_name: string | null
+  rank: number
+  current_plan: null | Plan
+  progress: {
+    chapter_id: string
+    chapter_name: string
+    lessons: {
+      id: string
+      status: string
+    }[]
+  }[]
+  history: Plan[]
+  role: string
+  email: string
+  providers: Provider[]
+  avatar: CustomAvatar | string
   date_of_creation: string
 }
 
@@ -136,7 +164,7 @@ export interface Lesson {
   } | null
 }
 
-export interface LessonResponse {
+export interface LessonAdminResponse {
   id: string
   name: string
   type: string
@@ -149,6 +177,26 @@ export interface LessonResponse {
     language: number
     tests: string
     validation_func: string
+    default_code: string
+  }[] | null
+  used_in: {
+    chapter_id: string
+    chapter_name: string
+  } | null
+}
+
+export interface LessonUserResponse {
+  id: string
+  name: string
+  type: string
+  free: boolean
+  statement: string | null
+  content: string | null
+  hints: string | null
+  resources: {
+    solution: string | null
+    language: number
+    tests: string
     default_code: string
   }[] | null
   used_in: {
@@ -178,6 +226,7 @@ export interface ChapterResponse {
     id: string
     type: string
     name: string
+    free: boolean
   }[]
 }
 
