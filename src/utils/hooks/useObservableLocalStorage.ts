@@ -18,7 +18,7 @@ function useObservableLocalStorage<T>(key: string): [T | undefined, React.Dispat
   }
 
   function updateValue(value: T | undefined) {
-    const serializedValue = JSON.stringify(value)
+    const serializedValue = JSON.stringify(value ?? null)
 
     ObservableLocalStorage.setItem(key, serializedValue)
     setValue(value)
