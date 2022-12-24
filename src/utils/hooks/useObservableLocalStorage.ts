@@ -6,7 +6,7 @@ function useObservableLocalStorage<T>(key: string): [T | undefined, React.Dispat
 
   function getItem() {
     const item = ObservableLocalStorage.getItem(key)
-    if (item == null) return null
+    if (item == null || item == "undefined") return null
 
     return JSON.parse(item)
   }
