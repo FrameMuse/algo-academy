@@ -179,7 +179,7 @@ export const userType = new BiMap<APISchemas.User["role"], UserType>({
 
 export const editorLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
   51: EditorLanguage["C#"],
-  62: EditorLanguage.Java,
+  5: EditorLanguage.Java,
   63: EditorLanguage.JavaScript,
   64: EditorLanguage.Lua,
   68: EditorLanguage.PHP,
