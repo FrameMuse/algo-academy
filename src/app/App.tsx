@@ -104,8 +104,6 @@ function FetchAndDispatchUser() {
   }, [user, userToken])
 
   useEffect(() => {
-    console.log(userToken)
-
     if (user != null) return
     if (userToken != null) return
 
