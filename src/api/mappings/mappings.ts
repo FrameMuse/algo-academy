@@ -3,17 +3,18 @@ import { LessonMultipleContent, LessonStatus, LessonType } from "app/areas/lesso
 import { Plan, Purchase } from "app/areas/purchase/types"
 import { ICodeSubmitionResult } from "app/areas/workspace/types"
 import { EditorLanguage } from "app/ui/synthetic/Editor/Editor.types"
+import { Buffer } from "buffer"
 import { USER_GUEST } from "store/reducers/user"
 import { User, UserType } from "store/reducers/user/types"
 import BiMap from "utils/transform/bimap"
 
 export function mapUser(schema: APISchemas.User): User {
-  const avatar = schema.avatar && (typeof schema.avatar === "string" ? schema.avatar : (URL.createObjectURL(new Blob([new Uint8Array(schema.avatar.data.data).buffer], { type: schema.avatar.contentType }))))
+  const avatar = mapUserAvatar(schema.avatar)
 
   return {
     id: schema.id,
 
-    avatar: avatar || USER_GUEST["avatar"],
+    avatar,
     firstName: schema.first_name,
     lastName: schema.last_name,
     userName: schema.display_name ?? "",
@@ -27,6 +28,22 @@ export function mapUser(schema: APISchemas.User): User {
     type: userType.forward(schema.role),
     signed: true,
   }
+}
+
+function mapUserAvatar(schema: APISchemas.User["avatar"]): string {
+  if (schema == null) {
+    return USER_GUEST["avatar"]
+  }
+
+  if (typeof schema === "object") {
+    const buffer = Buffer.from(schema.data, "base64")
+    const blob = new Blob([buffer], { type: schema.contentType })
+
+    const url = URL.createObjectURL(blob)
+    return url
+  }
+
+  return schema
 }
 
 export function mapChaptersProgress(schema: APISchemas.User["progress"][0]) {
