@@ -8,10 +8,12 @@ import usePlans from "api/hooks/plans/usePlans"
 import useUser from "api/hooks/user/useUser"
 import { ReactNode, StrictMode, Suspense, useEffect } from "react"
 import ReactGA from "react-ga4"
+import { Helmet } from "react-helmet"
 import { ModalContainer } from "react-modal-global"
 import { Provider as StoreProvider } from "react-redux"
 import { BrowserRouter, useLocation, useSearchParams } from "react-router-dom"
 import { ToastContainer, ToastOptions } from "react-toastify"
+import { useWindowSize } from "react-use"
 import { PersistGate } from "redux-persist/integration/react"
 import initGA from "services/ga"
 import initSentry from "services/sentry"
@@ -58,6 +60,8 @@ function App() {
             </Suspense>
             <ServicesInit />
             <GALocation />
+
+            <ViewportMetaUpdater />
 
             <CookiesNotice />
             <ModalContainer />
@@ -166,6 +170,21 @@ function PrefetchPlans() {
   usePlans()
 
   return null
+}
+
+function ViewportMetaUpdater() {
+  const { width } = useWindowSize()
+
+  const contentDefault = "width=device-width, initial-scale=1"
+  const contentMobileTooThin = "width=495, initial-scale=1"
+
+  const content = width <= 500 ? contentMobileTooThin : contentDefault
+
+  return (
+    <Helmet>
+      <meta name="viewport" content={content} />
+    </Helmet>
+  )
 }
 
 export default App
