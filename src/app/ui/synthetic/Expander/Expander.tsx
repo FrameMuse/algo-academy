@@ -5,6 +5,7 @@ import { classMerge, classWithModifiers } from "utils/common"
 
 interface ExpanderProps {
   className?: string
+  noTransition?: boolean
 
   expanded: boolean
   children: ReactNode
@@ -22,7 +23,7 @@ function Expander(props: ExpanderProps) {
   }, [props.expanded, props.children])
 
   return (
-    <div className={classWithModifiers("expander", props.expanded && "expanded")} aria-hidden={!props.expanded} style={{ "--height": height }}>
+    <div className={classWithModifiers("expander", props.expanded && "expanded", props.noTransition && "no-transition")} aria-hidden={!props.expanded} style={{ "--height": height }}>
       <div className={classMerge("expander__inner", props.className)} ref={innerRef}>
         {props.children}
       </div>
