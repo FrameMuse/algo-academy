@@ -55,7 +55,7 @@
   }
 
   @include Mobile {
-    padding: 3.5em 1.5em;
+    padding: 1.5em;
   }
 }
 
@@ -63,19 +63,21 @@
   position: absolute;
   top: 0;
   right: 0;
-  min-width: 200px;
-  max-width: 100%;
-  min-height: 48px;
-  padding: 10px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+
+  padding: 1em 3em;
   background: $color-blue-80;
-  font-weight: 700;
-  line-height: 1.1;
+  border-radius: 0 0 0 1.5em;
+
   color: #fff;
-  border-radius: 0 0 0 24px;
+  font-weight: 700;
+
+  @include Mobile {
+    position: static;
+
+    margin-top: -1.5em;
+    margin-right: -1.5em;
+    margin-left: auto;
+  }
 }
 
 .pricing-item-title {
