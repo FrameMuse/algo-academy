@@ -195,19 +195,19 @@ export const userType = new BiMap<APISchemas.User["role"], UserType>({
 })
 
 export const editorLanguage = new BiMap<NonNullable<APISchemas.Lesson["resources"]>[0]["language"], EditorLanguage>({
-  51: EditorLanguage["C#"],
   5: EditorLanguage.Java,
+  51: EditorLanguage["C#"],
   63: EditorLanguage.JavaScript,
   64: EditorLanguage.Lua,
   68: EditorLanguage.PHP,
-  72: EditorLanguage.Ruby,
-  74: EditorLanguage.TypeScript,
-  75: EditorLanguage["C++"],
-  79: EditorLanguage["Objective-C"],
   70: EditorLanguage.Python,
   71: EditorLanguage.Python,
+  72: EditorLanguage.Ruby,
+  74: EditorLanguage.TypeScript,
+  79: EditorLanguage["Objective-C"],
   80: EditorLanguage.R,
-  87: EditorLanguage["F#"]
+  87: EditorLanguage["F#"],
+  89: EditorLanguage["C++"]
 })
 
 export const lessonStatus = new BiMap<APISchemas.User["progress"][0]["lessons"][0]["status"], LessonStatus>({
