@@ -32,7 +32,7 @@ export interface WorkspaceSettings {
 export enum WorkspaceEditorLanguage {
   TypeScript = "typescript",
   JavaScript = "javascript",
-  "C++" = "C++",
+  "C++" = "cpp",
   Java = "java",
   Python = "python"
 }
