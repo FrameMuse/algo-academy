@@ -16,6 +16,10 @@ h1 {
   font-weight: 800;
 
   line-height: 1.1;
+
+  @include Mobile {
+    font-size: $font-size-h2;
+  }
 }
 
 h2 {

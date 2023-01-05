@@ -30,10 +30,12 @@ function GeneralInfo(props: GeneralInfoProps) {
   }
   return (
     <Box className="general-info">
-      <h5>General Information</h5>
-      {props.user.pricingPlan && (
-        <div className="general-info__plan">Plan - {props.user.pricingPlan.title}</div>
-      )}
+      <div className="general-info__title">
+        <h5>General Information</h5>
+        {props.user.pricingPlan && (
+          <div className="general-info__plan">Plan - {props.user.pricingPlan.title}</div>
+        )}
+      </div>
       <div className="general-info__info">
         <div className="general-info__img">
           <EditableAvatar image={props.user.avatar} onChange={props.onAvatarChange} />

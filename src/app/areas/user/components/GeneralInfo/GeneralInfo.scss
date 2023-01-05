@@ -2,6 +2,20 @@
 
 .general-info {
   width: calc(56% - 2em);
+
+  @include Mobile {
+    width: auto;
+  }
+}
+
+.general-info__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  gap: 0.5em;
 }
 
 .general-info__img {
@@ -32,6 +46,10 @@
   border-radius: 20px;
   font-weight: 700;
   line-height: 1.1;
+
+  @include Mobile {
+    position: static;
+  }
 }
 
 .general-info__rank {
