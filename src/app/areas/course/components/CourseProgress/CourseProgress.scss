@@ -24,3 +24,10 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.course-progress__level {}
+
+.course-progress__completed {
+  // To ensure it always stays on the right.
+  text-align: right;
+}

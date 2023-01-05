@@ -12,8 +12,8 @@ function CourseProgress(props: CourseProgressProps) {
   return (
     <div className="course-progress">
       <div className="course-progress__info">
-        <div className="course-progress-level">Level: <strong>{levelProgressSwitch(progress)}</strong></div>
-        <div className="course-progress-completed"><strong>{props.completed}/{props.total}</strong> Lessons Completed</div>
+        <div className="course-progress__level">Level: <strong>{levelProgressSwitch(progress)}</strong></div>
+        <div className="course-progress__completed"><strong>{props.completed}/{props.total}</strong> Lessons Completed</div>
       </div>
       <ProgressBar value={progress} />
     </div>

@@ -39,11 +39,15 @@
   display: flex;
   align-items: flex-start;
   background: $color-blue-10;
-  border-radius: 50px;
+  border-radius: 3em;
 
   @include Mobile {
     display: grid;
     gap: 1.5em;
+
+    padding: 1.5em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
   }
 }
 
@@ -70,7 +74,7 @@
   img {
     height: 100%;
     width: 100%;
-    border-radius: 30px;
+    border-radius: 2em;
 
     object-fit: cover;
   }
@@ -91,14 +95,13 @@
 }
 
 .founder-right {
+  display: grid;
+  gap: 1.25em;
+
   width: calc(53% - 60px);
   margin: 0 30px;
   font-size: 18px;
   color: rgba(13, 14, 20, 0.75);
-
-  p {
-    margin-bottom: 20px;
-  }
 
   @include Mobile {
     width: 100%;

@@ -176,7 +176,7 @@ function ViewportMetaUpdater() {
   const { width } = useWindowSize()
 
   const contentDefault = "width=device-width, initial-scale=1"
-  const contentMobileTooThin = "width=495, initial-scale=1"
+  const contentMobileTooThin = "width=device-width, initial-scale=1"
 
   const content = width <= 500 ? contentMobileTooThin : contentDefault
 

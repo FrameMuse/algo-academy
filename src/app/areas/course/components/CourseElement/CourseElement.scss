@@ -65,6 +65,10 @@
   &--expanded {
     height: calc(var(--height, auto) * 1px);
   }
+
+  @include Mobile {
+    padding: 0 1.5em;
+  }
 }
 
 .course-element__inner {

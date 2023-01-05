@@ -11,6 +11,8 @@
   @include Mobile {
     display: grid;
     gap: 1.5em;
+
+    padding: 1.5em;
   }
 }
 
@@ -22,10 +24,6 @@
 .notice__title {
   font-size: $font-size-h5;
   font-weight: 800;
-
-  @include DesktopLowResolution {
-    text-align: center;
-  }
 }
 
 .notice__desc {
@@ -47,6 +45,7 @@
   margin-left: auto;
 
   @include DesktopLowResolution {
-    margin-right: auto;
+    display: grid;
+    margin: unset;
   }
 }

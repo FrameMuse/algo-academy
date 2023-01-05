@@ -7,6 +7,10 @@ import Expander from "../Expander/Expander"
 
 interface ReadMoreProps {
   children: ReactNode
+  /**
+   * After expanding, the button will disappear.
+   */
+  stayExpanded?: boolean
 }
 
 function ReadMore(props: ReadMoreProps) {
