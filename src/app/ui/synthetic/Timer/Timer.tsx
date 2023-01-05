@@ -9,14 +9,15 @@ import { useClickAway } from "react-use"
 import { classWithModifiers, toggleState } from "utils/common"
 import useCountdown from "utils/hooks/useCountdown"
 
-interface TimerProps { }
+const minutesList = [...Array(60)].map((_, index) => index + 1)
 
-const minutesList = [...Array(59)].map((_, index) => index + 1)
+
+interface TimerProps { }
 
 function Timer(props: TimerProps) {
   const [expanded, setExpanded] = useState(false)
   const [minutesChoice, setMinutesChoice] = useState<number>(10)
-  const [countdown, start, pause, reset] = useCountdown(1000 * 60 * minutesChoice, { delimiters: 2 })
+  const [countdown, start, pause, reset] = useCountdown(1000 * 60 * minutesChoice, { minimumDelimiters: 2 })
 
   const toolbarElementRef = useRef<HTMLDivElement>(null)
   useClickAway(toolbarElementRef, () => setExpanded(false))

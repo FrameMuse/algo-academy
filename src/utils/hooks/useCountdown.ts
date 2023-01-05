@@ -4,9 +4,9 @@ import Time from "utils/transform/time"
 interface UseCountdownOptions {
   defaultEnabled?: boolean
   /**
-   * Amount of time delimiters (seconds, minutes, ...).
+   * Minimal amount of time delimiters (seconds, minutes, ...).
    */
-  delimiters?: number
+  minimumDelimiters?: number
   endLabel?: string
   splitter?: string
 }
@@ -19,7 +19,7 @@ function useCountdown(startTime: number, options?: Partial<UseCountdownOptions>)
   const [enabled, setEnabled] = useState(options?.defaultEnabled || false)
   const [time, setTime] = useState<number>(startTime)
 
-  const delimiters = Time.delimit(time, options?.delimiters)
+  const delimiters = Time.delimit(time, options?.minimumDelimiters)
 
   useEffect(() => {
     if (!enabled) return
@@ -37,7 +37,7 @@ function useCountdown(startTime: number, options?: Partial<UseCountdownOptions>)
       return options?.endLabel || "Run out of time"
     }
 
-    return delimiters.map(a => Time.fixZeros(a)).join(options?.splitter || ":")
+    return delimiters.map(Time.addZero).join(options?.splitter || ":")
   }
 
   return [
