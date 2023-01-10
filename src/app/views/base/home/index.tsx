@@ -245,12 +245,12 @@ function HomeView() {
                 <TabLink className="main-six-item" to="1">
                   <div className="main-six-item-title">In-depth video explanations</div>
                   <div className="main-six-item-text grey-color">
-                    <p>Studying for coding interviews is difficult enough. At algo academy we believe that video is the best medium to learn new topics. each of our coding...</p>
-                    <div className="button-wrap">
+                    <p>
+                      Studying for coding interviews is difficult enough. At algo academy we believe that video is the best medium to learn new topics. each of our coding
                       <ReadMore>
                         hidden content
                       </ReadMore>
-                    </div>
+                    </p>
                   </div>
                 </TabLink>
                 <TabLink className="main-six-item" to="2">
@@ -262,12 +262,12 @@ function HomeView() {
                 <TabLink className="main-six-item" to="3">
                   <div className="main-six-item-title">All-in-one solution</div>
                   <div className="main-six-item-text grey-color">
-                    <p>Studying algorithms is not enough to prepare for coding interviews anymore. many companies are stepping up their interview style and expect much...</p>
-                    <div className="button-wrap">
+                    <p>
+                      Studying algorithms is not enough to prepare for coding interviews anymore. many companies are stepping up their interview style and expect much
                       <ReadMore>
                         hidden content
                       </ReadMore>
-                    </div>
+                    </p>
                   </div>
                 </TabLink>
               </div>

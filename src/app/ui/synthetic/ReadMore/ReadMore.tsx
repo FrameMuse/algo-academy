@@ -8,26 +8,25 @@ import Expander from "../Expander/Expander"
 interface ReadMoreProps {
   children: ReactNode
   /**
-   * After expanding, the button will not appear again.
-   * 
-   * @default true
+   * @default
+   * "..."
    */
-  stayExpanded?: boolean
+  splitter?: string
 }
 
 function ReadMore(props: ReadMoreProps) {
   const [expanded, setExpanded] = useState(false)
 
-  const stayExpanded = props.stayExpanded ?? true
-
   const buttonText = expanded ? "read less" : "read more"
   return (
-    <>
-      <button className="read-more" type="button" hidden={stayExpanded && expanded} onClick={toggleState(setExpanded)}>{buttonText}</button>
-      <Expander expanded={expanded} noTransition={stayExpanded}>
+    <div className="read-more">
+      <span hidden={expanded}>{props.splitter ?? "..."}</span>
+      {" "}
+      <button className="read-more__button" type="button" onClick={toggleState(setExpanded)}>{buttonText}</button>
+      <Expander expanded={expanded}>
         {props.children}
       </Expander>
-    </>
+    </div>
   )
 }
 
