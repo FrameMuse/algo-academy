@@ -6,6 +6,7 @@ import ErrorCover from "app/ui/synthetic/ErrorCover/ErrorCover"
 import LoaderCover from "app/ui/synthetic/Loader/LoaderCover"
 import { ReactNode, Suspense } from "react"
 import { Modal } from "react-modal-global"
+import { useLocation } from "react-router-dom"
 import { useAppSelector } from "store/hooks"
 import { UserType } from "store/reducers/user/types"
 
@@ -76,6 +77,8 @@ function QueryBoundary(props: QueryBoundaryProps) {
     </div>
   )
 
+  const location = useLocation()
+
   if (props.userType != null) {
     if (!user.signed) return userGuestFallback
 
@@ -85,7 +88,7 @@ function QueryBoundary(props: QueryBoundaryProps) {
   }
 
   return (
-    <ErrorBoundary fallback={(reset, error) => error ? errorDefinedFallback(error, reset) : errorUnknownFallback}>
+    <ErrorBoundary fallback={(reset, error) => error ? errorDefinedFallback(error, reset) : errorUnknownFallback} deps={[location.pathname]}>
       <Suspense fallback={suspenseFallback}>
         {/* <UserBoundary fallback={userFallback} userType={props.userType}> */}
         {props.children}

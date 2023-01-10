@@ -18,6 +18,12 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.setState({ error, errorInfo })
   }
 
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (this.props.deps?.toString() !== prevProps.deps?.toString()) {
+      this.reset()
+    }
+  }
+
   reset = () => {
     this.setState({ hasError: false, error: undefined, errorInfo: undefined })
   }
