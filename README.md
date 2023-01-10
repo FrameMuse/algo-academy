@@ -1,5 +1,10 @@
 # algo-academy_client
 
+## Run server locally
+
+1. `npm i`
+2. `npm start`
+
 ## Structure
 
 ...
