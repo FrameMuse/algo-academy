@@ -30,6 +30,7 @@ import { ContactUsView } from "./views/base/contact-us"
 import FullCourseView from "./views/base/full-course/FullCourseView"
 import HomeView from "./views/base/home"
 import LessonView from "./views/base/lesson/LessonView"
+import { PrivacyPolicyView } from "./views/base/privacy-policy"
 import { ProblemView } from "./views/base/problem"
 import { ProfileView } from "./views/base/profile"
 import { PurchaseView } from "./views/base/purchase"
@@ -55,6 +56,7 @@ function AppRoutes() {
         <Route path={StaticRoutes.Home} element={<HomeView />} />
         <Route path={StaticRoutes.AboutUs} element={<AboutUsView />} />
         <Route path={StaticRoutes.ContactUs} element={<ContactUsView />} />
+        <Route path={StaticRoutes.PrivacyPolicy} element={<PrivacyPolicyView />} />
         <Route path={StaticRoutes.Purchase} element={<PurchaseView />} />
         <Route path={StaticRoutes.Profile + "/*"} element={<ProfileView />} />
 
