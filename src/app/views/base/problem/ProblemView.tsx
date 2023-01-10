@@ -55,7 +55,7 @@ function ProblemView() {
             </div>
 
             <div className="problem-header__right">
-              <LessonStatusSelector id={lessonId} defaultStatus={lesson.status} transparent />
+              <LessonStatusSelector id={lessonId} status={lesson.status} transparent />
 
               <Timer />
 

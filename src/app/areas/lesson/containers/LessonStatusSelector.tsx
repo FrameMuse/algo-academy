@@ -1,6 +1,6 @@
 import useUpdateLessonStatus from "api/hooks/lessons/useUpdateLessonStatus"
 import Selector from "app/ui/kit/Selector/Selector"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { LessonStatus } from "../types"
 
@@ -9,12 +9,12 @@ interface LessonStatusSelectorProps {
    * Id of a course.
    */
   id: string
-  defaultStatus?: LessonStatus
+  status?: LessonStatus
   transparent?: boolean
 }
 
 function LessonStatusSelector(props: LessonStatusSelectorProps) {
-  const [status, setStatus] = useState(props.defaultStatus)
+  const [status, setStatus] = useState(props.status)
   const updateStatus = useUpdateLessonStatus()
 
   async function onChange(value: LessonStatus) {
@@ -26,6 +26,8 @@ function LessonStatusSelector(props: LessonStatusSelectorProps) {
       setStatus(prevStatus)
     }
   }
+
+  useEffect(() => setStatus(props.status), [props.status])
 
   return (
     <Selector transparent={props.transparent} value={status} onChange={onChange}>

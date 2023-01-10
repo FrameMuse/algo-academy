@@ -40,7 +40,7 @@ function LessonView() {
             <ButtonIcon name="chevron-right" color="gray" size="smaller" squared ariaLabel="Next lesson" onClick={navigateToNext} />
           </div>
           <div className="article-status">
-            <LessonStatusSelector id={lessonId} defaultStatus={lesson.status} />
+            <LessonStatusSelector id={lessonId} status={lesson.status} />
           </div>
         </div>
 
