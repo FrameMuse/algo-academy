@@ -34,7 +34,7 @@ function CodeHighlighter(props: CodeHighlighterProps) {
 
   return (
     <Suspense fallback={<LoaderCover />}>
-      <SyntaxHighlighterLazy showLineNumbers language={props.lang} style={themeStyle.value.default}>
+      <SyntaxHighlighterLazy wrapLines wrapLongLines showLineNumbers language={props.lang} style={themeStyle.value.default}>
         {props.content}
       </SyntaxHighlighterLazy>
     </Suspense>
