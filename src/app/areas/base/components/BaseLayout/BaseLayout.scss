@@ -1,0 +1,12 @@
+@import "~assets/scss/bundle.scss";
+
+.base-layout {
+	display: flex;
+	flex-direction: column;
+
+	height: 100vh;
+
+	&>:last-child {
+		margin-top: auto;
+	}
+}

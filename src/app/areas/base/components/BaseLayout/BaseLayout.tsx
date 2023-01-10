@@ -1,3 +1,5 @@
+import "./BaseLayout.scss"
+
 import QueryBoundary from "app/containers/QueryBoundary"
 import { ReactNode } from "react"
 import { Outlet } from "react-router-dom"
@@ -12,7 +14,7 @@ interface BaseLayout {
 
 function BaseLayout(props: BaseLayout) {
   return (
-    <>
+    <div className="base-layout">
       <Header />
       <main>
         <QueryBoundary>
@@ -20,7 +22,7 @@ function BaseLayout(props: BaseLayout) {
         </QueryBoundary>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 
