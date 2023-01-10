@@ -4,9 +4,13 @@
 	display: flex;
 	flex-direction: column;
 
-	height: 100vh;
+	min-height: 100vh;
 
-	&>:last-child {
+	main {
+		flex: 1;
+	}
+
+	footer {
 		margin-top: auto;
 	}
 }
