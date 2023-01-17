@@ -178,12 +178,7 @@ function ProblemRightSection(props: { id: string }) {
             <h4>Snippets</h4>
             <p>Pieces of code that could help you solving a problem.</p>
           </Headings>
-          <Snippets snippets={[{
-            label: "string",
-            content: "stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstrings tringstringstringstringstringstringstringфыв",
-            runTime: "string",
-            space: "string"
-          }]} />
+          <Snippets snippets={snippets} />
         </TabRoute>
 
         <TabRoute path={TabRoutes.Notes}>
