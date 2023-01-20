@@ -62,7 +62,9 @@ function Header() {
               <AppNavLink className="menu-item-link" to={StaticRoutes.Home} end>What is Algo Academy?</AppNavLink>
               <AppNavLink className="menu-item-link" to={StaticRoutes.AboutUs}>About us</AppNavLink>
               <AppNavLink className="menu-item-link" to={StaticRoutes.FullCourse}>Full Course</AppNavLink>
-              <AppNavLink className="menu-item-link" to={StaticRoutes.Purchase}>Purchase</AppNavLink>
+              {user.pricingPlan == null && (
+                <AppNavLink className="menu-item-link" to={StaticRoutes.Purchase}>Purchase</AppNavLink>
+              )}
               <ProfileWidget />
             </nav>
           </div>
