@@ -14,7 +14,7 @@ function CourseContentsContainer(props: CourseContentsContainerProps) {
   const lockingReason = "Purchase a plan to unlock."
   return (
     <CourseContents>
-      {chapters.map((chapter, index) => (
+      {chapters.filter(chapter => chapter.published).map((chapter, index) => (
         <CourseElement title={chapter.title} progress={chapter.progress} defaultExapanded={!Progress.isMax(chapter.progress)} key={index}>
           {chapter.learningLessons.length > 0 && (
             <LessonPreviews title="Learning">

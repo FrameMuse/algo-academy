@@ -1,10 +1,10 @@
 /**
- * 
+ *
  * This is auto-generated file.
  * All edits will not be preserved for the next generation.
- * 
+ *
  * GitHub: https://github.com/FrameMuse/swagger-export-rfl
- * 
+ *
 */
 
 
@@ -209,6 +209,7 @@ export interface Chapter {
   name: string
   order_number: number
   user_topic: boolean
+  published?: boolean
   list: {
     id: string
     type: string
@@ -221,6 +222,7 @@ export interface ChapterResponse {
   id: string
   name: string
   order_number: number
+  published?: boolean
   user_topic: boolean
   list: {
     id: string

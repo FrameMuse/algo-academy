@@ -7,11 +7,13 @@ function useUpdateChapter() {
   async function updateChapter(id: string, chapter: {
     title?: string
     order?: number
+    published?: boolean,
     showInProfile?: boolean
   }) {
     const response = await appQuery(APIActions.patchChaptersId(id, {
       name: chapter.title,
       order_number: chapter.order,
+      published: chapter.published,
       user_topic: chapter.showInProfile
     }))
     if (!isResponseOk(response)) return

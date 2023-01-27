@@ -1,10 +1,10 @@
 /**
- * 
+ *
  * This is auto-generated file.
  * All edits will not be preserved for the next generation.
- * 
+ *
  * GitHub: https://github.com/FrameMuse/swagger-export-rfl
- * 
+ *
 */
 
 import { QueryAction } from "../types"
@@ -290,6 +290,7 @@ export const patchChaptersId = (id: string, body: Partial<{
   name: string
   order_number: number
   user_topic: boolean
+  published: boolean,
   list: string[]
 }>): QueryAction => ({
   method: "PATCH",

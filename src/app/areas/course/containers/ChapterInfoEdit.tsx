@@ -22,6 +22,7 @@ function ChapterInfoEdit(props: ChapterInfoEditProps) {
   const [title, setTitle] = useState<string>()
   const [order, setOrder] = useState<number>()
   const [showInProfile, setShowInProfile] = useState<boolean>()
+  const [published, setPublished] = useState<boolean>()
 
   async function onSubmit() {
     let confirmed = false
@@ -30,7 +31,7 @@ function ChapterInfoEdit(props: ChapterInfoEditProps) {
 
     if (!confirmed) return
 
-    await updateChapter(props.id, { title, order, showInProfile })
+    await updateChapter(props.id, { title, order, showInProfile, published })
   }
 
   return (
@@ -40,6 +41,10 @@ function ChapterInfoEdit(props: ChapterInfoEditProps) {
 
       <Selector label="Show this in `Profile Solved Problems`" defaultValue={Number(chapter.showInProfile)} onChange={targetValue(setShowInProfile, Boolean)}>
         {TrueFalseOptions}
+      </Selector>
+      <Selector label="Display type" defaultValue={Number(chapter.published)} onChange={targetValue(setPublished, Boolean)}>
+        <option value={0}>Private</option>
+        <option value={1}>Public</option>
       </Selector>
 
       <Button color="dark" onClick={onSubmit}>Save</Button>

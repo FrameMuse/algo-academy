@@ -147,6 +147,7 @@ export function mapChapter(schema: APISchemas.ChapterResponse) {
     id: schema.id,
     order: schema.order_number,
     title: schema.name,
+    published: schema.published,
     showInProfile: schema.user_topic,
     lessons: schema.list.map(mapLessonPreview)
   }
