@@ -32,6 +32,7 @@ function LessonStatusSelector(props: LessonStatusSelectorProps) {
   return (
     <Selector transparent={props.transparent} value={status} onChange={onChange}>
       <option value={LessonStatus.Incomplete}>Not completed</option>
+      <option value={LessonStatus.NeedsReviews}>Needs review</option>
       <option value={LessonStatus.Complete}>Completed</option>
     </Selector>
   )
