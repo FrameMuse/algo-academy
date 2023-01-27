@@ -34,6 +34,7 @@ import { PrivacyPolicyView } from "./views/base/privacy-policy"
 import { ProblemView } from "./views/base/problem"
 import { ProfileView } from "./views/base/profile"
 import { PurchaseView } from "./views/base/purchase"
+import { TermsView } from "./views/base/terms"
 import UIShowcaseView from "./views/showcase"
 
 function resetScroll() {
@@ -57,6 +58,7 @@ function AppRoutes() {
         <Route path={StaticRoutes.AboutUs} element={<AboutUsView />} />
         <Route path={StaticRoutes.ContactUs} element={<ContactUsView />} />
         <Route path={StaticRoutes.PrivacyPolicy} element={<PrivacyPolicyView />} />
+        <Route path={StaticRoutes.Terms} element={<TermsView />} />
         <Route path={StaticRoutes.Purchase} element={<PurchaseView />} />
         <Route path={StaticRoutes.Profile + "/*"} element={<ProfileView />} />
 
