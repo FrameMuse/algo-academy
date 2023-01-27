@@ -6,7 +6,7 @@ function PrivacyPolicyView() {
   return (
     <div className="wrapper">
       <Article className="privacy-policy-view">
-        <h1>Privacy Policy for , LLC</h1>
+        <h1>Privacy Policy for Algo Academy, LLC</h1>
 
         <p>At Algo Academy, accessible from algoacademy.io, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Algo Academy and how we use it.</p>
 
