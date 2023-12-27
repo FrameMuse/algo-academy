@@ -1,7 +1,5 @@
 import { useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
-import { useAppSelector } from "store/hooks"
-import { UserType } from "store/reducers/user/types"
 
 import { AdminLayout } from "./areas/admin"
 import BaseLayout from "./areas/base/components/BaseLayout/BaseLayout"
@@ -42,8 +40,8 @@ function resetScroll() {
 }
 
 function AppRoutes() {
-  const user = useAppSelector(state => state.user)
-  const isAdmin = user.signed && user.type >= UserType.Admin
+  // const user = useAppSelector(state => state.user)
+  const isAdmin = true
 
   const location = useLocation()
   useEffect(() => resetScroll(), [location.pathname])

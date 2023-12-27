@@ -1,9 +1,7 @@
 import "./AdminLayout.scss"
 
-import QueryBoundary from "app/containers/QueryBoundary"
 import { ReactNode } from "react"
 import { Outlet } from "react-router-dom"
-import { UserType } from "store/reducers/user/types"
 
 import AdminHeader from "../AdminHeader/AdminHeader"
 
@@ -16,9 +14,9 @@ function AdminLayout(props: AdminLayoutProps) {
     <>
       <AdminHeader />
       <main className="admin-layout">
-        <QueryBoundary userType={UserType.Admin}>
-          {props.children || <Outlet />}
-        </QueryBoundary>
+        {/* <QueryBoundary userType={UserType.Admin}> */}
+        {props.children || <Outlet />}
+        {/* </QueryBoundary> */}
       </main>
     </>
   )

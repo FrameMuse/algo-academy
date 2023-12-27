@@ -6,8 +6,8 @@ import { User, UserType } from "./types"
 export const USER_GUEST: User = {
   id: "",
 
-  signed: false,
-  type: UserType.Default,
+  signed: true,
+  type: UserType.Admin,
   avatar: "/static/images/guest-avatar.jpg",
   firstName: "",
   lastName: "",
